@@ -1,0 +1,21 @@
+/* =============================================================================
+   LUNCHEE — FONTY
+   Ładowany PIERWSZY, przed tokens.css.
+
+   Decyzja klienta (Wytyczne dla Lunchee.docx): Coolvetica do hasła i nagłówków,
+   Inter do tekstu ciągłego.
+
+   COOLVETICA — Adobe Fonts (Typekit), licencja Typodermic.
+   Ścieżka A: Web Project na koncie Adobe → <link rel="stylesheet" href="https://use.typekit.net/XXXX.css">
+   w <head>, przed tym plikiem. NIE self-hostuj plików .otf/.woff2 (łamie licencję).
+   Do czasu założenia kitu prototyp korzysta z lokalnej synchronizacji Adobe (local()),
+   więc na komputerze bez Coolvetiki spadnie na Arial Rounded / system-ui.
+   Przy handoffie: deweloper klienta potrzebuje własnego Web Projectu albo licencji.
+
+   INTER — Google Fonts, ładowany linkiem w <head> (wagi 400–800, latin-ext).
+   Do wdrożenia można zamienić na self-hosting woff2 z podzbiorem latin-ext.
+   ============================================================================= */
+
+@font-face { font-family: "Coolvetica LN"; font-weight: 400; font-display: swap; src: local("CoolveticaRg-Regular"), local("Coolvetica Regular"); }
+@font-face { font-family: "Coolvetica LN"; font-weight: 700; font-display: swap; src: local("CoolveticaRg-Bold"), local("Coolvetica Bold"); }
+@font-face { font-family: "Coolvetica LN"; font-weight: 900; font-display: swap; src: local("CoolveticaHv-Regular"), local("Coolvetica Heavy"); }
