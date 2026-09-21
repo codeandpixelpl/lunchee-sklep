@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#fbf8f1">
+<meta name="lunchee-para" content="30">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -79,9 +80,23 @@
             <dl>
               <div><dt>Produkty</dt><dd data-cart-qty>0</dd></div>
               <div><dt>Wartość</dt><dd data-cart-sum>0,00 zł</dd></div>
+              <div data-cart-discount-row hidden><dt>Rabat za parę</dt><dd data-cart-discount>0,00 zł</dd></div>
               <div><dt>Dostawa</dt><dd data-cart-ship data-ship="14.99" data-free="269">14,99 zł</dd></div>
               <div class="cart__total"><dt>Razem</dt><dd data-cart-total>0,00 zł</dd></div>
             </dl>
+            <!-- @para-koszyk -->
+<div class="pair pair--cart" data-para-cart>
+              <div class="pair__in">
+                <div class="pair__txt">
+                  <span class="pair__tag">Promocja dla par</span>
+                  <p class="pair__h" data-para-h>Dwa Lunchee. 30% taniej.</p>
+                  <p class="pair__sub" data-para-p>Rabat na każdą parę. Kolory możesz łączyć.</p>
+                  <a class="btn pair__btn" href="lunch-boxy.html" data-para-btn>Wybierz drugi Lunchee</a>
+                </div>
+                <div class="pair__img" aria-hidden="true"><img src="assets/img/produkty/lb745.webp" alt="" width="1000" height="742"><img src="assets/img/produkty/lb755.webp" alt="" width="1000" height="739"></div>
+              </div>
+            </div>
+<!-- @/para-koszyk -->
             <!-- @dostawa-pasek -->
 <div class="ship-bar" data-ship-bar data-free="269">
           <p data-ship-text>Darmowa dostawa od 269,00 zł</p>

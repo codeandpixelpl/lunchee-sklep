@@ -343,3 +343,41 @@ body.no-scroll { overflow: hidden; }
 .round-btn:disabled { opacity: .35; cursor: default; }
 .progress { display: block; flex: 1; height: 4px; border-radius: var(--r-pill); background: var(--linia); overflow: hidden; }
 .progress i { display: block; height: 100%; width: 25%; border-radius: inherit; background: var(--tekst-mocny); transition: margin-left var(--przejscie); }
+
+/* Promocja dla par: karta produktu i koszyk (feedback klienta 2026-09-21, wariant G z 21.09).
+   Układ zależy od szerokości samego banera (container query), bo w koszyku jest węższy niż w polu zakupu. */
+.pair { container-type: inline-size; margin: 18px 0 14px; border-radius: var(--r-l); background: var(--tlo-produkt); color: var(--tekst-mocny); overflow: hidden; }
+.pair__in { display: grid; gap: 4px; padding: 20px 18px 18px; }
+.pair__txt { position: relative; z-index: 1; min-width: 0; }
+.pair__tag { font-size: var(--fs-etykieta); font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.pair__h { margin: 8px 0 10px; font-family: var(--font-naglowki); font-size: clamp(1.9rem, 9cqi, 2.6rem); line-height: .95; }
+.pair__sub { margin: 0 0 16px; font-size: .95rem; }
+.pair__price { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0; padding: 10px 18px; border-radius: var(--r-pill); background: var(--biel); }
+.pair__price b { font-family: var(--font-naglowki); font-size: 1.7rem; line-height: 1; }
+.pair__price s { padding-left: 14px; border-left: 1px solid var(--linia); color: var(--tekst-slaby); font-weight: 600; }
+.pair__btn { width: 100%; margin-top: 10px; background: var(--tekst-mocny); border-color: var(--tekst-mocny); color: var(--biel); }
+.pair__btn svg { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pair__img { position: relative; order: -1; width: 100%; aspect-ratio: 16 / 9; }
+.pair__img::before { content: ""; position: absolute; inset: -10% 18%; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+.pair__img img { position: absolute; width: 52%; height: auto; filter: drop-shadow(0 10px 14px rgba(10, 42, 94, .2)); }
+/* pierwszy (bieżący model) z tyłu, drugi na pierwszym planie */
+.pair__img img:first-child { left: 10%; top: 2%; }
+.pair__img img:last-child { right: 8%; top: 30%; z-index: 1; }
+@container (min-width: 460px) {
+  .pair__in { grid-template-columns: 1.1fr .9fr; align-items: center; gap: 12px; padding: 26px 24px 24px 28px; }
+  .pair__img { order: 0; align-self: center; aspect-ratio: 1; }
+  .pair__img::before { inset: -4%; }
+  .pair__img img { width: 80%; }
+  .pair__img img:first-child { left: -4%; top: 14%; }
+  .pair__img img:last-child { right: -8%; top: 40%; }
+}
+.pair--cart { margin: 22px 0 18px; }
+.pair--cart .pair__h { font-size: clamp(1.5rem, 7cqi, 2rem); }
+.pair--cart .pair__img { aspect-ratio: 5 / 2; }
+.pair--cart .pair__img img { width: 40%; }
+.pair--cart .pair__img img:first-child { left: 14%; top: 0; }
+.pair--cart .pair__img img:last-child { right: 12%; top: 26%; }
+.pair--cart .pair__img::before { inset: -20% 26%; }
+.pair--cart.is-done { background: var(--ok-tlo); color: var(--ok-tekst); }
+@media (hover: hover) { .pair__btn:hover { background: var(--cta); border-color: var(--cta); } }
+

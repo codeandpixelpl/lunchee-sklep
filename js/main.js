@@ -168,6 +168,15 @@ $$('.qty').forEach(q => {
   }));
 });
 
+/* ---------- Promocja dla par: rabat na każdą parę lunch boxów (wysokość w <meta name="lunchee-para">) ---------- */
+const PARA = +(document.querySelector('meta[name="lunchee-para"]')?.content || 0) / 100;
+// Sztuki lunch boxów od najdroższej, rabat obejmuje pełne pary
+function pairDiscount(items) {
+  const units = items.filter(x => MODELS[x.id]).flatMap(x => Array(x.qty).fill(x.price || 0)).sort((a, b) => b - a);
+  const paired = units.slice(0, Math.floor(units.length / 2) * 2);
+  return { units: units.length, pairs: paired.length / 2, value: Math.round(paired.reduce((s, v) => s + v, 0) * PARA * 100) / 100 };
+}
+
 /* ---------- Koszyk (localStorage, prototyp bez cen) ---------- */
 const CART_KEY = 'lunchee-koszyk';
 const cart = {
@@ -186,11 +195,16 @@ const cart = {
     const n = cart.count();
     $$('[data-cart-count]').forEach(c => { c.textContent = n; c.hidden = n === 0; });
     $$('[data-cart-qty]').forEach(c => c.textContent = n);
-    const sum = cart.read().reduce((s, x) => s + (x.price || 0) * x.qty, 0);
+    const gross = cart.read().reduce((s, x) => s + (x.price || 0) * x.qty, 0);
+    const disc = pairDiscount(cart.read());
+    const sum = gross - disc.value;
+    $$('[data-cart-discount-row]').forEach(r => r.hidden = !disc.value);
+    $$('[data-cart-discount]').forEach(c => c.textContent = '−' + zl(disc.value));
+    paraCart(disc);
     const shipEl = $('[data-cart-ship]');
     const free = +(shipEl?.dataset.free || Infinity);
     const ship = n && sum < free ? +(shipEl?.dataset.ship || 0) : 0;
-    $$('[data-cart-sum]').forEach(c => c.textContent = zl(sum));
+    $$('[data-cart-sum]').forEach(c => c.textContent = zl(gross));
     $$('[data-cart-ship]').forEach(c => c.textContent = zl(ship));
     $$('[data-cart-total]').forEach(c => c.textContent = zl(sum + ship));
     const list = $('[data-cart-list]');
@@ -243,14 +257,17 @@ var addonInputs = buyBox ? $$('[data-addon]', buyBox) : [];
 function selection() {
   if (!withAddons) return 0;
   const qty = +($('.qty output', buyBox)?.textContent || 1);
-  return +withAddons.dataset.price * qty + addonInputs.filter(i => i.checked).reduce((s, i) => s + +i.dataset.price, 0);
+  const price = +withAddons.dataset.price;
+  const pairOff = Math.floor(qty / 2) * 2 * price * PARA;
+  return price * qty - pairOff + addonInputs.filter(i => i.checked).reduce((s, i) => s + +i.dataset.price, 0);
 }
 function shipBars() {
   $$('[data-ship-bar]').forEach(bar => {
     const free = +bar.dataset.free;
     // Na karcie produktu liczymy wybór plus to, co już leży w koszyku poza tym produktem i jego akcesoriami
     const skip = withAddons ? [withAddons.dataset.add, ...(addonInputs || []).map(i => i.dataset.addon)] : [];
-    const inCart = cart.read().filter(x => !skip.includes(x.id)).reduce((s, x) => s + (x.price || 0) * x.qty, 0);
+    const rest = cart.read().filter(x => !skip.includes(x.id));
+    const inCart = rest.reduce((s, x) => s + (x.price || 0) * x.qty, 0) - pairDiscount(rest).value;
     const total = inCart + (bar.closest('.buy') ? selection() : 0);
     const missing = free - total;
     $('[data-ship-fill]', bar).style.width = Math.min(100, total / free * 100) + '%';
@@ -273,6 +290,35 @@ if (withAddons) withAddons.addEventListener('click', () => {
   updateBuySum();
 });
 shipBars();
+
+// Przycisk „Dodaj dwa” w boksie promocji na karcie produktu
+$$('[data-add-pair]').forEach(b => b.addEventListener('click', () => {
+  cart.add({ id: b.dataset.addPair, name: b.dataset.name, img: b.dataset.img, price: +b.dataset.price }, 2);
+  toast(`Dwa ${b.dataset.name} w koszyku, rabat za parę naliczony`);
+}));
+
+// Boks promocji w koszyku: trzy stany zależne od liczby lunch boxów
+function paraCart(disc) {
+  const box = $('[data-para-cart]'); if (!box) return;
+  const h = $('[data-para-h]', box), p = $('[data-para-p]', box), btn = $('[data-para-btn]', box);
+  const r = Math.round(PARA * 100);
+  box.classList.toggle('is-done', disc.pairs > 0 && disc.units % 2 === 0);
+  if (disc.units % 2 === 1) {
+    const first = disc.units === 1;
+    h.textContent = first ? `Dodaj drugi Lunchee, rabat ${r}% obejmie parę` : `Dodaj jeszcze jeden Lunchee, rabat ${r}% obejmie kolejną parę`;
+    p.textContent = first ? 'Druga sztuka może być w innym kolorze, dla Ciebie albo dla bliskiej osoby.' : `Za ${disc.pairs === 1 ? 'parę' : disc.pairs + ' pary'} masz już ${zl(disc.value)} rabatu. Kolory możesz łączyć.`;
+    btn.hidden = false;
+  } else if (disc.pairs > 0) {
+    h.textContent = `Rabat ${r}% za ${disc.pairs === 1 ? 'parę' : disc.pairs + ' pary'} naliczony`;
+    p.textContent = `Oszczędzasz ${zl(disc.value)}. Każda kolejna para lunch boxów też kosztuje ${r}% mniej.`;
+    btn.hidden = true;
+  } else {
+    h.textContent = `Dwa Lunchee ${r}% taniej`;
+    p.textContent = 'Jeden dla Ciebie, drugi dla bliskiej osoby. Rabat obejmuje każdą parę lunch boxów, kolory możesz łączyć.';
+    btn.hidden = false; btn.textContent = 'Wybierz Lunchee';
+  }
+  if (disc.units % 2 === 1) btn.textContent = disc.units === 1 ? 'Wybierz drugi Lunchee' : 'Wybierz kolejny Lunchee';
+}
 
 /* ---------- Pasek zakupu na telefonie ---------- */
 const mainBuy = $('[data-main-buy]'), stickyBuy = $('.sticky-buy');
