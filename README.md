@@ -38,11 +38,41 @@ Potem `http://localhost:8000/`. Strona działa też z GitHub Pages.
   pojemników LBC7 i LBCL7. Wszystko do podmiany na dane klienta.
 - **Koszyk i formularze** działają tylko w przeglądarce (koszyk w `localStorage`),
   bez backendu, płatności i wysyłki maili.
-- **Coolvetica** (nagłówki) wymaga Web Projectu w Adobe Fonts i linku `use.typekit.net`
-  w `<head>`. Plików fontu nie wolno hostować samodzielnie. Bez kitu nagłówki spadają
-  na Arial Rounded albo krój systemowy.
+- **Fonty**: nagłówki używają Coolvetiki z projektu Adobe Fonts
+  `https://use.typekit.net/gay0uyj.css` (rodzina `"coolvetica"`). Link znajduje
+  się przed `styleguide/fonts.css` we wszystkich 23 stronach i w styleguide.
+  Projekt zawiera wymagane wagi 400, 700 i 900 oraz pozostałe odmiany.
+  Inter 4.1 dla tekstów i jako fallback nagłówków jest serwowany lokalnie
+  z `assets/fonts/` (WOFF2, wagi 100–900, kursywa, polskie znaki; licencja OFL).
+  Nie są potrzebne dodatkowe fonty. Plików Adobe nie kopiujemy na serwer.
+  Zestaw Polish został opublikowany i zweryfikowany: komplet
+  `ąćęłńóśźż ĄĆĘŁŃÓŚŹŻ` renderuje się Coolvetiką w wagach 400, 700 i 900.
+  Testy w Chromium, Firefox i WebKit przeszły; kontrola faktycznie użytych
+  fontów w Chromium potwierdziła brak domieszki Inter dla tych znaków.
+  Adobe obecnie dostarcza `font-display: auto`; ustawienie `swap` można
+  włączyć w konfiguracji projektu Adobe. Lokalny Inter używa `swap`.
 - **LB795 Night** jest pokazany jako niedostępny w sklepie (sprzedaż u partnera).
 - **Strony prawne** zawierają strukturę i wzór formularza odstąpienia,
   treść regulaminu i polityki prywatności dostarcza klient.
 - **Zgodność**: przy cenie promocyjnej wyświetla się najniższa cena z 30 dni (Omnibus),
   zgody w formularzach są rozdzielone.
+
+## Audyt fontów i mobile (8.10.2026)
+
+Raport: [dla-klienta/audyt-fonty-mobile.html](dla-klienta/audyt-fonty-mobile.html).
+Testy wymagają Node.js 22+ i Playwright; zależności mogą zostać poza projektem:
+
+```bash
+npm install --prefix /tmp/lunchee-audit-tools playwright@1.64.0
+/tmp/lunchee-audit-tools/node_modules/.bin/playwright install chromium firefox webkit
+# W drugim terminalu uruchom serwer z katalogu sklepu:
+python3 -m http.server 8765 --bind 127.0.0.1
+# W katalogu sklepu:
+NODE_PATH=/tmp/lunchee-audit-tools/node_modules node scripts/audit-layout.cjs
+NODE_PATH=/tmp/lunchee-audit-tools/node_modules node scripts/audit-interactions.cjs
+```
+
+`BASE_URL` pozwala wskazać inny adres podglądu. `ENGINE`, `PAGES`, `WIDTHS`
+pozwalają ograniczyć test układu. Testy korzystają z izolowanego profilu
+przeglądarki i zapisują wyniki oraz zrzuty w systemowym katalogu tymczasowym.
+Nie składają zamówień w zewnętrznym sklepie.

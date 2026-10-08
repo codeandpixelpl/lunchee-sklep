@@ -2,11 +2,12 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lunchee — Style guide</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- KOLEJNOŚĆ ŁADOWANIA JEST WIĄŻĄCA: fonty → tokeny → komponenty. Ta sama na stronie. -->
+<link rel="preload" href="../assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/gay0uyj.css">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
@@ -131,7 +132,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <!-- ====================================================================== -->
 <section class="sg-block" id="typografia">
 <h2>Typografia</h2>
-<p class="sg-note">Dwa kroje z wytycznych klienta: <b>Coolvetica</b> (Adobe Fonts) do hasła i nagłówków, <b>Inter</b> (Google Fonts) do wszystkiego, co się czyta. Coolvetica ma interlinię 1.0, bo jej x-height jest duże i przy 1.2 nagłówek dwuliniowy się rozjeżdża.</p>
+<p class="sg-note">Dwa kroje z wytycznych klienta: <b>Coolvetica</b> (Adobe Fonts) do hasła i nagłówków, <b>Inter</b> (lokalne pliki WOFF2) do wszystkiego, co się czyta. Nagłówki korzystają z Coolvetiki z projektu Adobe Fonts gay0uyj, a lokalny Inter jest krojem tekstowym i fallbackiem. Coolvetica ma interlinię 1.0, bo jej x-height jest duże i przy 1.2 nagłówek dwuliniowy się rozjeżdża.</p>
 
 <div class="sg-demo sg-demo--alt">
   <span class="eyebrow">Lunchee by NOVEEN</span>
@@ -417,7 +418,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <p class="sg-note"><b>Zasada nadrzędna:</b> strona nie ma własnej kopii wartości. Poprawka koloru czy wysokości przycisku wchodzi do <code>tokens.css</code> albo <code>components.css</code>. Jeśli trzeba zmienić coś w jednym miejscu, to nie jest komponent i wymaga osobnej klasy.</p>
 <p class="sg-note">Kontrola rozjazdu przed oddaniem (stan 2026-09-19: 0 tokenów nieużywanych, 1 kolor poza paletą: #000000 z <code>currentColor</code> w sprite SVG):<br>
 <code>python3 ~/.claude/data/styleguide/pomiar.py --url "http://localhost:8887/03%20-%20Design/" --drift --tokens "04 - Styleguide/tokens.css"</code></p>
-<p class="sg-note">Coolvetica: przed publikacją założyć Web Project na fonts.adobe.com i wkleić <code>&lt;link&gt;</code> Typekitu do <code>partials/head.html</code> przed <code>fonts.css</code>. Do tego czasu strona na komputerze bez Coolvetiki pokaże krój zastępczy.</p>
+<p class="sg-note">Coolvetica jest podłączona przez projekt Adobe Fonts <code>gay0uyj</code> przed <code>fonts.css</code>. Token <code>--font-naglowki</code> używa rodziny <code>coolvetica</code>; wymagane wagi 400, 700 i 900 są dostępne. Lokalny Inter 4.1 służy do tekstów i jako fallback nagłówków. Szczegóły w README.</p>
 </section>
 
 </div>

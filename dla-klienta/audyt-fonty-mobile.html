@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lunchee — audyt fontów i mobile</title>
+<link rel="stylesheet" href="../styleguide/fonts.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf8f1;color:#14213a;font:16px/1.65 Inter,system-ui,sans-serif;overflow-wrap:anywhere}main{max-width:1060px;margin:auto;padding:40px 20px 64px}h1,h2{color:#0a2a5e;line-height:1.2}h1{font-size:clamp(2rem,5vw,3rem)}h2{margin-top:40px}a{color:#0054af}.meta{color:#4a5570}.notice{padding:20px;background:#fdf1c9;border-left:5px solid #f2b90c;border-radius:12px}.table{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left}th,td{padding:14px;border-bottom:1px solid #e8e1d2;vertical-align:top}th{background:#f4efe3}.shots{display:flex;flex-wrap:wrap;gap:24px;align-items:start}figure{margin:0;flex:1 1 280px;max-width:390px}img{display:block;width:100%;height:auto;border-radius:16px}figcaption{margin:10px 0;color:#4a5570;font-size:.9rem}code{background:#f4efe3;padding:2px 5px;border-radius:4px}li+li{margin-top:8px}@media(max-width:600px){th,td{padding:10px;font-size:.9rem}}
+</style>
+</head>
+<body><main>
+<p class="meta">Audyt prototypu · 8 października 2026</p>
+<h1>Fonty i wyświetlanie sklepu na telefonach</h1>
+<p>Najważniejsze poprawki wdrożono w lokalnym prototypie. Zweryfikowano 23 podstrony sklepu, 15 szerokości i trzy silniki przeglądarek. W 1035 kombinacjach nie wykryto poziomego przewijania dokumentu, wystawania kontrolowanych elementów poza ekran ani błędów JavaScript.</p>
+<div class="notice"><strong>Fonty: integracja zakończona.</strong> Projekt Adobe Fonts <code>gay0uyj</code> jest dodany do wszystkich 23 podstron i styleguide. Po publikacji zestawu Polish potwierdzono poprawne ładowanie i pełny zestaw <code>ąćęłńóśźż ĄĆĘŁŃÓŚŹŻ</code> w wagach 400, 700 i 900 w Chromium, Firefox i WebKit. Kontrola rzeczywiście użytych fontów w Chromium potwierdziła, że wszystkie 18 polskich liter pochodzi z Coolvetiki, bez zastępowania przez Inter. Dodatkowy font nie jest potrzebny.</div>
+<h2>Ustalenia i wdrożone poprawki</h2>
+<div class="table"><table>
+<thead><tr><th>Priorytet</th><th>Problem</th><th>Wdrożenie</th></tr></thead><tbody>
+<tr><td>Wysoki</td><td>Coolvetica miała wyłącznie źródła <code>local()</code>. Bez zainstalowanego fontu nagłówki używały różnych fontów systemowych. Inter zależał od Google Fonts.</td><td>Lokalny Inter 4.1 WOFF2: wagi 100–900, kursywa, polskie znaki, <code>font-display: swap</code>, preload normalnego kroju. Usunięto zależność od Google i fontów zainstalowanych u odbiorcy. Dołączono licencję OFL i źródła plików. Następnie podłączono Coolvetikę z projektu Adobe gay0uyj dla nagłówków; Inter pozostaje fontem tekstów i fallbackiem.</td></tr>
+<tr><td>Wysoki</td><td>Menu po przejściu do desktopu pozostawało otwarte i blokowało przewijanie.</td><td>Zamykanie na progu 1000 px, przywracanie pozycji strony, obsługa Escape i Tab, fokus po otwarciu/zamknięciu, nieaktywne tło i dynamiczna wysokość nagłówka.</td></tr>
+<tr><td>Wysoki</td><td>WebKit rozszerzał nagłówki grup formularza zamówienia poza ekran po zmianie szerokości.</td><td>Zmieniono układ fieldsetów z grid na flow-root, zachowując legendy, odstępy i semantykę formularza.</td></tr>
+<tr><td>Średni</td><td>Pola formularzy dziedziczyły 14,4 px; na telefonie tekst był mały.</td><td>Pola mają co najmniej 16 px przy standardowym rozmiarze tekstu. Nie wyłączono powiększania strony.</td></tr>
+<tr><td>Średni</td><td>Odznaka gwarancji wychodziła o 17 px poza ekran przy 320 i 390 px. Element koszyka na 320 px przekraczał szerokość kontenera.</td><td>Odsunięto odznakę od brzegu, zarezerwowano miejsce na treść i poprawiono siatkę pozycji koszyka. Długie teksty i przyciski mogą się zawijać. Usunięto globalne maskowanie problemów przez overflow-x: hidden.</td></tr>
+<tr><td>Średni</td><td>Pasek zakupu mógł przykrywać dół strony i komunikat dodania do koszyka; ukryte przyciski nadal trafiały do nawigacji klawiaturą.</td><td>Rezerwa na rzeczywistą wysokość paska, komunikat ponad paskiem, inert i aria-hidden dla schowanego paska.</td></tr>
+<tr><td>Średni</td><td>Rozwinięty panel cookies nie miał ograniczenia wysokości na niskim ekranie.</td><td>Limit wysokości oparty o dostępny viewport, przewijanie zawartości, uwzględnienie bezpiecznej dolnej krawędzi. Dodano viewport-fit i bezpieczne marginesy treści.</td></tr>
+<tr><td>Średni</td><td>Ciasne dodatki do produktu i małe cele dotykowe w stopce.</td><td>Dodatki na telefonie mają cenę w osobnym wierszu; linki stopki i przełącznik ustawień cookies mają minimum 44 px wysokości.</td></tr>
+</tbody></table></div>
+<h2>Zakres weryfikacji</h2>
+<ul>
+<li><strong>Silniki:</strong> Chromium, Firefox i WebKit z Playwright 1.64.0. WebKit dodatkowo z emulacją iPhone 13.</li>
+<li><strong>Szerokości:</strong> 320, 360, 390, 414, 568, 640, 768, 899, 900, 999, 1000, 1080, 1100, 1280 i 1440 px; 23 strony HTML z katalogu głównego.</li>
+<li><strong>Interakcje w każdym silniku:</strong> menu, Tab/Escape i zmiana szerokości, cookies w orientacji poziomej 568 × 320, galeria, dodanie produktu, pasek zakupu, zmiana ilości w koszyku, pola faktury, wybór dostawy i walidacja zamówienia.</li>
+<li><strong>Coolvetica po podłączeniu:</strong> potwierdzono załadowanie wag 400, 700 i 900 w trzech silnikach, powtórzono 1035 kontroli układu bez błędów. Po uzupełnieniu projektu Adobe o zestaw Polish powtórzono testy: wszystkie 18 polskich liter jest dostępnych w wagach 400, 700 i 900. W trzech silnikach porównano pomiary glifów przy różnych fontach awaryjnych; dodatkowo Chromium potwierdził rzeczywistą rodzinę Coolvetica dla każdego z 54 glifów (18 liter × 3 wagi).</li>
+<li><strong>Fonty — wcześniejszy test fallbacku:</strong> pobranie lokalnego WOFF2 z odpowiedzią 200 oraz załadowanie Inter dla polskiego tekstu przy zablokowanych zewnętrznych adresach. Osobno sprawdzono awarię fontów i powiększenie tekstu do 200% na stronie głównej, produkcie, koszyku i zamówieniu w Chromium przy 320 px.</li>
+<li><strong>Kontrola wizualna:</strong> hero, karta gwarancji, sekcja zakupu i formularz w WebKit. Sprawdzono też ujawnianie formularza przy zwykłych animacjach, bez preferencji ograniczenia ruchu.</li>
+</ul>
+<p><a href="audyt-mobile/wyniki-fontow-polskich.json">Wyniki kontroli polskich znaków</a>. <a href="audyt-mobile/wyniki-ukladu.json.txt">Zapis wyników testów układu</a>. Testy do ponownego uruchomienia: <code>scripts/audit-layout.cjs</code> i <code>scripts/audit-interactions.cjs</code>. Instrukcja w README repozytorium.</p>
+<h2>Podgląd po poprawkach</h2>
+<div class="shots">
+<figure><img src="audyt-mobile/hero-webkit-390.png" width="390" height="749" alt="Sekcja główna sklepu po poprawkach na ekranie 390 pikseli"><figcaption>Hero, WebKit, 390 px — Coolvetica z Adobe z kompletem polskich znaków.</figcaption></figure>
+<figure><img src="audyt-mobile/formularz-webkit-390.png" width="358" height="745" alt="Grupa danych do wysyłki z poprawnie mieszczącymi się polami"><figcaption>Zamówienie, WebKit, 390 px — grupa danych do wysyłki.</figcaption></figure>
+</div>
+<h2>Granice audytu i dalszy krok</h2>
+<p>Testy dotyczą bieżących silników przeglądarek i emulacji. Nie zastępują kontroli na fizycznym iPhonie i Androidzie, zwłaszcza z otwartą klawiaturą ekranową i paskami przeglądarki. Nie obejmują historycznych wersji przeglądarek. Karuzele zachowują celowe przewijanie wewnętrzne. Nie jest to pełny audyt dostępności ani backendu: sklep nadal jest prototypem, bez rzeczywistych płatności i wysyłania zamówień.</p>
+<p>Rozszerzony zestaw Polish jest aktywny pod tym samym linkiem CSS. Weryfikacja została wykonana w świeżych sesjach przeglądarek. Nagłówki używają Coolvetiki, teksty lokalnego Inter; Inter pozostaje też awaryjnym fontem nagłówków na wypadek niedostępności Adobe. Adobe obecnie ustawia <code>font-display: auto</code>; opcjonalna optymalizacja w konfiguracji projektu to <code>swap</code>. Inter używa już <code>swap</code>.</p>
+<p class="meta">Źródła fontów i sposobu integracji: <a href="https://rsms.me/inter/download/">Inter — autor projektu</a>, <a href="https://fonts.adobe.com/fonts/coolvetica">Coolvetica — Adobe Fonts</a>, <a href="https://helpx.adobe.com/fonts/web/web-design-and-development/add-fonts-website.html">instrukcja dodawania projektu Adobe Fonts</a>, <a href="https://helpx.adobe.com/sg/fonts/web/language-support-and-opentype-features/language-support-subsetting.html">zestawy znaków i języki w Adobe Fonts</a>.</p>
+<p><a href="../index.html">Otwórz poprawiony prototyp →</a></p>
+</main></body></html>

@@ -27,8 +27,10 @@
   .header__actions { margin-left: 0; }
   .menu-toggle { display: none; }
 }
-.mobile-nav { display: none; position: fixed; inset: 76px 0 0; z-index: 49; background: var(--tlo); padding: 16px var(--margines) 40px; overflow-y: auto; }
+.mobile-nav { display: none; position: fixed; inset: var(--header-height, 76px) 0 0; z-index: 49; background: var(--tlo); padding: 16px var(--margines) 40px; overflow-y: auto; }
 .mobile-nav.is-open { display: block; }
+.mobile-nav { overscroll-behavior: contain; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+@media (min-width: 1000px) { .mobile-nav.is-open { display: none; } }
 .mobile-nav a { display: block; padding: 16px 0; border-bottom: 1px solid var(--linia); font-family: var(--font-naglowki); font-size: 2rem; color: var(--tekst-mocny); text-decoration: none; }
 
 /* ---------- 01 Hero (makieta Figmy 25:2 i 25:369, poprawki z 8.10) ----------
@@ -114,7 +116,7 @@
 .feats__tile--inox img { position: absolute; right: 16px; bottom: 12px; width: 150px; height: auto; }
 /* Pieczątka gwarancji: koło wychodzące poza prawy górny róg kafla (makieta 25:1067). */
 .feats__tile--gwarancja { overflow: visible; }
-.feats__stempel { position: absolute; top: -20px; right: -34px; z-index: 2; display: grid; place-items: center;
+.feats__stempel { position: absolute; top: -20px; right: -12px; z-index: 2; display: grid; place-items: center;
   width: 102px; height: 102px; border-radius: 50%; background: var(--akcent-cieply-tekst); color: var(--biel);
   font-family: var(--font-tekst); text-align: center; }
 .feats__stempel i { position: absolute; top: 20px; right: 20px; font-style: normal; font-size: 1.01rem; font-weight: 800; line-height: 1; }
@@ -307,7 +309,7 @@
 .pdp__grid { display: grid; gap: 28px; }
 @media (min-width: 900px) {
   .pdp__grid { grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: start; }
-  .gallery { position: sticky; top: 96px; display: grid; grid-template-columns: 88px 1fr; gap: 14px; }
+  .gallery { position: sticky; top: 96px; display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; }
   .gallery__main { margin: 0; border-radius: var(--r-l); overflow: hidden; }
   .gallery__thumbs { display: grid; gap: 10px; align-content: start; max-height: 660px; overflow-y: auto; scrollbar-width: none; }
   .gallery__thumbs button { padding: 0; border: 2px solid transparent; border-radius: 14px; overflow: hidden; background: var(--biel); cursor: pointer; }
@@ -517,7 +519,7 @@
 .gate { margin-top: 26px; padding: 20px; border-radius: var(--r-m); background: var(--biel); max-width: 30rem; }
 .gate__label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 8px; color: var(--tekst-mocny); }
 .gate__row { display: flex; flex-wrap: wrap; gap: 10px; }
-.gate__input { flex: 1 1 11rem; min-height: 48px; padding: 0 14px; border: 1px solid var(--linia); border-radius: 14px; font: inherit; background: var(--tlo); }
+.gate__input { min-width: 0; max-width: 100%; flex: 1 1 11rem; min-height: 48px; padding: 0 14px; border: 1px solid var(--linia); border-radius: 14px; font: inherit; background: var(--tlo); }
 .gate__input:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
 .gate__err { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--blad); }
 .gate__hint { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--tekst-slaby); }
@@ -525,3 +527,13 @@
 .reader__frame img { width: 100%; max-width: 760px; height: auto; border-radius: var(--r-m); -webkit-user-select: none; user-select: none; -webkit-user-drag: none; pointer-events: none; }
 .reader .note-small { text-align: center; }
 @media (min-width: 900px) { .reader__frame { grid-template-columns: .5fr 1fr; align-items: center; } }
+
+/* Nagłówki muszą mieścić się także przy dłuższym kroju zastępczym. */
+.hero h1 { line-height: 1.05; }
+@media (max-width: 639px) {
+  .feats__tile--gwarancja { padding-top: 94px; }
+  .header .wrap { gap: 8px; }
+  .header .brand { flex: 1; min-width: 0; }
+  .header .logo-mark { max-width: 100%; }
+  .header__actions { flex: none; }
+}

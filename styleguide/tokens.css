@@ -55,8 +55,8 @@
   --produkt-night:   #141414;
 
   /* --- Typografia --------------------------------------------------------- */
-  --font-naglowki:  "Coolvetica LN", "Coolvetica", "Arial Rounded MT Bold", system-ui, sans-serif; /* fonts.css: Adobe Fonts */
-  --font-tekst:     "Inter", system-ui, -apple-system, sans-serif;
+  --font-naglowki:  "coolvetica", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* Adobe Fonts gay0uyj; lokalny Inter jako fallback */
+  --font-tekst:     "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --fs-h1:          clamp(2.6rem, 7vw, 4.6rem);   /* hero, 74 px na 1440 (było 112 px, uwaga klienta 1.10) */
   --fs-h2:          clamp(2.1rem, 4.6vw, 3.4rem); /* nagłówki sekcji, 54 px na 1440 (było 67 px) */

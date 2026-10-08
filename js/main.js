@@ -13,16 +13,57 @@ onScroll();
 
 const toggle = $('.menu-toggle');
 const mobileNav = $('.mobile-nav');
-const setMenu = open => {
+const desktopMenu = matchMedia('(min-width: 1000px)');
+let menuScroll = 0;
+const menuBackground = $$('main, footer, .sticky-buy');
+const setMenu = (open, restoreFocus = true) => {
   if (!toggle || !mobileNav) return;
+  open = open && !desktopMenu.matches;
+  if (open === mobileNav.classList.contains('is-open')) return;
+  if (open) {
+    menuScroll = scrollY;
+    document.body.style.setProperty('--menu-scroll-top', `-${menuScroll}px`);
+  }
   mobileNav.classList.toggle('is-open', open);
   toggle.setAttribute('aria-expanded', open);
+  toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
   toggle.classList.toggle('is-open', open);
   document.body.classList.toggle('no-scroll', open);
+  menuBackground.forEach(el => { el.inert = open || (el === stickyBuy && !el.classList.contains('is-visible')); });
+  if (open) {
+    $('a', mobileNav)?.focus({ preventScroll: true });
+  } else {
+    document.body.style.removeProperty('--menu-scroll-top');
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    scrollTo(0, menuScroll);
+    root.style.scrollBehavior = previous;
+    if (restoreFocus) toggle.focus({ preventScroll: true });
+  }
 };
 toggle?.addEventListener('click', () => setMenu(!mobileNav.classList.contains('is-open')));
 mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-addEventListener('keydown', e => e.key === 'Escape' && setMenu(false));
+addEventListener('keydown', e => {
+  if (!mobileNav?.classList.contains('is-open')) return;
+  if (e.key === 'Escape') { e.preventDefault(); setMenu(false); }
+  if (e.key === 'Tab') {
+    const targets = [toggle, ...$$('a', mobileNav)];
+    const current = targets.indexOf(document.activeElement);
+    e.preventDefault();
+    targets[(current + (e.shiftKey ? -1 : 1) + targets.length) % targets.length].focus();
+  }
+});
+desktopMenu.addEventListener('change', () => {
+  if (desktopMenu.matches) {
+    const hadMenuFocus = mobileNav?.contains(document.activeElement) || document.activeElement === toggle;
+    setMenu(false, false);
+    if (hadMenuFocus) $('.nav a')?.focus({ preventScroll: true });
+  }
+});
+if (header && 'ResizeObserver' in window) {
+  new ResizeObserver(() => document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`)).observe(header);
+}
 
 // Podświetlenie bieżącej podstrony w menu
 const here = location.pathname.split('/').pop() || 'index.html';
@@ -323,7 +364,19 @@ function paraCart(disc) {
 /* ---------- Pasek zakupu na telefonie ---------- */
 const mainBuy = $('[data-main-buy]'), stickyBuy = $('.sticky-buy');
 if (mainBuy && stickyBuy && 'IntersectionObserver' in window) {
-  new IntersectionObserver(([e]) => stickyBuy.classList.toggle('is-visible', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(mainBuy);
+  document.body.classList.add('has-sticky-buy');
+  stickyBuy.inert = true;
+  stickyBuy.setAttribute('aria-hidden', 'true');
+  const measureStickyBuy = () => document.body.style.setProperty('--sticky-buy-height', `${stickyBuy.offsetHeight}px`);
+  measureStickyBuy();
+  if ('ResizeObserver' in window) new ResizeObserver(measureStickyBuy).observe(stickyBuy);
+  new IntersectionObserver(([e]) => {
+    const visible = !e.isIntersecting && e.boundingClientRect.top < 0;
+    stickyBuy.classList.toggle('is-visible', visible);
+    document.body.classList.toggle('has-visible-sticky-buy', visible);
+    stickyBuy.inert = !visible || document.body.classList.contains('no-scroll');
+    stickyBuy.setAttribute('aria-hidden', String(!visible));
+  }).observe(mainBuy);
 }
 
 /* ---------- Formularze: walidacja i pola warunkowe (prototyp, bez wysyłki) ---------- */

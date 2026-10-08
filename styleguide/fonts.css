@@ -1,21 +1,23 @@
-/* =============================================================================
-   LUNCHEE — FONTY
-   Ładowany PIERWSZY, przed tokens.css.
+/* Lunchee — Inter serwowany lokalnie, Coolvetica z Adobe Fonts.
+   Inter 4.1, SIL Open Font License: ../assets/fonts/OFL-Inter.txt.
+   Pełny zestaw znaków (w tym polskie), rzeczywiste wagi 100–900 i kursywa.
+   Nie używamy local(): zainstalowane fonty nie mogą zmieniać wyglądu sklepu.
+   Coolvetica: https://use.typekit.net/gay0uyj.css w <head> przed tym plikiem.
+   Rodzina "coolvetica", używane wagi normal: 400, 700, 900.
+   Inter pozostaje lokalnym fallbackiem na wypadek niedostępności Adobe. */
 
-   Decyzja klienta (Wytyczne dla Lunchee.docx): Coolvetica do hasła i nagłówków,
-   Inter do tekstu ciągłego.
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable.woff2") format("woff2");
+}
 
-   COOLVETICA — Adobe Fonts (Typekit), licencja Typodermic.
-   Ścieżka A: Web Project na koncie Adobe → <link rel="stylesheet" href="https://use.typekit.net/XXXX.css">
-   w <head>, przed tym plikiem. NIE self-hostuj plików .otf/.woff2 (łamie licencję).
-   Do czasu założenia kitu prototyp korzysta z lokalnej synchronizacji Adobe (local()),
-   więc na komputerze bez Coolvetiki spadnie na Arial Rounded / system-ui.
-   Przy handoffie: deweloper klienta potrzebuje własnego Web Projectu albo licencji.
-
-   INTER — Google Fonts, ładowany linkiem w <head> (wagi 400–800, latin-ext).
-   Do wdrożenia można zamienić na self-hosting woff2 z podzbiorem latin-ext.
-   ============================================================================= */
-
-@font-face { font-family: "Coolvetica LN"; font-weight: 400; font-display: swap; src: local("CoolveticaRg-Regular"), local("Coolvetica Regular"); }
-@font-face { font-family: "Coolvetica LN"; font-weight: 700; font-display: swap; src: local("CoolveticaRg-Bold"), local("Coolvetica Bold"); }
-@font-face { font-family: "Coolvetica LN"; font-weight: 900; font-display: swap; src: local("CoolveticaHv-Regular"), local("Coolvetica Heavy"); }
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable-Italic.woff2") format("woff2");
+}
