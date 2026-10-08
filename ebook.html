@@ -38,9 +38,9 @@
 <a class="skip" href="#tresc">Przejdź do treści</a>
 <header class="header">
   <div class="wrap">
-    <a href="index.html" aria-label="Lunchee, strona główna"><span class="logo-mark" role="img" aria-label="Lunchee"></span></a>
+    <a class="brand" href="index.html" aria-label="Lunchee, elektryczne lunch boxy, strona główna"><span class="logo-mark" role="img" aria-label="Lunchee"></span><span class="brand__tag" aria-hidden="true">Elektryczne lunch boxy</span></a>
     <nav class="nav" aria-label="Główna">
-      <a href="lunch-boxy.html">Lunch boxy</a>
+      <a href="lunch-boxy.html">Elektryczne lunch boxy</a>
       <a href="akcesoria.html">Akcesoria</a>
       <a href="index.html#jak-korzystac">Jak korzystać</a>
       <a href="dla-firm.html">Dla firm</a>
@@ -54,7 +54,7 @@
   </div>
 </header>
 <nav class="mobile-nav" id="menu-mobilne" aria-label="Menu mobilne">
-  <a href="lunch-boxy.html">Lunch boxy</a>
+  <a href="lunch-boxy.html">Elektryczne lunch boxy</a>
   <a href="akcesoria.html">Akcesoria</a>
   <a href="index.html#jak-korzystac">Jak korzystać</a>
   <a href="dla-firm.html">Dla firm</a>
@@ -65,19 +65,41 @@
 <!-- @/header -->
 <main id="tresc">
   <div class="wrap crumbs"><a href="index.html">Strona główna</a> / Ebook z przepisami</div>
+
   <section class="sec ebook ebook--page">
     <div class="wrap ebook__grid">
       <div class="ebook__text">
         <span class="eyebrow">Ebook z przepisami</span>
         <h1 class="h2" style="margin-bottom:22px">20 prostych przepisów</h1>
         <p>Razem z Michałem Podulskim, uczestnikiem XII edycji MasterChef, przygotowaliśmy dla Ciebie 20 prostych i pełnych smaku przepisów.</p>
-        <div class="hero__cta" style="margin-top:24px">
-          <a class="btn btn--blue" href="#" aria-disabled="true" data-ebook-download>Pobierz ebook (PDF) <svg><use href="#i-arrow"/></svg></a>
-        </div>
+        <form class="gate" data-gate method="dialog" autocomplete="off">
+          <label class="gate__label" for="haslo">Hasło z opakowania</label>
+          <div class="gate__row">
+            <input class="gate__input" id="haslo" name="haslo" type="password" inputmode="text" autocomplete="off" required>
+            <button class="btn btn--blue" type="submit">Otwórz ebook</button>
+          </div>
+          <p class="gate__err" data-gate-err hidden>Hasło się nie zgadza. Znajdziesz je na ulotce w pudełku z Lunchee.</p>
+          <p class="gate__hint">Kod QR i hasło dostajesz w pudełku razem z lunch boxem.</p>
+        </form>
       </div>
       <img class="ebook__img" src="assets/img/ebook.webp" alt="Ebook Lunchee z przepisami Michała Podulskiego, okładka i rozkładówka" fetchpriority="high" width="1400" height="902">
     </div>
   </section>
+
+  <section class="sec reader" data-gate-panel hidden>
+    <div class="wrap">
+      <div class="sec__head sec__head--center">
+        <span class="eyebrow">Ebook otwarty</span>
+        <h2 class="h2">Smaczne przepisy <span class="alt" style="display:inline">na ciepłe posiłki</span></h2>
+      </div>
+      <div class="reader__frame">
+        <img src="assets/img/ebook-okladka.webp" alt="Okładka ebooka z przepisami Michała Podulskiego" width="532" height="528" loading="lazy">
+        <img src="assets/img/ebook.webp" alt="Rozkładówka ebooka z przepisem na spaghetti carbonara" width="1400" height="902" loading="lazy">
+      </div>
+      <p class="note-small">Ebook otwiera się do czytania w przeglądarce, bez pobierania pliku.</p>
+    </div>
+  </section>
+
   <section class="sec">
     <div class="wrap">
       <div class="sec__head sec__head--center"><h2 class="h2">Jak korzystać z Lunchee?</h2></div>
@@ -117,7 +139,7 @@
         <h4>Lunchee</h4>
         <ul>
           <li><a href="index.html#jak-korzystac">Jak korzystać</a></li>
-          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="produkt-lb745.html#faq">FAQ</a></li>
           <li><a href="ebook.html">Ebook z przepisami</a></li>
           <li><a href="dla-firm.html">Dla firm</a></li>
           <li><a href="o-nas.html">O nas</a></li>

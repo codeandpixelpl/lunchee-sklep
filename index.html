@@ -38,9 +38,9 @@
 <a class="skip" href="#tresc">Przejdź do treści</a>
 <header class="header">
   <div class="wrap">
-    <a href="index.html" aria-label="Lunchee, strona główna"><span class="logo-mark" role="img" aria-label="Lunchee"></span></a>
+    <a class="brand" href="index.html" aria-label="Lunchee, elektryczne lunch boxy, strona główna"><span class="logo-mark" role="img" aria-label="Lunchee"></span><span class="brand__tag" aria-hidden="true">Elektryczne lunch boxy</span></a>
     <nav class="nav" aria-label="Główna">
-      <a href="lunch-boxy.html">Lunch boxy</a>
+      <a href="lunch-boxy.html">Elektryczne lunch boxy</a>
       <a href="akcesoria.html">Akcesoria</a>
       <a href="index.html#jak-korzystac">Jak korzystać</a>
       <a href="dla-firm.html">Dla firm</a>
@@ -54,7 +54,7 @@
   </div>
 </header>
 <nav class="mobile-nav" id="menu-mobilne" aria-label="Menu mobilne">
-  <a href="lunch-boxy.html">Lunch boxy</a>
+  <a href="lunch-boxy.html">Elektryczne lunch boxy</a>
   <a href="akcesoria.html">Akcesoria</a>
   <a href="index.html#jak-korzystac">Jak korzystać</a>
   <a href="dla-firm.html">Dla firm</a>
@@ -66,72 +66,71 @@
 
 <main id="tresc">
 
-  <!-- 01 · Hero -->
+  <!-- 01 · Hero (runda 01: kadr z ImageGena w kolorach KV, tekst na spokojnej lewej części) -->
   <section class="hero">
-    <picture class="hero__img">
-      <source media="(max-width: 899px)" srcset="assets/img/gen/01-hero-mobile-lifestyle.webp" width="900" height="1124">
-      <img src="assets/img/gen/01-hero-biuro-z-gory.webp" alt="Lunch box Lunchee LB745 City z ciepłym posiłkiem na biurku" width="1536" height="1024" fetchpriority="high">
+    <picture class="hero__foto">
+      <source media="(max-width: 899px)" srcset="assets/img/hero-kv-mobile.webp" width="780" height="975">
+      <img src="assets/img/hero-kv.webp" alt="Kobieta z ciepłym posiłkiem w lunch boxie Lunchee LB725 Nature" width="1536" height="850" fetchpriority="high">
     </picture>
-    <div class="wrap">
+    <div class="wrap hero__grid">
       <div class="hero__text">
         <span class="eyebrow">Lunchee by NOVEEN</span>
         <h1><span>Twój czas</span> <span class="alt">na ciepły posiłek</span></h1>
         <p class="hero__sub">Twój posiłek. Twój moment. Gdziekolwiek jesteś.</p>
         <div class="hero__cta">
-          <a class="btn btn--blue" href="#sklep">Wybierz swój Lunchee <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--blue" href="#modele">Wybierz swój Lunchee <svg><use href="#i-arrow"/></svg></a>
           <a class="btn btn--outline hero__how" href="#jak-korzystac"><span class="hero__how-ic" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Jak to działa</a>
         </div>
-        <ul class="hero__facts">
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></svg>230 V · 12 V · 24 V</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>30 mies. gwarancji</li>
-        </ul>
-        <img class="hero__badges" src="assets/img/odznaki.png" alt="Podgrzewanie do 60°C, 3 źródła zasilania" width="309" height="230">
+      </div>
+      <ul class="hero__fakty">
+        <li><span class="ic"><img src="assets/img/gen/icons/cieplo.webp" alt="" width="125" height="192"></span>Podgrzewa do 60°C</li>
+        <li><span class="ic"><img src="assets/img/gen/icons/zasilanie.webp" alt="" width="192" height="192"></span>3 źródła zasilania</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 · Promocje i rabaty (runda 01: stałe miejsce na banery) -->
+  <section class="sec promo" id="promocje" aria-labelledby="h-promo">
+    <div class="wrap">
+      <h2 class="sr-only" id="h-promo">Promocje i rabaty</h2>
+      <div class="promo__grid">
+        <a class="promo__main" href="#modele">
+          <img class="promo__foto" src="assets/img/promo/para.webp" alt="" width="1536" height="1024" loading="lazy">
+          <span class="promo__body">
+            <span class="promo__tag">Promocja</span>
+            <b>Dwa Lunchee 30% taniej</b>
+            <span class="promo__txt">Rabat na każdą parę lunch boxów. Kolory możesz łączyć.</span>
+            <span class="promo__go">Wybierz modele <svg><use href="#i-arrow"/></svg></span>
+          </span>
+        </a>
+        <div class="promo__tile">
+          <span class="promo__media"><img src="assets/img/promo/gwarancja.webp" alt="" width="1457" height="1080" loading="lazy"></span>
+          <span class="promo__body">
+            <span class="promo__pill">teraz 0 zł</span>
+            <b>Rozszerzona gwarancja producenta</b>
+            <span class="promo__txt">30 miesięcy zamiast 24, do każdego produktu w koszyku.</span>
+          </span>
+        </div>
+        <div class="promo__tile">
+          <span class="promo__media"><img src="assets/img/promo/dostawa.webp" alt="" width="1457" height="1080" loading="lazy"></span>
+          <span class="promo__body">
+            <span class="promo__pill">od 269 zł</span>
+            <b>Darmowa dostawa</b>
+            <span class="promo__txt">Kurier albo paczkomat, do wyboru w zamówieniu.</span>
+          </span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 02 · Najważniejsze cechy i Dlaczego Lunchee (kafle) -->
-  <section class="sec feats" aria-labelledby="h-feats">
-    <div class="wrap">
-      <h2 class="sr-only" id="h-feats">Dlaczego Lunchee?</h2>
-      <ul class="feats__grid">
-        <li class="feats__tile feats__tile--main">
-          <p class="feats__big">60°C</p>
-          <p class="feats__lead">Ciepły posiłek, kiedy chcesz.<br> Około 20 minut podgrzewania.</p>
-          <img src="assets/img/produkty/lb745.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" width="1000" height="742" loading="lazy">
-        </li>
-        <li class="feats__tile">
-          <span class="feats__chips" aria-hidden="true">
-            <span><svg viewBox="0 0 32 32"><path d="M5 15L16 6l11 9M8 13v13h6v-7h4v7h6V13"/></svg>230 V</span>
-            <span class="on"><svg viewBox="0 0 32 32"><path d="M6 17l3-7h14l3 7M5 17h22v7H5zM8 24v3M24 24v3"/><circle cx="10" cy="20.5" r="1.3"/><circle cx="22" cy="20.5" r="1.3"/></svg>12 V</span>
-            <span><svg viewBox="0 0 32 32"><path d="M3 9h16v13H3zM19 13h6l4 5v4H19"/><circle cx="8" cy="24" r="2.5"/><circle cx="23" cy="24" r="2.5"/></svg>24 V</span>
-          </span>
-          <b>W domu i w trasie.</b><span>W biurze i w samochodzie.</span>
-        </li>
-        <li class="feats__tile">
-          <svg class="feats__ic" viewBox="0 0 56 56" aria-hidden="true"><rect x="12" y="11" width="24" height="12" rx="4"/><path d="M10 17h28"/><rect x="7" y="27" width="34" height="18" rx="5"/><path d="M5 32h38"/><path class="ok" d="M42 4l-2 6M49 9l-6 4M51 17h-7"/></svg>
-          <b class="feats__val">1,7 + 0,5 l</b><span>Pojemność na konkretny posiłek i dodatki.</span>
-        </li>
-        <li class="feats__tile feats__tile--inox">
-          <b class="feats__val feats__val--xl">INOX</b><span>Wyjmowany pojemnik, łatwy do mycia w zmywarce.</span>
-          <img src="assets/img/gen/08-inox-wyciecie.webp" alt="" width="1100" height="1114" loading="lazy">
-        </li>
-        <li class="feats__tile">
-          <svg class="feats__ic feats__ic--shield" viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4l20 7v14c0 13-8.5 22-20 27C16.5 47 8 38 8 25V11z"/><path class="ok" d="M18 28l7 7 13-14"/></svg>
-          <b class="feats__val">30 mies.</b><span>Gwarancji producenta.</span>
-        </li>
-      </ul>
-      <p class="note-small">Czas podgrzewania zależy od rodzaju, ilości i temperatury posiłku.</p>
-    </div>
-  </section>
-
-  <!-- 03 · Każdy ma swój sposób -->
-  <section class="sec way" style="padding-top:0">
+  <!-- 03 · Każdy ma swój sposób (runda 01: wyżej, kolory z KV, miejsce na film) -->
+  <section class="sec way">
     <div class="wrap way__grid">
       <div class="way__text">
         <h2 class="h2" style="margin-bottom:28px">Każdy ma <span class="alt">swój sposób.</span></h2>
         <p>Praca, podróż, długi dzień poza domem – nie zawsze mamy kuchnię pod ręką. Ale własny posiłek możemy mieć ze sobą.</p>
         <p>Lunchee pozwala podgrzać go tam, gdzie akurat jesteś – w domu, samochodzie czy w trasie. Dzięki temu ciepły posiłek może być częścią Twojego dnia, niezależnie od miejsca.</p>
+        <a class="btn btn--blue" href="#jak-korzystac">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
       </div>
       <div class="way__compare">
         <figure>
@@ -147,73 +146,154 @@
     </div>
   </section>
 
-  <!-- 04 · Lunch boxy -->
-  <section class="sec picker" id="sklep" data-picker style="padding-top:0">
-    <div class="wrap picker__grid">
-      <div>
-        <div class="picker__stage">
-          <span class="status" data-picker-status hidden>Niedostępny w sklepie</span>
-          <img data-picker-img src="assets/img/produkty/lb745.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" width="1000" height="742">
-        </div>
-        <div class="thumbs" data-przewijane></div>
+  <!-- 04 · Najważniejsze cechy (runda 01: o jedną sekcję niżej) -->
+  <section class="sec feats" aria-labelledby="h-feats">
+    <div class="wrap">
+      <h2 class="sr-only" id="h-feats">Dlaczego Lunchee?</h2>
+<!-- @kafle-cech -->
+      <ul class="feats__grid">
+        <li class="feats__tile feats__tile--main">
+          <p class="feats__big">60°C</p>
+          <p class="feats__lead">Ciepły posiłek, kiedy chcesz.<br> Około 20 minut podgrzewania.</p>
+          <span class="feats__para" aria-hidden="true">
+            <img src="assets/img/produkty/lb745.webp" alt="" width="1000" height="742" loading="lazy">
+            <img src="assets/img/produkty/lb715.webp" alt="" width="1000" height="742" loading="lazy">
+          </span>
+        </li>
+        <li class="feats__tile">
+          <span class="feats__chips" aria-hidden="true">
+            <span><svg viewBox="0 0 32 32"><path d="M5 15L16 6l11 9M8 13v13h6v-7h4v7h6V13"/></svg>230 V</span>
+            <span class="on"><svg viewBox="0 0 32 32"><path d="M6 17l3-7h14l3 7M5 17h22v7H5zM8 24v3M24 24v3"/><circle cx="10" cy="20.5" r="1.3"/><circle cx="22" cy="20.5" r="1.3"/></svg>12 V</span>
+            <span><svg viewBox="0 0 32 32"><path d="M3 9h16v13H3zM19 13h6l4 5v4H19"/><circle cx="8" cy="24" r="2.5"/><circle cx="23" cy="24" r="2.5"/></svg>24 V</span>
+          </span>
+          <b>W domu i w trasie.</b><span>W biurze i w samochodzie.</span>
+        </li>
+        <li class="feats__tile">
+          <span class="feats__row">
+            <svg class="feats__ic" viewBox="0 0 56 56" aria-hidden="true"><rect x="12" y="11" width="24" height="12" rx="4"/><path d="M10 17h28"/><rect x="7" y="27" width="34" height="18" rx="5"/><path d="M5 32h38"/><path class="ok" d="M42 4l-2 6M49 9l-6 4M51 17h-7"/></svg>
+            <b class="feats__val">1,7 + 0,5 l</b>
+          </span>
+          <span>Pojemność na konkretny posiłek i dodatki.</span>
+        </li>
+        <li class="feats__tile feats__tile--inox">
+          <b class="feats__val feats__val--xl">INOX</b><span>Wyjmowany pojemnik, łatwy do mycia w zmywarce.</span>
+          <img src="assets/img/gen/08-inox-wyciecie.webp" alt="" width="1100" height="1114" loading="lazy">
+        </li>
+        <li class="feats__tile feats__tile--gwarancja">
+          <span class="feats__row">
+            <svg class="feats__ic feats__ic--shield" viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4l20 7v14c0 13-8.5 22-20 27C16.5 47 8 38 8 25V11z"/><path class="ok" d="M18 28l7 7 13-14"/></svg>
+            <b class="feats__val">30 mies.</b>
+          </span>
+          <span>Rozszerzona gwarancja producenta, dokładana do każdego produktu w koszyku.</span>
+          <span class="feats__stempel"><i>teraz</i><b>0 zł</b></span>
+        </li>
+      </ul>
+      <p class="note-small">Czas podgrzewania zależy od rodzaju, ilości i temperatury posiłku.</p>
+<!-- @/kafle-cech -->
+    </div>
+  </section>
+
+  <!-- 05 · Modele (runda 01: cała oferta z przyciskiem zakupu zamiast jednego koloru) -->
+  <section class="sec modele" id="modele">
+    <div class="wrap">
+      <div class="sec__head sec__head--center">
+        <span class="eyebrow">Elektryczne lunch boxy</span>
+        <h2 class="h2">Pięć kolorów. <span class="alt" style="display:inline">Wybierz swój.</span></h2>
+        <p class="lead">Ten sam lunch box w pięciu wersjach kolorystycznych. Parametry są wspólne, różni się kolor.</p>
       </div>
-      <div class="picker__info">
-        <span class="eyebrow">Lunch boxy</span>
-        <h2 class="h2">Wybierz swój Lunchee</h2>
-        <p class="full" data-picker-full>Elektryczny Lunch Box NOVEEN Lunchee LB745 City</p>
-        <ul class="swatches" aria-label="Kolor">
-          <li><button class="swatch" data-model="lb745" aria-pressed="true" style="--c:var(--produkt-city)"><i></i>City</button></li>
-          <li><button class="swatch" data-model="lb755" aria-pressed="false" style="--c:var(--produkt-glamour)"><i></i>Glamour</button></li>
-          <li><button class="swatch" data-model="lb725" aria-pressed="false" style="--c:var(--produkt-nature)"><i></i>Nature</button></li>
-          <li><button class="swatch" data-model="lb715" aria-pressed="false" style="--c:var(--produkt-pearl)"><i></i>Pearl</button></li>
-          <li><button class="swatch" data-model="lb795" aria-pressed="false" style="--c:var(--produkt-night)"><i></i>Night</button></li>
-        </ul>
-        <ul class="feat">
-          <li><span class="ic"><img src="assets/img/gen/icons/cieplo.webp" alt="" width="125" height="192"></span>Podgrzewanie posiłków do 60°C w około 20 minut</li>
-          <li><span class="ic"><img src="assets/img/gen/icons/inox.webp" alt="" width="192" height="170"></span>Wyjmowany pojemnik INOX, również do zmywarki</li>
-          <li><span class="ic"><img src="assets/img/gen/icons/torba.webp" alt="" width="169" height="192"></span>Torba termiczna w zestawie</li>
-          <li><span class="ic"><img src="assets/img/gen/icons/lisc.webp" alt="" width="161" height="192"></span>BPA Free</li>
-        </ul>
-        <div class="price-row"><span class="price" data-picker-price>249,00 zł</span><s class="price__old" data-picker-old>279,00 zł</s></div>
-        <a class="btn btn--blue btn--block" data-picker-buy href="produkt-lb745.html">Zobacz produkt <svg><use href="#i-arrow"/></svg></a>
+      <div class="modele__grid">
+<!-- @modele-karty -->
+        <a class="card card--product" href="produkt-lb745.html" data-model="lb745">
+          <div class="card__img card__img--produkt card__img--cieply"><img src="assets/img/produkty/lb745.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" loading="lazy" width="1000" height="742"><img class="card__img-hover card__img-hover--alfa" src="assets/img/lb745/lb745-08-wyciete.webp" alt="" loading="lazy" width="900" height="900"></div>
+          <div class="card__body"><span class="card__code"><i class="dot" style="--c:#39546f"></i>City</span><h3>Lunchee LB745 City</h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB745 City</p><div class="card__foot"><span class="price price--sm">249,00 zł<s class="price__old">279,00 zł</s></span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
+        </a>
+        <a class="card card--product" href="produkt-lb755.html" data-model="lb755">
+          <div class="card__img card__img--produkt card__img--limonka"><img src="assets/img/produkty/lb755.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour" loading="lazy" width="1000" height="739"><img class="card__img-hover card__img-hover--alfa" src="assets/img/lb755/lb755-08-wyciete.webp" alt="" loading="lazy" width="900" height="900"></div>
+          <div class="card__body"><span class="card__code"><i class="dot" style="--c:#ceaab2"></i>Glamour</span><h3>Lunchee LB755 Glamour</h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
+        </a>
+        <a class="card card--product" href="produkt-lb725.html" data-model="lb725">
+          <div class="card__img card__img--produkt card__img--zolty"><img src="assets/img/produkty/lb725.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature" loading="lazy" width="1000" height="742"><img class="card__img-hover card__img-hover--alfa" src="assets/img/lb725/lb725-08-wyciete.webp" alt="" loading="lazy" width="900" height="900"></div>
+          <div class="card__body"><span class="card__code"><i class="dot" style="--c:#7e9d93"></i>Nature</span><h3>Lunchee LB725 Nature</h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
+        </a>
+        <a class="card card--product" href="produkt-lb715.html" data-model="lb715">
+          <div class="card__img card__img--produkt card__img--grad"><img src="assets/img/produkty/lb715.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl" loading="lazy" width="1000" height="742"><img class="card__img-hover card__img-hover--alfa" src="assets/img/lb715/lb715-08-wyciete.webp" alt="" loading="lazy" width="900" height="900"></div>
+          <div class="card__body"><span class="card__code"><i class="dot" style="--c:#d7d7d9"></i>Pearl</span><h3>Lunchee LB715 Pearl</h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
+        </a>
+        <a class="card card--product" href="produkt-lb795.html" data-model="lb795">
+          <div class="card__img card__img--produkt card__img--cieply"><span class="card__status">Niedostępny w sklepie</span><img src="assets/img/produkty/lb795.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB795 Night" loading="lazy" width="1000" height="742"><img class="card__img-hover" src="assets/img/lb795/lb795-08.webp" alt="" loading="lazy" width="900" height="900"></div>
+          <div class="card__body"><span class="card__code"><i class="dot" style="--c:#141414"></i>Night</span><h3>Lunchee LB795 Night</h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB795 Night</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
+        </a>
+<!-- @/modele-karty -->
       </div>
     </div>
   </section>
 
-  <!-- 06 · Jak korzystać -->
+  <!-- 06 · Jak korzystać (runda 01: bez numeracji kroków) -->
   <section class="sec steps" id="jak-korzystac">
     <div class="wrap">
       <div class="sec__head sec__head--center">
         <h2 class="h2" style="color:var(--cta)">Jak korzystać z Lunchee?</h2>
       </div>
-      <ol class="steps__list" data-przewijane>
-        <li class="step"><div class="step__num"><span>01</span></div><div class="step__card"><img src="assets/img/gen/06-krok-01-przygotuj.webp" alt="Posiłek wkładany do głównego pojemnika Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><span class="n">01</span><h3>Przygotuj</h3><p>Włóż posiłek do głównego pojemnika. Jeśli chcesz, możesz dodać odrobinę sosu, bulionu, wody lub oleju, aby potrawa nie wyschła podczas podgrzewania.</p></div></div></li>
-        <li class="step"><div class="step__num"><span>02</span></div><div class="step__card"><img src="assets/img/gen/06-krok-02-zapakuj.webp" alt="Lunchee wkładany do torby termicznej" width="1100" height="1100" loading="lazy"><div class="step__body"><span class="n">02</span><h3>Zapakuj</h3><p>Zamknij pokrywę i włóż Lunchee do torby termicznej. Dodatkowy pojemnik wykorzystaj na dodatki, przekąskę lub sos. Sztućce są w komplecie.</p></div></div></li>
-        <li class="step"><div class="step__num"><span>03</span></div><div class="step__card"><img src="assets/img/gen/06-krok-03-podlacz.webp" alt="Przewód zasilający podłączany do Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><span class="n">03</span><h3>Podłącz</h3><p>W biurze użyj zasilania 230 V, a w samochodzie 12 V lub 24 V.</p></div></div></li>
-        <li class="step"><div class="step__num"><span>04</span></div><div class="step__card"><img src="assets/img/gen/06-krok-04-podgrzej.webp" alt="Uchylanie okienka parowego w pokrywie Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><span class="n">04</span><h3>Podgrzej</h3><p>Uchyl okienko parowe. Podłącz lunch box do zasilania i podgrzej posiłek.<br>Czas podgrzewania zależy od rodzaju, ilości i temperatury posiłku.</p></div></div></li>
-        <li class="step"><div class="step__num"><span>05</span></div><div class="step__card"><img src="assets/img/gen/06-krok-05-jedz.webp" alt="Ciepły posiłek w otwartym Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><span class="n">05</span><h3>Jedz</h3><p>Odłącz urządzenie od zasilania, otwórz pokrywę i ciesz się ciepłym posiłkiem. Po swojemu, tam gdzie jesteś.</p></div></div></li>
+      <ol class="steps__list steps__list--plain" data-przewijane>
+        <li class="step"><div class="step__card"><img src="assets/img/gen/06-krok-01-przygotuj.webp" alt="Posiłek wkładany do głównego pojemnika Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><h3>Przygotuj</h3><p>Włóż posiłek do głównego pojemnika. Jeśli chcesz, możesz dodać odrobinę sosu, bulionu, wody lub oleju, aby potrawa nie wyschła podczas podgrzewania.</p></div></div></li>
+        <li class="step"><div class="step__card"><img src="assets/img/gen/06-krok-02-zapakuj.webp" alt="Lunchee wkładany do torby termicznej" width="1100" height="1100" loading="lazy"><div class="step__body"><h3>Zapakuj</h3><p>Zamknij pokrywę i włóż Lunchee do torby termicznej. Dodatkowy pojemnik wykorzystaj na dodatki, przekąskę lub sos. Sztućce są w komplecie.</p></div></div></li>
+        <li class="step"><div class="step__card"><img src="assets/img/gen/06-krok-03-podlacz.webp" alt="Przewód zasilający podłączany do Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><h3>Podłącz</h3><p>W biurze użyj zasilania 230 V, a w samochodzie 12 V lub 24 V.</p></div></div></li>
+        <li class="step"><div class="step__card"><img src="assets/img/gen/06-krok-04-podgrzej.webp" alt="Uchylanie okienka parowego w pokrywie Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><h3>Podgrzej</h3><p>Uchyl okienko parowe. Podłącz lunch box do zasilania i podgrzej posiłek.<br>Czas podgrzewania zależy od rodzaju, ilości i temperatury posiłku.</p></div></div></li>
+        <li class="step"><div class="step__card"><img src="assets/img/gen/06-krok-05-jedz.webp" alt="Ciepły posiłek w otwartym Lunchee" width="1100" height="1100" loading="lazy"><div class="step__body"><h3>Jedz</h3><p>Odłącz urządzenie od zasilania, otwórz pokrywę i ciesz się ciepłym posiłkiem. Po swojemu, tam gdzie jesteś.</p></div></div></li>
       </ol>
     </div>
   </section>
 
-  <!-- 07 · Twój Lunchee moment -->
-  <section class="sec moments">
+  <!-- 07 · Twój Lunchee moment (runda 01: persony ze zdjęciami z KV zamiast zdjęć lokalizacji) -->
+  <section class="sec persony" id="dla-kogo">
     <div class="wrap">
-      <div class="sec__head moments__head">
+      <div class="sec__head">
         <h2 class="h2">Twój <span class="alt" style="display:inline">Lunchee moment</span></h2>
-        <div class="moments__nav"><button class="round-btn" type="button" data-carousel-prev aria-label="Poprzednie"><svg><use href="#i-left"/></svg></button><button class="round-btn" type="button" data-carousel-next aria-label="Następne"><svg><use href="#i-right"/></svg></button></div>
+        <p class="lead">Na grafikach pojawiają się różne osoby - są one odniesieniem do person, które opracowaliśmy.</p>
       </div>
-      <div class="moments__track" data-carousel data-dots="moments-dots" data-przewijane>
-        <figure class="moment"><img src="assets/img/gen/07-moment-praca.webp" alt="Lunchee z posiłkiem na biurku" width="1024" height="1536" loading="lazy"><figcaption><b>W pracy</b>Kiedy masz chwilę na swój posiłek.</figcaption></figure>
-        <figure class="moment"><img src="assets/img/gen/07-moment-samochod.webp" alt="Lunchee w samochodzie" width="1024" height="1536" loading="lazy"><figcaption><b>W samochodzie</b>Kiedy dzień spędzasz w trasie.</figcaption></figure>
-        <figure class="moment"><img src="assets/img/gen/07-moment-podroz.webp" alt="Lunchee z posiłkiem przy kamperze nad jeziorem" width="1024" height="1536" loading="lazy"><figcaption><b>W podróży</b>Kiedy chcesz zabrać ze sobą coś swojego.</figcaption></figure>
-        <figure class="moment"><img src="assets/img/gen/07-moment-poza-domem.webp" alt="Lunchee w torbie sportowej" width="1024" height="1536" loading="lazy"><figcaption><b>Poza domem</b>Kiedy nie masz kuchni pod ręką.</figcaption></figure>
+      <ul class="persony__grid" data-przewijane>
+        <li class="persona-card">
+          <div class="persona-card__img"><img src="assets/img/kv/persona-agnieszka.webp" alt="Agnieszka z ciepłym posiłkiem w lunch boxie Lunchee" width="392" height="532" loading="lazy"></div>
+          <div class="persona-card__body"><h3>Agnieszka, 36</h3><span>mama, dba o dietę</span><q>Chcę zjeść po swojemu, gdziekolwiek jestem.</q></div>
+        </li>
+        <li class="persona-card">
+          <div class="persona-card__img"><img src="assets/img/kv/persona-ewa.webp" alt="Ewa z ciepłym posiłkiem w lunch boxie Lunchee" width="397" height="532" loading="lazy"></div>
+          <div class="persona-card__body"><h3>Ewa, 27</h3><span>trenerka fitness</span><q>Chcę zjeść na ciepło, nawet gdy cały dzień jestem w ruchu.</q></div>
+        </li>
+        <li class="persona-card">
+          <div class="persona-card__img"><img src="assets/img/kv/persona-krzysiek.webp" alt="Krzysztof z ciepłym posiłkiem w lunch boxie Lunchee" width="397" height="532" loading="lazy"></div>
+          <div class="persona-card__body"><h3>Krzysztof, 43</h3><span>brygadzista, budowa</span><q>Skoro mam zadbać o siebie, chcę normalnie jeść — także w pracy.</q></div>
+        </li>
+        <li class="persona-card">
+          <div class="persona-card__img"><img src="assets/img/kv/persona-irenka.webp" alt="Irenka z ciepłym posiłkiem w lunch boxie Lunchee" width="397" height="532" loading="lazy"></div>
+          <div class="persona-card__body"><h3>Irenka, 31</h3><span>asystentka zarządu</span><q>Mój dzień się zmienia, ale lunch chcę mieć po swojemu.</q></div>
+        </li>
+      </ul>
+      <div class="persony__cta">
+        <a class="btn btn--blue" href="#modele">Wybierz swój Lunchee <svg><use href="#i-arrow"/></svg></a>
       </div>
-      <div class="dots" id="moments-dots" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- 07b · Opinie (przykładowe, z produkty.json) -->
+  <!-- 08 · Ebook (runda 01: wyżej, niższa sekcja, duże zdjęcie, bez kodu QR) -->
+  <section class="sec ebook" id="ebook">
+    <div class="wrap ebook__grid">
+      <div class="ebook__text">
+        <span class="eyebrow">Ebook z przepisami</span>
+        <h2 class="h2" style="margin-bottom:22px">20 prostych przepisów</h2>
+        <p>Razem z Michałem Podulskim, uczestnikiem XII edycji MasterChef, przygotowaliśmy dla Ciebie 20 prostych i pełnych smaku przepisów.</p>
+        <ol class="ebook__steps">
+          <li><b>1</b><span>Kup Lunchee</span></li>
+          <li><b>2</b><span>W pudełku znajdziesz ulotkę z kodem QR i hasłem</span></li>
+          <li><b>3</b><span>Zeskanuj kod, podaj hasło i czytaj ebook</span></li>
+        </ol>
+        <a class="btn btn--blue" href="ebook.html">Zobacz stronę ebooka <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <img class="ebook__img" src="assets/img/ebook.webp" alt="Ebook Lunchee z przepisami Michała Podulskiego, okładka i rozkładówka" loading="lazy" width="1400" height="902">
+  </section>
+
+  <!-- 09 · Opinie (przykładowe, z produkty.json) -->
 <!-- @opinie -->
 <section class="sec reviews" id="opinie">
     <div class="wrap">
@@ -271,166 +351,16 @@
   </section>
 <!-- @/opinie -->
 
-  <!-- 08 · Zestaw -->
-  <section class="sec kit">
-    <div class="wrap kit__grid">
-      <div class="kit__img"><img src="assets/img/gen/08-zestaw-poprawiony.webp" alt="Zestaw Lunchee: lunch box, torba termiczna, pojemniki, sztućce i przewody zasilające" width="1100" height="1100" loading="lazy"></div>
-      <div>
-        <div class="sec__head" style="margin-bottom:24px">
-          <span class="eyebrow">W zestawie</span>
-          <h2 class="h2" style="font-size:clamp(2.2rem,4.4vw,3.4rem)">Co znajduje się w zestawie Lunch Boxa?</h2>
-        </div>
-        <ol class="kit__list">
-          <li><span class="th"><img src="assets/img/produkty/lb745.webp" alt="" width="1000" height="742"></span><span class="tx">Elektryczny Lunch Box NOVEEN Lunchee</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-inox-wyciecie.webp" alt="" width="1100" height="1114"></span><span class="tx">pojemnik główny 1,7 l ze stali nierdzewnej INOX,</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-maly-pojemnik-wyciecie.webp" alt="" width="850" height="783"></span><span class="tx">pojemnik 0,5 l z pokrywką na sos lub inne dodatki ,</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-torba-wyciecie.webp" alt="" width="1100" height="1095"></span><span class="tx">Torba termiczna – wygodny transport i lepsze utrzymanie ciepła</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-sztucce-wyciecie.webp" alt="" width="1100" height="1091"></span><span class="tx">łyżka i widelec</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-przewod-samochodowy-wyciecie.webp" alt="" width="1100" height="1072"></span><span class="tx">przewód zasilający 12/24 V samochód osobowy i ciężarowy</span></li>
-          <li><span class="th"><img src="assets/img/gen/08-przewod-sieciowy-wyciecie.webp" alt="" width="1091" height="1222"></span><span class="tx">przewód zasilający 230 V</span></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- 09 · Ebook -->
-  <section class="sec ebook" id="ebook">
-    <div class="wrap ebook__grid">
-      <div class="ebook__text">
-        <span class="eyebrow">Ebook z przepisami</span>
-        <h2 class="h2" style="margin-bottom:22px">20 prostych przepisów</h2>
-        <p>Razem z Michałem Podulskim, uczestnikiem XII edycji MasterChef, przygotowaliśmy dla Ciebie 20 prostych i pełnych smaku przepisów.</p>
-        <ol class="ebook__steps">
-          <li><b>1</b><span>Kup Lunchee</span></li>
-          <li><b>2</b><span>W pudełku znajdziesz ulotkę z kodem QR</span></li>
-          <li><b>3</b><span>Zeskanuj kod i pobierz ebook</span></li>
-        </ol>
-        <div class="ebook__qr">
-          <img src="assets/img/qr-ebook.svg" alt="Kod QR prowadzący do ebooka z przepisami" width="96" height="96">
-          <div><b>Kod z ulotki prowadzi tutaj</b><a href="ebook.html">Zobacz stronę ebooka <svg><use href="#i-arrow"/></svg></a></div>
-        </div>
-      </div>
-      <img class="ebook__img" src="assets/img/ebook.webp" alt="Ebook Lunchee z przepisami Michała Podulskiego, okładka i rozkładówka" loading="lazy" width="1400" height="902">
-    </div>
-  </section>
-
-  <!-- 09b · Przepisy (karuzela, z produkty.json) -->
-<!-- @przepisy -->
-<section class="sec recipes" id="przepisy">
-    <div class="wrap">
-      <div class="sec__head recipes__head">
-        <div><h2 class="h2">Przepisy do Twojego lunchboxa</h2><p class="lead">Odkryj inspiracje na ciepły posiłek.</p></div>
-        <a class="btn btn--blue" href="ebook.html">Zobacz e-book <svg><use href="#i-arrow"/></svg></a>
-      </div>
-      <div class="recipes__track" data-carousel data-progress="recipes-progress" data-przewijane>
-        <a class="recipe" href="ebook.html">
-          <span class="recipe__img"><img src="assets/img/lb745/lb745-08.webp" alt="Kurczak z ryżem i warzywami w lunch boxie Lunchee" loading="lazy" width="900" height="900"></span>
-          <span class="recipe__name">Kurczak z ryżem i warzywami<span class="round-btn" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span>
-        </a>
-        <a class="recipe" href="ebook.html">
-          <span class="recipe__img"><img src="assets/img/lb715/lb715-08.webp" alt="Spaghetti carbonara w lunch boxie Lunchee" loading="lazy" width="900" height="900"></span>
-          <span class="recipe__name">Spaghetti carbonara<span class="round-btn" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span>
-        </a>
-        <a class="recipe" href="ebook.html">
-          <span class="recipe__img"><img src="assets/img/lb725/lb725-08.webp" alt="Kurczak z brokułami i pomidorami w lunch boxie Lunchee" loading="lazy" width="900" height="900"></span>
-          <span class="recipe__name">Kurczak z brokułami i pomidorami<span class="round-btn" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span>
-        </a>
-        <a class="recipe" href="ebook.html">
-          <span class="recipe__img"><img src="assets/img/lb745/lb745-07.webp" alt="Placuszki z owsianką w lunch boxie Lunchee" loading="lazy" width="900" height="900"></span>
-          <span class="recipe__name">Placuszki z owsianką<span class="round-btn" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></span>
-        </a>
-      </div>
-      <div class="recipes__nav">
-        <span class="progress" id="recipes-progress" aria-hidden="true"><i></i></span>
-        <button class="round-btn" type="button" data-carousel-prev aria-label="Poprzednie przepisy"><svg><use href="#i-left"/></svg></button>
-        <button class="round-btn round-btn--dark" type="button" data-carousel-next aria-label="Następne przepisy"><svg><use href="#i-right"/></svg></button>
-      </div>
-    </div>
-  </section>
-<!-- @/przepisy -->
-
-  <!-- 10 · Akcesoria -->
-  <section class="sec" id="akcesoria">
-    <div class="wrap">
-      <div class="sec__head">
-        <span class="eyebrow">Akcesoria dodatkowe</span>
-        <h2 class="h2">Akcesoria do <span class="alt" style="display:inline">Lunch Boxa</span></h2>
-      </div>
-      <div class="acc__grid">
-<!-- @akcesoria-karty -->
-        <a class="card" href="akcesoria-lbb370.html">
-          <div class="card__img"><img src="assets/img/gen/08-torba-wyciecie.webp" alt="Torba termiczna NOVEEN Lunchee LBB370 do Lunch Boxa LB7xx" loading="lazy" width="1100" height="1095"></div>
-          <div class="card__body"><span class="card__code">LBB370</span><h3>Torba termiczna</h3><p>Spakuj. Zabierz. Zachowaj temperaturę.</p><ul class="card__params"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Do Lunch Boxów serii LB7xx</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v4M11 7v3M15 7v4M19 7v3"/></svg>16 × 17 × 23 cm</li></ul><div class="card__foot"><span class="price price--sm">59,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
-        </a>
-        <a class="card" href="akcesoria-lbc7.html">
-          <div class="card__img"><img src="assets/img/gen/08-inox-wyciecie.webp" alt="Pojemnik do Lunch Boxa Noveen Lunchee LBC7 inox" loading="lazy" width="1100" height="1114"></div>
-          <div class="card__body"><span class="card__code">LBC7 INOX</span><h3>Pojemnik INOX</h3><p>Dopasowany do Lunch Boxów serii 7</p><ul class="card__params"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Do wszystkich modeli serii LB7</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v4M11 7v3M15 7v4M19 7v3"/></svg>1,7 l · stal nierdzewna INOX</li></ul><div class="card__foot"><span class="price price--sm">49,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
-        </a>
-        <a class="card" href="akcesoria-lbcl7.html">
-          <div class="card__img"><img src="assets/img/gen/08-maly-pojemnik-wyciecie.webp" alt="Pojemnik z pokrywą NOVEEN Lunchee LBCL7" loading="lazy" width="850" height="783"></div>
-          <div class="card__body"><span class="card__code">LBCL7</span><h3>Pojemnik z pokrywą</h3><p>Przechowuj. Zabierz. Korzystaj po swojemu.</p><ul class="card__params"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Do wszystkich modeli serii LB7</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v4M11 7v3M15 7v4M19 7v3"/></svg>0,5 l · pojemnik z pokrywą</li></ul><div class="card__foot"><span class="price price--sm">39,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
-        </a>
-        <a class="card" href="akcesoria-lbl7.html">
-          <div class="card__img"><img src="assets/img/gen/10-pokrywa-koncepcja.webp" alt="Pokrywa do Lunch Boxa NOVEEN Lunchee LBL7" loading="lazy" width="1100" height="1066"></div>
-          <div class="card__body"><span class="card__code">LBL7</span><h3>Pokrywa do Lunch Boxa</h3><p>Dopasowana. Wymienna. Gotowa do codziennego użytkowania.</p><ul class="card__params"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Do wszystkich modeli serii LB7</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v4M11 7v3M15 7v4M19 7v3"/></svg>Pokrywa zamienna lub dodatkowa</li></ul><div class="card__foot"><span class="price price--sm">29,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
-        </a>
-<!-- @/akcesoria-karty -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 · FAQ -->
-  <section class="sec faq" id="faq">
-    <div class="wrap faq__grid">
-      <div class="faq__side">
-        <span class="eyebrow">FAQ</span>
-        <h2 class="h2">Najczęściej zadawane <span class="alt">pytania</span></h2>
-        <a class="faq__link" href="kontakt.html">Masz pytanie? Napisz do nas →</a>
-      </div>
-      <div>
-        <details name="faq" open><summary>Do jakiej temperatury podgrzewa Lunchee?</summary><p>Lunchee podgrzewa posiłki do 60°C. Osiągnięcie tej temperatury może zająć około 20 minut. Rzeczywisty czas podgrzewania zależy m.in. od ilości, rodzaju, konsystencji i temperatury początkowej jedzenia.</p></details>
-        <details name="faq"><summary>Gdzie można używać Lunchee?</summary><p>Lunchee sprawdzi się w pracy, biurze, samochodzie, na budowie, w trasie, kamperze czy podczas podróży. Dzięki zasilaniu 230 V / 12 V / 24 V możesz korzystać z niego w różnych miejscach.</p></details>
-        <details name="faq"><summary>Czy Lunchee można używać w samochodzie?</summary><p>Tak. Lunchee LB745 City można zasilać z instalacji 12 V lub 24 V, dlatego sprawdzi się zarówno w samochodach osobowych, jak i pojazdach wyposażonych w instalację 24 V.</p></details>
-        <details name="faq"><summary>Czy pojemnik INOX można myć w zmywarce?</summary><p>Tak. Wyjmowany główny pojemnik ze stali nierdzewnej INOX można myć w zmywarce.</p></details>
-        <details name="faq"><summary>Czy dodatkowy pojemnik 0,5 l można podgrzewać?</summary><p>Nie. Podgrzewanie odbywa się w głównym pojemniku INOX. Dodatkowy pojemnik służy do przechowywania dodatków, takich jak sałatka, owoce, sos, przekąska czy deser.</p></details>
-        <details name="faq"><summary>Jakie potrawy można podgrzewać w Lunchee?</summary><p>W Lunchee możesz podgrzewać różne wcześniej przygotowane posiłki, m.in. dania z mięsem, ryżem, makaronem, warzywami czy sosem.</p></details>
-        <details name="faq"><summary>Czy mogę dokupić dodatkowy pojemnik do Lunchee?</summary><p>Tak. Dodatkowy pojemnik możesz dokupić osobno w naszym sklepie. Sprawdzi się do przechowywania dodatkowej porcji, sałatki, owoców, przekąski lub deseru.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12 · Dla firm -->
-  <section class="sec b2b" id="dla-firm">
-    <div class="wrap b2b__grid">
-      <div class="b2b__text">
-        <span class="eyebrow">WSPÓŁPRACA DLA BIZNESU</span>
+  <!-- 10 · Dla firm (runda 01: pasek zamiast sekcji, szczegóły na podstronie) -->
+  <section class="sec b2b b2b--pasek" id="dla-firm">
+    <div class="wrap b2b__pasek">
+      <div class="b2b__pasek-txt">
+        <span class="eyebrow">Współpraca dla biznesu</span>
         <h2 class="b2b__title">Lunchee dla Twojej firmy</h2>
         <p class="lead">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
-        <ul class="b2b__feats">
-          <li class="b2b__feat"><span class="ic"><img src="assets/img/gen/icons/zespol.webp" alt="" width="192" height="150"></span><div><h3>Oferta B2B</h3><p>Przygotujemy indywidualną ofertę B2B, dopasowaną do wielkości zamówienia i Twoich potrzeb.</p></div></li>
-          <li class="b2b__feat"><span class="ic"><img src="assets/img/gen/icons/personalizacja.webp" alt="" width="184" height="192"></span><div><h3>Twój Lunchee z logo</h3><p>Chcesz, żeby Lunchee stało się częścią identyfikacji Twojej firmy? Przy większych zamówieniach możemy przygotować personalizację produktu z logo firmy.</p></div></li>
-        </ul>
-        <div class="b2b__cta">
-          <a class="btn btn--yellow" href="dla-firm.html#formularz">Napisz do nas <svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--outline-white" href="dla-firm.html">Więcej o ofercie dla firm</a>
-        </div>
       </div>
-      <div class="b2b__img"><img src="assets/img/gen/12-b2b-martwa-natura.webp" alt="Dwa lunch boxy Lunchee i torba termiczna" loading="lazy" width="1024" height="1536"></div>
-    </div>
-  </section>
-
-  <!-- 13 · O nas -->
-  <section class="sec about" id="o-nas">
-    <div class="wrap about__grid">
-      <div class="about__img"><img src="assets/img/gen/13-o-nas-posilek.webp" alt="Ciepły posiłek z Lunchee w kuchni" width="1024" height="1536" loading="lazy"></div>
-      <div>
-        <span class="eyebrow">O nas</span>
-        <h2 class="h2">Każdy ma swój sposób. <span class="alt" style="display:inline">My stworzyliśmy Lunchee dla tych, którzy chcą mieć swój.</span></h2>
-        <p>Pomysł na Lunchee zaczął się od prostej potrzeby: mieć możliwość zjedzenia własnego, ciepłego posiłku niezależnie od tego, gdzie jesteśmy.</p>
-        <p>Praca, podróż, długi dzień poza domem – nie zawsze mamy kuchnię pod ręką. Ale własny posiłek możemy mieć ze sobą.</p>
-        <p>Dlatego zaczęliśmy od jednego produktu i jednej konkretnej potrzeby. Tworzymy Lunchee tak, jak sami chcielibyśmy korzystać z takich produktów: prosto, praktycznie i bez zbędnego kombinowania.</p>
-        <p>Za marką stoi doświadczenie zespołu, który od lat tworzy produkty do codziennego użytku. Ale Lunchee ma własny kierunek, własny charakter i własny pomysł na codzienność.</p>
-        <div class="quote"><p>Bo każdy ma swój sposób. Swoje miejsce. Swój czas na ciepły posiłek. Lunchee pomaga mieć je ze sobą, gdziekolwiek jesteś.</p></div>
+      <div class="b2b__cta">
+        <a class="btn btn--yellow" href="dla-firm.html">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -462,7 +392,7 @@
         <h4>Lunchee</h4>
         <ul>
           <li><a href="index.html#jak-korzystac">Jak korzystać</a></li>
-          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="produkt-lb745.html#faq">FAQ</a></li>
           <li><a href="ebook.html">Ebook z przepisami</a></li>
           <li><a href="dla-firm.html">Dla firm</a></li>
           <li><a href="o-nas.html">O nas</a></li>

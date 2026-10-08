@@ -400,3 +400,19 @@ $$('[data-logo-demo]').forEach(demo => {
   });
   reset?.addEventListener('click', () => { img.hidden = true; img.removeAttribute('src'); ph.hidden = false; zone.classList.remove('has-logo'); reset.hidden = true; input.value = ''; });
 });
+
+/* Ebook na hasło (runda 01). Prototyp: hasło sprawdzane w przeglądarce,
+   docelowo po stronie serwera razem z plikiem PDF. */
+const gate = $('[data-gate]');
+if (gate) {
+  const panel = $('[data-gate-panel]'), err = $('[data-gate-err]');
+  gate.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const ok = gate.haslo.value.trim().toLowerCase() === 'lunchee';
+    err.hidden = ok;
+    if (!ok) { gate.haslo.focus(); return; }
+    panel.hidden = false;
+    gate.hidden = true;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}

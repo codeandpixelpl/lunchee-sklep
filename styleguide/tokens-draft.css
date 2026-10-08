@@ -1,0 +1,56 @@
+/* ===========================================================
+   TOKENY — SZKIC WYGENEROWANY AUTOMATYCZNIE
+   
+   To NIE jest gotowy plik. Do zrobienia ręcznie:
+   1. Nazwij tokeny po ROLI w serwisie (--cta, --tlo-ciemne),
+      nie po kolorze (--czerwony-2). Nazwa po roli przeżywa rebranding.
+   2. Dopisz przy każdym komentarz GDZIE występuje.
+   3. Skasuj to, co jest wartością jednorazową, nie tokenem.
+   4. Scal odcienie różniące się o 1-2 punkty, to zwykle rozjazd.
+   =========================================================== */
+
+:root {
+  /* --- Kolory --------------------------------------------- */
+  --kolor-1: #0a2a5e;   /* 197× — TODO: nazwa po roli + gdzie używany */
+  --kolor-2: #14213a;   /* 170× — TODO: nazwa po roli + gdzie używany */
+  --kolor-3: #ffffff;   /* 70× — TODO: nazwa po roli + gdzie używany */
+  --kolor-4: #4a5570;   /* 59× — TODO: nazwa po roli + gdzie używany */
+  --kolor-5: #cfdaf0;   /* 47× — TODO: nazwa po roli + gdzie używany */
+  --kolor-6: #f2b90c;   /* 46× — TODO: nazwa po roli + gdzie używany */
+  --kolor-7: #0054af;   /* 28× — TODO: nazwa po roli + gdzie używany */
+  --kolor-8: #e8e1d2;   /* 28× — TODO: nazwa po roli + gdzie używany */
+  --kolor-9: #1d5c34;   /* 18× — TODO: nazwa po roli + gdzie używany */
+  --kolor-10: #bcdd3f;   /* 10× — TODO: nazwa po roli + gdzie używany */
+  --kolor-11: #f1f7dd;   /* 6× — TODO: nazwa po roli + gdzie używany */
+  --kolor-12: #fdf1c9;   /* 4× — TODO: nazwa po roli + gdzie używany */
+  --kolor-13: #7a5600;   /* 3× — TODO: nazwa po roli + gdzie używany */
+
+  /* --- Typografia ----------------------------------------- */
+  --font-1: "Inter", sans-serif;
+  --font-2: "Coolvetica LN", sans-serif;
+  --fs-11-52: 11.52px;
+  --fs-12-48: 12.48px;
+  --fs-12-8: 12.8px;
+  --fs-13-12: 13.12px;
+  --fs-13-6: 13.6px;
+  --fs-14-4: 14.4px;
+  --fs-14-72: 14.72px;
+  --fs-15-2: 15.2px;
+
+  /* --- Odstępy -------------------------------------------- */
+  /* TODO: sprowadź do jednej skali. Jeśli dominują 8/16/24/32,
+     zostaw tylko je i podciągnij resztę. */
+  --odstep-2: 2px;   /* 31× */
+  --odstep-6: 6px;   /* 61× */
+  --odstep-7: 7px;   /* 32× */
+  --odstep-8: 8px;   /* 40× */
+  --odstep-10: 10px;   /* 38× */
+  --odstep-12: 12px;   /* 51× */
+  --odstep-16: 16px;   /* 35× */
+  --odstep-24: 24px;   /* 79× */
+
+  /* --- Zaokrąglenia --------------------------------------- */
+  --r-1: 99px;   /* 33× */
+  --r-2: 20px;   /* 20× */
+  --r-3: 28px;   /* 18× */
+}

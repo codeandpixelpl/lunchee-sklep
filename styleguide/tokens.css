@@ -2,9 +2,10 @@
    LUNCHEE — TOKENY
    Jedyne miejsce z wartościami liczbowymi systemu.
 
-   Źródło: pomiar własnego prototypu (POMIARY.md, 1440 px, 2026-09-19)
-            + kierunek wizualny z makiety w Figmie i planszy Kamila
-   Wersja: 1.0 · 2026-09-19
+   Źródło: plansza KV Kamila (FONT & COLORS / DIGITAL: tekst #0054a6 i #ffffff,
+            tła #f2b90c główne oraz #bcdd3f, #f26a3d, #7693df opcjonalne)
+            + pomiar własnego prototypu (POMIARY.md, 1440 px, 2026-09-19)
+   Wersja: 1.1 · 2026-10-05 (runda 01 uwag klienta: błękit poza KV, limonka wchodzi)
 
    ZASADY:
    1. Nazwa po ROLI, nie po wyglądzie. `--cta` przeżyje rebranding, `--granat` nie.
@@ -23,9 +24,12 @@
   /* --- Kolory: tła -------------------------------------------------------- */
   --tlo:            #fbf8f1;  /* domyślne tło strony, nagłówek (z przezroczystością .92) */
   --tlo-alt:        #f4efe3;  /* co druga sekcja, tło zdjęć w kartach, pole faktury, tło hero pod zdjęciem */
-  --tlo-produkt:    #dfeafb;  /* błękit pod packshotami: scena wyboru koloru, galeria karty, miniatury w koszyku */
+  --tlo-produkt:    #f1f7dd;  /* jasna limonka pod packshotami: karty modeli, galeria karty produktu, miniatury w koszyku (było #dfeafb, błękit poza KV, uwaga klienta 1.10) */
   --tlo-akcent:     #fdf1c9;  /* jasnożółte: ikony parametrów, otwarte pytanie FAQ, cytat, pole gwarancji i dostawy, hover w menu */
   --tlo-ciemne:     #0a2a5e;  /* stopka, toast, link „Przejdź do treści”, etykieta „Niedostępny” */
+  --tlo-limonka:    #bcdd3f;  /* KV: tło sekcji „Każdy ma swój sposób”, kart person i paska promocji */
+  --akcent-cieply:  #f26a3d;  /* KV: etykieta promocji, kółko ikony w hero (tło, nie tekst) */
+  --akcent-cieply-tekst: #d95220;  /* ten sam pomarańcz przyciemniony do tekstu: 3,82:1 na kremie, bo #f26a3d daje 2,87:1 */
   --biel:           #ffffff;  /* karty, pola formularzy, tekst na kolorze */
 
   /* --- Kolory: tekst ------------------------------------------------------ */
@@ -54,8 +58,8 @@
   --font-naglowki:  "Coolvetica LN", "Coolvetica", "Arial Rounded MT Bold", system-ui, sans-serif; /* fonts.css: Adobe Fonts */
   --font-tekst:     "Inter", system-ui, -apple-system, sans-serif;
 
-  --fs-h1:          clamp(3.2rem, 11vw, 7rem);    /* hero, 112 px na 1440 */
-  --fs-h2:          clamp(2.4rem, 6vw, 4.2rem);   /* nagłówki sekcji, 67 px na 1440 */
+  --fs-h1:          clamp(2.6rem, 7vw, 4.6rem);   /* hero, 74 px na 1440 (było 112 px, uwaga klienta 1.10) */
+  --fs-h2:          clamp(2.1rem, 4.6vw, 3.4rem); /* nagłówki sekcji, 54 px na 1440 (było 67 px) */
   --fs-h3:          1.55rem;                      /* nazwy w kartach, kroki, kolumny stopki */
   --fs-lead:        1.12rem;                      /* lead pod nagłówkiem, opisy w O nas */
   --fs-tekst:       1rem;                         /* 16 px, akapity */
