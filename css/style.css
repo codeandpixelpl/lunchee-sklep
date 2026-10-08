@@ -1,0 +1,539 @@
+/* Lunchee · SEKCJE STRON
+   Tokeny: ../04 - Styleguide/tokens.css · komponenty: ../04 - Styleguide/components.css
+   Tu wyłącznie układ sekcji. Wartości przez var(--token). */
+
+
+
+
+
+
+
+
+/* ---------- Nagłówek ---------- */
+.header { position: sticky; top: 0; z-index: 50; background: rgb(251 248 241 / .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: box-shadow var(--przejscie); }
+.header.is-scrolled { box-shadow: 0 8px 24px -18px rgba(10,42,94,.5); }
+.header .wrap { display: flex; align-items: center; gap: var(--odstep-m); min-height: 76px; }
+.header .logo-mark { width: 128px; }
+.nav { display: none; margin: 0 auto; gap: 4px; }
+.nav a { padding: 10px 16px; border-radius: var(--r-pill); font-weight: 600; font-size: .98rem; color: var(--tekst-mocny); text-decoration: none; }
+@media (hover: hover) { .nav a:hover { background: var(--tlo-akcent); } }
+.header__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.icon-btn { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; background: transparent; color: var(--tekst-mocny); cursor: pointer; text-decoration: none; }
+.icon-btn svg { width: 26px; height: 26px; }
+.icon-btn .count { position: absolute; top: 4px; right: 2px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: var(--r-pill); background: var(--akcent); color: var(--tekst-mocny); font-size: .72rem; font-weight: 800; line-height: 20px; text-align: center; }
+@media (min-width: 1000px) {
+  .header .logo-mark { width: 158px; }
+  .nav { display: flex; }
+  .header__actions { margin-left: 0; }
+  .menu-toggle { display: none; }
+}
+.mobile-nav { display: none; position: fixed; inset: var(--header-height, 76px) 0 0; z-index: 49; background: var(--tlo); padding: 16px var(--margines) 40px; overflow-y: auto; }
+.mobile-nav.is-open { display: block; }
+.mobile-nav { overscroll-behavior: contain; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+@media (min-width: 1000px) { .mobile-nav.is-open { display: none; } }
+.mobile-nav a { display: block; padding: 16px 0; border-bottom: 1px solid var(--linia); font-family: var(--font-naglowki); font-size: 2rem; color: var(--tekst-mocny); text-decoration: none; }
+
+/* ---------- 01 Hero (makieta Figmy 25:2 i 25:369, poprawki z 8.10) ----------
+   Pas ma stałe 528 px, zdjęcie leży w kontenerze treści (w makiecie 1258 z 1920 px,
+   czyli praktycznie szerokość kontenera), a nie na całej szerokości okna. Zasłony
+   w kolorze marki nie ma: zdjęcie wygasza maska po obu bokach, więc nie ma krawędzi. */
+.hero { position: relative; overflow: hidden; background: var(--akcent); }
+.hero__grid { position: relative; z-index: 1; display: flex; align-items: center; min-height: 528px; }
+/* Makieta 25:2: zdjęcie ma 1258 z 1920 px, czyli 65,52% szerokości okna, i stoi
+   17,24% od lewej. Żółty margines po obu stronach jest częścią kompozycji,
+   więc liczymy to od sekcji, a nie od kontenera treści. */
+.hero__foto { position: absolute; left: 17.24%; top: 0; width: 65.52%; height: 100%; z-index: 0; }
+/* Przystanki z maski w makiecie (linearGradient od prawej do lewej): 0 przezroczyste,
+   9,6% pełne, 56,84% pełne, 100% przezroczyste. */
+.hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: center;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 9.6%, #000 56.84%, transparent 100%);
+  mask-image: linear-gradient(to left, transparent 0, #000 9.6%, #000 56.84%, transparent 100%); }
+.hero__text { position: relative; z-index: 1; width: 592px; max-width: 100%; padding: 36px 0; }
+.hero .eyebrow { color: var(--tekst-mocny); }
+.hero h1 { font-size: var(--fs-h1); line-height: .92; font-weight: 900; letter-spacing: -.01em; }
+.hero h1 span { display: block; }
+.hero h1 .alt { color: var(--cta); }
+.hero__sub { margin: 18px 0 26px; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.35; color: var(--tekst-mocny); max-width: 342px; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero__how-ic { display: none; }
+.hero__fakty { position: absolute; right: var(--margines); bottom: 30px; z-index: 2; list-style: none; display: flex; flex-direction: column;
+  align-items: flex-end; gap: 8px; margin: 0; padding: 0; }
+.hero__fakty li { display: flex; align-items: center; gap: 10px; padding: 8px 18px 8px 8px; border-radius: var(--r-pill);
+  background: var(--biel); color: var(--tekst-mocny); font-size: var(--fs-maly); font-weight: 700; white-space: nowrap; }
+.hero__fakty .ic { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--tlo-akcent); }
+.hero__fakty .ic img { width: 20px; height: 20px; object-fit: contain; }
+
+@media (max-width: 899px) {
+  /* static, żeby odznaki kotwiczyły się do sekcji (czyli do zdjęcia), a nie do siatki tekstu */
+  .hero__grid { position: static; display: block; min-height: 0; padding-left: 0; padding-right: 0; }
+  .hero__foto { position: static; left: auto; width: 100%; height: auto; display: block; }
+  /* W makiecie zdjęcie ma 331 px wysokości i jest przesunięte w prawo, żeby zostać na postaci. */
+  .hero__foto img { height: 331px; object-position: 70% 20%; mask-image: none; -webkit-mask-image: none; }
+  .hero__text { width: auto; padding: 26px var(--margines) 32px; }
+  .hero h1 { font-size: 2.6rem; }
+  .hero__sub { font-size: 1.1rem; max-width: none; }
+  .hero__cta { flex-direction: column; align-items: stretch; gap: 14px; }
+  .hero__cta .btn--blue { min-height: 60px; font-size: 1.05rem; }
+  .hero__how { order: 3; align-self: center; border-color: transparent; gap: 14px; }
+  .hero__how-ic { display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--tekst-mocny); border-radius: 50%; }
+  .hero__how-ic svg { transform: rotate(90deg); }
+  /* Makieta 25:369: odznaki leżą na zdjęciu, dosunięte do prawej krawędzi ekranu.
+     Zdjęcie ma stałe 331 px, więc kotwiczę je do jego dolnej krawędzi. */
+  .hero__fakty { position: absolute; top: 331px; bottom: auto; right: 0; left: auto; z-index: 2;
+    transform: translateY(calc(-100% - 28px)); align-items: flex-end; gap: 8px; margin: 0; padding: 0; }
+  .hero__fakty li { border-top-right-radius: 0; border-bottom-right-radius: 0; box-shadow: var(--cien); }
+}
+
+/* ---------- 02 Najważniejsze cechy i Dlaczego Lunchee: kafle według wzoru z 19.09 (wersja 2) ---------- */
+/* Kafle techniczne, wartości z makiety Figmy 25:785 (kontener treści 1184 px). */
+.feats__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 15px 20px; }
+.feats__tile { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 27px 29px;
+  border: 1px solid var(--linia); border-radius: var(--r-l); background: var(--biel);
+  color: var(--tekst-slaby); font-size: 1.18rem; line-height: 1.4; overflow: hidden; }
+.feats__tile b { font-family: var(--font-naglowki); font-size: 1.96rem; line-height: 1.1; color: var(--tekst-mocny); margin-top: 10px; }
+.feats__row { display: flex; align-items: center; gap: 6px; }
+.feats__row .feats__val { margin: 0; }
+.feats__tile .feats__val { font-size: 3.34rem; line-height: 1; margin-top: 10px; }
+.feats__tile .feats__val--xl { font-size: 4.32rem; margin-top: 0; margin-bottom: 4px; }
+/* Kafel 60°C: białe tło, dwa pojemniki nachodzące na siebie (makieta: drugi o 91,6 px w prawo i 107,3 px w dół). */
+.feats__tile--main { background: var(--biel); border-color: transparent; }
+.feats__big { margin: 0; font-family: var(--font-naglowki); font-size: 6rem; line-height: .9; color: var(--tekst-mocny); letter-spacing: -.02em; }
+.feats__lead { margin: 10px 0 0; font-size: 1.3rem; line-height: 1.3; color: var(--tekst-slaby); }
+.feats__para { position: relative; display: block; width: 100%; aspect-ratio: 378 / 320; margin-top: auto; }
+.feats__para img { position: absolute; width: 75.8%; height: auto; }
+.feats__para img:first-child { left: 0; top: 0; }
+.feats__para img:last-child { left: 24.2%; top: 33.5%; }
+.feats__chips { display: flex; gap: 8px; }
+.feats__chips > span { flex: 1; max-width: 102px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 6px 10px; border: 2px solid var(--tekst-mocny); border-radius: 20px;
+  font-family: var(--font-naglowki); font-size: 1.28rem; line-height: 1; color: var(--tekst-mocny); }
+.feats__chips svg { width: 33px; height: 33px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.feats__chips circle { fill: currentColor; stroke: none; }
+.feats__chips .on { background: var(--tekst-mocny); color: var(--biel); }
+.feats__ic { width: 59px; height: 59px; flex: none; fill: none; stroke: var(--tekst-mocny); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.feats__ic .ok { stroke: var(--akcent); stroke-width: 3.6; }
+.feats__tile--inox { padding-bottom: 150px; }
+.feats__tile--inox img { position: absolute; right: 16px; bottom: 12px; width: 150px; height: auto; }
+/* Pieczątka gwarancji: koło wychodzące poza prawy górny róg kafla (makieta 25:1067). */
+.feats__tile--gwarancja { overflow: visible; }
+.feats__stempel { position: absolute; top: -20px; right: -12px; z-index: 2; display: grid; place-items: center;
+  width: 102px; height: 102px; border-radius: 50%; background: var(--akcent-cieply-tekst); color: var(--biel);
+  font-family: var(--font-tekst); text-align: center; }
+.feats__stempel i { position: absolute; top: 20px; right: 20px; font-style: normal; font-size: 1.01rem; font-weight: 800; line-height: 1; }
+.feats__stempel b { margin: 6px 0 0; font-family: var(--font-tekst); font-size: 2.3rem; font-weight: 800; line-height: 1; color: var(--biel); }
+.feats .note-small { margin-top: 18px; }
+@media (min-width: 640px) {
+  .feats__grid { grid-template-columns: 1fr 1fr; }
+  .feats__tile--main { grid-column: 1 / -1; }
+  .feats__tile--inox { padding-bottom: clamp(24px, 3vw, 40px); padding-right: 45%; }
+  .feats__tile--inox img { width: 42%; max-width: 210px; bottom: 20px; }
+}
+@media (min-width: 1000px) {
+  /* Makieta: 430 + 24 + 350 + 15,7 + 350 px przy kontenerze treści 1184 px. */
+  .feats__grid { grid-template-columns: 430fr 350fr 350fr; grid-template-rows: auto auto; gap: 15px 20px; }
+  .feats__tile--main { grid-column: 1; grid-row: 1 / 3; }
+  .feats__tile--inox { padding-right: 140px; padding-bottom: 27px; }
+  .feats__tile--inox > span { max-width: 17ch; }
+  /* Wkład INOX: 341 px szerokości, wychodzi ponad górną krawędź i poza prawą (makieta 25:849). */
+  .feats__tile--inox img { position: absolute; left: 48%; top: -22%; right: auto; bottom: auto; width: 97%; max-width: none; }
+}
+
+/* ---------- 03 Każdy ma swój sposób ---------- */
+.way__grid { display: grid; gap: 40px; align-items: center; }
+.way__text p { font-size: 1.15rem; color: var(--tekst-mocny); max-width: 42ch; }
+.way__compare { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.way__compare figure { position: relative; margin: 0; border-radius: var(--r-l); overflow: hidden; }
+.way__compare img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+.way__compare figcaption { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); padding: 9px 18px; border-radius: var(--r-pill); background: var(--tlo-alt); color: var(--tekst-mocny); font-size: .8rem; font-weight: 700; white-space: nowrap; }
+.way__compare figure:last-child figcaption { background: var(--akcent); }
+.way__arrow { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); border: 4px solid var(--tlo); z-index: 2; }
+.way__arrow svg { width: 24px; height: 24px; }
+@media (max-width: 520px) { .way__compare figcaption { font-size: .66rem; padding: 7px 12px; } .way__arrow { width: 44px; height: 44px; } }
+@media (min-width: 900px) { .way__grid { grid-template-columns: .8fr 1.2fr; gap: 64px; } }
+
+
+/* ---------- 06 Jak korzystać ---------- */
+.steps__list { scroll-padding-inline: var(--margines); list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin: 0 calc(var(--margines) * -1); padding-left: var(--margines); padding-right: var(--margines); scrollbar-width: none; }
+.steps__list::-webkit-scrollbar { display: none; }
+.step { scroll-snap-align: start; display: flex; flex-direction: column; }
+.step__num { position: relative; display: flex; justify-content: center; margin-bottom: 18px; }
+.step__num span { position: relative; z-index: 1; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); font-weight: 800; font-size: 1.1rem; }
+.step__num::before { content: ""; position: absolute; top: 50%; left: -50%; right: -50%; border-top: 2px dotted var(--akcent); }
+.step:first-child .step__num::before { left: 50%; }
+.step:last-child .step__num::before { right: 50%; }
+.step__card { flex: 1; border-radius: var(--r-m); background: var(--biel); overflow: hidden; box-shadow: 0 1px 0 var(--linia); }
+.step__card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.step__body { padding: 20px 22px 24px; }
+.step__body .n { display: block; font-family: var(--font-naglowki); font-size: 2rem; color: var(--cta); line-height: 1; }
+.step__body h3 { font-size: var(--fs-h3); margin: 4px 0 10px; }
+.step__body p { font-size: var(--fs-maly); color: var(--tekst-slaby); }
+@media (min-width: 1100px) {
+  .steps__list { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; margin: 0; padding: 0; }
+}
+
+/* ---------- 07 Twój Lunchee moment ---------- */
+.moments__head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--odstep-s); }
+.moments__nav { display: none; gap: 10px; }
+@media (min-width: 1000px) { .moments__nav { display: flex; } }
+/* ---------- 08 Zestaw ---------- */
+.kit__grid { display: grid; gap: 40px; align-items: center; }
+.kit__img img { width: 100%; border-radius: var(--r-l); }
+.kit__list { list-style: none; margin: 0; padding: 0; counter-reset: kit; }
+.kit__list li { counter-increment: kit; display: grid; grid-template-columns: 76px 28px 1fr; align-items: center; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--linia); color: var(--tekst-mocny); font-size: 1.02rem; }
+.kit__list li::before { content: counter(kit); grid-column: 2; grid-row: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--akcent); font-size: .8rem; font-weight: 800; }
+.kit__list .th { grid-column: 1; grid-row: 1; display: grid; place-items: center; width: 76px; height: 60px; border-radius: 14px; background: var(--tlo-alt); }
+.kit__list .th img { max-width: 60px; max-height: 46px; object-fit: contain; }
+.kit__list .tx { grid-column: 3; grid-row: 1; }
+@media (min-width: 900px) { .kit__grid { grid-template-columns: 1.3fr 1fr; gap: 56px; } }
+
+/* ---------- 09 Ebook ---------- */
+.ebook { position: relative; overflow: hidden; background: var(--akcent) url(../assets/img/gen/09-ebook-tlo-kulinarne.webp) center / cover no-repeat; }
+.ebook__grid { position: relative; display: grid; gap: 28px; align-items: center; }
+.ebook__text { background: rgba(253,241,201,.92); border-radius: var(--r-l); padding: 28px; }
+.ebook__text p { font-size: 1.15rem; color: var(--tekst-mocny); max-width: 34ch; }
+.ebook__img { width: 100%; }
+.ebook__steps { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+.ebook__steps li { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--tekst-mocny); }
+.ebook__steps b { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--cta); color: var(--biel); font-size: .9rem; }
+.ebook__steps--row { justify-content: center; }
+@media (min-width: 900px) { .ebook__steps--row { display: flex; flex-wrap: wrap; gap: 28px; } }
+@media (min-width: 900px) {
+  .ebook { min-height: 680px; display: flex; align-items: center; }
+  .ebook__grid { grid-template-columns: .8fr 1.2fr; gap: 40px; }
+  .ebook__text { padding: 40px; }
+}
+
+/* ---------- 10 Akcesoria (jedyna sekcja kart) ---------- */
+.acc__grid { display: grid; grid-template-columns: 1fr; gap: var(--odstep-s); }
+.card { display: flex; flex-direction: column; border-radius: var(--r-m); background: var(--biel); overflow: hidden; text-decoration: none; }
+.card__img { position: relative; aspect-ratio: 4 / 3; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; padding: var(--odstep-m); background: var(--tlo-alt); overflow: hidden; /* bez overflow aspect-ratio rośnie do wysokości zdjęcia */ }
+.card__img img { width: 100%; height: 100%; object-fit: contain; }
+.card__img .tbd { position: absolute; left: 12px; bottom: 12px; background: var(--biel); font-size: .7rem; }
+.card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card__code { font-size: var(--fs-etykieta); color: var(--tekst-slaby); }
+.card h3 { font-size: var(--fs-h3); }
+.card p { font-size: var(--fs-maly); color: var(--tekst-slaby); margin: 4px 0 8px; }
+.card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+@media (min-width: 640px) { .acc__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .acc__grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+@media (hover: hover) { .card { transition: transform var(--przejscie), box-shadow var(--przejscie); } .card:hover { transform: translateY(-4px); box-shadow: var(--cien); } }
+
+/* ---------- 11 FAQ ---------- */
+.faq__grid { display: grid; gap: 32px; }
+.faq .h2 { font-size: clamp(2.3rem, 5vw, 3.6rem); }
+.faq__link { display: inline-block; margin-top: 24px; font-weight: 700; color: var(--cta); }
+@media (min-width: 900px) { .faq__grid { grid-template-columns: .75fr 1.25fr; gap: 72px; } .faq__side { position: sticky; top: 110px; align-self: start; } }
+
+/* ---------- 12 Dla firm ---------- */
+.b2b { background: var(--cta); color: var(--biel); overflow: hidden; padding: 0; }
+.b2b__grid { display: grid; }
+.b2b__text { padding: var(--odstep-xl) 0; }
+.b2b .eyebrow { color: var(--tlo-akcent); }
+.b2b__title { color: var(--biel); font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: .98; max-width: 12ch; }
+.b2b .lead { color: var(--tekst-na-ciemnym); margin: 22px 0 32px; font-size: var(--fs-lead); max-width: 46ch; }
+.b2b__feats { list-style: none; margin: 0 0 36px; padding: 0; display: grid; }
+.b2b__feat { display: grid; grid-template-columns: 56px 1fr; gap: var(--odstep-s); align-items: start; padding: 20px 0; border-top: 1px solid rgb(255 255 255 / .2); }
+.b2b__feat:last-child { border-bottom: 1px solid rgb(255 255 255 / .2); }
+.b2b__feat .ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--akcent); }
+.b2b__feat .ic img { width: 28px; height: 28px; object-fit: contain; filter: brightness(0) saturate(100%) invert(12%) sepia(40%) saturate(3500%) hue-rotate(208deg) brightness(92%); }
+.b2b__feat h3 { color: var(--biel); font-family: var(--font-tekst); font-weight: 700; font-size: var(--fs-lead); line-height: 1.3; margin: 4px 0 6px; }
+.b2b__feat p { color: var(--tekst-na-ciemnym); font-size: var(--fs-tekst); margin: 0; max-width: 48ch; }
+.b2b__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.b2b__img { margin: 0 calc(var(--margines) * -1); background: var(--tekst-mocny); }
+.b2b__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 1000px) {
+  .b2b__grid { grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: stretch; }
+  .b2b__img { margin: 0 calc((100vw - min(100vw, var(--tresc))) / -2 - var(--margines)) 0 0; }
+  .b2b__img img { height: 100%; aspect-ratio: auto; object-position: 40% 50%; }
+}
+.b2b--hero .b2b__text { padding-top: clamp(40px, 6vw, 88px); }
+
+/* Dla firm: kroki */
+.b2b-steps__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--odstep-s); counter-reset: s; }
+.b2b-steps__list li { position: relative; padding: var(--odstep-m); border-radius: var(--r-l); background: var(--biel); }
+.b2b-steps__n { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); font-weight: 800; margin-bottom: var(--odstep-s); }
+.b2b-steps__list h3 { font-size: var(--fs-h3); margin-bottom: 8px; }
+.b2b-steps__list p { color: var(--tekst-slaby); margin: 0; }
+@media (min-width: 900px) {
+  .b2b-steps__list { grid-template-columns: repeat(3, 1fr); gap: var(--odstep-m); }
+  .b2b-steps__list li:not(:last-child)::after { content: ""; position: absolute; top: 50px; right: -24px; width: 24px; border-top: 2px dotted var(--akcent); }
+}
+
+/* Dla firm: podgląd logo na produkcie */
+.logo-demo { background: var(--tlo-alt); }
+.logo-demo__grid { display: grid; gap: var(--odstep-l); align-items: center; }
+.logo-demo__stage { border-radius: var(--r-l); background: var(--tlo-produkt); padding: clamp(24px, 4vw, 48px); }
+.logo-demo__product { position: relative; max-width: 640px; margin: 0 auto; }
+.logo-demo__product > img { width: 100%; filter: drop-shadow(0 30px 30px rgba(10,42,94,.2)); transition: opacity var(--przejscie); }
+.logo-demo__zone { position: absolute; left: 15%; top: 56%; width: 27%; height: 20%; display: grid; place-items: center; border: 2px dashed rgb(255 255 255 / .85); border-radius: 12px; color: rgb(255 255 255 / .92); font-weight: 700; font-size: clamp(.7rem, 1.4vw, .95rem); text-align: center; transform: skewY(-3deg); }
+.logo-demo__zone img { max-width: 88%; max-height: 80%; object-fit: contain; }
+.logo-demo__zone.has-logo { border-color: transparent; }
+.logo-demo__note { margin: var(--odstep-s) 0 0; text-align: center; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.logo-demo__punch { font-family: var(--font-naglowki); font-size: 1.5rem; line-height: 1.15; color: var(--cta); margin-top: 20px; }
+.logo-demo__upload { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.logo-demo__upload label { cursor: pointer; }
+.logo-demo__upload input:focus-visible + * , .logo-demo__upload label:focus-within { outline: 3px solid var(--akcent); outline-offset: 3px; }
+@media (min-width: 900px) { .logo-demo__grid { grid-template-columns: 1.15fr 1fr; gap: 72px; } }
+.b2b-form { background: var(--tlo); }
+
+
+/* ---------- 13 O nas ---------- */
+.about__grid { display: grid; gap: 40px; align-items: center; }
+.about__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-l); }
+.about .h2 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); margin-bottom: 26px; }
+.about p { color: var(--tekst-mocny); }
+.quote { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; margin-top: 28px; padding: 24px 28px; border-radius: var(--r-m); background: var(--tlo-akcent); }
+.quote::before { content: "“"; font-family: Georgia, serif; font-size: 4.2rem; line-height: .6; color: var(--akcent); padding-right: 18px; border-right: 2px solid var(--akcent); height: 100%; display: flex; align-items: center; }
+.quote p { margin: 0; font-family: var(--font-naglowki); font-size: 1.4rem; line-height: 1.2; color: var(--tekst-mocny); }
+@media (min-width: 900px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+/* ---------- 14 Stopka ---------- */
+.footer { background: var(--tlo-ciemne); color: var(--tekst-na-ciemnym); padding: 72px 0 32px; }
+.footer__grid { display: grid; gap: 40px; }
+/* Lewa kolumna zrownana wysokoscia z kolumnami linkow po prawej. */
+.footer__brand img { width: 180px; margin-bottom: 26px; }
+.footer__brand h2 { color: var(--biel); font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.05; margin-bottom: 12px; }
+.footer__brand p { font-size: 1.05rem; margin-bottom: 22px; }
+.footer__brand .btn { min-height: 48px; font-size: .95rem; }
+.footer h4 { font-family: var(--font-naglowki); font-size: var(--fs-h3); color: var(--biel); padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.footer ul a { display: inline-block; padding: 7px 0; text-decoration: none; }
+@media (hover: hover) { .footer ul a:hover { color: var(--biel); } }
+.footer__bottom { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.2); display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; font-size: .85rem; }
+@media (min-width: 900px) { .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; align-items: start; } }
+
+/* ---------- Karta produktu ---------- */
+.crumbs { font-size: var(--fs-maly); color: var(--tekst-slaby); padding-top: 18px; padding-bottom: 18px; }
+.crumbs a { text-decoration: none; }
+.pdp { padding-bottom: var(--odstep-xl); }
+.pdp__grid { display: grid; gap: 28px; }
+@media (min-width: 900px) {
+  .pdp__grid { grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: start; }
+  .gallery { position: sticky; top: 96px; display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; }
+  .gallery__main { margin: 0; border-radius: var(--r-l); overflow: hidden; }
+  .gallery__thumbs { display: grid; gap: 10px; align-content: start; max-height: 660px; overflow-y: auto; scrollbar-width: none; }
+  .gallery__thumbs button { padding: 0; border: 2px solid transparent; border-radius: 14px; overflow: hidden; background: var(--biel); cursor: pointer; }
+  .gallery__thumbs button img { width: 84px; height: 84px; object-fit: cover; }
+  .gallery__thumbs button[aria-current="true"] { border-color: var(--cta); }
+  .gallery__dots { display: none; }
+}
+.buy .eyebrow { margin-bottom: 10px; }
+.buy h1 { font-size: clamp(1.7rem, 2.6vw, 2.2rem); line-height: 1.12; }
+.buy__claim { font-family: var(--font-naglowki); font-size: 1.5rem; color: var(--cta); margin: 12px 0 22px; }
+.omnibus { font-size: .82rem; color: var(--tekst-slaby); margin: -8px 0 24px; }
+.buy__label { font-weight: 700; font-size: .88rem; margin-bottom: 12px; color: var(--tekst-mocny); font-family: var(--font-tekst); }
+.buy__row { display: flex; gap: 10px; margin: 8px 0 14px; }
+.buy__row .btn { flex: 1; padding: 0 1.1em; }
+.buy__short { display: none; }
+@media (max-width: 479px) { .buy__row .btn svg, .buy__verb { display: none; } .buy__short { display: inline; } .buy__row .btn { padding: 0 .9em; } }
+@media (max-width: 359px) { .buy__row .btn { white-space: normal; line-height: 1.15; font-size: .92rem; padding: 6px .8em; } .buy__row .qty button { width: 38px; } }
+
+@media (min-width: 900px) { .sticky-buy { padding: 12px calc((100vw - min(100vw, var(--tresc))) / 2 + var(--margines)); } .sticky-buy .name { font-size: 1rem; } }
+
+.story { padding-top: var(--odstep-xl); padding-bottom: var(--odstep-xl); }
+.story__row { display: grid; gap: 28px; align-items: center; padding: clamp(28px, 5vw, 56px) 0; }
+.story__row img { width: 100%; border-radius: var(--r-l); aspect-ratio: 4 / 3; object-fit: cover; }
+.story__row h2 { font-size: clamp(2rem, 4.2vw, 3rem); margin-bottom: 18px; }
+.story__row p { color: var(--tekst-slaby); font-size: 1.05rem; }
+.story__lead { font-size: 1.15rem !important; color: var(--tekst-mocny) !important; margin-bottom: 28px !important; }
+.story__punch { font-family: var(--font-naglowki); font-size: 1.5rem !important; color: var(--cta) !important; }
+@media (min-width: 900px) {
+  .story__row { grid-template-columns: 1fr 1fr; gap: 72px; }
+  .story__row:nth-child(even) .story__media { order: 2; }
+}
+@media (min-width: 900px) { .spec-wrap { grid-template-columns: .7fr 1.3fr; gap: 72px; } }
+/* ---------- v0.3: interakcje, koszyk, formularze, kategorie ---------- */
+
+
+.gallery:focus-visible { outline-offset: 6px; }
+
+
+
+
+
+
+
+/* cele dotykowe (audyt.py, próg 32 px) */
+
+/* ---------- Opinie (główna i karta produktu) ---------- */
+.reviews__grid { display: grid; gap: var(--odstep-m); }
+.reviews__sum { padding: var(--odstep-m); border-radius: var(--r-m); background: var(--tlo-akcent); color: var(--tekst-mocny); align-self: start; }
+.reviews__sum > b { display: block; font-family: var(--font-naglowki); font-size: 4rem; line-height: 1; margin-bottom: 6px; }
+.reviews__sum p { margin: 8px 0 16px; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.reviews__bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .8rem; font-weight: 600; }
+.reviews__bars li { display: grid; grid-template-columns: 12px 1fr 36px; align-items: center; gap: 10px; }
+.reviews__bars li span:last-child { text-align: right; color: var(--tekst-slaby); }
+.reviews__bars .bar { height: 8px; border-radius: var(--r-pill); background: var(--biel); overflow: hidden; }
+.reviews__bars .bar i { display: block; height: 100%; background: var(--akcent); }
+.reviews__track { scroll-padding-inline: var(--margines); display: grid; grid-auto-flow: column; grid-auto-columns: 84%; gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; scrollbar-width: none; }
+.reviews__track::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .reviews__track { grid-auto-columns: 48%; } }
+@media (min-width: 1000px) {
+  .reviews__grid { grid-template-columns: 280px 1fr; gap: 20px; }
+  .reviews__track { grid-auto-columns: calc((100% - 32px) / 3); margin: 0; padding: 0 0 8px; }
+  .reviews .dots { display: none; }
+}
+
+/* ---------- Dopracowanie 19.09 ---------- */
+@media (max-width: 639px) { .acc__grid .card__img { aspect-ratio: 16 / 10; } }
+.rating-link { display: inline-flex; align-items: center; gap: 8px; margin: -8px 0 18px; padding: 6px 0; font-size: var(--fs-maly); font-weight: 600; color: var(--tekst-mocny); text-decoration: none; }
+.rating-link .stars i { width: 16px; height: 16px; }
+.rating-link span:last-child { color: var(--tekst-slaby); text-decoration: underline; text-underline-offset: 3px; }
+@media (hover: hover) { .rating-link:hover span:last-child { color: var(--cta); } }
+
+/* =============================================================================
+   RUNDA 01 (uwagi klienta 1.10.2026): hero z KV, pasek promocji, karty modeli,
+   persony ze zdjęciami z planszy Kamila, niższy ebook, pasek dla firm.
+   ============================================================================= */
+
+/* --- Nagłówek: logo z funkcją obok (desktop) --- */
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand__tag { display: none; padding-left: 14px; border-left: 1px solid var(--linia); font-size: .78rem; font-weight: 600; line-height: 1.2; color: var(--tekst-slaby); max-width: 7.5em; }
+@media (min-width: 1080px) { .brand__tag { display: block; } }  /* 1080 px to zmierzone minimum: 40+258+24+558+24+100+40 = 1044 px, plus zapas na fonty. Niżej nagłówek wychodzi poza ekran. Było 1200 px, czyli 200 px desktopu bez podpisu, teraz 80 px */
+.nav a { white-space: nowrap; }
+@media (min-width: 1000px) and (max-width: 1199px) { .nav a { padding: 10px 11px; font-size: .92rem; } }
+
+/* --- 02 Promocje: stałe miejsce na banery, pasek i kafle --- */
+.promo { padding-top: clamp(32px, 4vw, 56px); padding-bottom: clamp(32px, 4vw, 56px); }
+.promo__grid { display: grid; gap: var(--odstep-s); }
+/* Makieta 25:923: kolumny 512, 320, 320 przy kontenerze 1184 px treści. */
+@media (min-width: 900px) { .promo__grid { grid-template-columns: 512fr 320fr 320fr; } }
+.promo__main, .promo__tile { position: relative; display: grid; border: 1px solid var(--linia);
+  border-radius: var(--r-l); overflow: hidden; text-decoration: none; }
+.promo__main { background: var(--tlo); color: var(--tekst-mocny); }
+.promo__tile { background: var(--biel); grid-template-rows: 230px 1fr; }
+.promo__media { display: block; overflow: hidden; background: var(--tlo-alt); }
+.promo__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.promo__body { display: grid; align-content: center; gap: 8px; padding: 0 24px; }
+.promo__main .promo__body { position: relative; z-index: 1; align-self: end; gap: 6px; padding: 28px; }
+.promo__main b { font-family: var(--font-naglowki); font-size: 2.2rem; line-height: 1; }
+.promo__tile b { font-family: var(--font-naglowki); font-size: 1.35rem; line-height: 1.1; color: var(--tekst-mocny); }
+.promo__txt { font-size: var(--fs-maly); line-height: 1.6; color: var(--tekst-slaby); max-width: 30ch; }
+.promo__go { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-weight: 700; color: var(--tekst-mocny); }
+.promo__go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.promo__tag { display: inline-block; justify-self: start; padding: 7px 17px; border-radius: var(--r-pill);
+  background: var(--akcent-cieply); color: var(--biel); font-size: 1.07rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
+.promo__pill { display: inline-block; justify-self: start; padding: 7px 16px; border-radius: var(--r-pill);
+  background: var(--tlo-akcent); color: var(--akcent-cieply-tekst); font-size: 1.04rem; font-weight: 800; letter-spacing: .03em; }
+/* Zdjęcie w dużej karcie: cała szerokość karty, własne proporcje, przyklejone do góry.
+   Maska wygasza je w dół (przystanki 61,6% i 77,7% z makiety), więc tekst siada na czystym
+   tle karty. Liczone od wysokości samego zdjęcia, nie od ramki z Figmy, bo tamta jest
+   wyższa od karty i wygaszanie wypadało poniżej dolnej krawędzi. */
+@media (min-width: 900px) {
+  .promo__main { min-height: 449px; }
+  .promo__foto { position: absolute; left: 0; top: 0; width: 100%; height: auto; z-index: 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 61.6%, transparent 77.7%);
+    mask-image: linear-gradient(to bottom, #000 61.6%, transparent 77.7%); }
+}
+@media (max-width: 899px) {
+  .promo__main { grid-template-rows: 230px 1fr; }
+  .promo__foto { width: 100%; height: 100%; object-fit: cover; }
+  .promo__main .promo__body { padding: 24px; }
+  .promo__main b { font-size: 1.8rem; }
+}
+
+/* --- 03 Każdy ma swój sposób: tło z KV --- */
+.way { background: var(--tlo-limonka); }
+.way__text p { color: var(--tekst-mocny); }
+.way__text .btn { margin-top: 8px; }
+.way__compare figcaption { background: var(--biel); }
+.way__compare figure:last-child figcaption { background: var(--biel); }
+.way__arrow { border-color: var(--tlo-limonka); color: var(--biel); }
+
+/* --- 04 Kafle: gwarancja jako usługa --- */
+.feats__tile--gwarancja { background: var(--tlo-akcent); border-color: transparent; }
+
+/* --- 05 Modele: cała oferta z przyciskiem zakupu --- */
+.modele__grid { display: grid; grid-template-columns: 1fr; gap: var(--odstep-s); }
+.modele .lead { max-width: 56ch; margin-inline: auto; }
+.modele .card__foot { gap: 8px; }
+@media (min-width: 640px) { .modele__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .modele__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .modele__grid { grid-template-columns: repeat(5, 1fr); gap: 18px; } .modele .card__body { padding: 18px 16px 20px; } .modele .card h3 { font-size: 1.3rem; } }
+
+/* --- 06 Kroki bez numeracji --- */
+.steps__list--plain .step__card { height: 100%; }
+
+/* --- 07 Persony --- */
+.persony__grid { list-style: none; margin: 0; padding: 0; scroll-padding-inline: var(--margines); display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; scrollbar-width: none; }
+.persony__grid::-webkit-scrollbar { display: none; }
+/* Makieta 25:607: kadr na kolorze marki (kolor jest w samym renderze), blok z imieniem na bialym. */
+.persona-card { scroll-snap-align: start; display: flex; flex-direction: column; border-radius: var(--r-m); background: var(--biel); overflow: hidden; }
+.persona-card__img { display: grid; place-items: end center; }
+.persona-card__img img { width: 100%; height: auto; max-width: none; }
+.persona-card__body { padding: 18px 22px 26px; }
+.persona-card h3 { font-size: var(--fs-h3); line-height: 1.1; color: var(--tekst-mocny); }
+.persona-card span { display: block; margin-top: 2px; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.persona-card q { display: block; margin-top: 12px; font-family: var(--font-naglowki); font-size: 1.25rem; line-height: 1.2; color: var(--cta); }
+.persony__cta { margin-top: var(--odstep-m); display: flex; justify-content: center; }
+@media (min-width: 1000px) {
+  .persony__grid { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 0; }
+}
+
+/* --- 08 Ebook: niższa sekcja, większe zdjęcie --- */
+.ebook__img { max-width: 100%; }
+@media (min-width: 900px) {
+  /* Makieta 25:688: sekcja 72 px odstępu, karta 482,8 px, zdjęcie poza siatką:
+     od 40,29% szerokości okna, 59,47% szerokości, wychodzi poza prawą krawędź. */
+  .ebook { min-height: 0; padding: 72px 0; }
+  .ebook__grid { grid-template-columns: .85fr 1.15fr; gap: var(--odstep-l); }
+  .ebook .sec, .ebook__text { padding: 32px; }
+  .ebook__img { position: absolute; left: 40.29%; top: 50%; transform: translateY(-50%);
+    width: 59.47%; height: auto; z-index: 0; }
+  .ebook__grid { position: relative; z-index: 1; }
+  .ebook__text { grid-column: 1; }
+}
+.ebook .btn { margin-top: 24px; }
+
+/* --- 10 Dla firm jako pasek --- */
+.b2b--pasek { background: var(--tlo); padding: clamp(36px, 5vw, 64px) 0; }
+.b2b__pasek { display: grid; gap: var(--odstep-m); align-items: center; padding: clamp(28px, 4vw, 44px); border-radius: var(--r-l); background: var(--cta); }
+/* SG-11012: zdjęcie biura w tle paska, przyciemnione od strony tekstu, żeby treść miała kontrast */
+.b2b__pasek { background: linear-gradient(90deg, rgb(10 42 94 / .95) 0%, rgb(10 42 94 / .86) 48%, rgb(10 42 94 / .45) 100%), url("../assets/img/gen/01-hero-biuro-z-gory.webp") center / cover no-repeat; }
+@media (max-width: 899px) { .b2b__pasek { background: linear-gradient(180deg, rgb(10 42 94 / .9) 0%, rgb(10 42 94 / .94) 100%), url("../assets/img/gen/01-hero-biuro-z-gory.webp") center / cover no-repeat; } }
+.b2b--pasek .b2b__title { font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 16ch; margin-bottom: 12px; }
+.b2b--pasek .lead { margin: 0; max-width: 60ch; }
+@media (min-width: 900px) { .b2b__pasek { grid-template-columns: 1fr auto; gap: var(--odstep-l); } }
+
+/* --- Karta produktu, runda 01 --- */
+.gallery__stage { position: relative; }
+.gallery__badges { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: clamp(96px, 16vw, 140px); height: auto; }
+.ebook-box { display: grid; grid-template-columns: 96px 1fr; gap: var(--odstep-s); align-items: center; margin: 18px 0; padding: 14px; border-radius: var(--r-m); background: var(--tlo-akcent); text-decoration: none; color: var(--tekst-mocny); }
+.ebook-box img { width: 96px; height: auto; border-radius: 10px; }
+.ebook-box b { display: block; font-family: var(--font-naglowki); font-size: 1.25rem; line-height: 1.1; }
+.ebook-box small { display: block; margin-top: 6px; font-size: var(--fs-maly); line-height: 1.4; color: var(--tekst-slaby); }
+@media (hover: hover) { .ebook-box:hover { box-shadow: var(--cien); } .ebook-box:hover b { color: var(--cta); } }
+
+/* --- Kreacje z kampanii (docelowo publikacje z SoMe) --- */
+.some__grid { list-style: none; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; scroll-padding-inline: var(--margines); display: grid; grid-auto-flow: column; grid-auto-columns: 62%; gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.some__grid::-webkit-scrollbar { display: none; }
+.some__grid li { scroll-snap-align: start; }
+.some__grid img { width: 100%; height: auto; border-radius: var(--r-m); }
+@media (min-width: 900px) { .some__grid { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 0; } }
+
+/* --- Ebook na stronie głównej: niższa sekcja --- */
+.sec.ebook { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+.h2--kategoria { font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
+
+/* --- Ebook na hasło (uwaga klienta 1.10: podstrona zabezpieczona hasłem) --- */
+.gate { margin-top: 26px; padding: 20px; border-radius: var(--r-m); background: var(--biel); max-width: 30rem; }
+.gate__label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 8px; color: var(--tekst-mocny); }
+.gate__row { display: flex; flex-wrap: wrap; gap: 10px; }
+.gate__input { min-width: 0; max-width: 100%; flex: 1 1 11rem; min-height: 48px; padding: 0 14px; border: 1px solid var(--linia); border-radius: 14px; font: inherit; background: var(--tlo); }
+.gate__input:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+.gate__err { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--blad); }
+.gate__hint { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.reader__frame { display: grid; gap: var(--odstep-m); justify-items: center; padding: clamp(16px, 3vw, 32px); border-radius: var(--r-l); background: var(--tlo-alt); }
+.reader__frame img { width: 100%; max-width: 760px; height: auto; border-radius: var(--r-m); -webkit-user-select: none; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.reader .note-small { text-align: center; }
+@media (min-width: 900px) { .reader__frame { grid-template-columns: .5fr 1fr; align-items: center; } }
+
+/* Nagłówki muszą mieścić się także przy dłuższym kroju zastępczym. */
+.hero h1 { line-height: 1.05; }
+@media (max-width: 639px) {
+  .feats__tile--gwarancja { padding-top: 94px; }
+  .header .wrap { gap: 8px; }
+  .header .brand { flex: 1; min-width: 0; }
+  .header .logo-mark { max-width: 100%; }
+  .header__actions { flex: none; }
+}

@@ -1,0 +1,96 @@
+/* =============================================================================
+   LUNCHEE — TOKENY
+   Jedyne miejsce z wartościami liczbowymi systemu.
+
+   Źródło: plansza KV Kamila (FONT & COLORS / DIGITAL: tekst #0054a6 i #ffffff,
+            tła #f2b90c główne oraz #bcdd3f, #f26a3d, #7693df opcjonalne)
+            + pomiar własnego prototypu (POMIARY.md, 1440 px, 2026-09-19)
+   Wersja: 1.1 · 2026-10-05 (runda 01 uwag klienta: błękit poza KV, limonka wchodzi)
+
+   ZASADY:
+   1. Nazwa po ROLI, nie po wyglądzie. `--cta` przeżyje rebranding, `--granat` nie.
+   2. Każdy token ma komentarz GDZIE występuje.
+   3. Nie każda wartość jest tokenem. Wartość użyta raz zostaje w komponencie.
+   4. Strona w 03 - Design ładuje TEN plik. Nie ma własnej kopii wartości.
+   ============================================================================= */
+
+:root {
+  /* --- Kolory: akcja ------------------------------------------------------ */
+  --cta:            #0054af;  /* przyciski główne, nagłówki drugiego członu (.alt), tło sekcji Dla firm, obrys aktywnego swatcha */
+  --cta-hover:      #0a2a5e;  /* hover przycisku .btn--blue */
+  --akcent:         #f2b90c;  /* żółty marki: przycisk .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, blok za zdjęciem w Dlaczego */
+  --akcent-hover:   #ffcb2e;  /* hover przycisku .btn--yellow */
+
+  /* --- Kolory: tła -------------------------------------------------------- */
+  --tlo:            #fbf8f1;  /* domyślne tło strony, nagłówek (z przezroczystością .92) */
+  --tlo-alt:        #f4efe3;  /* co druga sekcja, tło zdjęć w kartach, pole faktury, tło hero pod zdjęciem */
+  --tlo-produkt:    #f1f7dd;  /* jasna limonka pod packshotami: karty modeli, galeria karty produktu, miniatury w koszyku (było #dfeafb, błękit poza KV, uwaga klienta 1.10) */
+  --tlo-akcent:     #fdf1c9;  /* jasnożółte: ikony parametrów, otwarte pytanie FAQ, cytat, pole gwarancji i dostawy, hover w menu */
+  --tlo-ciemne:     #0a2a5e;  /* stopka, toast, link „Przejdź do treści”, etykieta „Niedostępny” */
+  --tlo-limonka:    #bcdd3f;  /* KV: tło sekcji „Każdy ma swój sposób”, kart person i paska promocji */
+  --akcent-cieply:  #f26a3d;  /* KV: etykieta promocji, kółko ikony w hero (tło, nie tekst) */
+  --akcent-cieply-tekst: #d95220;  /* ten sam pomarańcz przyciemniony do tekstu: 3,82:1 na kremie, bo #f26a3d daje 2,87:1 */
+  --biel:           #ffffff;  /* karty, pola formularzy, tekst na kolorze */
+
+  /* --- Kolory: tekst ------------------------------------------------------ */
+  --tekst:          #14213a;  /* treść akapitów, wartości w tabeli specyfikacji */
+  --tekst-mocny:    #0a2a5e;  /* nagłówki, nazwy w kartach, pytania FAQ, etykiety pól */
+  --tekst-slaby:    #4a5570;  /* podpisy, opisy kroków, okruszki, notki w koszyku — kontrast 7,0:1 na --tlo */
+  --tekst-na-ciemnym: #cfdaf0; /* akapity w stopce i w sekcji Dla firm */
+  --tekst-etykieta: #7a5600;  /* eyebrow nad nagłówkami i cytat w O nas — 5,8:1 na --tlo-akcent (było #946800, 4,0:1 na hero) */
+
+  /* --- Kolory: stany i pomoc ---------------------------------------------- */
+  --linia:          #e8e1d2;  /* separatory list, ramki pól, kropki nieaktywne, obrys plusa FAQ */
+  --blad:           #b3261e;  /* pole z błędem, hover kosza w koszyku */
+  --ok:             #1d7a3f;  /* przycisk po dodaniu do koszyka */
+  --ok-tlo:         #e5f5ea;  /* komunikat po wysłaniu formularza */
+  --ok-tekst:       #1d5c34;
+  --brak:           #f26a3d;  /* kropka w etykiecie .tbd (treść do uzupełnienia), znika przed oddaniem */
+
+  /* --- Kolory produktów (swatche, kropki w kartach) ----------------------- */
+  --produkt-city:    #39546f;
+  --produkt-glamour: #ceaab2;
+  --produkt-nature:  #7e9d93;
+  --produkt-pearl:   #d7d7d9;
+  --produkt-night:   #141414;
+
+  /* --- Typografia --------------------------------------------------------- */
+  --font-naglowki:  "coolvetica", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* Adobe Fonts gay0uyj; lokalny Inter jako fallback */
+  --font-tekst:     "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-h1:          clamp(2.6rem, 7vw, 4.6rem);   /* hero, 74 px na 1440 (było 112 px, uwaga klienta 1.10) */
+  --fs-h2:          clamp(2.1rem, 4.6vw, 3.4rem); /* nagłówki sekcji, 54 px na 1440 (było 67 px) */
+  --fs-h3:          1.55rem;                      /* nazwy w kartach, kroki, kolumny stopki */
+  --fs-lead:        1.12rem;                      /* lead pod nagłówkiem, opisy w O nas */
+  --fs-tekst:       1rem;                         /* 16 px, akapity */
+  --fs-maly:        .9rem;                        /* okruszki, notki, opisy kroków (.95) i etykiety pól (.9) */
+  --fs-etykieta:    .78rem;                       /* eyebrow, kod produktu, etykiety .tbd */
+
+  --lh-naglowki:    1;      /* Coolvetica ma duże x-height, 1.0 trzyma się w dwóch liniach hero */
+  --lh-tekst:       1.6;
+
+  /* --- Odstępy: skala 8 px ------------------------------------------------ */
+  --odstep-xs:      8px;    /* gap między kropkami, między ikoną a tekstem w małych elementach */
+  --odstep-s:       16px;   /* gap kart, gap list, padding pól */
+  --odstep-m:       24px;   /* padding kart i fieldsetów, odstęp nagłówek → treść */
+  --odstep-l:       48px;   /* gap kolumn na desktopie (do 72 px w sekcjach dwukolumnowych), margines nagłówka sekcji */
+  --odstep-xl:      clamp(64px, 8vw, 112px);      /* pionowy padding sekcji */
+
+  /* --- Układ -------------------------------------------------------------- */
+  --tresc:          1280px;                       /* skąd: makieta 1536 px minus 2 × 128 px marginesu = 1280 */
+  --margines:       clamp(16px, 4vw, 48px);       /* boczny margines: 16 px na 390, 48 px od 1200 */
+
+  /* --- Zaokrąglenia i cienie ---------------------------------------------- */
+  --r-s:            12px;   /* miniatury, notki */
+  --r-m:            20px;   /* karty, pola formularzy (14 px), fieldsety */
+  --r-l:            28px;   /* zdjęcia w sekcjach, scena produktu, podsumowanie koszyka */
+  --r-pill:         99px;   /* przyciski, etykiety, swatche */
+  --cien:           0 20px 40px -24px rgba(10, 42, 94, .35);   /* hover karty, toast, strzałki galerii */
+
+  /* --- Ruch --------------------------------------------------------------- */
+  --przejscie:      180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --przejscie: 0ms; }
+}

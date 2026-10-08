@@ -1,0 +1,23 @@
+/* Lunchee — Inter serwowany lokalnie, Coolvetica z Adobe Fonts.
+   Inter 4.1, SIL Open Font License: ../assets/fonts/OFL-Inter.txt.
+   Pełny zestaw znaków (w tym polskie), rzeczywiste wagi 100–900 i kursywa.
+   Nie używamy local(): zainstalowane fonty nie mogą zmieniać wyglądu sklepu.
+   Coolvetica: https://use.typekit.net/gay0uyj.css w <head> przed tym plikiem.
+   Rodzina "coolvetica", używane wagi normal: 400, 700, 900.
+   Inter pozostaje lokalnym fallbackiem na wypadek niedostępności Adobe. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/InterVariable-Italic.woff2") format("woff2");
+}
