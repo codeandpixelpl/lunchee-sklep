@@ -1,0 +1,155 @@
+<!-- Warianty sekcji Dla firm (Figma, strona 9, wiersz 09). Płótno 1672×941.
+     Części z Codeksa (r2/warianty/b2b-*): prezenty, zespół, postacie 3D, zestaw premium, biurko. Ikony i kształty w CSS. Treść klienta 1:1.
+     „3 godziny działania” i „utrzymuje ciepło” z kadrów Codeksa zastąpione faktami z oferty. Opisy pod postaciami w wariancie 3 to nasze teksty do akceptacji. -->
+<style>
+/* odznaka „Prezent firmowy” w stylu odznak marki: płytka z napisem, ikona 3D prezentu na górze (Codex 16.10) */
+.vb-odz__plytka { position: absolute; left: 0; right: 0; bottom: 0; height: 58%; display: grid; place-items: center; align-content: end; padding-bottom: calc(22 * var(--u)); border-radius: calc(24 * var(--u));
+  background: linear-gradient(180deg, #ffd23a, #f2b90c); color: var(--tekst-mocny); font: 700 calc(30 * var(--u))/1 var(--font-naglowki); text-align: center;
+  box-shadow: inset 0 calc(-6 * var(--u)) 0 rgb(0 0 0 / .12), 0 0 0 calc(5 * var(--u)) #fff, 0 calc(16 * var(--u)) calc(26 * var(--u)) calc(-8 * var(--u)) rgb(0 0 0 / .45); transform: rotate(-6deg); }
+.vb-odz__3d { position: absolute; left: 50%; top: 0; width: 66%; height: auto; translate: -50% 0; rotate: -6deg; filter: drop-shadow(0 calc(10 * var(--u)) calc(10 * var(--u)) rgb(0 0 0 / .35)); }
+.vb-teczka { display: grid; place-items: center; border-radius: calc(26 * var(--u)); background: linear-gradient(180deg,#fbcb2c,#f2b90c); color: var(--tekst-mocny); box-shadow: inset 0 calc(-6 * var(--u)) 0 rgb(0 0 0 / .12), 0 calc(14 * var(--u)) calc(24 * var(--u)) calc(-10 * var(--u)) rgb(0 0 0 / .35); }
+.vb-kolko { display: grid; place-items: center; border-radius: calc(14 * var(--u)); border: calc(2 * var(--u)) solid currentColor; }
+.vb-cecha { line-height: 1.3; }
+.vb-pas { display: inline-flex; align-items: center; justify-content: center; gap: .5em; border-radius: 99px; font-weight: 800; white-space: nowrap; }
+.vb-zolte-k { display: grid; place-items: center; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); }
+/* b2b-1: kolor kształtu i światła za prezentami (re-audyt R1-19). Kształt na telefonie rysuje też garb w svg w data URL niżej,
+   tam kolor stoi literalnie (#f2b90c = --akcent), bo zmienna nie wchodzi do data URL. */
+.vb1 { --b2b-ksztalt: var(--akcent); --b2b-swiatlo: rgb(255 246 214 / .7); }
+.vk .vb1-btn:hover { background: var(--cta-hover); }
+.vk .vb1-btn:focus-visible { outline: 3px solid var(--tekst-mocny); outline-offset: 3px; }
+/* TELEFON b2b-1 START */
+@media (max-width: 899px) {
+  /* telefon: ścieżka svg rozciągnięta do pionu wykrzywia narożniki, więc żółty kształt składają dwa prostokąty:
+     korpus to svg (ścieżka ukryta, jasne światło za LB745 w tle), wybrzuszenie po prawej z łagodnym S to span poświaty */
+  #dla-firm .vk.vk--m { margin-top: calc(-8 * var(--u)) !important; }
+  #dla-firm .vk--m > svg.a:first-child > path { display: none; }
+  #dla-firm .vk--m > svg.a:first-child { border-radius: calc(24 * var(--u)) 0 calc(24 * var(--u)) calc(24 * var(--u));
+    background: radial-gradient(closest-side, var(--b2b-swiatlo), transparent) calc(100% + 70 * var(--u)) calc(100% + 80 * var(--u)) / calc(300 * var(--u)) calc(280 * var(--u)) no-repeat, var(--b2b-ksztalt); }
+  /* wybrzuszenie: ta sama krzywa S co na desktopie (styczne poziome na obu końcach), rysowana w svg, bo twarde przejścia gradientów
+     dawały poszarpaną krawędź; span ma stałe proporcje 218×30 jednostek, więc rozciągnięcie svg niczego nie wykrzywia */
+  #dla-firm .vk--m > svg.a:first-child + span.a {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 218 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30V28C37 28 48 0 80 0H194A24 24 0 0 1 218 24V30Z' fill='%23f2b90c'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat !important; }
+}
+/* TELEFON b2b-1 END */
+/* b2b-1 na 1000–1199 px (iPad w poziomie): płótno w skali 0,69 zmniejsza akapit do ok. 12 px i przycisk poniżej 44 px,
+   więc tu dolne progi. Szerokość akapitu rośnie razem z pismem (600/21 jak na desktopie, te same trzy wiersze),
+   przycisk schodzi tyle, żeby pod akapitem zostało ok. 10 px. Powyżej progów, od 1200 px w górę i na telefonie bez zmian */
+@media (min-width: 1000px) and (max-width: 1199px) {
+  #dla-firm .vk.vk--m > .t-p { font-size: max(13px, calc(21 * var(--u))); width: max(calc(600 * var(--u)), calc(600px * 13 / 21)); }
+  #dla-firm .vk.vk--m > .btn-v { top: max(calc(374 * var(--u)), calc(262 * var(--u) + 66px)); width: max(calc(360 * var(--u)), 210px);
+    height: max(44px, calc(68 * var(--u))); font-size: max(14px, calc(24 * var(--u))); }
+}
+</style>
+<template data-nr="1" data-nazwa="Granat z prezentami">
+<!-- wybór 16.10: granat na całą szerokość, czerwona kokarda i zawieszka z Codeksa, bez ikon, teczki i nadtytułu.
+     17.10 (R1-41, R1-19): pasek niższy, cała kompozycja w skali ok. 0,69 (sekcja ok. 470 px na 1440, na telefonie prezenty na garbie
+     obok nagłówka, LB745 obok przycisku).
+     Re-audyt R1-19 (17.10, decyzja z 5.10: granat tylko w tekstach i CTA): kształt na żółtym KV zamiast granatu, bez niebieskiej
+     poświaty (za prezentami jasne światło), nagłówek i akapit granatowe, przycisk niebieski CTA jak w hero i na dla-firm.html.
+     Kompozycja bez zmian: kokarda, pudełka, LB745, kukurydza pod 45°, awokado, nieregularny kształt. -->
+<div class="vk-sek vk-sek--pelne" style="--tlo-v:var(--tlo)"><div class="vk-ramka"><div class="vk vk--m vb1" style="--h-k:522;margin-top:calc(-50 * var(--u));--mhk:450">
+  <svg class="a" viewBox="0 0 1672 522" style="--x:0;--y:0;--w:1672;--h:522;--mx:16;--my:64;--mw:358;--mh:358" preserveAspectRatio="none"><path d="M24 112C24 84 48 74 76 74H900C960 74 978 36 1030 36H1630C1653 36 1672 55 1672 78V442C1672 465 1653 484 1630 484H64C40 484 24 468 24 444Z" style="fill:var(--b2b-ksztalt)"/></svg>
+  <span class="a" style="--x:950;--y:74;--w:662;--h:442;background:radial-gradient(closest-side, var(--b2b-swiatlo), transparent);--mx:156;--my:36;--mw:218;--mh:30"></span>
+  <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:1014;--y:155;--w:262;--mx:202;--my:26;--mw:90">
+  <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:1318;--y:155;--w:262;--mx:290;--my:26;--mw:90">
+  <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="Pudełka Lunchee jako prezent firmowy" style="--x:1152;--y:121;--w:290;--mx:244;--my:11;--mw:104">
+  <img class="a cien" src="assets/img/r2/warianty/kokarda-czerwona.webp" alt="" style="--x:1208;--y:71;--w:172;--mx:264;--my:-7;--mw:62">
+  <img class="a cien-s unos" src="assets/img/r2/skladniki/kukurydza.webp" alt="" style="--x:770;--y:4;--w:170;--r:-45deg;--t:8s;--d:-3s;--mx:56;--my:30;--mw:88">
+  <img class="a cien-s unos" src="assets/img/r2/skladniki/awokado.webp" alt="" style="--x:790;--y:388;--w:118;--r:18deg;--t:9s;--d:-5s;--mx:4;--my:398;--mw:58"><!-- R-02 (17.10): awokado z decyzji o b2b t1, na dolnej krawędzi kształtu -->
+  <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" alt="" style="--x:980;--y:279;--w:324;--mx:280;--my:372;--mw:94">
+  <h2 class="a t-h" style="--x:122;--y:106;--fs:66;color:var(--tekst-mocny);line-height:1.02;--mx:40;--my:112;--mfs:36">Lunchee dla<br>Twojej firmy</h2>
+  <p class="a t-p" style="--x:124;--y:262;--w:600;--fs:21;color:var(--tekst-mocny);--mx:40;--my:210;--mw:306;--mfs:16">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-b vb1-btn" href="dla-firm.html" style="--x:124;--y:374;--w:360;--h:68;--fs:24;--mx:40;--my:344;--mw:230;--mh:54;--mfs:16">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+</div></div></div>
+</template>
+<template data-nr="2" data-nazwa="Zespół w biurze">
+<div class="vk-sek" style="--tlo-v:#f3ead9"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <div class="a foto" style="--x:0;--y:0;--w:1672;--h:941"><img src="assets/img/r2/warianty/b2b-zespol.webp" alt="Zespół w biurze z prezentem Lunchee" style="object-position:70% 40%"></div>
+  <span class="a" style="--x:-20;--y:820;--w:520;--h:200;border-radius:50%;background:#f4c11c"></span>
+  <span class="a karta" style="--x:30;--y:84;--w:662;--h:772;background:rgb(255 250 240 / .96);border-radius:calc(40 * var(--u))"></span>
+  <span class="a vb-teczka" style="--x:82;--y:122;--w:92;--h:92;border-radius:calc(18 * var(--u))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56%;height:56%"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18M11 12h2v2h-2z"/></svg></span>
+  <p class="a t-e" style="--x:200;--y:156;--fs:15;color:var(--tekst-mocny)">Współpraca dla biznesu · oferta B2B</p>
+  <h2 class="a t-h" style="--x:80;--y:226;--fs:80;line-height:1.04">Lunchee dla<br>Twojej firmy</h2>
+  <p class="a t-p" style="--x:82;--y:410;--w:540;--fs:21;color:var(--tekst-mocny)">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-z" href="dla-firm.html" style="--x:82;--y:548;--w:384;--h:78;--fs:24">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+  <span class="odz" style="--x:94;--y:660"><span class="odznaka odznaka--cieplo" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:212;--y:660"><span class="odznaka odznaka--zasilanie" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:321;--y:695;--w:109">
+  <span class="a t-p c" style="--x:70;--y:764;--w:132;--fs:16;font-weight:700;color:var(--tekst-mocny)">Ciepły posiłek<br>w pracy</span>
+  <span class="a t-p c" style="--x:188;--y:764;--w:132;--fs:16;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
+  <span class="a t-p c" style="--x:305;--y:764;--w:132;--fs:16;font-weight:700;color:var(--tekst-mocny)">Stalowy<br>pojemnik</span>
+  <span class="a vb-pas" style="--x:1080;--y:380;--w:270;--h:76;--fs:24;background:var(--akcent);color:var(--tekst-mocny);transform:rotate(3deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1c0 0 6 2 6-1s-4-3-6 1"/></svg> Prezent firmowy</span>
+</div></div></div>
+</template>
+<template data-nr="3" data-nazwa="Postacie 3D">
+<div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <span class="a karta" style="--x:36;--y:104;--w:1600;--h:720;background:#f8efdc;border-radius:calc(30 * var(--u))"></span>
+  <svg class="a" viewBox="0 0 860 720" style="--x:36;--y:104;--w:860;--h:720" preserveAspectRatio="none"><path d="M30 0H820C860 160 870 520 790 720H30C13 720 0 707 0 690V30C0 13 13 0 30 0Z" fill="#f4bf1c"/></svg>
+  <img class="a cien" src="assets/img/r2/warianty/b2b-prezenty.webp" alt="" style="--x:600;--y:160;--w:300;transform:rotate(-4deg)">
+  <img class="a dek" src="assets/img/r2/skladniki/para-2.webp" alt="" style="--x:600;--y:340;--w:70;opacity:.7">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" alt="" style="--x:476;--y:390;--w:410">
+  <span class="a vb-teczka" style="--x:86;--y:152;--w:92;--h:92;border-radius:calc(18 * var(--u));background:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56%;height:56%"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18M11 12h2v2h-2z"/></svg></span>
+  <p class="a t-e" style="--x:206;--y:176;--fs:17;color:var(--tekst-mocny)">Współpraca dla biznesu · oferta B2B</p>
+  <h2 class="a t-h" style="--x:86;--y:262;--fs:76;line-height:1.04">Lunchee dla<br>Twojej firmy</h2>
+  <p class="a t-p" style="--x:88;--y:442;--w:400;--fs:22;color:var(--tekst-mocny)">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-n" href="dla-firm.html" style="--x:86;--y:634;--w:346;--h:76;--fs:23">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+  <span class="a vb-pas" style="--x:94;--y:730;--fs:22;color:var(--tekst-mocny)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1c0 0 6 2 6-1s-4-3-6 1"/></svg> Prezent firmowy</span>
+  <span class="a" style="--x:918;--y:220;--w:210;--h:260;border-radius:50%;background:#fbe08a"></span>
+  <img class="a" src="assets/img/r2/warianty/b2b-pracownica.webp" alt="" style="--x:904;--y:166;--w:230">
+  <div class="a vo-t" style="--x:920;--y:486;--w:220;--fs:19"><h3 style="margin:0;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny);font-size:1.6em;line-height:1.05">Dla<br>pracowników</h3><p style="margin:calc(10 * var(--u)) 0 0;color:var(--tekst-mocny);line-height:1.35">Praktyczny prezent na co dzień, do pracy i w drogę.</p></div>
+  <span class="a vb-zolte-k" style="--x:960;--y:702;--w:84;--h:84"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:52%;height:52%"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 2 6 5"/></svg></span>
+  <span class="a" style="--x:1164;--y:220;--w:210;--h:260;border-radius:50%;background:#fbe08a"></span>
+  <img class="a" src="assets/img/r2/warianty/b2b-prezent.webp" alt="" style="--x:1150;--y:166;--w:230">
+  <div class="a vo-t" style="--x:1166;--y:486;--w:220;--fs:19"><h3 style="margin:0;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny);font-size:1.6em;line-height:1.05">Dla<br>klientów</h3><p style="margin:calc(10 * var(--u)) 0 0;color:var(--tekst-mocny);line-height:1.35">Upominek, który zostaje w użyciu na dłużej.</p></div>
+  <span class="a vb-zolte-k" style="--x:1206;--y:702;--w:84;--h:84"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:52%;height:52%"><path d="M3 12l4-4 4 2 3-3 4 1 3 4-6 6-3-1-2 2-3-3-4-4z"/></svg></span>
+  <span class="a" style="--x:1410;--y:220;--w:210;--h:260;border-radius:50%;background:#fbe08a"></span>
+  <img class="a" src="assets/img/r2/warianty/b2b-szef.webp" alt="" style="--x:1396;--y:166;--w:230">
+  <div class="a vo-t" style="--x:1412;--y:486;--w:220;--fs:19"><h3 style="margin:0;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny);font-size:1.6em;line-height:1.05">Dla<br>partnerów</h3><p style="margin:calc(10 * var(--u)) 0 0;color:var(--tekst-mocny);line-height:1.35">Prezent, który pasuje do biura, auta i podróży.</p></div>
+  <span class="a vb-zolte-k" style="--x:1452;--y:702;--w:84;--h:84"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:52%;height:52%"><path d="M5 20V12M10 20V8M15 20v-5M20 20V5"/></svg></span>
+</div></div></div>
+</template>
+<template data-nr="4" data-nazwa="Zestaw premium">
+<div class="vk-sek" style="--tlo-v:#0b2c62"><div class="vk-ramka"><div class="vk" style="overflow:hidden;background:radial-gradient(80% 90% at 70% 40%,#163f86,#0b2c62 70%)">
+  <img class="a cien" src="assets/img/r2/warianty/b2b-premium.webp" alt="Zestaw prezentowy Lunchee dla firm" style="--x:600;--y:110;--w:1080">
+  <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:680;--y:230;--w:330">
+  <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:610;--y:380;--w:330">
+  <span class="a vb-teczka" style="--x:64;--y:112;--w:108;--h:108;border-radius:calc(22 * var(--u))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56%;height:56%"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18M11 12h2v2h-2z"/></svg></span>
+  <p class="a t-e" style="--x:210;--y:130;--fs:17;color:var(--akcent)">Współpraca dla biznesu · oferta B2B</p>
+  <h2 class="a t-h" style="--x:206;--y:184;--fs:84;color:#fff;line-height:1.02">Lunchee dla<br><span style="color:var(--akcent)">Twojej firmy</span></h2>
+  <p class="a t-p" style="--x:66;--y:380;--w:600;--fs:22;color:#e6ecf8">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-z" href="dla-firm.html" style="--x:64;--y:548;--w:430;--h:84;--fs:27">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+  <span class="a" style="--x:92;--y:690;--w:72;--h:60;color:#fbe7a8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 2 6 5"/></svg></span>
+  <span class="a t-p c" style="--x:44;--y:762;--w:170;--fs:18;color:#fff">Motywuje<br>pracowników</span>
+  <span class="a" style="--x:212;--y:716;--w:2;--h:90;background:rgb(255 255 255 / .3)"></span>
+  <span class="a" style="--x:256;--y:690;--w:68;--h:60;color:#fbe7a8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1c0 0 6 2 6-1s-4-3-6 1"/></svg></span>
+  <span class="a t-p c" style="--x:216;--y:762;--w:150;--fs:18;color:#fff">Buduje<br>relacje</span>
+  <span class="a" style="--x:366;--y:716;--w:2;--h:90;background:rgb(255 255 255 / .3)"></span>
+  <span class="a" style="--x:424;--y:690;--w:68;--h:60;color:#fbe7a8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span>
+  <span class="a t-p c" style="--x:370;--y:762;--w:180;--fs:18;color:#fff">Sprawdza się<br>na każdą okazję</span>
+  <span class="a vb-pas" style="--x:1262;--y:772;--w:352;--h:76;--fs:26;background:#fbf2df;color:var(--tekst-mocny)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1c0 0 6 2 6-1s-4-3-6 1"/></svg> Prezent firmowy</span>
+</div></div></div>
+</template>
+<template data-nr="5" data-nazwa="Biurko z odznaką">
+<div class="vk-sek" style="--tlo-v:#fbf3e3"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <div class="a foto" style="--x:560;--y:0;--w:1112;--h:941"><img src="assets/img/r2/warianty/b2b-biurko.webp" alt="Lunchee z ciepłym posiłkiem na biurku" style="object-position:70% 50%"></div>
+  <svg class="a" viewBox="0 0 900 941" style="--x:0;--y:0;--w:900;--h:941" preserveAspectRatio="none"><path d="M0 0H780C700 200 640 420 690 620C720 760 800 860 860 941H0Z" fill="#fbf3e3"/></svg>
+  <span class="a" style="--x:-80;--y:640;--w:560;--h:420;border-radius:50%;background:#f4c11c"></span>
+  <img class="a dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:-30;--y:760;--w:240;filter:blur(3px)">
+  <span class="a vb-teczka" style="--x:82;--y:66;--w:112;--h:112;border-radius:calc(22 * var(--u))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56%;height:56%"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18M11 12h2v2h-2z"/></svg></span>
+  <p class="a t-e" style="--x:232;--y:110;--fs:19;color:var(--tekst-mocny)">Współpraca dla biznesu · oferta B2B</p>
+  <h2 class="a t-h" style="--x:86;--y:196;--fs:96;line-height:1.02">Lunchee dla<br>Twojej firmy</h2>
+  <p class="a t-p" style="--x:88;--y:408;--w:600;--fs:24;color:var(--tekst-mocny)">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-z" href="dla-firm.html" style="--x:86;--y:566;--w:434;--h:80;--fs:27">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+  <span class="odz" style="--x:180;--y:676"><span class="odznaka odznaka--cieplo" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:314;--y:676"><span class="odznaka odznaka--zasilanie" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:439;--y:716;--w:125">
+  <span class="a t-p c" style="--x:156;--y:795;--w:144;--fs:16;font-weight:700;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span>
+  <span class="a t-p c" style="--x:290;--y:795;--w:144;--fs:16;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
+  <span class="a t-p c" style="--x:425;--y:795;--w:144;--fs:16;font-weight:700;color:var(--tekst-mocny)">Pojemnik INOX<br>1,7 + 0,5 l</span>
+  <span class="a vp-falka" style="--x:850;--y:66;--w:250;--h:250;background:#0b2c62;transform:rotate(-4deg)"></span>
+  <span class="a" style="--x:930;--y:110;--w:90;--h:90;color:var(--akcent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1c0 0 6 2 6-1s-4-3-6 1"/></svg></span>
+  <span class="a vb-pas" style="--x:820;--y:196;--w:300;--h:64;--fs:26;background:var(--akcent);color:var(--tekst-mocny);transform:rotate(-8deg);border-radius:calc(6 * var(--u))">Prezent firmowy</span>
+  <span class="a reka" style="--x:736;--y:340;--fs:30;--rot:-14deg">Praktyczny<br>prezent, który<br>się sprawdza</span>
+  <span class="a reka" style="--x:1540;--y:296;--fs:30;--rot:-10deg">Więcej<br>energii<br>w pracy</span>
+</div></div></div>
+</template>

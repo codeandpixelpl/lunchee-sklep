@@ -1,0 +1,185 @@
+<!-- Warianty sekcji „Każdy ma swój sposób” (Figma, strona 9, wiersz 03). Płótno 1672×941.
+     Części: zdjęcia kiedyś/dziś (pionowe z sekcji + poszerzone przez Codex do poziomu), odznaki 60°C i 3, miska, packshot, składniki, strzałka 3D z Codeksa. -->
+<style>
+.vs-h { text-align: center; }
+.vs-h .alt, .vk .alt { color: var(--cta); }
+.vs-pigulka { display: inline-flex; align-items: center; justify-content: center; border-radius: 99px; background: #fff; color: var(--tekst-mocny); font-weight: 800; white-space: nowrap; box-shadow: 0 calc(6 * var(--u)) calc(14 * var(--u)) rgb(0 0 0 / .12); }
+.vs-polaroid { background: #fff; padding: calc(20 * var(--u)) calc(20 * var(--u)) 0; box-shadow: 0 calc(20 * var(--u)) calc(40 * var(--u)) calc(-12 * var(--u)) rgb(60 40 10 / .35); }
+.vs-polaroid > .foto { width: 100%; }
+.vs-polaroid > .reka { position: static; transform: none; text-align: center; }
+.vs-podkreslenie { background: var(--akcent); border-radius: 99px; transform: rotate(-1.5deg); }
+.vs-kolko { border-radius: 50%; background: #fff6e2; display: grid; place-items: center; box-shadow: 0 0 0 calc(4 * var(--u)) rgb(255 255 255 / .7); }
+.vs-kafel-niebieski { border-radius: calc(16 * var(--u)); background: linear-gradient(180deg, #1c63c6, #0a3f94); color: #fff; font-weight: 800; text-align: center; text-transform: uppercase; line-height: 1.15; display: grid; align-content: end; padding-bottom: calc(14 * var(--u)); box-shadow: 0 calc(10 * var(--u)) calc(16 * var(--u)) calc(-6 * var(--u)) rgb(10 42 94 / .5); }
+.vs-cecha b { display: block; font-weight: 800; text-transform: uppercase; color: var(--tekst-mocny); line-height: 1.15; }
+.vs-cecha small { display: block; color: var(--tekst-slaby); line-height: 1.3; }
+.vs-x { display: grid; place-items: center; border-radius: 50%; background: #e2382b; color: #fff; font: 700 calc(var(--fs) * var(--u))/1 var(--font-tekst); box-shadow: 0 0 0 calc(5 * var(--u)) #fff, 0 calc(6 * var(--u)) calc(12 * var(--u)) rgb(0 0 0 / .25); }
+.vs-strzalka { fill: none; stroke: var(--tekst-mocny); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+/* Wariant 2 (17.10): logo marki zamiast odręcznego „lunchee” w Caveat (W-01, R1-17, R2-51), kolor jak logo w nagłówku */
+.vs-logo { background: var(--cta); -webkit-mask: url(assets/logo/lunchee-czarne.svg) left center / contain no-repeat; mask: url(assets/logo/lunchee-czarne.svg) left center / contain no-repeat; }
+/* Miejsce na film (R1-18, uwaga klienta z 1.10: „W tym miejscu docelowo będziemy chcieli mieć też film”).
+   PRZEŁĄCZNIK: klasa vs-film-on na .vk. Bez niej kadr filmu znika, a płótno wraca do wysokości bez filmu.
+   Wysokości płótna stoją tu, a nie w stylu .vk, bo zależą od przełącznika. Przycisk odtwarzania jest atrapą bez akcji. */
+.vk.vs-sposob { --h-k: 900; --mhk: 812; }
+.vk.vs-sposob.vs-film-on { --h-k: 1655; --mhk: 1078; }
+.vk.vs-sposob:not(.vs-film-on) .vs-film { display: none !important; }
+.vs-film { border-radius: calc(26 * var(--u)); background: var(--tekst-mocny); box-shadow: 0 0 0 calc(10 * var(--u)) #fff, 0 calc(26 * var(--u)) calc(48 * var(--u)) calc(-14 * var(--u)) rgb(60 40 10 / .4); }
+.vs-film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(10 42 94 / 0) 45%, rgb(10 42 94 / .28)); pointer-events: none; }
+.vs-film__play { position: absolute; left: 50%; top: 50%; z-index: 1; width: calc(132 * var(--u)); aspect-ratio: 1; translate: -50% -50%; display: grid; place-items: center; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); cursor: default;
+  box-shadow: 0 0 0 calc(9 * var(--u)) rgb(255 255 255 / .85), 0 calc(14 * var(--u)) calc(30 * var(--u)) rgb(10 42 94 / .35); }
+/* drugi akapit klienta łamie się inaczej na komputerze (.vs-br-d) i na telefonie (.vs-br-m); spacje przed <br> zostają, więc tekst jest co do znaku z docx */
+@media (min-width: 900px) { .vs-br-m { display: none; } }
+.vs-film__play svg { width: 42%; height: 42%; display: block; fill: currentColor; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; } /* trójkąt wyśrodkowany optycznie w samym viewBox (obrys 6,3–19,7, środek ciężkości 11,2), bez marginesu */
+/* TELEFON (17.10): wariant 2 „Dwa polaroidy” na płótnie 390, polaroidy mniejsze, zdjęcia z własną wysokością (--mfh) */
+@media (max-width: 899px) {
+  .vk--m .vs-br-d { display: none; }
+  .vk--m .vs-film { border-radius: calc(14 * var(--u)); box-shadow: 0 0 0 calc(5 * var(--u)) #fff, 0 calc(14 * var(--u)) calc(26 * var(--u)) calc(-8 * var(--u)) rgb(60 40 10 / .4); }
+  .vk--m .vs-film__play { width: calc(62 * var(--u)); box-shadow: 0 0 0 calc(5 * var(--u)) rgb(255 255 255 / .85), 0 calc(8 * var(--u)) calc(18 * var(--u)) rgb(10 42 94 / .35); }
+  .vk--m .vs-polaroid { padding: calc(8 * var(--u)) calc(8 * var(--u)) 0; box-shadow: 0 calc(12 * var(--u)) calc(22 * var(--u)) calc(-8 * var(--u)) rgb(60 40 10 / .35); }
+  .vk--m .vs-polaroid > .foto[style*="--mfh"] { height: calc(var(--mfh) * var(--u)) !important; }
+  .vk--m .vs-polaroid > .reka { padding-top: calc(7 * var(--u)) !important; padding-bottom: calc(9 * var(--u)); white-space: nowrap; }
+  /* podpis „kiedyś” odsunięty w lewo, bo prawy brzeg polaroidu przykrywa polaroid „dziś” */
+  .vk--m .vs-polaroid > .reka[style*="--mpr"] { padding-right: calc(var(--mpr) * var(--u)); }
+}
+</style>
+
+<template data-nr="1" data-nazwa="Porównanie w kadrze">
+<div class="vk-sek" style="--tlo-v:#f8efdd"><div class="vk-ramka"><div class="vk">
+  <svg class="a dek" viewBox="0 0 400 260" style="--x:0;--y:680;--w:400;--h:261" preserveAspectRatio="none"><path d="M0 10C70 40 170 120 230 260H0Z" fill="#f2b90c"/></svg>
+  <svg class="a dek" viewBox="0 0 300 120" style="--x:1372;--y:821;--w:300;--h:120" preserveAspectRatio="none"><path d="M0 120C80 70 190 30 300 10V120Z" fill="#f2b90c"/></svg>
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/pomidorki.webp" alt="" style="--x:58;--y:-24;--w:168">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:-14;--y:96;--w:100">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:248;--y:58;--w:60">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/brokul.webp" alt="" style="--x:1546;--y:8;--w:136">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/papryka-czerwona.webp" alt="" style="--x:-10;--y:790;--w:100">
+  <h2 class="a t-h vs-h" style="--x:236;--y:58;--w:1200;--fs:80">Każdy ma <span class="alt">swój sposób.</span></h2>
+  <p class="a t-p" style="--x:236;--y:146;--w:1200;--fs:24;text-align:center;color:var(--tekst-mocny);line-height:1.3">Praca, podróż, długi dzień poza domem – nie zawsze mamy kuchnię pod ręką.<br>Ale własny posiłek możemy mieć ze sobą.</p>
+  <div class="a karta foto" style="--x:105;--y:232;--w:1462;--h:516;border-radius:calc(30 * var(--u));background:#fff">
+    <div class="a foto" style="--x:0;--y:0;--w:715;--h:516"><img src="assets/img/r2/warianty/kiedys-szeroko.webp" alt="Znudzona kobieta nad kanapką przy biurku" style="object-position:50% 40%;transform:scale(1.42);transform-origin:56% 46%"></div>
+    <div class="a foto" style="--x:723;--y:0;--w:739;--h:516"><img src="assets/img/r2/warianty/dzis-szeroko.webp" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" style="object-position:50% 40%;transform:scale(1.36);transform-origin:47% 52%"></div>
+    <span class="a vs-pigulka" style="--x:35;--y:23;--w:216;--h:44;--fs:18">Lunchowanie kiedyś</span>
+    <span class="a vs-pigulka" style="--x:1227;--y:23;--w:200;--h:44;--fs:18">Lunchowanie dziś</span>
+    <span class="a reka dek" style="--x:96;--y:132;--fs:32;color:#fff;--rot:-12deg">Zimna<br>kanapka…<br>Znów to samo?</span>
+    <span class="a reka dek" style="--x:1186;--y:128;--fs:34;--rot:-10deg">Ciepły posiłek<br>zawsze ze mną!</span>
+  </div>
+  <span class="a" style="--x:786;--y:436;--w:76;--h:76;border-radius:50%;background:var(--akcent);box-shadow:0 0 0 calc(5 * var(--u)) #fff;display:grid;place-items:center;font:800 calc(26 * var(--u))/1 var(--font-tekst);color:var(--tekst-mocny)">‹ ›</span>
+  <img class="a" src="assets/img/r2/ikony/plomien.webp" alt="" style="--x:172;--y:762;--w:76">
+  <span class="a vs-cecha" style="--x:256;--y:812;--fs:14"><b>Podgrzewa do<br><span style="font-size:1.7em">60°C</span></b></span>
+  <span class="odz" style="--x:372;--y:770"><span class="odznaka odznaka--zasilanie" style="--s:86"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka" style="border-radius:50%"></span></span></span>
+  <span class="a vs-cecha" style="--x:472;--y:815;--fs:15"><b>3 źródła<br>zasilania</b></span>
+  <a class="a btn-v btn-z" href="#jak-korzystac" style="--x:644;--y:785;--w:368;--h:74;--fs:26">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:1060;--y:786;--w:108">
+  <span class="a vs-cecha" style="--x:1180;--y:802;--fs:14"><b>Stalowy<br>wkład</b><small>łatwy w czyszczeniu</small></span>
+  <img class="a cien-s" src="assets/img/r2/produkty/lb745-zamkniety.webp" alt="" style="--x:1282;--y:776;--w:124">
+  <span class="a vs-cecha" style="--x:1420;--y:802;--fs:14"><b>Twój posiłek<br>w każdym miejscu</b><small>w domu, w pracy, w podróży</small></span>
+</div></div></div>
+</template>
+
+<template data-nr="2" data-nazwa="Dwa polaroidy">
+<!-- wybór 16.10: tło na całą szerokość sekcji, inne lewitujące składniki.
+     17.10: logo zamiast odręcznego „lunchee”, drugi akapit klienta z docx (R2-13), kadr na film (R1-18, przełącznik vs-film-on na .vk) -->
+<div class="vk-sek vk-sek--pelne" style="--tlo-v:var(--tlo-alt)"><div class="vk-ramka"><div class="vk vk--m vs-sposob vs-film-on">
+  <img class="a cien-s dek unos" src="assets/img/r2/skladniki/papryka-zolta.webp" alt="" style="--x:30;--y:748;--w:150;--mx:14;--my:736;--mw:80;--r:-18deg;--t:8s;--d:-2s">
+  <img class="a cien-s dek unos" src="assets/img/r2/skladniki/chili.webp" alt="" style="--x:186;--y:752;--w:110;--mx:104;--my:726;--mw:52;--r:-48deg;--t:9s;--d:-5s">
+  <img class="a cien-s dek unos" src="assets/img/r2/skladniki/batat.webp" alt="" style="--x:1500;--y:-20;--w:180;--mx:290;--my:-8;--mw:80;--r:18deg;--t:7s;--d:-1s">
+  <img class="a cien-s dek unos" src="assets/img/r2/skladniki/cytryna.webp" alt="" style="--x:1590;--y:376;--w:88;--r:-12deg;--t:9s;--d:-4s">
+  <img class="a cien-s dek unos" src="assets/img/r2/skladniki/rozmaryn.webp" alt="" style="--x:1594;--y:560;--w:74;--r:16deg;--t:10s;--d:-6s;filter:blur(1.5px)">
+  <span class="a vs-logo" role="img" aria-label="Lunchee" style="--x:88;--y:72;--w:232;--h:54;--mx:16;--my:6;--mw:116;--mh:27"></span>
+  <h2 class="a t-h" style="--x:88;--y:160;--fs:92;line-height:1;--mx:16;--my:50;--mw:358;--mfs:40">Każdy ma<br><span class="alt">swój sposób.</span></h2>
+  <p class="a t-p" style="--x:90;--y:368;--fs:22;color:var(--tekst-mocny);line-height:1.5;--mx:16;--my:148;--mw:358;--mfs:16">Praca, podróż, długi dzień poza domem – <br>nie zawsze mamy kuchnię pod ręką. <br>Ale własny posiłek możemy mieć ze sobą.</p>
+  <p class="a t-p" style="--x:90;--y:487;--fs:22;color:var(--tekst-mocny);line-height:1.5;--mx:16;--my:232;--mw:358;--mfs:16">Lunchee pozwala podgrzać go tam, <br class="vs-br-m">gdzie akurat <br class="vs-br-d">jesteś – w domu, samochodzie <br class="vs-br-m">czy w trasie. <br class="vs-br-d">Dzięki temu ciepły posiłek <br class="vs-br-m">może być częścią <br class="vs-br-d">Twojego dnia, <br class="vs-br-m">niezależnie od miejsca.</p>
+  <a class="a btn-v btn-z" href="#jak-korzystac" style="--x:90;--y:648;--w:368;--h:76;--fs:24;--mx:16;--my:374;--mw:358;--mh:54;--mfs:17">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
+  <div class="a vs-polaroid" style="--x:622;--y:76;--w:420;--h:620;transform:rotate(-4deg);--mx:16;--my:472;--mw:168">
+    <div class="foto" style="height:calc(500 * var(--u));--mfh:200"><img src="assets/img/gen/03-porownanie-kiedys.webp" alt="Znudzona kobieta nad kanapką przy biurku" style="object-position:50% 40%"></div>
+    <span class="reka" style="--fs:38;display:block;padding-top:calc(18 * var(--u));--mfs:20;--mpr:12">Lunchowanie kiedyś</span>
+  </div>
+  <div class="a vs-polaroid" style="--x:996;--y:104;--w:592;--h:748;transform:rotate(-3deg);--mx:174;--my:490;--mw:200">
+    <div class="foto" style="height:calc(624 * var(--u));--mfh:208"><img src="assets/img/r2/porownanie-dzis.webp" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" style="object-position:50% 46%"></div>
+    <span class="reka" style="--fs:48;display:block;padding-top:calc(16 * var(--u));--mfs:24">Lunchowanie dziś ♡</span>
+  </div>
+  <svg class="a dek" viewBox="0 0 200 110" style="--x:958;--y:236;--w:200;--h:110;--mx:142;--my:540;--mw:66;--mh:36;overflow:visible;filter:drop-shadow(0 calc(4 * var(--u)) calc(6 * var(--u)) rgb(0 0 0 / .3))">
+    <path d="M14 96C44 40 104 22 160 40" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+    <path d="M150 12L194 46L144 76Z" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M14 96C44 40 104 22 160 40" fill="none" stroke="#f2b90c" stroke-width="12" stroke-linecap="round"/>
+    <path d="M150 12L194 46L144 76Z" fill="#f2b90c" stroke="#f2b90c" stroke-width="4" stroke-linejoin="round"/>
+  </svg>
+  <div class="a foto vs-film" style="--x:286;--y:975;--w:1100;--h:619;--mx:16;--my:846;--mw:358;--mh:201">
+    <img src="assets/img/r2/warianty/dzis-szeroko.webp" alt="" loading="lazy" style="object-position:50% 50%">
+    <span class="vs-film__play" role="img" aria-label="Film wkrótce" title="Film wkrótce"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5 18.5 12 7.5 18.5Z"/></svg></span>
+  </div>
+</div></div></div>
+</template>
+
+<template data-nr="3" data-nazwa="Dwa koła na żółtym">
+<div class="vk-sek" style="--tlo-v:#f6c21b"><div class="vk-ramka"><div class="vk" style="background:radial-gradient(70% 90% at 50% 45%, #fbd23d, #f4bf18 75%)">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/pomidorki.webp" alt="" style="--x:-20;--y:-60;--w:130">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:166;--y:-6;--w:80">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/brokul.webp" alt="" style="--x:1548;--y:-10;--w:130">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:-20;--y:760;--w:180">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/pomidorki.webp" alt="" style="--x:1170;--y:780;--w:100">
+  <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:1084;--y:724;--w:76">
+  <div class="a kolo" style="--x:-12;--y:112;--w:590;--h:700;box-shadow:0 0 0 calc(5 * var(--u)) #fde7a0"><img src="assets/img/gen/03-porownanie-kiedys.webp" alt="Znudzona kobieta nad kanapką przy biurku" style="object-position:50% 52%"></div>
+  <div class="a kolo" style="--x:1090;--y:108;--w:600;--h:708;box-shadow:0 0 0 calc(5 * var(--u)) #fde7a0"><img src="assets/img/r2/porownanie-dzis.webp" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" style="object-position:50% 56%"></div>
+  <span class="a vs-pigulka" style="--x:142;--y:132;--w:286;--h:54;--fs:22">Lunchowanie kiedyś</span>
+  <span class="a vs-pigulka" style="--x:1247;--y:130;--w:254;--h:54;--fs:22">Lunchowanie dziś</span>
+  <h2 class="a t-h vs-h" style="--x:560;--y:104;--w:560;--fs:90">Każdy ma<br>swój sposób.</h2>
+  <p class="a t-p" style="--x:560;--y:300;--w:560;--fs:23;text-align:center;color:var(--tekst-mocny);line-height:1.6">Praca, podróż, długi dzień poza domem –<br>nie zawsze mamy kuchnię pod ręką.<br>Ale własny posiłek możemy mieć ze sobą.</p>
+  <img class="a" src="assets/img/r2/warianty/strzalka-3d.webp" alt="" style="--x:676;--y:420;--w:310">
+  <span class="odz" style="--x:617;--y:586"><span class="odznaka odznaka--cieplo" style="--s:106"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><small>Podgrzewa do</small><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:768;--y:590"><span class="odznaka odznaka--zasilanie" style="--s:102"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></span></span>
+  <span class="a vs-kafel-niebieski" style="--x:918;--y:640;--w:130;--h:106;--fs:13">Wyjmowana<br>stalowa miska</span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:906;--y:612;--w:152">
+  <a class="a btn-v btn-n" href="#jak-korzystac" style="--x:634;--y:780;--w:400;--h:74;--fs:25">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
+</div></div></div>
+</template>
+
+<template data-nr="4" data-nazwa="Duże zdjęcie dziś">
+<div class="vk-sek" style="--tlo-v:#f8efdd"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <svg class="a" viewBox="0 0 1100 941" style="--x:572;--y:0;--w:1100;--h:941" preserveAspectRatio="none"><path d="M260 0C150 160 10 380 20 660C24 780 50 880 70 941H1100V0Z" fill="#f2b90c"/></svg>
+  <div class="a foto" style="--x:610;--y:0;--w:1062;--h:941;-webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1062 941%22 preserveAspectRatio=%22none%22><path d=%22M268 0C150 170 40 390 50 660C54 780 76 880 96 941H1062V0Z%22/></svg>') 0 0/100% 100%;mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1062 941%22 preserveAspectRatio=%22none%22><path d=%22M268 0C150 170 40 390 50 660C54 780 76 880 96 941H1062V0Z%22/></svg>') 0 0/100% 100%">
+    <img src="assets/img/r2/warianty/dzis-szeroko.webp" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" style="object-position:60% 40%;transform:scale(1.16);transform-origin:56% 20%">
+  </div>
+  <h2 class="a t-h" style="--x:72;--y:152;--fs:94;line-height:1">Każdy ma<br>swój sposób.</h2>
+  <span class="a vs-podkreslenie" style="--x:76;--y:340;--w:470;--h:12"></span>
+  <p class="a t-p" style="--x:72;--y:384;--fs:24;color:var(--tekst-mocny);line-height:1.52">Praca, podróż, długi dzień poza domem –<br>nie zawsze mamy kuchnię pod ręką.<br>Ale własny posiłek możemy mieć ze sobą.</p>
+  <a class="a btn-v btn-b" href="#jak-korzystac" style="--x:72;--y:518;--w:318;--h:68;--fs:22">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
+  <span class="odz" style="--x:78;--y:622"><span class="odznaka odznaka--cieplo" style="--s:94"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><small>Podgrzewa do</small><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:236;--y:630"><span class="odznaka odznaka--zasilanie" style="--s:94"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:380;--y:666;--w:172">
+  <span class="a t-p" style="--x:50;--y:792;--w:150;--fs:17;text-align:center;color:var(--tekst-mocny)">Ciepły posiłek<br>w 20 minut</span>
+  <span class="a t-p" style="--x:208;--y:792;--w:150;--fs:17;text-align:center;color:var(--tekst-mocny)">W domu,<br>w samochodzie,<br>w trasie</span>
+  <span class="a t-p" style="--x:376;--y:792;--w:180;--fs:17;text-align:center;color:var(--tekst-mocny)">Stalowy wkład<br>łatwy w czyszczeniu</span>
+  <div class="a karta foto" style="--x:598;--y:66;--w:340;--h:440;transform:rotate(-6deg);border-radius:calc(22 * var(--u));box-shadow:0 0 0 calc(8 * var(--u)) #fff, 0 calc(22 * var(--u)) calc(40 * var(--u)) calc(-10 * var(--u)) rgb(0 0 0 / .4)">
+    <img src="assets/img/gen/03-porownanie-kiedys.webp" alt="Znudzona kobieta nad kanapką przy biurku" style="object-position:50% 52%">
+  </div>
+  <span class="a vs-pigulka" style="--x:600;--y:82;--w:214;--h:50;--fs:17;transform:rotate(-6deg)">Lunchowanie kiedyś</span>
+  <span class="a vs-x" style="--x:876;--y:72;--w:72;--h:72;--fs:40">✕</span>
+  <span class="a vs-pigulka" style="--x:1404;--y:458;--w:210;--h:56;--fs:19;transform:rotate(-6deg)">Lunchowanie dziś</span>
+  <svg class="a dek" viewBox="0 0 80 90" style="--x:1388;--y:530;--w:80;--h:90"><path class="vs-strzalka" d="M66 6C70 40 50 70 14 78M30 62l-18 16 22 8"/></svg>
+  <svg class="a dek" viewBox="0 0 70 120" style="--x:1600;--y:416;--w:66;--h:120"><path d="M20 10l14 30M44 60h22M30 90l20 22" stroke="#f2b90c" stroke-width="8" stroke-linecap="round" fill="none"/></svg>
+</div></div></div>
+</template>
+
+<template data-nr="5" data-nazwa="Dwie połowy">
+<div class="vk-sek" style="--tlo-v:#f4efe6"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <div class="a foto" style="--x:0;--y:0;--w:880;--h:941"><img src="assets/img/r2/warianty/kiedys-szeroko.webp" alt="Znudzona kobieta nad kanapką przy biurku" style="object-position:44% 50%"></div>
+  <div class="a foto" style="--x:800;--y:0;--w:872;--h:941;-webkit-mask:linear-gradient(90deg,#0000,#000 12%);mask:linear-gradient(90deg,#0000,#000 12%)"><img src="assets/img/r2/warianty/dzis-szeroko.webp" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" style="object-position:58% 50%"></div>
+  <span class="a" style="--x:500;--y:0;--w:680;--h:941;background:radial-gradient(48% 62% at 50% 44%, rgb(255 255 255 / .96), rgb(255 255 255 / .82) 55%, rgb(255 255 255 / 0) 100%)"></span>
+  <span class="a reka" style="--x:56;--y:28;--fs:66;color:var(--akcent);--rot:0deg">lunchee</span>
+  <span class="a vs-pigulka" style="--x:57;--y:152;--w:223;--h:46;--fs:17">Lunchowanie kiedyś</span>
+  <span class="a vs-pigulka" style="--x:1405;--y:152;--w:210;--h:46;--fs:17">Lunchowanie dziś</span>
+  <h2 class="a t-h vs-h" style="--x:520;--y:66;--w:640;--fs:92;line-height:1">Każdy ma<br><span class="alt">swój sposób.</span></h2>
+  <span class="a vs-podkreslenie" style="--x:792;--y:256;--w:292;--h:12"></span>
+  <svg class="a dek" viewBox="0 0 60 90" style="--x:1096;--y:96;--w:60;--h:90"><path d="M44 6L18 46M50 62l-30 16" stroke="#f2b90c" stroke-width="8" stroke-linecap="round" fill="none"/></svg>
+  <p class="a t-p" style="--x:520;--y:280;--w:640;--fs:23;text-align:center;color:var(--tekst-mocny);line-height:1.4">Praca, podróż, długi dzień poza domem –<br>nie zawsze mamy kuchnię pod ręką.<br>Ale własny posiłek możemy mieć ze sobą.</p>
+  <a class="a btn-v btn-b" href="#jak-korzystac" style="--x:673;--y:403;--w:324;--h:68;--fs:22">Zobacz, jak to działa <svg><use href="#i-arrow"/></svg></a>
+  <span class="a vs-kolko" style="--x:613;--y:535;--w:136;--h:136"></span>
+  <span class="a vs-kolko" style="--x:756;--y:535;--w:136;--h:136"></span>
+  <span class="a vs-kolko" style="--x:899;--y:535;--w:136;--h:136"></span>
+  <span class="odz" style="--x:638;--y:520"><span class="odznaka odznaka--cieplo" style="--s:88"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><small>do</small><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:782;--y:526"><span class="odznaka odznaka--zasilanie" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" alt="" style="--x:914;--y:566;--w:104">
+  <span class="a vs-cecha" style="--x:899;--y:628;--w:136;--fs:13;text-align:center"><b>Stalowy<br>pojemnik</b></span>
+  <span class="a reka" style="--x:690;--y:712;--fs:48;--rot:-4deg">Ciepły posiłek.<br>Gdzie chcesz.</span>
+  <span class="a vs-podkreslenie" style="--x:784;--y:812;--w:160;--h:8"></span>
+</div></div></div>
+</template>

@@ -3,6 +3,10 @@
 Prototyp sklepu lunchee.pl (Lunchee, sub-marka NOVEEN) przygotowany przez Code&Pixel.
 Statyczny HTML, CSS i JS, bez frameworka i bez kroku budowania.
 
+> Ta paczka to stan z 8.10.2026 (runda 01). Przed przekazaniem trzeba ją odświeżyć z `03 - Design`
+> po zdjęciu podglądu wariantów (opis niżej). Uwagi „Przekazanie dla programisty” opisują stan
+> z 17.10.2026.
+
 ## Podgląd lokalny
 
 ```bash
@@ -56,6 +60,77 @@ Potem `http://localhost:8000/`. Strona działa też z GitHub Pages.
   treść regulaminu i polityki prywatności dostarcza klient.
 - **Zgodność**: przy cenie promocyjnej wyświetla się najniższa cena z 30 dni (Omnibus),
   zgody w formularzach są rozdzielone.
+
+## Przekazanie dla programisty (stan 17.10.2026)
+
+Źródło prawdy to `03 - Design` w repozytorium projektu: strony generuje i uzupełnia `_build/build.py`
+z `_build/produkty.json` i `_build/partials/`, a tokeny i komponenty leżą w `04 - Styleguide/`
+(`tokens.css`, `components.css`, `styleguide.html`).
+
+### Przed oddaniem: zdjąć podgląd wariantów sekcji
+
+Wybrane warianty sekcji składa dziś w przeglądarce `js/warianty-sekcji.js` z plików `warianty/<sekcja>.html`.
+Oryginalny kod sekcji leży na stronie ukryty w `.ws-oryginal`. Wybór:
+`WYBRANE = { promocje: 2, sposob: 2, parametry: 3, modele: 2, kroki: 2, b2b: 1, kategoria: 3, koszyk: 4 }`,
+a sekcje „momenty”, „ebook” i karta produktu zostają w wersji z `build.py` (`ZOSTAJE`).
+
+1. Wypalić wybrane szablony na stałe w stronach: na `index.html` sześć sekcji z `WYBRANE`,
+   na `lunch-boxy.html` kategorię, na `koszyk.html` koszyk, a na pięciu kartach `produkt-lb7xx.html` parametry t3
+   z kodem, nazwą i zdjęciami modelu danej karty. Razem z szablonem przenieść wspólne style płótna
+   (`.vk`, `.a`, `.t-h`, `.t-p`, `.rabat`, `.odz` i reszta) z `js/warianty-sekcji.js` do CSS.
+2. W `_build/build.py` ustawić `PODGLAD_WARIANTOW = False`.
+3. Usunąć `js/warianty-*.js` i katalog `warianty/`.
+4. Przebudować strony: `python3 _build/build.py`.
+5. Sprawdzić, że na żadnej stronie nie zostały statyczne kafle cech z `build.py` w miejscu parametrów t3
+   i że nie ładuje się już Google Fonts. Krój Caveat (podpisy polaroidów w sekcji „Każdy ma swój sposób”)
+   trzeba wtedy hostować lokalnie, jak Inter (licencja OFL).
+
+### Części statyczne do podpięcia
+
+- **Koszyk** żyje w `localStorage` (`lunchee-koszyk`). Przy pierwszym wejściu na `koszyk.html` skrypt wkłada
+  przykładową zawartość LB755 + LB715 (flaga `lunchee-koszyk-przyklad`). Ten fragment usunąć na produkcji.
+- **Promocja „Dwa Lunchee 30% taniej”** liczy się w `js/main.js` (`pairDiscount`, wysokość rabatu w `<meta name="lunchee-para">`).
+  Na produkcji regułę trzyma platforma sklepu.
+- **Kody rabatowe**: pole w koszyku odrzuca każdy kod komunikatem „nieprawidłowy albo wygasł”. Walidację robi platforma.
+- **Formularze** na wszystkich stronach pokazują komunikat sukcesu bez wysyłki.
+  Płatności (BLIK, przelew, karta) to sam interfejs, bez operatora.
+- **Ceny i Omnibus**: ceny, `oldPrice` i `lowest30dPrice` są wpisane ręcznie w `produkty.json`. Najniższą cenę z 30 dni
+  musi liczyć platforma z historii cen.
+- **Dostawa**: kurier 14,99 zł, paczkomat 12,99 zł i próg 269 zł to wartości przykładowe z `produkty.json`.
+  Strona `dostawa-i-platnosci.html` ma w ich miejscu znaczniki „do potwierdzenia przez sklep”.
+- **Opinie** i ocena 4,8 / 127 opinii są przykładowe i mają widoczny znacznik. Przed startem podmienić na system opinii
+  z opisaną weryfikacją albo zdjąć sekcję i ocenę przy cenie.
+- **Ebook**: czytnik pokazuje dwa obrazy WEBP dostępne bez hasła. Docelowo strony ebooka wydaje serwer
+  po weryfikacji hasła, bez stałego publicznego adresu pliku.
+- **„Lunchee w sieci”** na kartach produktu pokazuje kreacje KV bez linków, do podmiany na posty klienta.
+- **Znaczniki `.tbd`** na stronach prawnych, w kontakcie, we wzorze odstąpienia, w klauzulach RODO i w bloku
+  „Producent i bezpieczeństwo” wymagają danych od klienta.
+
+### Kod 30% po zakupie (R1-53)
+
+- Wyzwalacz: opłacone zamówienie z jednym lunch boxem.
+- Skutek: jednorazowy kod rabatowy 30% na kolejnego Lunchee, ważny 30 dni, wysyłany e-mailem.
+- Kod generuje i wysyła platforma sklepu. Prototyp go nie tworzy.
+- Do ustalenia z klientem: łączenie kodu z promocją „Dwa Lunchee 30% taniej” i treść maila.
+
+### KSeF
+
+- Faktury dla klientów z NIP idą przez KSeF. Obowiązek obowiązuje od 1.02.2026 dla największych podatników
+  i od 1.04.2026 dla pozostałych.
+- Integracja przez API systemu fakturowego sprzedawcy.
+- Wyzwalacz: zamówienie z `payment_status: paid` i `invoice != null` (klient zaznaczył fakturę w zamówieniu).
+- Numer KSeF zapisać przy zamówieniu.
+- W prototypie zaznaczenie faktury wymaga nazwy firmy, NIP-u (z sumą kontrolną) i adresu firmy.
+
+### Zgody na cookies
+
+- Baner w prototypie ma trzy kategorie: niezbędne, analityczne i marketingowe. Wybór zapisuje w `localStorage`
+  (`lunchee-cookies`). Link „Ustawienia cookies” w stopce (`[data-cookies-open]`) otwiera baner ponownie.
+- Prototyp niczego nie blokuje. Adobe Fonts (`use.typekit.net`) ładuje się zawsze, a Google Fonts z podglądu wariantów
+  ładuje się przed wyborem w banerze.
+- Na produkcji wdrożyć CMP albo Google Consent Mode z blokadą skryptów analitycznych i marketingowych do czasu zgody.
+  Warto też wyrównać wagę przycisków akceptacji i odrzucenia.
+- Listę plików cookies i narzędzi w każdej kategorii trzeba wpisać do polityki prywatności (sekcja `#cookies`, dziś `.tbd`).
 
 ## Audyt fontów i mobile (8.10.2026)
 

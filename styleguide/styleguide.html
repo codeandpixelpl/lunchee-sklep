@@ -63,6 +63,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20.5" r="1.3"/><circle cx="17" cy="20.5" r="1.3"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-rozeta" viewBox="0 0 100 100"><path d="M50.00 0.00 L54.98 5.78 L61.13 1.25 L64.70 8.00 L71.69 4.95 L73.68 12.32 L81.17 10.91 L81.47 18.53 L89.09 18.83 L87.68 26.32 L95.05 28.31 L92.00 35.30 L98.75 38.87 L94.22 45.02 L100.00 50.00 L94.22 54.98 L98.75 61.13 L92.00 64.70 L95.05 71.69 L87.68 73.68 L89.09 81.17 L81.47 81.47 L81.17 89.09 L73.68 87.68 L71.69 95.05 L64.70 92.00 L61.13 98.75 L54.98 94.22 L50.00 100.00 L45.02 94.22 L38.87 98.75 L35.30 92.00 L28.31 95.05 L26.32 87.68 L18.83 89.09 L18.53 81.47 L10.91 81.17 L12.32 73.68 L4.95 71.69 L8.00 64.70 L1.25 61.13 L5.78 54.98 L0.00 50.00 L5.78 45.02 L1.25 38.87 L8.00 35.30 L4.95 28.31 L12.32 26.32 L10.91 18.83 L18.53 18.53 L18.83 10.91 L26.32 12.32 L28.31 4.95 L35.30 8.00 L38.87 1.25 L45.02 5.78Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="50" r="37" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="1.6 2.4"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
   <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
@@ -75,7 +76,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <h1 class="sg-title">Lunchee — Style guide</h1>
 
 <p class="sg-meta">
-  <b>Wersja:</b> 1.0 &nbsp;·&nbsp; <b>Data:</b> 2026-09-19 &nbsp;·&nbsp; <b>Autor:</b> PROUP Studio dla Code&amp;Pixel<br>
+  <b>Wersja:</b> 1.3 &nbsp;·&nbsp; <b>Data:</b> 2026-10-17 (pierwsza wersja 2026-09-19) &nbsp;·&nbsp; <b>Autor:</b> PROUP Studio dla Code&amp;Pixel<br>
   <b>Źródło wartości:</b> prototyp v0.3, zmierzony na localhost:8887, viewport 1440 (<code>POMIARY.md</code>); kierunek wizualny z makiety w Figmie i planszy Kamila; kroje z wytycznych klienta<br>
   <b>Status:</b> to jest źródło prawdy dla sklepu lunchee.pl, nie odwrotnie. Strona ładuje <code>fonts.css</code>, <code>tokens.css</code> i <code>components.css</code> z tego folderu; w <code>03 - Design/css/style.css</code> zostają wyłącznie układy sekcji.
 </p>
@@ -83,7 +84,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <nav class="sg-toc">
   <a href="#kolory">Kolory</a><a href="#typografia">Typografia</a><a href="#odstepy">Odstępy</a>
   <a href="#przyciski">Przyciski</a><a href="#formularze">Formularze</a><a href="#tresc">Komponenty treści</a>
-  <a href="#sklep">Sklep</a><a href="#zlozone">Złożone</a><a href="#ikony">Ikony</a><a href="#breakpointy">Breakpointy</a>
+  <a href="#sklep">Sklep</a><a href="#zlozone">Złożone</a><a href="#runda02">Runda 02</a><a href="#z-glownej">Z głównej</a><a href="#ikony">Ikony</a><a href="#breakpointy">Breakpointy</a>
   <a href="#dostepnosc">Dostępność</a><a href="#zasady">Robić / nie robić</a><a href="#wdrozenie">Wdrożenie</a>
 </nav>
 
@@ -91,19 +92,23 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <section class="sg-block" id="kolory">
 <h2>Kolory</h2>
 <p class="sg-note">Wyłącznie kolory występujące w serwisie, nazwane po roli. Kolory produktów są osobną grupą: pokazują wariant, nie budują interfejsu.</p>
+<p class="sg-note"><b>Zmiany 17.10.2026 (audyt zgodności z KV):</b> jasne tła tylko trzy: <code>--tlo</code>, <code>--tlo-alt</code> i <code>--tlo-produkt</code>. <code>--tlo-akcent</code> wskazuje na <code>--tlo-alt</code>, więc jasnożółte #fdf1c9 spoza palety KV zniknęło z cytatu, FAQ, pól gwarancji i dostawy, ikon i menu. Stany „ok” przepięte na kolory KV: <code>--ok</code> = <code>--akcent</code>, <code>--ok-tlo</code> = <code>--tlo-akcent</code>, <code>--ok-tekst</code> = <code>--tekst-mocny</code> (zielenie #1d7a3f, #e5f5ea i #1d5c34 wypadły). Pigułki cen w wariantach (<code>.vk .pill-r</code>) stoją na <code>--tlo-alt</code> zamiast #fbe7a8, nagłówek strony na <code>--tlo</code> z .92 przez <code>color-mix()</code>.</p>
 <p class="sg-h3">Akcja i akcent</p>
 <div class="sg-swatches">
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--cta)"></div><p class="sg-sw__meta"><b>#0054af</b><code>--cta</code><span>przyciski główne, drugi człon nagłówków (.alt), tło sekcji Dla firm, obrys aktywnego swatcha</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--cta)"></div><p class="sg-sw__meta"><b>#0054af</b><code>--cta</code><span>przyciski główne, drugi człon nagłówków (.alt), obrys aktywnego swatcha; od 17.10 nie jest tłem sekcji Dla firm (ta stoi na --akcent)</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--cta-hover)"></div><p class="sg-sw__meta"><b>#0a2a5e</b><code>--cta-hover</code><span>hover .btn--blue; ten sam hex co --tekst-mocny i --tlo-ciemne</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--akcent)"></div><p class="sg-sw__meta"><b>#f2b90c</b><code>--akcent</code><span>żółty marki: .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, blok za zdjęciem</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--akcent)"></div><p class="sg-sw__meta"><b>#f2b90c</b><code>--akcent</code><span>żółty marki: .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, tło pierwszej sekcji Dla firm, przycisk po dodaniu do koszyka (--ok)</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--akcent-hover)"></div><p class="sg-sw__meta"><b>#ffcb2e</b><code>--akcent-hover</code><span>hover .btn--yellow</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--akcent-cieply)"></div><p class="sg-sw__meta"><b>#f26a3d</b><code>--akcent-cieply</code><span>KV: etykiety, pomarańczowy żar w hero i kaflu 60°C (tło, nie tekst)</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--akcent-zar)"></div><p class="sg-sw__meta"><b>#f7a51c</b><code>--akcent-zar</code><span>dół kafla 60°C, żółć przechodząca w pomarańcz jak front opakowania</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--promocja)"></div><p class="sg-sw__meta"><b>#d42a1c</b><code>--promocja</code><span>czerwona plakietka rabatu „30%” i etykieta „Promocja dla Ciebie”, 5,4:1 na bieli</span></p></div>
 </div>
 <p class="sg-h3">Tła</p>
 <div class="sg-swatches">
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo)"></div><p class="sg-sw__meta"><b>#fbf8f1</b><code>--tlo</code><span>tło strony, nagłówek (z .92)</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-alt)"></div><p class="sg-sw__meta"><b>#f4efe3</b><code>--tlo-alt</code><span>co druga sekcja, tło zdjęć w kartach, pole faktury</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-produkt)"></div><p class="sg-sw__meta"><b>#dfeafb</b><code>--tlo-produkt</code><span>błękit pod packshotami, galeria, miniatury w koszyku</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-akcent)"></div><p class="sg-sw__meta"><b>#fdf1c9</b><code>--tlo-akcent</code><span>ikony parametrów, otwarte pytanie FAQ, cytat, pole gwarancji, hover w menu</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo)"></div><p class="sg-sw__meta"><b>#fbf8f1</b><code>--tlo</code><span>tło strony, nagłówek (z .92 przez color-mix)</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-alt)"></div><p class="sg-sw__meta"><b>#f6ecda</b><code>--tlo-alt</code><span>krem z boku opakowania: co druga sekcja, kafle cech, tło zdjęć w kartach; od 17.10 także wszystko, co było na --tlo-akcent</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-produkt)"></div><p class="sg-sw__meta"><b>#fbf5ea</b><code>--tlo-produkt</code><span>pod packshotami (galeria, koszyk, boks promocji); jaśniejszy krem od 17.10 („tło pod produktami jaśniejsze”), limonka i błękit wypadły w rundach 01 i 02</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-akcent)"></div><p class="sg-sw__meta"><b>= --tlo-alt</b><code>--tlo-akcent</code><span>ikony parametrów, otwarte pytanie FAQ, cytat, pole gwarancji, hover w menu; do 16.10 jasnożółte #fdf1c9. Na kremowej sekcji (opinie na karcie produktu) element dostaje biel</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tlo-ciemne)"></div><p class="sg-sw__meta"><b>#0a2a5e</b><code>--tlo-ciemne</code><span>stopka, toast, etykieta „Niedostępny”</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--biel)"></div><p class="sg-sw__meta"><b>#ffffff</b><code>--biel</code><span>karty, pola formularzy, tekst na kolorze</span></p></div>
 </div>
@@ -112,12 +117,19 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst)"></div><p class="sg-sw__meta"><b>#14213a</b><code>--tekst</code><span>akapity, wartości w specyfikacji</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-mocny)"></div><p class="sg-sw__meta"><b>#0a2a5e</b><code>--tekst-mocny</code><span>nagłówki, nazwy w kartach, pytania FAQ, etykiety pól</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-slaby)"></div><p class="sg-sw__meta"><b>#4a5570</b><code>--tekst-slaby</code><span>podpisy, okruszki, notki; 7,0:1 na --tlo</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-na-ciemnym)"></div><p class="sg-sw__meta"><b>#cfdaf0</b><code>--tekst-na-ciemnym</code><span>akapity w stopce i w Dla firm</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-etykieta)"></div><p class="sg-sw__meta"><b>#7a5600</b><code>--tekst-etykieta</code><span>eyebrow nad nagłówkami; 5,8:1 na --tlo-akcent</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-na-ciemnym)"></div><p class="sg-sw__meta"><b>#cfdaf0</b><code>--tekst-na-ciemnym</code><span>akapity w stopce (Dla firm od 17.10 na żółtym, tekst --tekst-mocny)</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--tekst-etykieta)"></div><p class="sg-sw__meta"><b>#7a5600</b><code>--tekst-etykieta</code><span>eyebrow nad nagłówkami; 5,7:1 na --tlo-akcent (krem)</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--linia)"></div><p class="sg-sw__meta"><b>#e8e1d2</b><code>--linia</code><span>separatory, ramki pól, kropki nieaktywne</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--blad)"></div><p class="sg-sw__meta"><b>#b3261e</b><code>--blad</code><span>pole z błędem, hover kosza</span></p></div>
-  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--ok)"></div><p class="sg-sw__meta"><b>#1d7a3f</b><code>--ok</code><span>przycisk po dodaniu do koszyka; --ok-tlo i --ok-tekst dla komunikatu formularza</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--ok)"></div><p class="sg-sw__meta"><b>= --akcent</b><code>--ok</code><span>przycisk po dodaniu do koszyka, tekst granatowy (7,8:1); --ok-tlo = --tlo-akcent i --ok-tekst = --tekst-mocny (11,9:1) dla komunikatu formularza, „Zweryfikowany zakup” i ceny gwarancji w koszyku. Do 16.10 zielenie spoza KV</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--brak)"></div><p class="sg-sw__meta"><b>#f26a3d</b><code>--brak</code><span>kropka etykiety .tbd; znika przed oddaniem</span></p></div>
+</div>
+<p class="sg-h3">Odznaki z kreacji klienta</p>
+<div class="sg-swatches">
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--odznaka-cieplo)"></div><p class="sg-sw__meta"><b>#ff5a3c</b><code>--odznaka-cieplo</code><span>„Podgrzanie do 60°C”, góra płytki</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--odznaka-cieplo-ciemny)"></div><p class="sg-sw__meta"><b>#d70f00</b><code>--odznaka-cieplo-ciemny</code><span>ta sama płytka, dół</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--odznaka-zasilanie)"></div><p class="sg-sw__meta"><b>#a8de3c</b><code>--odznaka-zasilanie</code><span>„3 źródła zasilania”, góra płytki</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--odznaka-zasilanie-ciemny)"></div><p class="sg-sw__meta"><b>#82bf17</b><code>--odznaka-zasilanie-ciemny</code><span>dół płytki i obrys cyfry „3”</span></p></div>
 </div>
 <p class="sg-h3">Kolory produktów</p>
 <div class="sg-swatches">
@@ -126,6 +138,8 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--produkt-nature)"></div><p class="sg-sw__meta"><b>#7e9d93</b><code>--produkt-nature</code><span>LB725 Nature</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--produkt-pearl)"></div><p class="sg-sw__meta"><b>#d7d7d9</b><code>--produkt-pearl</code><span>LB715 Pearl</span></p></div>
   <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--produkt-night)"></div><p class="sg-sw__meta"><b>#141414</b><code>--produkt-night</code><span>LB795 Night, niedostępny w sklepie</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--produkt-glamour-nazwa)"></div><p class="sg-sw__meta"><b>#c897a2</b><code>--produkt-glamour-nazwa</code><span>duża nazwa „Glamour” w karcie modelu (pastel przyciemniony do czytelności)</span></p></div>
+  <div class="sg-sw"><div class="sg-sw__chip" style="background:var(--produkt-pearl-nazwa)"></div><p class="sg-sw__meta"><b>#b3b4bb</b><code>--produkt-pearl-nazwa</code><span>duża nazwa „Pearl” w karcie modelu</span></p></div>
 </div>
 </section>
 
@@ -136,9 +150,9 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 
 <div class="sg-demo sg-demo--alt">
   <span class="eyebrow">Lunchee by NOVEEN</span>
-  <h1 style="font-size:var(--fs-h1);font-weight:900;line-height:.92"><span>Twój czas</span><br><span style="color:var(--cta)">na ciepły posiłek</span></h1>
+  <h1 style="font-size:var(--fs-h1);line-height:1.02"><span>Twój czas</span><br><span style="color:var(--cta)">na ciepły posiłek</span></h1>
 </div>
-<p class="sg-spec">Coolvetica 900 · var(--fs-h1) = clamp(3.2rem, 11vw, 7rem) / .92 · --tekst-mocny + --cta · wyłącznie hero strony głównej</p>
+<p class="sg-spec">Coolvetica 700 (--waga-naglowki) · var(--fs-h1) = clamp(2.4rem, 5.6vw, 4rem), 64 px na 1440 / 1.02 · tracking --tracking-naglowki .012em · --tekst-mocny + --cta · runda 02: 900 zlewało „ł”, wszystkie nagłówki na 700</p>
 
 <div class="sg-demo">
   <span class="eyebrow">Etykieta nad nagłówkiem</span>
@@ -154,6 +168,9 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <tr><td>H1 podstrony, H2 sekcji</td><td><code>.h2</code> / <code>--fs-h2</code></td><td>Coolvetica 700</td><td>67 px na 1440, 38 px na 390 / 1</td><td>każda sekcja; drugi człon w <code>.alt</code></td></tr>
   <tr><td>H1 karty produktu</td><td><code>.buy h1</code></td><td>Coolvetica 700</td><td>clamp(2.3rem, 4.6vw, 3.4rem) / 1</td><td>karty produktów i akcesoriów</td></tr>
   <tr><td>H3</td><td><code>--fs-h3</code></td><td>Coolvetica 700</td><td>24.8 px / 1</td><td>karty, kroki, kolumny stopki, legendy formularza</td></tr>
+  <tr><td>Małe nagłówki</td><td><code>.card--model h3</code>, <code>h2.buy__label</code>, <code>.b2b__feat h3</code>, <code>.legal__body h3</code></td><td>Coolvetica 700, tracking --tracking-naglowki</td><td>16–21 px / 1–1.15</td><td>od 17.10 (audyt W-01) w Coolvetice jak pozostałe h1–h3, wcześniej Inter</td></tr>
+  <tr><td>Nazwy modeli</td><td><code>.card__nazwa</code>, <code>.card__tlo-nazwa</code>, <code>.vk .t-h</code></td><td>Coolvetica 700, tracking --tracking-naglowki</td><td>wg karty</td><td>od 17.10 (audyt R2-02) z trackingiem nagłówków, było 0, -.01em i .01em</td></tr>
+  <tr><td>Cytat</td><td><code>.quote p</code></td><td>Inter 600</td><td>20.8 px / 1.4 (18 px na telefonie)</td><td>O nas; trzy zdania to tekst ciągły, więc Inter (audyt W-02), było Coolvetica 22.4 px</td></tr>
   <tr><td>Etykieta (eyebrow)</td><td><code>.eyebrow</code> / <code>--fs-etykieta</code></td><td>Inter 700, uppercase, tracking .18em</td><td>12.5 px / 1.6</td><td>nad nagłówkiem sekcji, kod produktu</td></tr>
   <tr><td>Lead</td><td><code>.lead</code> / <code>--fs-lead</code></td><td>Inter 400</td><td>18 px / 1.6</td><td>pod nagłówkiem, kategoria</td></tr>
   <tr><td>Tekst</td><td><code>body</code> / <code>--fs-tekst</code></td><td>Inter 400</td><td>16 px / 1.6</td><td>akapity, FAQ, specyfikacja</td></tr>
@@ -215,14 +232,14 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <tr><td>focus-visible</td><td>outline 3 px --akcent, offset 3 px (globalna reguła)</td><td>na granacie widoczny, na żółtym przycisku kontrast obrysu z tłem 1:1, więc obrys wychodzi poza przycisk dzięki offsetowi</td></tr>
   <tr><td>active</td><td>scale(.97)</td><td></td></tr>
   <tr><td>disabled</td><td>opacity .5, cursor not-allowed</td><td>np. LB795 Night</td></tr>
-  <tr><td>is-added</td><td>tło --ok przez 900 ms po dodaniu do koszyka</td><td>towarzyszy mu toast</td></tr>
+  <tr><td>is-added</td><td>tło --ok (żółty KV) i tekst --tekst-mocny przez 900 ms po dodaniu do koszyka</td><td>towarzyszy mu toast; żółty, bo granat jest już hoverem .btn--blue, a .btn--outline ma granatowy tekst</td></tr>
 </table>
 <table class="sg-table">
   <tr><th>Wariant</th><th>Tło</th><th>Tekst</th><th>Padding</th><th>Wysokość</th><th>Gdzie</th></tr>
   <tr><td><code>.btn--blue</code></td><td>--cta</td><td>--biel</td><td>0 1.7em</td><td>54 px</td><td>akcja główna: hero, Zobacz produkt, Dodaj do koszyka, Zamawiam i płacę</td></tr>
-  <tr><td><code>.btn--yellow</code></td><td>--akcent</td><td>--tekst-mocny</td><td>0 1.7em</td><td>54 px</td><td>CTA na ciemnym tle: Dla firm, stopka</td></tr>
+  <tr><td><code>.btn--yellow</code></td><td>--akcent</td><td>--tekst-mocny</td><td>0 1.7em</td><td>54 px</td><td>CTA na ciemnym tle: stopka. Wyjątek: w <code>.b2b--hero</code> (od 17.10, żółte tło) wygląda jak <code>.btn--blue</code></td></tr>
   <tr><td><code>.btn--outline</code></td><td>przezroczyste, ramka 1.5 px --tekst-mocny</td><td>--tekst-mocny</td><td>0 1.7em</td><td>54 px</td><td>akcja druga: Jak to działa, Kontynuuj zakupy</td></tr>
-  <tr><td><code>.btn--outline-white</code></td><td>przezroczyste, ramka biała .7</td><td>--biel</td><td>0 1.7em</td><td>54 px</td><td>adres e-mail w Dla firm</td></tr>
+  <tr><td><code>.btn--outline-white</code></td><td>przezroczyste, ramka biała .7</td><td>--biel</td><td>0 1.7em</td><td>54 px</td><td>adres e-mail w Dla firm. Wyjątek: w <code>.b2b--hero</code> (od 17.10) wygląda jak <code>.btn--outline</code></td></tr>
   <tr><td><code>.btn--sm</code></td><td>modyfikator</td><td></td><td>0 1.1em</td><td>44 px</td><td>„Zobacz” w kartach</td></tr>
   <tr><td><code>.btn--block</code></td><td>modyfikator</td><td></td><td></td><td></td><td>pełna szerokość w kolumnie zakupu i koszyku</td></tr>
   <tr><td><code>.round-btn</code></td><td>przezroczyste, ramka --tekst-mocny</td><td>--tekst-mocny</td><td></td><td>48 px</td><td>strzałki karuzeli momentów</td></tr>
@@ -271,7 +288,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <a class="card card--product" href="#"><div class="card__img card__img--produkt"><img src="assets/demo/lb745.webp" alt=""><img class="card__img-hover" src="assets/demo/lb745-08.webp" alt=""></div><div class="card__body"><span class="card__code"><i class="dot" style="--c:var(--produkt-city)"></i>City</span><h3>Lunchee LB745 City</h3><p>Elektryczny Lunch Box NOVEEN Lunchee</p><div class="card__foot"><span class="tbd">cena</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div></a>
   <a class="card" href="#"><div class="card__img"><img src="assets/demo/08-torba-wyciecie.webp" alt=""></div><div class="card__body"><span class="card__code">LBB370</span><h3>Torba termiczna</h3><p>Spakuj. Zabierz. Zachowaj temperaturę.</p><div class="card__foot"><span class="tbd">cena</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div></a>
 </div></div>
-<p class="sg-spec">.card: biel, r --r-m, cień --cien na hover · .card__img 4:3 na --tlo-alt (produkty: --tlo-produkt) · .card__img-hover: drugie ujęcie po najechaniu (cover, scale 1.18, mix-blend-mode multiply, bo zdjęcia WWW mają białe tło), tylko @media (hover: hover); packshot gaśnie, nazwa w --cta, przycisk wypełnia się granatem; na dotyku karta prowadzi do karty produktu, gdzie galerię przewija się palcem</p>
+<p class="sg-spec">.card: biel, r --r-m, obrys 1 px --linia (na kremowych sekcjach pole zdjęcia się nie zlewa), cień --cien na hover · .card__img 4:3 na --tlo-alt · karty modeli z build.py w dwóch wariantach: <code>.card--nazwa</code> (strona główna: duża nazwa modelu w jego kolorze za packshotem) i <code>.card--warzywa</code> (kategoria, karty produktu: warzywa wokół zamkniętego urządzenia) · po najechaniu ten sam kąt i inne danie w każdym modelu</p>
 
 <p class="sg-h3">Lista cech z ikoną, lista zestawu, swatche</p>
 <div class="sg-demo">
@@ -288,7 +305,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <p class="note" style="max-width:640px;margin-top:16px">Ważne: podgrzewanie odbywa się wyłącznie w głównym pojemniku INOX.</p>
   <p style="margin-top:16px"><span class="tbd">cena</span> &nbsp; <span class="tbd">zdjęcie produktu do potwierdzenia</span></p>
 </div>
-<p class="sg-spec">FAQ: natywne &lt;details name="faq"&gt;, więc otwiera się jedno naraz bez skryptu; otwarte na --tlo-akcent, plus obraca się w minus · .quote: --tlo-akcent, cudzysłów --akcent · .note: lewa krawędź --akcent · .tbd: przerywana ramka i kropka --brak, oznacza treść do uzupełnienia przez klienta; przed oddaniem lista .tbd musi być pusta</p>
+<p class="sg-spec">FAQ: natywne &lt;details name="faq"&gt;, więc otwiera się jedno naraz bez skryptu; otwarte na --tlo-akcent, plus obraca się w minus · .quote (od 17.10 w components.css): --tlo-akcent, cudzysłów --akcent, tekst Inter 600 · .note: lewa krawędź --akcent · .tbd: przerywana ramka i kropka --brak, oznacza treść do uzupełnienia przez klienta; przed oddaniem lista .tbd musi być pusta</p>
 
 <p class="sg-h3">Kroki, momenty, parametry, etykieta „niedostępny”</p>
 <div class="sg-demo sg-demo--white">
@@ -327,6 +344,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
   <tr><td>logo</td><td>128 px na telefonie, 158 px od 1000 px; <code>.logo-mark</code> to czarny SVG jako maska CSS w kolorze --cta</td><td>klient dał logo tylko czarne i białe, granat wymagany przez makietę</td></tr>
   <tr><td>tło</td><td>--tlo z .92 + blur 10 px, cień po przewinięciu (<code>.is-scrolled</code>)</td><td></td></tr>
   <tr><td>menu desktop</td><td>od 1000 px, linki Inter 600 16 px, hover i bieżąca strona na --tlo-akcent (<code>aria-current</code> nadaje skrypt)</td><td></td></tr>
+  <tr><td>podpis przy logo</td><td><code>.brand__tag</code> „Elektryczne lunch boxy” od 1000 px, razem z menu (od 17.10, było od 1080 px); w zakresie 1000–1079 px logo 136 px, linki 8 px po bokach i .9rem, odstępy 16 px</td><td>wymóg klienta: nazwa funkcji przy logo na desktopie</td></tr>
   <tr><td>menu mobilne</td><td><code>.mobile-nav</code> pełnoekranowe pod nagłówkiem, Coolvetica 32 px, zamyka Escape i klik w link, blokuje przewijanie tła</td><td></td></tr>
   <tr><td>stopka</td><td>--tlo-ciemne, 4 kolumny od 900 px, logo białe z NOVEEN (jedyne miejsce z NOVEEN w logo, zgodnie z wytyczną „NOVEEN obok, nie na pierwszym planie”)</td><td></td></tr>
 </table>
@@ -341,6 +359,93 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 </section>
 
 <!-- ====================================================================== -->
+<section class="sg-block" id="runda02">
+<h2>Runda 02: smak i język opakowania</h2>
+<p class="sg-note">Komponenty dodane po uwagach klienta z 9.10.2026. Zasada nadrzędna: produkt na stronie pochodzi z prawdziwych packshotów klienta; ImageGen robi jedzenie, tła i sceny z ludźmi, a każdy kadr z produktem narysowanym przez AI przechodzi przez Kamila (<code>05 - Feedback/runda-02/dla-kamila/</code>).</p>
+
+<p class="sg-h3">Odznaki klienta <code>.odznaka</code></p>
+<div class="sg-demo sg-demo--alt"><ul class="odznaki">
+  <li class="odznaka odznaka--cieplo" style="--w:104px"><img class="odznaka__3d" src="../assets/img/r2/ikony/plomien.webp" alt=""><span class="odznaka__plytka"><small>Podgrzanie do</small><b>60°C</b></span></li>
+  <li class="odznaka odznaka--zasilanie" style="--w:104px"><img class="odznaka__3d" src="../assets/img/r2/ikony/wtyczka.webp" alt=""><span class="odznaka__cyfra" aria-hidden="true">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></li>
+</ul></div>
+<p class="sg-spec">rozmiar przez --w: w hero 120 px na desktopie i 86–100 px na telefonie (podpis min. 12 px i 11 px, na telefonie w dwóch liniach, płomień i wtyczka niżej), w galerii 72–84 px na desktopie i 66–72 px na telefonie (podpis min. 9 px w dwóch liniach, płomień niżej, na telefonie obrys 2 px) · płytka z obrysem 3 px biel, gradient --odznaka-* · napis Inter 800/900 wielkimi literami, tekst klienta 1:1 · w hero pod przyciskami, na telefonie w prawym górnym rogu zdjęcia · w galerii karty produktu w prawym górnym rogu zdjęcia, ukryte na zdjęciach zestawu, torby, przewodów, zbliżeń i scen z życia · płomień (<code>r2/ikony/plomien.webp</code>, 515×665) od 17.10 z KV klienta: wycięty z <code>elementy-kv/3-zrodla-zasilania.png</code> i powiększony 4× (Upscayl ultrasharp-4x), wcześniej emoji Apple</p>
+
+<p class="sg-h3">Pieczęć gwarancji, rabat na czerwonej plakietce, etykieta promocji</p>
+<div class="sg-demo" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+  <span class="pieczec" style="--w:110px"><svg><use href="#i-rozeta"/></svg><span>Gwarancja<b>30</b>miesięcy</span></span>
+  <span class="promo-tag">Promocja dla Ciebie</span>
+  <b style="font-family:var(--font-naglowki);font-size:2.2rem;color:var(--tekst-mocny)">Dwa Lunchee <span class="rabat">30%</span> taniej</b>
+</div>
+<p class="sg-spec">.pieczec: granatowa rozeta jak na froncie opakowania (symbol i-rozeta, kolor --tlo-ciemne) · .rabat: czerwona plakietka (gradient wokół --promocja), biała cyfra, obrót -4°, ten sam wygląd na głównej, w karcie produktu i w koszyku (17.10) · .promo-tag: --promocja, biel, zdaniem jak w wariancie 2 promocji (od 17.10, wcześniej wielkie litery) · w tekstach promocji nie używamy słowa „para” (uwaga klienta: dwuznaczne)</p>
+
+<p class="sg-h3">Para i składniki</p>
+<p class="sg-note"><code>.para</code>: trzy kłęby z ImageGen nałożone w jednym miejscu nad jedzeniem, cykl 9 s liniowo, jasność do 0,35, przy <code>prefers-reduced-motion</code> nieruchome. <code>.para--hero</code> (od 17.10) nad pudełkiem w hero: krycie do 0,85, kłęby lekko rozjaśnione (<code>brightness(1.12)</code>) z ciepłą poświatą krawędzi, a dwa nad białą koszulką z mocniejszą poświatą, żeby tam nie znikały, koniec pary pod brodą. <code>.nakladka</code> z <code>.lewitujacy</code>: jedna warstwa przed wszystkimi sekcjami strony głównej, siedem składników w różnych rozmiarach na granicach sekcji (<code>data-kotwica</code>, <code>data-dy</code>), ruch przy przewijaniu do ±60 px (<code>data-glebia</code>), poniżej 1360 px mniejsze, na telefonie dwa. Kliknięcia przechodzą przez nakładkę. W hero składników nie ma.</p>
+</section>
+
+<!-- ====================================================================== -->
+<section class="sg-block" id="z-glownej">
+<h2>Warianty z głównej na podstronach</h2>
+<p class="sg-note">17.10, audyt sekcji: podstrony dostały wygląd wariantów wybranych na stronę główną. Style wariantów żyją w <code>03 - Design/warianty/*.html</code> i działają tylko na płótnie <code>.vk</code>, więc tu stoją ich odpowiedniki jako zwykłe klasy.</p>
+
+<p class="sg-h3">Karta modelu z motywem <code>.modele-siatka</code> · <code>.model-karta</code></p>
+<div class="sg-demo sg-demo--alt"><div class="modele-siatka" style="--n:2;max-width:560px">
+        <a class="model-karta" href="../produkt-lb745.html" data-model="lb745" style="--nazwa-kolor:#1f3550;--nazwa-fs:22.76;--tlo-o:0.85;--zx:6.41;--zy:38.46;--zw:89.74;--dx:7.05;--dy:36.22;--dw:91.35">
+          <div class="model-karta__scena">
+            <img class="model-karta__tlo" src="../assets/img/r2/warianty/tlo-city.webp" alt="" loading="lazy">
+            <span class="model-karta__nazwa" aria-hidden="true">City</span>
+            <img class="model-karta__zamk" src="../assets/img/r2/produkty/lb745-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" loading="lazy">
+            <img class="model-karta__danie" src="../assets/img/r2/produkty/lb745-danie.webp" alt="" loading="lazy">
+          </div>
+          <div class="model-karta__body"><h3 class="model-karta__kod">Lunchee LB745<span class="sr-only"> City</span></h3><span class="price price--sm">249,00 zł<s class="price__old">279,00 zł</s></span><small class="omnibus model-karta__omnibus">Najniższa cena z 30 dni przed obniżką: 249,00&nbsp;zł</small><span class="btn btn--yellow btn--sm model-karta__btn">Kup teraz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a class="model-karta" href="../produkt-lb795.html" data-model="lb795" style="--nazwa-kolor:#fff;--nazwa-fs:22.47;--tlo-o:1;--zx:6.33;--zy:37.97;--zw:88.61;--dx:6.96;--dy:38.92;--dw:90.35">
+          <div class="model-karta__scena">
+            <img class="model-karta__tlo" src="../assets/img/r2/warianty/tlo-night.webp" alt="" loading="lazy"><span class="model-karta__halo" style="--k:#c9d6ee;--o:0.5"></span><span class="model-karta__podloze"></span>
+            <span class="model-karta__nazwa" aria-hidden="true">Night</span>
+            <img class="model-karta__zamk" src="../assets/img/r2/produkty/lb795-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB795 Night" loading="lazy">
+            <img class="model-karta__danie" src="../assets/img/r2/produkty/lb795-danie.webp" alt="" loading="lazy">
+          </div>
+          <div class="model-karta__body"><h3 class="model-karta__kod">Lunchee LB795<span class="sr-only"> Night</span></h3><span class="model-karta__brak">Niedostępny w sklepie</span><span class="price price--sm">249,00 zł</span><span class="btn btn--outline btn--sm model-karta__btn">Zobacz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+</div></div>
+<p class="sg-spec">z wariantu 2 sekcji Modele („Tła z motywem”) · build.py: <code>lunchbox_cards(wariant="motyw")</code>, „Pozostałe Lunchee” na kartach produktu i „Wybierz swój Lunchee” na akcesoria.html · tło <code>r2/warianty/tlo-&lt;nazwa&gt;.webp</code> gaśnie w dół, duża nazwa w kolorze modelu (--nazwa-kolor, --nazwa-fs w cqi sceny), zamknięty packshot, po najechaniu ten sam kadr z daniem, na dotyku danie od razu · cena z Omnibusem przy starej cenie · LB795: „Niedostępny w sklepie” i obrysowany „Zobacz” · siatka 2 w rzędzie do 999 px (nieparzysta ostatnia karta na całą szerokość, scena po lewej), od 1000 px --n w rzędzie</p>
+
+<p class="sg-h3">Promocja dla par na karcie produktu <code>.pair--promo</code></p>
+<div class="sg-demo" style="max-width:560px"><div class="pair pair--promo" data-para-box>
+          <div class="pair__in">
+            <div class="pair__txt">
+              <span class="promo-tag">Promocja dla Ciebie</span>
+              <p class="pair__h">Dwa Lunchee<br><span class="rabat">30%</span> taniej</p>
+              <p class="pair__sub">Bierzesz dwa lunch boxy, oba są tańsze. Kolory możesz łączyć.</p>
+              <button class="btn pair__btn" type="button" data-add-pair="lb725" data-price="249" data-name="Lunchee LB725 Nature" data-img="assets/img/produkty/lb725.webp">Dodaj dwa do koszyka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+            <div class="pair__img pair__img--danie" aria-hidden="true"><img src="../assets/img/r2/produkty/lb725-danie.webp" alt=""><img src="../assets/img/r2/produkty/lb755-danie.webp" alt=""></div>
+          </div>
+        </div></div>
+<p class="sg-spec">z wariantu 2 promocji · żółty gradient z --akcent i --akcent-hover, kadry z daniem (<code>pair_imgs(..., "danie")</code>), .promo-tag zdaniem, .pair__h krojem nagłówków 700 · kolumna zakupu ok. 525 px, układ zależy od szerokości banera (container query 460 px)</p>
+
+<p class="sg-h3">Kupon <code>.kupon</code> i pigułka <code>.pill-promo</code></p>
+<div class="sg-demo sg-demo--alt" style="max-width:560px"><a class="kupon" href="../zwroty-i-reklamacje.html#reklamacje">
+          <img src="../assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" width="383" height="480" loading="lazy">
+          <span><span class="pill-promo">teraz 0 zł</span><b>Rozszerzona gwarancja producenta</b><small>30 miesięcy gwarancji producenta</small></span>
+        </a></div>
+<p class="sg-spec">z wariantu 2 promocji (kupon gwarancji) · biała karta z wycięciami 7 px co 18 px na bocznych brzegach (mask), rozeta 30 · .pill-promo: krem --tlo-alt, tekst --promocja, małymi literami („teraz 0 zł”)</p>
+
+<p class="sg-h3">Podsumowanie zamówienia na granacie <code>.cart__summary--granat</code></p>
+<div class="sg-demo" style="max-width:460px"><aside class="cart__summary cart__summary--granat">
+  <h2>Twoje zamówienie</h2>
+  <dl>
+    <div><dt>Wartość</dt><dd>498,00 zł</dd></div>
+    <div><dt>Rabat <span class="rabat">30%</span> za dwa Lunchee</dt><dd>−149,40 zł</dd></div>
+    <div><dt>Dostawa</dt><dd>0,00 zł</dd></div>
+    <div class="cart__total"><dt>Razem</dt><dd>348,60 zł</dd></div>
+  </dl>
+  <span class="btn btn--yellow btn--block">Zamawiam i&nbsp;płacę</span>
+</aside></div>
+<p class="sg-spec">z wariantu 4 koszyka · zamowienie.html · tło --tlo-ciemne, etykiety --tekst-na-ciemnym, kwoty biel bez łamania, „Razem” krojem nagłówków, żółty przycisk · wiersz rabatu z .rabat pokazuje main.js tylko przy naliczonym rabacie (data-cart-discount-row) · kwoty w przykładzie są przykładowe</p>
+</section>
+
+<!-- ====================================================================== -->
 <section class="sg-block" id="ikony">
 <h2>Ikonografia</h2>
 <p class="sg-note">Dwa zestawy. <b>Ikony marki</b> to 9 plików WebP z paczki ImageGen (granat + żółty, 192 px), wstawiane w koło --tlo-akcent 52 lub 104 px; nie kolorują się przez CSS. <b>Ikony interfejsu</b> to sprite SVG w <code>&lt;symbol&gt;</code> na początku każdej strony, linia 1.8–2.2, <code>currentColor</code>, rozmiar bazowy 24 px.</p>
@@ -350,7 +455,7 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <div class="sg-demo"><div class="sg-icons">
   <div><svg><use href="#i-cart"/></svg>i-cart</div><div><svg><use href="#i-user"/></svg>i-user</div><div><svg><use href="#i-menu"/></svg>i-menu</div><div><svg><use href="#i-arrow"/></svg>i-arrow</div><div><svg><use href="#i-left"/></svg>i-left</div><div><svg><use href="#i-right"/></svg>i-right</div><div><svg><use href="#i-mail"/></svg>i-mail</div><div><svg><use href="#i-check"/></svg>i-check</div><div><svg><use href="#i-trash"/></svg>i-trash</div>
 </div></div>
-<p class="sg-note">Odznaki „60°C” i „3 źródła zasilania” (<code>odznaki.png</code>) pochodzą z kreacji klienta i zostają rastrem; nie przerysowywać.</p>
+<p class="sg-note">Odznaki „60°C” i „3 źródła zasilania” z kreacji klienta są komponentem <code>.odznaka</code> (opis w sekcji „Runda 02”): płytka i napis w CSS, płomień z planszy KV klienta (od 17.10, wcześniej emoji Apple Color Emoji, bez licencji do użytku na stronie), wtyczka z warstwy PSB. <code>odznaki.png</code> nie jest już używany.</p>
 </section>
 
 <!-- ====================================================================== -->
@@ -375,13 +480,15 @@ body{background:#fff;color:#111;color-scheme:light;font-family:system-ui,sans-se
 <table class="sg-table">
   <tr><th>Para</th><th>Kontrast</th><th>Próg</th><th>Ocena</th></tr>
   <tr><td>--tekst-slaby na --tlo</td><td>7,0:1</td><td>4,5</td><td>OK</td></tr>
-  <tr><td>--tekst-etykieta na --tlo-akcent (12 px bold)</td><td>5,8:1</td><td>4,5</td><td>OK (po poprawce, było 3,75)</td></tr>
+  <tr><td>--tekst-etykieta na --tlo-akcent (12 px bold)</td><td>5,7:1</td><td>4,5</td><td>OK (od 17.10 --tlo-akcent to krem; było 5,8 na jasnożółtym)</td></tr>
   <tr><td>--tekst-etykieta na --tlo-alt (hero)</td><td>5,5:1</td><td>4,5</td><td>OK (było 4,02)</td></tr>
   <tr><td>--cta na --tlo (nagłówki .alt)</td><td>6,9:1</td><td>3,0 (duży tekst)</td><td>OK</td></tr>
   <tr><td>--biel na --cta (przycisk)</td><td>7,3:1</td><td>4,5</td><td>OK</td></tr>
   <tr><td>--tekst-mocny na --akcent (przycisk żółty)</td><td>7,8:1</td><td>4,5</td><td>OK</td></tr>
   <tr><td>--tekst-na-ciemnym na --tlo-ciemne</td><td>9,9:1</td><td>4,5</td><td>OK</td></tr>
-  <tr><td>--tlo-akcent na --cta (etykieta w Dla firm)</td><td>12,4:1</td><td>4,5</td><td>OK (było --akcent 4,06)</td></tr>
+  <tr><td>--tekst-mocny na --akcent (Dla firm od 17.10: nagłówek, akapity, etykieta)</td><td>7,8:1</td><td>4,5</td><td>OK (wcześniej --tlo-akcent na --cta 12,4:1)</td></tr>
+  <tr><td>--ok-tekst na --ok-tlo (komunikat formularza)</td><td>11,9:1</td><td>4,5</td><td>OK</td></tr>
+  <tr><td>--promocja na --tlo-alt (pigułka ceny w wariantach)</td><td>4,3:1</td><td>3,0 (duży pogrubiony)</td><td>OK</td></tr>
 </table>
 <p class="sg-note">Poza kontrastem: link „Przejdź do treści”, <code>:focus-visible</code> globalnie, <code>aria-expanded</code> i <code>aria-controls</code> na przycisku menu, <code>aria-pressed</code> na swatchach, <code>aria-current</code> w nawigacji i miniaturach, <code>role="status"</code> na toaście, cele dotykowe ≥ 44 px (audyt.py: 0 uwag na 16 stronach), <code>prefers-reduced-motion</code> wyłącza pojawianie i przejścia.</p>
 </section>
