@@ -572,6 +572,10 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
 .pair--promo { background: radial-gradient(90% 140% at 70% 40%, var(--akcent-hover), var(--akcent) 70%); }
 .pair--promo .pair__sub { color: var(--tekst-mocny); }
 .pair--promo .pair__img::before { display: none; }
+/* 17.10: pudełka z daniem wyżej, żeby dolna krawędź nie była ucinana przez kartę */
+.pair--promo .pair__img img:first-child { top: -4%; }
+.pair--promo .pair__img img:last-child { top: 18%; }
+@container (min-width: 460px) { .pair--promo .pair__img img:first-child { top: 6%; } .pair--promo .pair__img img:last-child { top: 30%; } }
 .pair__img--danie img { filter: drop-shadow(0 12px 14px rgb(60 30 0 / .3)); }
 .pair--promo .pair__btn { padding-inline: 1.1em; } /* „Dodaj dwa do koszyka” w jednym wierszu w kolumnie ok. 270 px */
 

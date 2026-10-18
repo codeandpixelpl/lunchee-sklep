@@ -218,6 +218,8 @@
   function naModel(korzen) {
     if (!MODEL_ID) return;
     korzen.querySelectorAll('img[src*="/r2/produkty/lb745-"]').forEach(img => {
+      // 17.10 (obrazy): przy srcset przeglądarka bierze plik z srcset, więc podmieniamy oba atrybuty
+      if (img.hasAttribute('srcset')) img.setAttribute('srcset', img.getAttribute('srcset').replaceAll('/lb745-', `/${MODEL_ID}-`));
       img.src = img.getAttribute('src').replace('/lb745-', `/${MODEL_ID}-`);
     });
     const h1 = document.querySelector('section.pdp h1, main h1');
@@ -249,21 +251,35 @@
     if (ZOSTAJE.includes(klucz)) continue;
     const sek = document.querySelector(sel);
     if (!sek) continue;
+    // 17.10 (obrazy): sekcja z wybranym wariantem chowa oryginał od razu, zanim przyjdzie szablon, więc jego obrazy
+    // (loading="lazy" i tła z CSS) nie ładują się wcale; po błędzie pobrania oryginał wraca
+    if (WYBRANE[klucz]) schowaj(sek);
     fetch(`warianty/${klucz}.html`, { cache: 'no-cache' }).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(html => {
       const doc = new DOMParser().parseFromString(`<body>${html}</body>`, 'text/html');
       const style = doc.querySelector('style');
       if (style) { const s = document.createElement('style'); s.textContent = style.textContent; s.dataset.ws = klucz; document.head.appendChild(s); }
       const szablony = [...doc.querySelectorAll('template[data-nr]')].sort((a, b) => a.dataset.nr - b.dataset.nr);
       wlacz(sek, klucz, plik, nazwa, szablony);
-    }).catch(e => console.warn('warianty', klucz, e));
+    }).catch(e => { sek.classList.remove('ws-on'); console.warn('warianty', klucz, e); });
   }
 
-  function wlacz(sek, klucz, plik, nazwa, szablony) {
-    sek.classList.add('ws-sekcja');
+  function schowaj(sek) {
+    sek.classList.add('ws-sekcja', 'ws-on');
     const oryg = document.createElement('div');
     oryg.className = 'ws-oryginal';
     while (sek.firstChild) oryg.appendChild(sek.firstChild);
     sek.appendChild(oryg);
+  }
+
+  function wlacz(sek, klucz, plik, nazwa, szablony) {
+    sek.classList.add('ws-sekcja');
+    let oryg = sek.querySelector(':scope > .ws-oryginal');
+    if (!oryg) {
+      oryg = document.createElement('div');
+      oryg.className = 'ws-oryginal';
+      while (sek.firstChild) oryg.appendChild(sek.firstChild);
+      sek.appendChild(oryg);
+    }
     const miejsce = document.createElement('div');
     miejsce.className = 'ws-wariant';
     // przyciski w wariancie (koszyk, ilość, kolory) przekazują kliknięcie do ukrytego oryginału, więc sklep działa jak dotąd
