@@ -1,0 +1,115 @@
+/* =============================================================================
+   LUNCHEE — TOKENY
+   Jedyne miejsce z wartościami liczbowymi systemu.
+
+   Źródło: plansza KV Kamila (FONT & COLORS / DIGITAL: tekst #0054a6 i #ffffff,
+            tła #f2b90c główne oraz #bcdd3f, #f26a3d, #7693df opcjonalne)
+            + pomiar własnego prototypu (POMIARY.md, 1440 px, 2026-09-19)
+   Wersja: 1.3 · 2026-10-17 (audyt zgodności z KV: jasne tła tylko trzy, --tlo-akcent wskazuje
+            na krem opakowania, stany „ok” w kolorach KV zamiast zieleni)
+            1.2 · 2026-10-13 (runda 02: krem z opakowania, limonka wypada, czerwień promocji,
+            nagłówki 700 zamiast 900, mniejsze H1 i odstępy sekcji)
+
+   ZASADY:
+   1. Nazwa po ROLI, nie po wyglądzie. `--cta` przeżyje rebranding, `--granat` nie.
+   2. Każdy token ma komentarz GDZIE występuje.
+   3. Nie każda wartość jest tokenem. Wartość użyta raz zostaje w komponencie.
+   4. Strona w 03 - Design ładuje TEN plik. Nie ma własnej kopii wartości.
+   ============================================================================= */
+
+:root {
+  /* --- Kolory: akcja ------------------------------------------------------ */
+  --cta:            #0054af;  /* przyciski główne, nagłówki drugiego członu (.alt), obrys aktywnego swatcha, tło pierwszej sekcji Dla firm (runda 3) */
+  --cta-hover:      #0a2a5e;  /* hover przycisku .btn--blue */
+  --akcent:         #f2b90c;  /* żółty marki: przycisk .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, blok za zdjęciem w Dlaczego, przycisk po dodaniu do koszyka (--ok) */
+  --akcent-hover:   #ffcb2e;  /* hover przycisku .btn--yellow */
+
+  /* --- Kolory: tła -------------------------------------------------------- */
+  --tlo:            #fbf8f1;  /* domyślne tło strony, nagłówek (z przezroczystością .92) */
+  --tlo-alt:        #f6ecda;  /* krem z boku opakowania (pomiar wykrojnika 13.10): co druga sekcja, kafle cech, tło zdjęć w kartach, pole faktury */
+  --tlo-produkt:    #fbf5ea;  /* pod packshotami: karty, galeria, miniatury w koszyku, boks promocji. Jaśniejszy krem niż --tlo-alt (17.10: „tło pod produktami jaśniejsze”); było var(--tlo-alt), wcześniej #f1f7dd */
+  --tlo-akcent:     var(--tlo-alt);  /* 17.10 (audyt R1-73): jasne tła tylko trzy (--tlo, --tlo-alt, --tlo-produkt), więc jasnożółte #fdf1c9
+                                       spoza palety KV wypada i ta rola dostaje krem z opakowania. Ikony parametrów, otwarte pytanie FAQ, cytat,
+                                       pole gwarancji i dostawy, hover w menu. Nazwa zostaje, bo używają jej komponenty */
+  --tlo-promocja:   var(--tlo-alt);  /* 22.10 (runda 03, SG-766): karta promocji na głównej, przy zakupie na karcie produktu i w koszyku.
+                                       Krem z opakowania zamiast żółtego, żółty zostaje w hero; promocję wyróżnia czerwień (--promocja) */
+  --tlo-ciemne:     #0a2a5e;  /* stopka, toast, link „Przejdź do treści”, etykieta „Niedostępny”, kształt paska Dla firm na głównej (runda 3) */
+  --akcent-cieply:  #f26a3d;  /* KV: etykieta promocji, kółko ikony w hero (tło, nie tekst) */
+  --promocja:       #d42a1c;  /* czerwona ramka rabatu i etykieta promocji (uwaga klienta 9.10: „30% w czerwonej ramce”), 5,4:1 na bieli */
+  --akcent-cieply-tekst: #d95220;  /* ten sam pomarańcz przyciemniony do tekstu: 3,82:1 na kremie, bo #f26a3d daje 2,87:1 */
+  --akcent-zar:     #f7a51c;  /* dół kafla 60°C: żółć przechodząca w pomarańcz jak front opakowania (runda 02) */
+  --odznaka-cieplo:        #ff5a3c;  /* odznaka „Podgrzanie do 60°C” z kreacji klienta: góra płytki */
+  --odznaka-cieplo-ciemny: #d70f00;  /* ta sama płytka, dół (pomiar ikony z PSB Kamila) */
+  --odznaka-zasilanie:        #a8de3c;  /* odznaka „3 źródła zasilania”: góra płytki */
+  --odznaka-zasilanie-ciemny: #82bf17;  /* ta sama płytka, dół, i obrys cyfry „3” */
+  --biel:           #ffffff;  /* karty, pola formularzy, tekst na kolorze */
+
+  /* --- Kolory: tekst ------------------------------------------------------ */
+  --tekst:          #14213a;  /* treść akapitów, wartości w tabeli specyfikacji */
+  --tekst-mocny:    #0a2a5e;  /* nagłówki, nazwy w kartach, pytania FAQ, etykiety pól */
+  --tekst-slaby:    #4a5570;  /* podpisy, opisy kroków, okruszki, notki w koszyku — kontrast 7,0:1 na --tlo */
+  --tekst-na-ciemnym: #cfdaf0; /* akapity w stopce */
+  --tekst-etykieta: #7a5600;  /* eyebrow nad nagłówkami i cytat w O nas — 5,8:1 na --tlo-akcent (było #946800, 4,0:1 na hero) */
+
+  /* --- Kolory: stany i pomoc ---------------------------------------------- */
+  --linia:          #e8e1d2;  /* separatory list, ramki pól, kropki nieaktywne, obrys plusa FAQ */
+  --blad:           #b3261e;  /* pole z błędem, hover kosza w koszyku */
+  /* 17.10 (audyt R2-39): stany „ok” w kolorach KV zamiast zieleni #1d7a3f / #e5f5ea / #1d5c34 spoza palety */
+  --ok:             var(--akcent);      /* przycisk po dodaniu do koszyka: żółty KV z granatowym tekstem (7,8:1). Nie granat z audytu,
+                                          bo granat to już hover .btn--blue (stan by zniknął pod kursorem), a .btn--outline w koszyku
+                                          ma granatowy tekst, który na granacie byłby niewidoczny */
+  --ok-tlo:         var(--tlo-akcent);  /* komunikat po wysłaniu formularza: krem opakowania */
+  --ok-tekst:       var(--tekst-mocny); /* tekst komunikatu (11,9:1 na kremie), „Zweryfikowany zakup” w opiniach, cena gwarancji w koszyku */
+  --brak:           #f26a3d;  /* kropka w etykiecie .tbd (treść do uzupełnienia), znika przed oddaniem */
+
+  /* --- Kolory produktów (swatche, kropki w kartach) ----------------------- */
+  --produkt-city:    #39546f;
+  --produkt-glamour: #ceaab2;
+  --produkt-nature:  #7e9d93;
+  --produkt-pearl:   #d7d7d9;
+  --produkt-night:   #141414;
+  --produkt-glamour-nazwa: #c897a2; /* duża nazwa w karcie modelu: pastel Glamour przyciemniony, żeby był czytelny na kremie */
+  --produkt-pearl-nazwa:   #b3b4bb; /* to samo dla Pearl, który w kolorze produktu znika na jasnym tle */
+
+  /* --- Typografia --------------------------------------------------------- */
+  --font-naglowki:  "coolvetica", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* Adobe Fonts bpt1qjw; lokalny Inter jako fallback */
+  --font-tekst:     "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-h1:          clamp(2.4rem, 5.6vw, 4rem);   /* hero, 64 px na 1440 (runda 01: 74 px, runda 02: „wielkość fonta na mniejszy”) */
+  --fs-h2:          clamp(2.1rem, 4.6vw, 3.4rem); /* nagłówki sekcji, 54 px na 1440 (było 67 px) */
+  --fs-h3:          1.55rem;                      /* nazwy w kartach, kroki, kolumny stopki */
+  --fs-lead:        1.12rem;                      /* lead pod nagłówkiem, opisy w O nas */
+  --fs-tekst:       1rem;                         /* 16 px, akapity */
+  --fs-maly:        .9rem;                        /* okruszki, notki, opisy kroków (.95) i etykiety pól (.9) */
+  --fs-etykieta:    .78rem;                       /* eyebrow, kod produktu, etykiety .tbd */
+
+  --lh-naglowki:    1;      /* Coolvetica ma duże x-height, 1.0 trzyma się w dwóch liniach hero */
+  --waga-naglowki:  700;    /* Coolvetica Bold; 900 zlewało „ł” (uwaga klienta 9.10). Kit ma 400, 700 i 900 */
+  --tracking-naglowki: .012em; /* „delikatnie zwiększyć odległości między literami” (9.10), było -.01em */
+  --lh-tekst:       1.6;
+
+  /* --- Odstępy: skala 8 px ------------------------------------------------ */
+  --odstep-xs:      8px;    /* gap między kropkami, między ikoną a tekstem w małych elementach */
+  --odstep-s:       16px;   /* gap kart, gap list, padding pól */
+  --odstep-m:       24px;   /* padding kart i fieldsetów, odstęp nagłówek → treść */
+  --odstep-l:       48px;   /* gap kolumn na desktopie (do 72 px w sekcjach dwukolumnowych), margines nagłówka sekcji */
+  --odstep-xl:      clamp(44px, 5vw, 72px);       /* pionowy padding sekcji (runda 01: do 112 px, runda 02: 72 px, uwaga 9.10: „trochę mniejsze odstępy”) */
+
+  /* --- Układ -------------------------------------------------------------- */
+  --tresc:          1280px;                       /* skąd: makieta 1536 px minus 2 × 128 px marginesu = 1280 */
+  --margines:       clamp(16px, 4vw, 48px);       /* boczny margines: 16 px na 390, 48 px od 1200 */
+
+  /* --- Zaokrąglenia i cienie ---------------------------------------------- */
+  --r-s:            12px;   /* miniatury, notki */
+  --r-m:            20px;   /* karty, pola formularzy (14 px), fieldsety */
+  --r-l:            28px;   /* zdjęcia w sekcjach, scena produktu, podsumowanie koszyka */
+  --r-pill:         99px;   /* przyciski, etykiety, swatche */
+  --cien:           0 20px 40px -24px rgba(10, 42, 94, .35);   /* hover karty, toast, strzałki galerii */
+
+  /* --- Ruch --------------------------------------------------------------- */
+  --przejscie:      180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --przejscie: 0ms; }
+}

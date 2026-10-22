@@ -1,0 +1,425 @@
+<!-- Warianty koszyka (Figma, strona 9, wiersz 12), tylko na koszyk.html. Płótno 1672×941.
+     Warianty 1–3 i 5: statyczny podgląd z przykładowym koszykiem (LB755 + LB715, rabat za dwa Lunchee). Wybrany wariant 4 czyta
+     prawdziwy koszyk (main.js, koszykV4). Przyciski „Dodaj” klikają ukryte przyciski sklepu, „Przejdź do zamówienia” prowadzi do zamówienia.
+     Fakty bez pokrycia z kadrów Codeksa („3 lata”, „tysiące zadowolonych klientów”) wypadły. -->
+<style>
+/* TELEFON, wariant 4 „Granatowe podsumowanie” (17.10): koszyk w jednej kolumnie, pozycje, gwarancja, akcesoria dwa obok siebie,
+   granatowe podsumowanie na pasie zdjęcia z carbonarą (jak na desktopie karta nachodzi na zdjęcie). */
+@media (max-width: 899px) {
+  .vk--m [data-m="gw"] { white-space: normal !important; line-height: 1.3; }
+  .vk--m [data-m="lewo"] { text-align: left !important; }
+  .vk--m [data-m="prawo"] { text-align: right; }
+  .vk--m [data-m="kosz"] { display: grid; place-items: center; }
+}
+/* 17.10, wariant 4 z prawdziwego koszyka (main.js, koszykV4). Liczba pozycji zmienia wysokość lewej kolumny:
+   grupy pod listą przesuwa się zmiennymi z .vk (jednostki płótna), na telefonie razem z nimi jedzie granatowe podsumowanie. */
+.vk > [data-kv="gw"] { top: calc((var(--y) + var(--kv-a, 0)) * var(--u)); }
+.vk > [data-kv="pod"] { top: calc((var(--y) + var(--kv-b, 0)) * var(--u)); }
+.vk > [data-kv="podrabat"] { top: calc((var(--y) + var(--kv-r, 0)) * var(--u)); }
+.vk > .a[data-kv-podsum] { height: calc((var(--h) + var(--kv-r, 0)) * var(--u)); }
+@media (max-width: 899px) {
+  .vk--m > [data-kv="gw"] { top: calc((var(--my) + var(--kv-am, 0)) * var(--u)); }
+  .vk--m > [data-kv="pod"], .vk--m > [data-kv="prawy"], .vk--m > [data-kv="rabat"] { top: calc((var(--my) + var(--kv-bm, 0)) * var(--u)); }
+  .vk--m > [data-kv="podrabat"], .vk--m > [data-kv="foto"] { top: calc((var(--my) + var(--kv-bm, 0) + var(--kv-rm, 0)) * var(--u)); }
+  .vk--m > .a[data-kv-podsum] { height: calc((var(--mh) + var(--kv-rm, 0)) * var(--u)); }
+  .vk--m .kv-kod input { font-size: max(16px, calc(var(--mfs) * var(--u))) !important; } /* iOS nie powiększa strony przy polu od 16 px */
+}
+/* runda 03 (KOS-586): talerz wychodzi poza płótno w prawo; sekcja przycina go na krawędzi okna bez poziomego przewijania strony */
+.vk-sek--koszyk { overflow-x: clip; }
+.vk [data-kv-ukryj] { display: none !important; }
+.vk[data-kv-promo="naliczony"] [data-kv-pokaz="dodaj"], .vk[data-kv-promo="dodaj"] [data-kv-pokaz="naliczony"] { display: none !important; }
+.kv-foto, .kv-akc { display: flex; align-items: center; justify-content: center; background: var(--tlo-produkt); }
+.kv-foto { border-radius: calc(14 * var(--u)); }
+.kv-foto img { width: 88%; height: 88%; object-fit: contain; filter: drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2)); }
+.kv-akc { border-radius: calc(12 * var(--u)); }
+.kv-akc img { width: auto; height: 82%; max-width: 90%; object-fit: contain; filter: drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2)); }
+.kv-ilosc { display: flex; align-items: center; justify-content: space-between; border-radius: 99px; box-shadow: inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4; font-weight: 600; color: var(--tekst-mocny); }
+.kv-ilosc button, .kv-usun { appearance: none; margin: 0; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; }
+.kv-ilosc button { width: 33.3%; height: 100%; border-radius: 99px; }
+.kv-ilosc output { flex: 1; text-align: center; }
+.kv-usun { display: grid; place-items: center; border-radius: calc(12 * var(--u)); color: var(--tekst-mocny); }
+.kv-ilosc button:focus-visible, .kv-usun:focus-visible { outline: 3px solid var(--cta); outline-offset: 2px; }
+.kv-kod input { box-sizing: border-box; margin: 0; padding: 0 1.2em; border: 0; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4; font-family: inherit; color: var(--tekst-mocny); text-transform: uppercase; }
+.kv-kod input::placeholder { color: #8a93a6; text-transform: none; opacity: 1; }
+.kv-kod button { box-sizing: border-box; margin: 0; padding: 0; border: 0; border-radius: 99px; background: transparent; box-shadow: inset 0 0 0 calc(2 * var(--u)) #fff; font-family: inherit; font-weight: 800; color: #fff; cursor: pointer; }
+.kv-kod input:focus-visible, .kv-kod button:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+.kv-kod-msg { margin: 0; line-height: 1.3; color: #cfdaf0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* zawsze jeden wiersz, nie wchodzi pod żółtą kartę */
+.kv-kod-msg[data-stan="blad"] { color: #ffb8ae; }
+/* zachęta do drugiego Lunchee: nagłówek ma 2–3 wiersze zależnie od tekstu, przycisk idzie za nim */
+.kv-zacheta { display: flex; flex-direction: column; align-items: flex-start; gap: calc(8 * var(--u)); }
+.kv-zacheta .t-h { line-height: 1.08; }
+.kv-zacheta .btn-v { width: calc(270 * var(--u)); height: calc(40 * var(--u)); }
+@media (max-width: 899px) {
+  .vk--m .kv-zacheta .btn-v { width: calc(220 * var(--u)); height: calc(40 * var(--u)); }
+  .vk[data-kv-promo="dodaj"] [data-kv-foto] { display: none !important; } /* na telefonie zachęta bierze całą szerokość karty */
+}
+</style>
+<template data-nr="1" data-nazwa="Klasyczny układ">
+<div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <span class="a" style="--x:950;--y:-180;--w:400;--h:220;border-radius:50%;background:#f4c11c"></span><span class="a" style="--x:-100;--y:650;--w:300;--h:400;border-radius:50%;background:#f4c11c"></span>
+  <span class="a reka" style="--x:120;--y:10;--fs:62;--rot:0deg">lunchee</span><span class="a t-p" style="--x:350;--y:24;--fs:16;color:var(--tekst-mocny);border-left:calc(2 * var(--u)) solid #ccc;padding-left:.8em">Ciepły posiłek.<br>Lepszy dzień.</span>
+  <h1 class="a t-h" style="--x:120;--y:90;--fs:72">Koszyk</h1><span class="a t-p" style="--x:124;--y:168;--fs:22;color:var(--tekst-mocny)">2 produkty w Twoim koszyku</span>
+  <span class="odz" style="--x:530;--y:64"><span class="odznaka odznaka--cieplo" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:670;--y:64"><span class="odznaka odznaka--zasilanie" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 79px, (min-width: 900px) 6.10vw, 1px" alt="" style="--x:802;--y:98;--w:102">
+  <span class="a t-p c" style="--x:500;--y:164;--w:142;--fs:15;font-weight:700;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span>
+  <span class="a t-p c" style="--x:640;--y:164;--w:142;--fs:15;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
+  <span class="a t-p c" style="--x:780;--y:164;--w:142;--fs:15;font-weight:700;color:var(--tekst-mocny)">Stalowy<br>pojemnik INOX</span>
+  <span class="a karta" style="--x:120;--y:216;--w:820;--h:140;background:#fff"></span>
+  <span class="a" style="--x:134;--y:228;--w:210;--h:116;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:134;--y:228;--w:210;--h:116;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:374;--y:250;--fs:22;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB755 Glamour</b>
+  <span class="a" style="--x:374;--y:284;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:660;--y:258;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:850;--y:268;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:120;--y:368;--w:820;--h:140;background:#fff"></span>
+  <span class="a" style="--x:134;--y:380;--w:210;--h:116;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:134;--y:380;--w:210;--h:116;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:374;--y:402;--fs:22;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB715 Pearl</b>
+  <span class="a" style="--x:374;--y:436;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:660;--y:410;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:850;--y:420;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:120;--y:522;--w:820;--h:128;background:var(--tlo-alt)"></span>
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:144;--y:522;--w:102">
+  <b class="a" style="--x:270;--y:560;--fs:19;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
+  <span class="a t-p" style="--x:270;--y:591;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
+  <b class="a t-h" style="--x:122;--y:676;--fs:32">Dołóż do zamówienia</b>
+  <span class="a t-p" style="--x:578;--y:688;--w:360;--fs:15;text-align:right;color:var(--tekst-mocny)">Praktyczne dodatki do Twojego Lunchee</span>
+  <span class="a karta" style="--x:122;--y:735;--w:400;--h:142;background:#fff"></span>
+  <span class="a" style="--x:134;--y:747;--w:120;--h:120;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/torba.webp" srcset="assets/img/r2/akcesoria/torba-w240.webp 240w, assets/img/r2/akcesoria/torba-w400.webp 400w, assets/img/r2/akcesoria/torba.webp 700w" sizes="(min-width: 1376px) 86px, (min-width: 900px) 6.70vw, 1px" alt="" style="--x:138;--y:758;--w:112">
+  <b class="a" style="--x:264;--y:754;--w:238;--fs:17;color:var(--tekst-mocny);line-height:1.15">Torba termiczna</b>
+  <span class="a t-p" style="--x:264;--y:801;--fs:17;color:var(--tekst-mocny)">59,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbb370']" style="--x:398;--y:822;--w:104;--h:42;--fs:16;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:538;--y:735;--w:400;--h:142;background:#fff"></span>
+  <span class="a" style="--x:550;--y:747;--w:120;--h:120;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 86px, (min-width: 900px) 6.70vw, 1px" alt="" style="--x:554;--y:758;--w:112">
+  <b class="a" style="--x:680;--y:754;--w:238;--fs:17;color:var(--tekst-mocny);line-height:1.15">Pojemnik INOX</b>
+  <span class="a t-p" style="--x:680;--y:801;--fs:17;color:var(--tekst-mocny)">49,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" style="--x:814;--y:822;--w:104;--h:42;--fs:16;border:0;cursor:pointer;background:#fff">Dodaj</button>
+
+  <span class="a karta" style="--x:972;--y:78;--w:480;--h:840;background:#fff"></span>
+  <b class="a" style="--x:998;--y:96;--fs:38;font-family:var(--font-naglowki);color:var(--tekst-mocny)">Podsumowanie</b>
+  <span class="a t-p" style="--x:998;--y:157;--fs:18;color:var(--tekst-slaby)">Produkty</span><span class="a" style="--x:998;--y:157;--w:430;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">2</span><span class="a" style="--x:998;--y:193;--w:430;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:998;--y:202;--fs:18;color:var(--tekst-slaby)">Wartość</span><span class="a" style="--x:998;--y:202;--w:430;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">498,00 zł</span><span class="a" style="--x:998;--y:238;--w:430;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:998;--y:248;--fs:18;color:var(--tekst-slaby)">Rabat za dwa Lunchee</span><span class="a" style="--x:998;--y:248;--w:430;--fs:19;font-weight:800;text-align:right;color:var(--promocja)">−149,40 zł</span><span class="a" style="--x:998;--y:284;--w:430;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:998;--y:294;--fs:18;color:var(--tekst-slaby)">Dostawa</span><span class="a" style="--x:998;--y:294;--w:430;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">0,00 zł</span><span class="a" style="--x:998;--y:330;--w:430;--h:1;background:#ece3d2"></span>
+  <b class="a" style="--x:998;--y:345;--fs:25;color:var(--tekst-mocny)">Razem</b><span class="a" style="--x:998;--y:335;--w:430;--fs:36;font-family:var(--font-naglowki);font-weight:700;letter-spacing:.04em;text-align:right;color:var(--tekst-mocny)">348,60 zł</span>
+
+  <span class="a" style="--x:998;--y:414;--w:260;--h:55;border-radius:calc(14 * var(--u));background:#fff;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;--fs:17;color:#8a93a6;display:flex;align-items:center;padding-left:1em">🏷&nbsp; Kod rabatowy</span>
+  <span class="a" style="--x:1278;--y:414;--w:150;--h:55;border-radius:99px;box-shadow:inset 0 0 0 calc(2 * var(--u)) var(--tekst-mocny);--fs:18;font-weight:800;color:var(--tekst-mocny);display:grid;place-items:center">Zastosuj</span>
+  <span class="a karta" style="--x:988;--y:494;--w:452;--h:170;background:var(--tlo-alt)"></span>
+  <span class="a tag-r" style="--x:1008;--y:512;--w:209;--h:38;--fs:15">Promocja dla Ciebie</span>
+  <b class="a t-h" style="--x:1008;--y:565;--fs:32;white-space:nowrap">Rabat <span class="rabat">30%</span> naliczony</b>
+  <span class="a t-p" style="--x:1008;--y:601;--w:298;--fs:15;color:var(--tekst-mocny)">Oszczędzasz 149,40 zł. Każde kolejne dwa lunch boxy też kosztują 30% mniej.</span>
+  <img class="a cien" src="assets/img/r2/produkty/lb755-zamkniety.webp" srcset="assets/img/r2/produkty/lb755-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb755-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb755-zamkniety.webp 756w" sizes="(min-width: 1376px) 94px, (min-width: 900px) 7.30vw, 1px" alt="" style="--x:1270;--y:502;--w:122">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 94px, (min-width: 900px) 7.30vw, 1px" alt="" style="--x:1301;--y:545;--w:122" loading="lazy" decoding="async">
+  <span class="a t-p" style="--x:996;--y:692;--fs:15;color:var(--tekst-mocny)">🚚 <b>Dostawa 0,00 zł</b><br>Darmowa dostawa od 269,00 zł.</span>
+  <span class="a t-p" style="--x:1250;--y:692;--fs:15;color:var(--tekst-mocny)">🔒 <b>Bezpieczne płatności</b></span>
+  <a class="a btn-v btn-z" href="zamowienie.html" style="--x:990;--y:756;--w:446;--h:70;--fs:23">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
+  <a class="a link-v" href="lunch-boxy.html" style="--x:1144;--y:842;--fs:17">Kontynuuj zakupy</a>
+  <img class="a cien" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 1600w" sizes="(min-width: 1376px) 230px, (min-width: 900px) 17.94vw, 1px" alt="" style="--x:1440;--y:420;--w:300" loading="lazy" decoding="async">
+  <span class="a reka" style="--x:1470;--y:40;--fs:30;--rot:-14deg">Twój<br>ciepły posiłek<br>zawsze pod ręką!</span><span class="a reka" style="--x:1500;--y:830;--fs:30;--rot:-14deg">Smaczniej<br>każdego dnia!</span>
+  <span class="a reka" style="--x:20;--y:820;--fs:26;--rot:-14deg">Więcej<br>możliwości<br>z Lunchee!</span>
+  <span class="a" style="--x:1460;--y:912;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
+</div></div></div>
+</template>
+<template data-nr="2" data-nazwa="Baner rabatu">
+<div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <span class="a reka" style="--x:50;--y:20;--fs:62;--rot:0deg">lunchee</span><span class="a t-p" style="--x:56;--y:86;--fs:17;color:var(--tekst-mocny)">Ciepły posiłek. Lepszy dzień.</span>
+  <h1 class="a t-h" style="--x:52;--y:140;--fs:76">Koszyk</h1><span class="a t-p" style="--x:56;--y:232;--fs:21;color:var(--tekst-mocny)"><b>2 produkty</b> w Twoim koszyku</span>
+  <span class="a t-p" style="--x:1036;--y:26;--fs:15;color:var(--tekst-mocny)">🚚 Darmowa dostawa<br>od 269,00 zł</span><span class="a t-p" style="--x:1246;--y:26;--fs:15;color:var(--tekst-mocny)">🛡 30 miesięcy<br>gwarancji</span><span class="a t-p" style="--x:1416;--y:26;--fs:15;color:var(--tekst-mocny)">📦 Zwrot<br>w ciągu 14 dni</span>
+  <span class="a karta" style="--x:424;--y:86;--w:1214;--h:198;background:linear-gradient(90deg,#f8c71e,#fbd34a)"></span>
+  <span class="a tag-r" style="--x:446;--y:102;--w:216;--h:40;--fs:17;text-transform:none">Promocja dla Ciebie</span>
+  <b class="a t-h" style="--x:456;--y:146;--fs:52;white-space:nowrap">Rabat <span style="background:var(--promocja);color:#fff;border-radius:.15em;padding:0 .12em">30%</span> naliczony!</b>
+  <img class="a" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:450;--y:208;--w:56"><span class="a t-p" style="--x:518;--y:220;--fs:16;color:var(--tekst-mocny);font-weight:700">Rozszerzona gwarancja producenta<br>jest już w koszyku, teraz 0 zł</span>
+  <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 192px, (min-width: 900px) 14.95vw, 1px" alt="" style="--x:996;--y:100;--w:250" loading="lazy" decoding="async"><img class="a cien" src="assets/img/r2/produkty/lb755-zamkniety.webp" srcset="assets/img/r2/produkty/lb755-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb755-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb755-zamkniety.webp 756w" sizes="(min-width: 1376px) 192px, (min-width: 900px) 14.95vw, 1px" alt="" style="--x:1196;--y:126;--w:250">
+  <span class="a reka" style="--x:1470;--y:110;--fs:40;--rot:-12deg">Ciepło<br>zawsze<br>z Tobą!</span>
+  <span class="a karta" style="--x:48;--y:304;--w:966;--h:108;background:#fff"></span>
+  <span class="a" style="--x:62;--y:316;--w:162;--h:84;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:62;--y:316;--w:162;--h:84;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:254;--y:330;--fs:20;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB755 Glamour</b>
+  <span class="a" style="--x:254;--y:361;--fs:27;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:734;--y:330;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:924;--y:340;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:48;--y:428;--w:966;--h:108;background:#fff"></span>
+  <span class="a" style="--x:62;--y:440;--w:162;--h:84;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:62;--y:440;--w:162;--h:84;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:254;--y:454;--fs:20;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB715 Pearl</b>
+  <span class="a" style="--x:254;--y:485;--fs:27;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:734;--y:454;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:924;--y:464;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:48;--y:554;--w:966;--h:90;background:var(--tlo-alt)"></span>
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:72;--y:557;--w:72">
+  <b class="a" style="--x:168;--y:581;--fs:18;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
+  <span class="a t-p" style="--x:168;--y:610;--fs:15">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
+  <b class="a t-h" style="--x:54;--y:656;--fs:31">Dołóż do zamówienia</b>
+  <span class="a t-p" style="--x:654;--y:668;--w:360;--fs:14;text-align:right;color:var(--tekst-mocny)">Uzupełnij swój zestaw</span>
+  <span class="a karta" style="--x:54;--y:712;--w:472;--h:135;background:#fff"></span>
+  <span class="a" style="--x:66;--y:724;--w:113;--h:113;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/torba.webp" srcset="assets/img/r2/akcesoria/torba-w240.webp 240w, assets/img/r2/akcesoria/torba-w400.webp 400w, assets/img/r2/akcesoria/torba.webp 700w" sizes="(min-width: 1376px) 82px, (min-width: 900px) 6.34vw, 1px" alt="" style="--x:70;--y:733;--w:106">
+  <b class="a" style="--x:189;--y:730;--w:319;--fs:16;color:var(--tekst-mocny);line-height:1.15">Torba termiczna</b>
+  <span class="a t-p" style="--x:189;--y:775;--fs:16;color:var(--tekst-mocny)">59,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbb370']" style="--x:409;--y:795;--w:99;--h:40;--fs:15;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:542;--y:712;--w:472;--h:135;background:#fff"></span>
+  <span class="a" style="--x:554;--y:724;--w:113;--h:113;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 82px, (min-width: 900px) 6.34vw, 1px" alt="" style="--x:558;--y:733;--w:106">
+  <b class="a" style="--x:677;--y:730;--w:319;--fs:16;color:var(--tekst-mocny);line-height:1.15">Pojemnik INOX</b>
+  <span class="a t-p" style="--x:677;--y:775;--fs:16;color:var(--tekst-mocny)">49,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" style="--x:897;--y:795;--w:99;--h:40;--fs:15;border:0;cursor:pointer;background:#fff">Dodaj</button>
+
+  <span class="a karta" style="--x:1050;--y:304;--w:576;--h:608;background:#fff"></span>
+  <b class="a" style="--x:1076;--y:322;--fs:38;font-family:var(--font-naglowki);color:var(--tekst-mocny)">Podsumowanie</b>
+  <span class="a t-p" style="--x:1076;--y:383;--fs:18;color:var(--tekst-slaby)">Produkty</span><span class="a" style="--x:1076;--y:383;--w:520;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">2</span><span class="a" style="--x:1076;--y:419;--w:520;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1076;--y:428;--fs:18;color:var(--tekst-slaby)">Wartość</span><span class="a" style="--x:1076;--y:428;--w:520;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">498,00 zł</span><span class="a" style="--x:1076;--y:464;--w:520;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1076;--y:474;--fs:18;color:var(--tekst-slaby)">Rabat za dwa Lunchee</span><span class="a" style="--x:1076;--y:474;--w:520;--fs:19;font-weight:800;text-align:right;color:var(--promocja)">−149,40 zł</span><span class="a" style="--x:1076;--y:510;--w:520;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1076;--y:520;--fs:18;color:var(--tekst-slaby)">Dostawa</span><span class="a" style="--x:1076;--y:520;--w:520;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">0,00 zł</span><span class="a" style="--x:1076;--y:556;--w:520;--h:1;background:#ece3d2"></span>
+  <b class="a" style="--x:1076;--y:571;--fs:25;color:var(--tekst-mocny)">Razem</b><span class="a" style="--x:1076;--y:561;--w:520;--fs:36;font-family:var(--font-naglowki);font-weight:700;letter-spacing:.04em;text-align:right;color:var(--tekst-mocny)">348,60 zł</span>
+
+  <span class="a" style="--x:1076;--y:640;--w:350;--h:55;border-radius:calc(14 * var(--u));background:#fff;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;--fs:17;color:#8a93a6;display:flex;align-items:center;padding-left:1em">🏷&nbsp; Kod rabatowy</span>
+  <span class="a" style="--x:1446;--y:640;--w:150;--h:55;border-radius:99px;box-shadow:inset 0 0 0 calc(2 * var(--u)) var(--tekst-mocny);--fs:18;font-weight:800;color:var(--tekst-mocny);display:grid;place-items:center">Zastosuj</span>
+  <a class="a btn-v btn-b" href="zamowienie.html" style="--x:1076;--y:716;--w:524;--h:58;--fs:21">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
+  <a class="a btn-v btn-o" href="lunch-boxy.html" style="--x:1076;--y:784;--w:524;--h:52;--fs:20">Kontynuuj zakupy</a>
+  <span class="a t-p" style="--x:1076;--y:862;--fs:15;color:var(--tekst-mocny)">🚚 Darmowa dostawa od 269,00 zł</span><span class="a t-p" style="--x:1330;--y:862;--fs:15;color:var(--tekst-mocny)">🔒 Bezpieczne płatności</span>
+  <span class="odz" style="--x:70;--y:858"><span class="odznaka odznaka--cieplo" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:310;--y:858"><span class="odznaka odznaka--zasilanie" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 58px, (min-width: 900px) 4.49vw, 1px" alt="" style="--x:544;--y:855;--w:75">
+  <span class="a t-p c" style="--x:40;--y:903;--w:120;--fs:1;opacity:0"></span>
+  <span class="a t-p c" style="--x:280;--y:903;--w:120;--fs:1;opacity:0"></span>
+  <span class="a t-p c" style="--x:520;--y:903;--w:120;--fs:1;opacity:0"></span>
+  <span class="a t-p" style="--x:150;--y:872;--fs:15;font-weight:700;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span><span class="a t-p" style="--x:390;--y:872;--fs:15;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span><span class="a t-p" style="--x:640;--y:872;--fs:15;font-weight:700;color:var(--tekst-mocny)">Stalowy<br>pojemnik INOX</span>
+  <span class="a reka" style="--x:842;--y:850;--fs:32;--rot:-10deg">Smaczniej<br>każdego dnia! ♡</span>
+  <span class="a" style="--x:1460;--y:916;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
+</div></div></div>
+</template>
+<template data-nr="3" data-nazwa="Pasek dostawy">
+<div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <span class="a" style="--x:1300;--y:-100;--w:500;--h:300;border-radius:50%;background:#f4c11c"></span>
+  <span class="a reka" style="--x:60;--y:6;--fs:60;--rot:0deg">lunchee</span><span class="a t-p" style="--x:64;--y:76;--fs:16;color:var(--tekst-mocny)">Ciepły posiłek. Gdziekolwiek jesteś.</span>
+  <span class="odz" style="--x:390;--y:14"><span class="odznaka odznaka--cieplo" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span><span class="a t-p" style="--x:470;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">Do 60°C</b><br>zawsze ciepły posiłek</span>
+  <span class="odz" style="--x:660;--y:14"><span class="odznaka odznaka--zasilanie" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span><span class="a t-p" style="--x:740;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">3 źródła</b><br>230 V, 12 V, 24 V</span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 65px, (min-width: 900px) 5.02vw, 1px" alt="" style="--x:950;--y:28;--w:84"><span class="a t-p" style="--x:1048;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">Stal nierdzewna</b><br>pojemnik do zmywarki</span>
+  <span class="a reka" style="--x:1400;--y:24;--fs:40;--rot:-10deg">Więcej<br>niż lunch box</span>
+  <span class="a karta" style="--x:38;--y:118;--w:1046;--h:800;background:#fff"></span>
+  <h1 class="a t-h" style="--x:60;--y:140;--fs:62">Koszyk</h1><span class="a t-p" style="--x:62;--y:206;--fs:20">2 produkty w Twoim koszyku</span>
+  <span class="a" style="--x:612;--y:152;--fs:36">🚚</span><b class="a" style="--x:684;--y:150;--fs:16;color:var(--tekst-mocny)">Masz darmową dostawę!</b><b class="a" style="--x:1010;--y:150;--fs:16;color:var(--tekst-mocny)">0,00 zł</b>
+  <span class="a" style="--x:684;--y:182;--w:380;--h:12;border-radius:99px;background:var(--akcent)"></span><span class="a t-p" style="--x:684;--y:204;--fs:13">Dostawa standardowa 14,99 zł. Darmowa od 269,00 zł.</span>
+  <span class="a karta" style="--x:60;--y:254;--w:1004;--h:140;background:#fff"></span>
+  <span class="a" style="--x:74;--y:266;--w:210;--h:116;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:74;--y:266;--w:210;--h:116;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:314;--y:288;--fs:21;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB755 Glamour</b>
+  <span class="a" style="--x:314;--y:320;--fs:28;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:784;--y:296;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:974;--y:306;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:60;--y:408;--w:1004;--h:140;background:#fff"></span>
+  <span class="a" style="--x:74;--y:420;--w:210;--h:116;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:74;--y:420;--w:210;--h:116;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:314;--y:442;--fs:21;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB715 Pearl</b>
+  <span class="a" style="--x:314;--y:474;--fs:28;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:784;--y:450;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:974;--y:460;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:60;--y:562;--w:1004;--h:100;background:var(--tlo-alt)"></span>
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:84;--y:564;--w:80">
+  <b class="a" style="--x:188;--y:592;--fs:18;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
+  <span class="a t-p" style="--x:188;--y:621;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
+  <b class="a" style="--x:930;--y:590;--fs:28;color:var(--ok)">0 zł</b><span class="a" style="--x:996;--y:586;--w:44;--h:44;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:calc(24 * var(--u))">✓</span>
+  <b class="a t-h" style="--x:62;--y:684;--fs:28">Dołóż do zamówienia</b>
+  <span class="a t-p" style="--x:678;--y:696;--w:360;--fs:13;text-align:right;color:var(--tekst-mocny)">Przydatne dodatki do Twojego Lunchee</span>
+  <span class="a karta" style="--x:62;--y:735;--w:232;--h:123;background:#fff"></span>
+  <span class="a" style="--x:74;--y:747;--w:103;--h:103;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/torba.webp" srcset="assets/img/r2/akcesoria/torba-w240.webp 240w, assets/img/r2/akcesoria/torba-w400.webp 400w, assets/img/r2/akcesoria/torba.webp 700w" sizes="(min-width: 1376px) 75px, (min-width: 900px) 5.80vw, 1px" alt="" style="--x:78;--y:755;--w:97">
+  <b class="a" style="--x:185;--y:751;--w:93;--fs:15;color:var(--tekst-mocny);line-height:1.15">Torba termiczna</b>
+  <span class="a t-p" style="--x:185;--y:792;--fs:15;color:var(--tekst-mocny)">59,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbb370']" style="--x:187;--y:810;--w:90;--h:36;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:310;--y:735;--w:232;--h:123;background:#fff"></span>
+  <span class="a" style="--x:322;--y:747;--w:103;--h:103;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 75px, (min-width: 900px) 5.80vw, 1px" alt="" style="--x:326;--y:755;--w:97">
+  <b class="a" style="--x:433;--y:751;--w:93;--fs:15;color:var(--tekst-mocny);line-height:1.15">Pojemnik INOX</b>
+  <span class="a t-p" style="--x:433;--y:792;--fs:15;color:var(--tekst-mocny)">49,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" style="--x:435;--y:810;--w:90;--h:36;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:558;--y:735;--w:232;--h:123;background:#fff"></span>
+  <span class="a" style="--x:570;--y:747;--w:103;--h:103;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 75px, (min-width: 900px) 5.80vw, 1px" alt="" style="--x:574;--y:755;--w:97">
+  <b class="a" style="--x:681;--y:751;--w:93;--fs:15;color:var(--tekst-mocny);line-height:1.15">Pojemnik z pokrywą LBCL7</b>
+  <span class="a t-p" style="--x:681;--y:792;--fs:15;color:var(--tekst-mocny)">39,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbcl7']" style="--x:683;--y:810;--w:90;--h:36;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:806;--y:735;--w:232;--h:123;background:#fff"></span>
+  <span class="a" style="--x:818;--y:747;--w:103;--h:103;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/lbl7-pokrywa.webp" srcset="assets/img/r2/akcesoria/lbl7-pokrywa-w240.webp 240w, assets/img/r2/akcesoria/lbl7-pokrywa-w400.webp 400w, assets/img/r2/akcesoria/lbl7-pokrywa-w640.webp 640w, assets/img/r2/akcesoria/lbl7-pokrywa.webp 1000w" sizes="(min-width: 1376px) 75px, (min-width: 900px) 5.80vw, 1px" alt="" style="--x:822;--y:767;--w:97">
+  <b class="a" style="--x:929;--y:751;--w:93;--fs:15;color:var(--tekst-mocny);line-height:1.15">Pokrywa do Lunch Boxa LBL7</b>
+  <span class="a t-p" style="--x:929;--y:792;--fs:15;color:var(--tekst-mocny)">29,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbl7']" style="--x:931;--y:810;--w:90;--h:36;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+
+  <span class="a karta" style="--x:1106;--y:118;--w:536;--h:600;background:#fff"></span>
+  <b class="a" style="--x:1128;--y:140;--fs:37;font-family:var(--font-naglowki);color:var(--tekst-mocny)">Podsumowanie</b>
+  <span class="a t-p" style="--x:1128;--y:199;--fs:17;color:var(--tekst-slaby)">Produkty</span><span class="a" style="--x:1128;--y:199;--w:480;--fs:18;font-weight:800;text-align:right;color:var(--tekst-mocny)">2</span><span class="a" style="--x:1128;--y:234;--w:480;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1128;--y:243;--fs:17;color:var(--tekst-slaby)">Wartość</span><span class="a" style="--x:1128;--y:243;--w:480;--fs:18;font-weight:800;text-align:right;color:var(--tekst-mocny)">498,00 zł</span><span class="a" style="--x:1128;--y:278;--w:480;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1128;--y:287;--fs:17;color:var(--tekst-slaby)">Rabat za dwa Lunchee</span><span class="a" style="--x:1128;--y:287;--w:480;--fs:18;font-weight:800;text-align:right;color:var(--promocja)">−149,40 zł</span><span class="a" style="--x:1128;--y:322;--w:480;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1128;--y:331;--fs:17;color:var(--tekst-slaby)">Dostawa</span><span class="a" style="--x:1128;--y:331;--w:480;--fs:18;font-weight:800;text-align:right;color:var(--tekst-mocny)">0,00 zł</span><span class="a" style="--x:1128;--y:366;--w:480;--h:1;background:#ece3d2"></span>
+  <b class="a" style="--x:1128;--y:382;--fs:24;color:var(--tekst-mocny)">Razem</b><span class="a" style="--x:1128;--y:372;--w:480;--fs:35;font-family:var(--font-naglowki);font-weight:700;letter-spacing:.04em;text-align:right;color:var(--tekst-mocny)">348,60 zł</span>
+
+  <span class="a" style="--x:1138;--y:424;--w:302;--h:52;border-radius:calc(14 * var(--u));background:#fff;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;--fs:16;color:#8a93a6;display:flex;align-items:center;padding-left:1em">🏷&nbsp; Kod rabatowy</span>
+  <span class="a" style="--x:1460;--y:424;--w:150;--h:52;border-radius:99px;box-shadow:inset 0 0 0 calc(2 * var(--u)) var(--tekst-mocny);--fs:17;font-weight:800;color:var(--tekst-mocny);display:grid;place-items:center">Zastosuj</span>
+  <span class="a karta" style="--x:1128;--y:494;--w:244;--h:96;background:#fdeceb"></span><span class="a" style="--x:1140;--y:516;--w:52;--h:52;border-radius:50%;background:var(--promocja);color:#fff;display:grid;place-items:center;font:800 calc(26 * var(--u))/1 var(--font-tekst)">%</span><span class="a t-p" style="--x:1206;--y:512;--fs:16;color:var(--promocja);font-weight:700">Promocja dla Ciebie</span><span class="a t-p" style="--x:1206;--y:540;--fs:16;color:var(--tekst-mocny)">Rabat 30% naliczony</span>
+  <span class="a karta" style="--x:1388;--y:494;--w:232;--h:96;background:#eef3fb"></span><img class="a" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:1396;--y:497;--w:68"><span class="a t-p" style="--x:1476;--y:510;--fs:15;color:var(--tekst-mocny);font-weight:700">Rozszerzona<br>gwarancja</span><b class="a" style="--x:1476;--y:556;--fs:16;color:var(--ok)">teraz 0 zł</b>
+  <a class="a btn-v btn-z" href="zamowienie.html" style="--x:1128;--y:608;--w:490;--h:60;--fs:21">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
+  <span class="a t-p c" style="--x:1128;--y:676;--w:490;--fs:15;color:var(--tekst-mocny)">🔒 Bezpieczne i szybkie zakupy</span>
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1376px) 353px, (min-width: 900px) 27.51vw, 1px" alt="" style="--x:1300;--y:690;--w:460" loading="lazy" decoding="async">
+  <span class="a reka" style="--x:1140;--y:740;--fs:40;--rot:-14deg">Ciepłe<br>chwile<br>każdego<br>dnia ♡</span>
+  <span class="a" style="--x:60;--y:906;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
+</div></div></div>
+</template>
+<template data-nr="4" data-nazwa="Granatowe podsumowanie">
+<!-- wybór 16.10, tło na całą szerokość. 17.10 (audyt R2-43, R2-44, R2-46, R1-52): pozycje, sumy i stan promocji liczy main.js
+     z prawdziwego koszyka (koszykV4), więc „Przejdź do zamówienia” niesie to samo, co widać. Poniżej układ dla dwóch pozycji.
+     data-kv: gw (gwarancja), pod (akcesoria), prawy (granatowe podsumowanie, przesuwa się tylko na telefonie),
+     rabat (wiersz rabatu, znika bez rabatu), podrabat (wszystko w podsumowaniu pod rabatem, podjeżdża w jego miejsce,
+     a granatowa karta skraca się o ten wiersz), foto (carbonara, na telefonie pod podsumowaniem). -->
+<div class="vk-sek vk-sek--pelne vk-sek--koszyk" style="--tlo-v:var(--tlo-produkt);padding-top:8px"><div class="vk-ramka"><div class="vk vk--m" data-kv-koszyk data-kv-promo="naliczony" style="--mhk:2054">
+  <!-- runda 03 (KOS-586, „Problem z grafiką - odcięta”): zamiast paska wyciętego z kadru carbonary cały talerz (wycinek z carbonara.webp
+       bez pudełka z AI). Na desktopie wychodzi zza granatowej karty i biegnie za prawą krawędź okna (sekcja przycina go overflow-x: clip),
+       od ok. 2100 px stoi cały. Na telefonie cały, pod kartą podsumowania. -->
+  <img class="a" data-kv="foto" src="assets/img/r2/warianty/carbonara-talerz-caly.webp" srcset="assets/img/r2/warianty/carbonara-talerz-caly-w640.webp 640w, assets/img/r2/warianty/carbonara-talerz-caly.webp 1024w" sizes="(min-width: 900px) min(36vw, 560px), 82vw" width="1024" height="646" alt="" loading="lazy" decoding="async" style="--x:1468;--y:250;--w:730;--mx:35;--my:1846;--mw:320">
+  <h1 tabindex="-1" data-kv-h1 class="a t-h" style="--x:40;--y:20;--fs:76;--mx:16;--my:8;--mfs:38">Koszyk</h1><span class="a t-p" style="--x:44;--y:112;--fs:26;color:var(--tekst-mocny);--mx:16;--my:56;--mw:358;--mfs:16">Dobre jedzenie zawsze z Tobą</span>
+  <div data-kv-lista>
+  <div class="a karta" data-id="lb755" style="--x:40;--y:186;--w:894;--h:156;background:#fff;--mx:16;--my:96;--mw:358;--mh:136">
+    <span class="a kv-foto" style="--x:14;--y:12;--w:234;--h:132;--mx:12;--my:12;--mw:108;--mh:112"><img src="assets/img/r2/produkty/lb755-zamkniety.webp" alt=""></span>
+    <b class="a" style="--x:278;--y:37;--fs:22;color:var(--tekst-mocny);white-space:nowrap;--mx:134;--my:16;--mfs:15">Lunchee LB755 Glamour</b>
+    <span class="a" style="--x:278;--y:71;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny);--mx:134;--my:38;--mfs:22">249,00 zł</span>
+    <span class="a kv-ilosc" style="--x:614;--y:50;--w:160;--h:56;--fs:22;--mx:134;--my:76;--mw:116;--mh:48;--mfs:18"><button type="button" data-kv-krok="-1" aria-label="Mniej">−</button><output>1</output><button type="button" data-kv-krok="1" aria-label="Więcej">+</button></span>
+    <button type="button" class="a kv-usun" data-kv-usun aria-label="Usuń z koszyka" style="--x:790;--y:50;--w:52;--h:56;--fs:26;--mx:298;--my:76;--mw:48;--mh:48;--mfs:22">🗑</button>
+  </div>
+  <div class="a karta" data-id="lb715" style="--x:40;--y:360;--w:894;--h:156;background:#fff;--mx:16;--my:244;--mw:358;--mh:136">
+    <span class="a kv-foto" style="--x:14;--y:12;--w:234;--h:132;--mx:12;--my:12;--mw:108;--mh:112"><img src="assets/img/r2/produkty/lb715-zamkniety.webp" alt=""></span>
+    <b class="a" style="--x:278;--y:37;--fs:22;color:var(--tekst-mocny);white-space:nowrap;--mx:134;--my:16;--mfs:15">Lunchee LB715 Pearl</b>
+    <span class="a" style="--x:278;--y:71;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny);--mx:134;--my:38;--mfs:22">249,00 zł</span>
+    <span class="a kv-ilosc" style="--x:614;--y:50;--w:160;--h:56;--fs:22;--mx:134;--my:76;--mw:116;--mh:48;--mfs:18"><button type="button" data-kv-krok="-1" aria-label="Mniej">−</button><output>1</output><button type="button" data-kv-krok="1" aria-label="Więcej">+</button></span>
+    <button type="button" class="a kv-usun" data-kv-usun aria-label="Usuń z koszyka" style="--x:790;--y:50;--w:52;--h:56;--fs:26;--mx:298;--my:76;--mw:48;--mh:48;--mfs:22">🗑</button>
+  </div>
+  </div>
+  <span class="a karta" data-kv="gw" style="--x:40;--y:538;--w:894;--h:118;background:var(--tlo-alt);--mx:16;--my:392;--mw:358;--mh:118"></span>
+  <img class="a cien" data-kv="gw" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:64;--y:539;--w:94;--mx:26;--my:404;--mw:56">
+  <b data-m="gw" data-kv="gw" class="a" style="--x:182;--y:573;--fs:19;color:var(--tekst-mocny);white-space:nowrap;--mx:94;--my:408;--mw:272;--mfs:15">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
+  <span class="a t-p" data-kv="gw" style="--x:182;--y:604;--fs:16;--mx:94;--my:454;--mw:270;--mfs:14">30 miesięcy gwarancji producenta, do każdego lunch boxa w zamówieniu.</span>
+  <b class="a t-h" data-kv="pod" style="--x:40;--y:686;--fs:34;--mx:16;--my:546;--mfs:28">Dołóż do zamówienia</b>
+  <span data-m="lewo" data-kv="pod" class="a t-p" style="--x:574;--y:698;--w:360;--fs:16;text-align:right;color:var(--tekst-mocny);--mx:16;--my:582;--mw:358;--mfs:15">Przydatne akcesoria do Twojego Lunchee</span>
+  <div class="a karta" data-kv="pod" style="--x:40;--y:742;--w:212;--h:186;background:#fff;--mx:16;--my:616;--mw:171;--mh:240">
+    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/torba.webp" srcset="assets/img/r2/akcesoria/torba-w240.webp 240w, assets/img/r2/akcesoria/torba-w400.webp 400w, assets/img/r2/akcesoria/torba.webp 700w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
+    <b class="a" style="--x:14;--y:98;--w:184;--fs:18;color:var(--tekst-mocny);line-height:1.15;--mx:14;--my:118;--mw:143;--mfs:15">Torba termiczna LBB370</b>
+    <span class="a t-p" style="--x:14;--y:148;--fs:18;color:var(--tekst-mocny);--mx:14;--my:160;--mfs:15">59,00 zł</span>
+    <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbb370']" aria-label="Dodaj do koszyka: Torba termiczna LBB370" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
+  </div>
+  <div class="a karta" data-kv="pod" style="--x:267;--y:742;--w:212;--h:186;background:#fff;--mx:203;--my:616;--mw:171;--mh:240">
+    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
+    <b class="a" style="--x:14;--y:98;--w:184;--fs:18;color:var(--tekst-mocny);line-height:1.15;--mx:14;--my:118;--mw:143;--mfs:15">Pojemnik INOX LBC7</b>
+    <span class="a t-p" style="--x:14;--y:148;--fs:18;color:var(--tekst-mocny);--mx:14;--my:160;--mfs:15">49,00 zł</span>
+    <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" aria-label="Dodaj do koszyka: Pojemnik INOX LBC7" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
+  </div>
+  <div class="a karta" data-kv="pod" style="--x:494;--y:742;--w:212;--h:186;background:#fff;--mx:16;--my:868;--mw:171;--mh:240">
+    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/inox-z-pokrywa.webp" srcset="assets/img/r2/akcesoria/inox-z-pokrywa-w240.webp 240w, assets/img/r2/akcesoria/inox-z-pokrywa-w400.webp 400w, assets/img/r2/akcesoria/inox-z-pokrywa-w640.webp 640w, assets/img/r2/akcesoria/inox-z-pokrywa.webp 1000w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
+    <b class="a" style="--x:14;--y:98;--w:184;--fs:18;color:var(--tekst-mocny);line-height:1.15;--mx:14;--my:118;--mw:143;--mfs:15">Pojemnik z&nbsp;pokrywą LBCL7</b>
+    <span class="a t-p" style="--x:14;--y:148;--fs:18;color:var(--tekst-mocny);--mx:14;--my:160;--mfs:15">39,00 zł</span>
+    <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbcl7']" aria-label="Dodaj do koszyka: Pojemnik z pokrywą LBCL7" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
+  </div>
+  <div class="a karta" data-kv="pod" style="--x:722;--y:742;--w:212;--h:186;background:#fff;--mx:203;--my:868;--mw:171;--mh:240">
+    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/lbl7-pokrywa.webp" srcset="assets/img/r2/akcesoria/lbl7-pokrywa-w240.webp 240w, assets/img/r2/akcesoria/lbl7-pokrywa-w400.webp 400w, assets/img/r2/akcesoria/lbl7-pokrywa-w640.webp 640w, assets/img/r2/akcesoria/lbl7-pokrywa.webp 1000w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
+    <b class="a" style="--x:14;--y:98;--w:184;--fs:18;color:var(--tekst-mocny);line-height:1.15;--mx:14;--my:118;--mw:143;--mfs:15">Pokrywa LBL7</b>
+    <span class="a t-p" style="--x:14;--y:148;--fs:18;color:var(--tekst-mocny);--mx:14;--my:160;--mfs:15">29,00 zł</span>
+    <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbl7']" aria-label="Dodaj do koszyka: Pokrywa LBL7" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
+  </div>
+
+  <span class="a karta" data-kv="prawy" data-kv-podsum style="--x:964;--y:16;--w:540;--h:912;background:#0b2c62;border-radius:calc(30 * var(--u));--mx:16;--my:1140;--mw:358;--mh:754"></span>
+  <span data-m="prawo" data-kv="prawy" data-kv-pole="ile" class="a t-p" style="--x:1376;--y:60;--fs:18;color:#cfdaf0;--mx:36;--my:1174;--mw:318;--mfs:15">2 produkty</span>
+  <b class="a" data-kv="prawy" style="--x:998;--y:44;--fs:40;font-family:var(--font-naglowki);color:#fff;--mx:36;--my:1166;--mfs:28">Podsumowanie</b>
+  <span class="a t-p" data-kv="prawy" style="--x:998;--y:108;--fs:19;color:#cfdaf0;--mx:36;--my:1220;--mfs:15">Wartość</span><span class="a" data-kv="prawy" data-kv-pole="wartosc" style="--x:998;--y:108;--w:472;--fs:20;font-weight:800;text-align:right;color:#fff;--mx:36;--my:1220;--mw:318;--mfs:16">498,00 zł</span><span class="a" data-kv="prawy" style="--x:998;--y:146;--w:472;--h:1;background:rgb(255 255 255 / .2);--mx:36;--my:1252;--mw:318;--mh:1"></span>
+  <span class="a t-p" data-kv="rabat" style="--x:998;--y:156;--fs:19;color:#cfdaf0;--mx:36;--my:1262;--mfs:15">Rabat za dwa Lunchee</span><span class="a" data-kv="rabat" data-kv-pole="rabat" style="--x:998;--y:156;--w:472;--fs:20;font-weight:800;text-align:right;color:#fff;--mx:36;--my:1262;--mw:318;--mfs:16">−149,40 zł</span><span class="a" data-kv="rabat" style="--x:998;--y:194;--w:472;--h:1;background:rgb(255 255 255 / .2);--mx:36;--my:1294;--mw:318;--mh:1"></span>
+  <span class="a t-p" data-kv="podrabat" style="--x:998;--y:204;--fs:19;color:#cfdaf0;--mx:36;--my:1304;--mfs:15">Dostawa</span><span class="a" data-kv="podrabat" data-kv-pole="dostawa" style="--x:998;--y:204;--w:472;--fs:20;font-weight:800;text-align:right;color:#fff;--mx:36;--my:1304;--mw:318;--mfs:16">0,00 zł</span><span class="a" data-kv="podrabat" style="--x:998;--y:242;--w:472;--h:1;background:rgb(255 255 255 / .2);--mx:36;--my:1336;--mw:318;--mh:1"></span>
+  <b class="a" data-kv="podrabat" style="--x:998;--y:258;--fs:26;color:#fff;--mx:36;--my:1360;--mfs:22">Razem</b><span class="a" data-kv="podrabat" data-kv-pole="razem" style="--x:998;--y:248;--w:472;--fs:38;font-family:var(--font-naglowki);font-weight:700;letter-spacing:.04em;text-align:right;color:#fff;--mx:36;--my:1352;--mw:318;--mfs:32">348,60 zł</span>
+
+  <form class="a kv-kod" data-kv="podrabat" data-kod novalidate style="--x:996;--y:362;--w:476;--h:58;--mx:36;--my:1422;--mw:318;--mh:50">
+    <input class="a" name="kod" autocomplete="off" maxlength="16" placeholder="Kod rabatowy" aria-label="Kod rabatowy" style="--x:0;--y:0;--w:306;--h:58;--fs:18;--mx:0;--my:0;--mw:196;--mh:50;--mfs:16">
+    <button class="a" type="submit" style="--x:326;--y:0;--w:150;--h:58;--fs:19;--mx:208;--my:0;--mw:110;--mh:50;--mfs:15">Zastosuj</button>
+  </form>
+  <p class="a kv-kod-msg" data-kv="podrabat" data-kod-msg role="status" hidden style="--x:996;--y:422;--w:476;--fs:15;--mx:34;--my:1475;--mw:322;--mfs:13"></p>
+  <span class="a karta promo-karta" data-kv="podrabat" style="--x:980;--y:444;--w:508;--h:198;--mx:26;--my:1496;--mw:338;--mh:176"></span>
+  <span class="a tag-r" data-kv="podrabat" style="--x:1000;--y:462;--w:220;--h:40;--fs:16;text-transform:none;--mx:42;--my:1514;--mw:192;--mh:32;--mfs:14">Promocja dla Ciebie</span>
+  <b class="a t-h" data-kv="podrabat" data-kv-pokaz="naliczony" data-kv-pole="naglowek" style="--x:1000;--y:520;--fs:30;white-space:nowrap;--mx:42;--my:1560;--mfs:24">Rabat <span class="rabat">30%</span> naliczony</b>
+  <span class="a t-p" data-kv="podrabat" data-kv-pokaz="naliczony" data-kv-pole="oszczedzasz" style="--x:1000;--y:574;--w:318;--fs:16;color:var(--tekst-mocny);--mx:42;--my:1608;--mw:304;--mfs:15">Oszczędzasz 149,40 zł. Każde kolejne dwa lunch boxy też kosztują 30% mniej.</span>
+  <div class="a kv-zacheta" data-kv="podrabat" data-kv-pokaz="dodaj" style="--x:1000;--y:512;--w:330;--mx:42;--my:1554;--mw:304">
+    <b class="t-h" data-kv-pole="zacheta" style="--fs:22;--mfs:19">Dodaj drugi Lunchee, a&nbsp;rabat <span class="rabat">30%</span> obejmie oba</b>
+    <a class="btn-v btn-b" data-kv-pole="przycisk" href="lunch-boxy.html" style="--fs:17;--mfs:15">Wybierz drugi Lunchee</a>
+  </div>
+  <img class="a cien" data-kv="podrabat" data-kv-foto="1" src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="" style="--x:1344;--y:468;--w:120;--mx:268;--my:1510;--mw:72">
+  <img class="a cien" data-kv="podrabat" data-kv-foto="2" src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="" style="--x:1364;--y:520;--w:120;--mx:284;--my:1538;--mw:72">
+  <span class="a t-p" data-kv="podrabat" data-kv-pelny style="--x:1000;--y:662;--fs:18;color:#fff;--mx:36;--my:1694;--mw:250;--mfs:15">🚚 <b>Dostawa <span data-kv-pole="dostawa">0,00 zł</span></b><br><span style="color:#cfdaf0">Dostawa standardowa 14,99 zł. Darmowa od 269,00 zł.</span></span>
+  <a class="a btn-v btn-z" data-kv="podrabat" data-kv-pelny href="zamowienie.html" style="--x:988;--y:760;--w:494;--h:78;--fs:26;--mx:36;--my:1778;--mw:318;--mh:56;--mfs:18">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
+  <span class="a t-p c" data-kv="podrabat" style="--x:988;--y:858;--w:494;--fs:18;color:#fff;--mx:36;--my:1850;--mw:318;--mfs:15">🔒 Bezpieczne i szybkie zakupy</span>
+</div></div></div>
+</template>
+<template data-nr="5" data-nazwa="Kroki zamówienia">
+<div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
+  <span class="a reka" style="--x:50;--y:10;--fs:62;--rot:0deg">lunchee</span><span class="a t-p" style="--x:56;--y:74;--fs:17;color:var(--tekst-mocny);transform:rotate(-4deg)">Ciepły posiłek<br>zawsze z Tobą</span>
+  <span class="a" style="--x:338;--y:40;--w:42;--h:42;border-radius:50%;background:var(--tekst-mocny);color:#fff;display:grid;place-items:center;font-weight:800;--fs:18">1</span><b class="a" style="--x:398;--y:48;--fs:20;color:var(--tekst-mocny)">Koszyk</b>
+  <span class="a" style="--x:486;--y:60;--w:56;--h:2;background:#c9bfae"></span><span class="a" style="--x:560;--y:40;--w:42;--h:42;border-radius:50%;box-shadow:inset 0 0 0 calc(2 * var(--u)) #c9bfae;display:grid;place-items:center;font-weight:700;--fs:18;color:var(--tekst-slaby)">2</span><span class="a t-p" style="--x:620;--y:48;--fs:20">Dostawa</span>
+  <span class="a" style="--x:714;--y:60;--w:56;--h:2;background:#c9bfae"></span><span class="a" style="--x:784;--y:40;--w:42;--h:42;border-radius:50%;box-shadow:inset 0 0 0 calc(2 * var(--u)) #c9bfae;display:grid;place-items:center;font-weight:700;--fs:18;color:var(--tekst-slaby)">3</span><span class="a t-p" style="--x:844;--y:48;--fs:20">Płatność</span>
+  <span class="a t-p" style="--x:1086;--y:40;--fs:14;color:var(--tekst-mocny)">🚚 Darmowa dostawa<br>od 269,00 zł</span><span class="a t-p" style="--x:1280;--y:40;--fs:14;color:var(--tekst-mocny)">🛡 30 miesięcy<br>gwarancji</span><span class="a t-p" style="--x:1436;--y:40;--fs:14;color:var(--tekst-mocny)">📦 Zwrot<br>w ciągu 14 dni</span>
+  <h1 class="a t-h" style="--x:48;--y:130;--fs:68">Twój koszyk</h1><span class="a t-p" style="--x:56;--y:208;--fs:22">2 produkty w koszyku</span>
+  <span class="a karta" style="--x:44;--y:252;--w:970;--h:152;background:#fff"></span>
+  <span class="a" style="--x:58;--y:264;--w:228;--h:128;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:58;--y:264;--w:228;--h:128;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:316;--y:288;--fs:22;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB755 Glamour</b>
+  <span class="a" style="--x:316;--y:322;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:734;--y:300;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:924;--y:310;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a karta" style="--x:44;--y:418;--w:970;--h:152;background:#fff"></span>
+  <span class="a" style="--x:58;--y:430;--w:228;--h:128;border-radius:calc(14 * var(--u));background:var(--tlo-produkt)"></span>
+  <div class="a" style="--x:58;--y:430;--w:228;--h:128;display:grid;place-items:center"><img src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="" style="width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 calc(6 * var(--u)) calc(6 * var(--u)) rgb(60 30 0 / .2))"></div>
+  <b class="a" style="--x:316;--y:454;--fs:22;color:var(--tekst-mocny);white-space:nowrap">Lunchee LB715 Pearl</b>
+  <span class="a" style="--x:316;--y:488;--fs:30;font-family:var(--font-naglowki);font-weight:700;color:var(--tekst-mocny)">249,00 zł</span>
+  <span class="a" style="--x:734;--y:466;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
+  <span class="a" style="--x:924;--y:476;--fs:26;color:var(--tekst-mocny)">🗑</span>
+  <span class="a" style="--x:312;--y:354;--w:30;--h:30;border-radius:50%;background:#ceaab2;box-shadow:0 0 0 calc(3 * var(--u)) #fff,0 0 0 calc(5 * var(--u)) var(--tekst-mocny)"></span><span class="a" style="--x:362;--y:358;--w:22;--h:22;border-radius:50%;background:#d7d7d9"></span><span class="a" style="--x:404;--y:358;--w:22;--h:22;border-radius:50%;background:#39546f"></span>
+  <span class="a" style="--x:316;--y:524;--w:22;--h:22;border-radius:50%;background:#ceaab2"></span><span class="a" style="--x:356;--y:520;--w:30;--h:30;border-radius:50%;background:#d7d7d9;box-shadow:0 0 0 calc(3 * var(--u)) #fff,0 0 0 calc(5 * var(--u)) var(--tekst-mocny)"></span><span class="a" style="--x:404;--y:524;--w:22;--h:22;border-radius:50%;background:#39546f"></span>
+  <span class="a karta" style="--x:44;--y:584;--w:970;--h:104;background:var(--tlo-alt)"></span>
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:68;--y:586;--w:83">
+  <b class="a" style="--x:175;--y:615;--fs:19;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
+  <span class="a t-p" style="--x:175;--y:646;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
+  <span class="a" style="--x:908;--y:614;--w:50;--h:50;border-radius:50%;background:#dcefd9;color:var(--ok);display:grid;place-items:center;font-size:calc(26 * var(--u))">✓</span>
+  <b class="a t-h" style="--x:48;--y:712;--fs:29">Dołóż do zamówienia</b>
+  <span class="a t-p" style="--x:646;--y:724;--w:360;--fs:14;text-align:right;color:var(--tekst-mocny)">Praktyczne dodatki do Twojego Lunchee</span>
+  <span class="a karta" style="--x:48;--y:765;--w:309;--h:128;background:#fff"></span>
+  <span class="a" style="--x:60;--y:777;--w:107;--h:107;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/torba.webp" srcset="assets/img/r2/akcesoria/torba-w240.webp 240w, assets/img/r2/akcesoria/torba-w400.webp 400w, assets/img/r2/akcesoria/torba.webp 700w" sizes="(min-width: 1376px) 77px, (min-width: 900px) 5.98vw, 1px" alt="" style="--x:64;--y:785;--w:100">
+  <b class="a" style="--x:176;--y:782;--w:164;--fs:15;color:var(--tekst-mocny);line-height:1.15">Torba termiczna</b>
+  <span class="a t-p" style="--x:176;--y:824;--fs:15;color:var(--tekst-mocny)">59,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbb370']" style="--x:246;--y:843;--w:94;--h:37;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:373;--y:765;--w:309;--h:128;background:#fff"></span>
+  <span class="a" style="--x:385;--y:777;--w:107;--h:107;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 77px, (min-width: 900px) 5.98vw, 1px" alt="" style="--x:389;--y:785;--w:100">
+  <b class="a" style="--x:500;--y:782;--w:164;--fs:15;color:var(--tekst-mocny);line-height:1.15">Pojemnik INOX</b>
+  <span class="a t-p" style="--x:500;--y:824;--fs:15;color:var(--tekst-mocny)">49,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" style="--x:571;--y:843;--w:94;--h:37;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+  <span class="a karta" style="--x:697;--y:765;--w:309;--h:128;background:#fff"></span>
+  <span class="a" style="--x:709;--y:777;--w:107;--h:107;border-radius:calc(12 * var(--u));background:var(--tlo-produkt)"></span><img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 77px, (min-width: 900px) 5.98vw, 1px" alt="" style="--x:713;--y:785;--w:100">
+  <b class="a" style="--x:825;--y:782;--w:164;--fs:15;color:var(--tekst-mocny);line-height:1.15">Pojemnik z pokrywą LBCL7</b>
+  <span class="a t-p" style="--x:825;--y:824;--fs:15;color:var(--tekst-mocny)">39,00 zł</span>
+  <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbcl7']" style="--x:896;--y:843;--w:94;--h:37;--fs:14;border:0;cursor:pointer;background:#fff">Dodaj</button>
+
+  <span class="a karta" style="--x:1046;--y:110;--w:596;--h:808;background:#fff"></span>
+  <span class="a t-p" style="--x:1500;--y:142;--fs:18">2 produkty</span>
+  <b class="a" style="--x:1068;--y:130;--fs:38;font-family:var(--font-naglowki);color:var(--tekst-mocny)">Podsumowanie</b>
+  <span class="a t-p" style="--x:1068;--y:191;--fs:18;color:var(--tekst-slaby)">Wartość</span><span class="a" style="--x:1068;--y:191;--w:548;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">498,00 zł</span><span class="a" style="--x:1068;--y:227;--w:548;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1068;--y:236;--fs:18;color:var(--tekst-slaby)">Rabat za dwa Lunchee</span><span class="a" style="--x:1068;--y:236;--w:548;--fs:19;font-weight:800;text-align:right;color:var(--promocja)">−149,40 zł</span><span class="a" style="--x:1068;--y:272;--w:548;--h:1;background:#ece3d2"></span>
+  <span class="a t-p" style="--x:1068;--y:282;--fs:18;color:var(--tekst-slaby)">Dostawa</span><span class="a" style="--x:1068;--y:282;--w:548;--fs:19;font-weight:800;text-align:right;color:var(--tekst-mocny)">0,00 zł</span><span class="a" style="--x:1068;--y:318;--w:548;--h:1;background:#ece3d2"></span>
+  <b class="a" style="--x:1068;--y:334;--fs:25;color:var(--tekst-mocny)">Razem</b><span class="a" style="--x:1068;--y:324;--w:548;--fs:36;font-family:var(--font-naglowki);font-weight:700;letter-spacing:.04em;text-align:right;color:var(--tekst-mocny)">348,60 zł</span>
+
+  <span class="a" style="--x:1070;--y:402;--w:376;--h:55;border-radius:calc(14 * var(--u));background:#fff;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;--fs:17;color:#8a93a6;display:flex;align-items:center;padding-left:1em">🏷&nbsp; Kod rabatowy</span>
+  <span class="a" style="--x:1466;--y:402;--w:150;--h:55;border-radius:99px;box-shadow:inset 0 0 0 calc(2 * var(--u)) var(--tekst-mocny);--fs:18;font-weight:800;color:var(--tekst-mocny);display:grid;place-items:center">Zastosuj</span>
+  <span class="a karta" style="--x:1058;--y:484;--w:572;--h:214;background:var(--tlo-alt)"></span>
+  <span class="a tag-r" style="--x:1078;--y:502;--w:220;--h:40;--fs:16">Promocja dla Ciebie</span>
+  <b class="a t-h" style="--x:1078;--y:558;--fs:34;white-space:nowrap">Rabat <span class="rabat">30%</span> naliczony</b>
+  <span class="a t-p" style="--x:1078;--y:632;--w:378;--fs:16;color:var(--tekst-mocny)">Oszczędzasz 149,40 zł. Każde kolejne dwa lunch boxy też kosztują 30% mniej.</span>
+  <img class="a cien" src="assets/img/r2/produkty/lb755-zamkniety.webp" srcset="assets/img/r2/produkty/lb755-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb755-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb755-zamkniety.webp 756w" sizes="(min-width: 1376px) 118px, (min-width: 900px) 9.21vw, 1px" alt="" style="--x:1416;--y:492;--w:154">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 118px, (min-width: 900px) 9.21vw, 1px" alt="" style="--x:1455;--y:548;--w:154" loading="lazy" decoding="async">
+  <a class="a btn-v btn-z" href="zamowienie.html" style="--x:1062;--y:718;--w:564;--h:72;--fs:25">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
+  <span class="a t-p c" style="--x:1062;--y:800;--w:564;--fs:15">Koszyk zapamiętuje wybór w tej przeglądarce.</span>
+  <span class="odz" style="--x:1078;--y:834"><span class="odznaka odznaka--cieplo" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:1238;--y:834"><span class="odznaka odznaka--zasilanie" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 50px, (min-width: 900px) 3.89vw, 1px" alt="" style="--x:1393;--y:856;--w:65">
+  <span class="a t-p c" style="--x:1048;--y:897;--w:112;--fs:1;opacity:0"></span>
+  <span class="a t-p c" style="--x:1208;--y:897;--w:112;--fs:1;opacity:0"></span>
+  <span class="a t-p c" style="--x:1368;--y:897;--w:112;--fs:1;opacity:0"></span>
+  <span class="a t-p" style="--x:1146;--y:846;--fs:15;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span><span class="a t-p" style="--x:1306;--y:846;--fs:15;color:var(--tekst-mocny)">3 źródła<br>zasilania</span><span class="a t-p" style="--x:1480;--y:846;--fs:15;color:var(--tekst-mocny)">Stalowy<br>pojemnik INOX</span>
+  <span class="a" style="--x:48;--y:912;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
+</div></div></div>
+</template>

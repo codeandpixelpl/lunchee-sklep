@@ -1,0 +1,93 @@
+[
+  {
+    "engine": "chromium",
+    "weights": [
+      {
+        "weight": 400,
+        "loaded": true
+      },
+      {
+        "weight": 700,
+        "loaded": true
+      },
+      {
+        "weight": 900,
+        "loaded": true
+      }
+    ],
+    "unsupported": [],
+    "glyphs": [
+      {
+        "weight": 400,
+        "fonts": [
+          {
+            "familyName": "Coolvetica",
+            "postScriptName": "CoolveticaBk-Regular",
+            "isCustomFont": true,
+            "glyphCount": 18
+          }
+        ]
+      },
+      {
+        "weight": 700,
+        "fonts": [
+          {
+            "familyName": "Coolvetica",
+            "postScriptName": "CoolveticaRg-Bold",
+            "isCustomFont": true,
+            "glyphCount": 18
+          }
+        ]
+      },
+      {
+        "weight": 900,
+        "fonts": [
+          {
+            "familyName": "Coolvetica",
+            "postScriptName": "CoolveticaHv-Regular",
+            "isCustomFont": true,
+            "glyphCount": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "engine": "firefox",
+    "weights": [
+      {
+        "weight": 400,
+        "loaded": true
+      },
+      {
+        "weight": 700,
+        "loaded": true
+      },
+      {
+        "weight": 900,
+        "loaded": true
+      }
+    ],
+    "unsupported": [],
+    "glyphs": []
+  },
+  {
+    "engine": "webkit",
+    "weights": [
+      {
+        "weight": 400,
+        "loaded": true
+      },
+      {
+        "weight": 700,
+        "loaded": true
+      },
+      {
+        "weight": 900,
+        "loaded": true
+      }
+    ],
+    "unsupported": [],
+    "glyphs": []
+  }
+]

@@ -1,0 +1,1058 @@
+/* Lunchee · SEKCJE STRON
+   Tokeny: ../04 - Styleguide/tokens.css · komponenty: ../04 - Styleguide/components.css
+   Tu wyłącznie układ sekcji. Wartości przez var(--token). */
+
+
+
+
+
+
+
+
+/* ---------- Nagłówek ---------- */
+.header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--tlo) 92%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: box-shadow var(--przejscie); }
+.header.is-scrolled { box-shadow: 0 8px 24px -18px rgba(10,42,94,.5); }
+.header .wrap { display: flex; align-items: center; gap: var(--odstep-m); min-height: 76px; }
+.header .logo-mark { width: 128px; }
+.nav { display: none; margin: 0 auto; gap: 4px; }
+.nav a { padding: 10px 16px; border-radius: var(--r-pill); font-weight: 600; font-size: .98rem; color: var(--tekst-mocny); text-decoration: none; }
+@media (hover: hover) { .nav a:hover { background: var(--tlo-akcent); } }
+.header__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.icon-btn { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; background: transparent; color: var(--tekst-mocny); cursor: pointer; text-decoration: none; }
+.icon-btn svg { width: 26px; height: 26px; }
+.icon-btn .count { position: absolute; top: 4px; right: 2px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: var(--r-pill); background: var(--akcent); color: var(--tekst-mocny); font-size: .72rem; font-weight: 800; line-height: 20px; text-align: center; }
+@media (min-width: 1000px) {
+  .header .logo-mark { width: 158px; }
+  .nav { display: flex; }
+  .header__actions { margin-left: 0; }
+  .menu-toggle { display: none; }
+}
+.mobile-nav { display: none; position: fixed; inset: var(--header-height, 76px) 0 0; z-index: 49; background: var(--tlo); padding: 16px var(--margines) 40px; overflow-y: auto; }
+.mobile-nav.is-open { display: block; }
+.mobile-nav { overscroll-behavior: contain; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+@media (min-width: 1000px) { .mobile-nav.is-open { display: none; } }
+.mobile-nav a { display: block; padding: 16px 0; border-bottom: 1px solid var(--linia); font-family: var(--font-naglowki); font-size: 2rem; color: var(--tekst-mocny); text-decoration: none; }
+
+/* ---------- 01 Hero: przebudowane w rundzie 02, reguły w bloku RUNDA 02 na końcu pliku ---------- */
+
+/* ---------- 02 Najważniejsze cechy: kafle (runda 02, wersja P4 z docs/warianty-parametry.html, 13.10 „zastosujmy chwilowo”) ----------
+   Kafel 60°C: zdjęcie parującego dania z Codeksa, biała liczba i podpis na ciepłym przyciemnieniu. Pozostałe kafle:
+   tekst po lewej, ilustracja 3D po prawej w stylu ikon z frontu opakowania, „teraz 0 zł” jako okrągła pieczątka w rogu. */
+.feats__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.feats__tile { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 20px;
+  padding: 28px; border-radius: var(--r-l); background: var(--tlo-alt); color: var(--tekst-slaby); }
+.feats__tekst { display: grid; gap: 8px; align-content: center; }
+.feats__val { margin: 0; font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); letter-spacing: var(--tracking-naglowki);
+  font-size: clamp(2.3rem, 2.9vw, 3rem); line-height: .95; color: var(--tekst-mocny); white-space: nowrap; }
+.feats__val--m { font-size: 1.85rem; }
+.feats__opis { margin: 0; line-height: 1.45; }
+.feats__ilustracja { display: grid; place-items: center; width: clamp(84px, 7.5vw, 120px); }
+.feats__ilustracja img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 12px rgb(0 0 0 / .18)); }
+.feats__ilustracja--wtyczka img { width: 56%; }
+.feats__ilustracja--gwarancja { align-self: end; width: clamp(70px, 6vw, 96px); }
+.feats__chips { display: flex; gap: 6px; }
+.feats__chips span { white-space: nowrap; padding: 6px 11px; border-radius: var(--r-pill); background: var(--biel); font-weight: 800; font-size: .95rem; color: var(--tekst-mocny); }
+.feats__tile--main { grid-template-columns: 1fr; align-content: start; min-height: 520px; overflow: hidden;
+  background: linear-gradient(180deg, rgb(150 58 0 / .42) 0%, rgb(150 58 0 / .18) 34%, transparent 52%), var(--akcent-zar) url(../assets/img/r2/parametry/danie-para.webp) center bottom / cover no-repeat; }
+.feats__tile--main .feats__val { font-size: clamp(4.6rem, 7vw, 6.4rem); color: var(--biel); text-shadow: 0 2px 18px rgb(120 45 0 / .35); }
+.feats__tile--main .feats__opis { color: var(--biel); font-size: 1.05rem; font-weight: 600; text-shadow: 0 1px 10px rgb(120 45 0 / .45); } /* 17.10 (PARAM-V3): dłuższy opis z docx, mniejsze pismo, żeby został na pomarańczowym polu nad daniem */
+.feats__stempel { position: absolute; top: -20px; right: -12px; z-index: 2; display: grid; place-items: center; width: 102px; height: 102px; border-radius: 50%;
+  background: var(--promocja); color: var(--biel); font-family: var(--font-tekst); text-align: center; rotate: 8deg; box-shadow: 0 12px 20px -10px rgb(120 20 0 / .55); }
+.feats__stempel i { position: absolute; top: 20px; right: 22px; font-style: normal; font-size: 1rem; font-weight: 800; line-height: 1; }
+.feats__stempel b { margin: 8px 0 0; font-size: 2.3rem; font-weight: 800; line-height: 1; color: var(--biel); }
+@media (max-width: 599px) { .feats__stempel { right: -4px; } } /* przy 390 stempel wychodził 3 px poza ekran */
+.feats .note-small { margin-top: 18px; }
+/* uwaga 13.10 „górne i dolne powinny być równe”: rzędy małych kafli tej samej wysokości */
+@media (min-width: 700px) {
+  .feats__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; grid-auto-rows: 1fr; }
+  .feats__tile--main { grid-column: 1 / -1; min-height: 460px; background-position: 0 0, center 70%; }
+}
+@media (min-width: 1100px) {
+  .feats__grid { grid-template-columns: .9fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .feats__tile--main { grid-column: 1; grid-row: 1 / 3; min-height: 460px; background-position: 0 0, center bottom; }
+}
+
+/* ---------- 03 Każdy ma swój sposób ---------- */
+.way__grid { display: grid; gap: 40px; align-items: center; }
+.way__text p { font-size: 1.15rem; color: var(--tekst-mocny); max-width: 42ch; }
+.way__compare { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.way__compare figure { position: relative; margin: 0; border-radius: var(--r-l); overflow: hidden; }
+.way__compare img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+.way__compare figcaption { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); padding: 9px 18px; border-radius: var(--r-pill); background: var(--tlo-alt); color: var(--tekst-mocny); font-size: .8rem; font-weight: 700; white-space: nowrap; }
+.way__compare figure:last-child figcaption { background: var(--akcent); }
+.way__arrow { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); border: 4px solid var(--tlo); z-index: 2; }
+.way__arrow svg { width: 24px; height: 24px; }
+@media (max-width: 520px) { .way__compare figcaption { font-size: .66rem; padding: 7px 12px; } .way__arrow { width: 44px; height: 44px; } }
+@media (min-width: 900px) { .way__grid { grid-template-columns: .8fr 1.2fr; gap: 64px; } }
+
+
+/* ---------- 06 Jak korzystać ---------- */
+.steps__list { scroll-padding-inline: var(--margines); list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin: 0 calc(var(--margines) * -1); padding-left: var(--margines); padding-right: var(--margines); scrollbar-width: none; }
+.steps__list::-webkit-scrollbar { display: none; }
+.step { scroll-snap-align: start; display: flex; flex-direction: column; }
+.step__card { flex: 1; border-radius: var(--r-m); background: var(--biel); overflow: hidden; box-shadow: 0 1px 0 var(--linia); }
+.step__card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.step__body { padding: 20px 22px 24px; }
+.step__body .n { display: block; font-family: var(--font-naglowki); font-size: 2rem; color: var(--cta); line-height: 1; }
+.step__body h3 { font-size: var(--fs-h3); margin: 4px 0 10px; }
+.step__body p { font-size: var(--fs-maly); color: var(--tekst-slaby); }
+@media (min-width: 1100px) {
+  .steps__list { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; margin: 0; padding: 0; }
+}
+
+/* ---------- 07 Twój Lunchee moment ---------- */
+.moments__head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--odstep-s); }
+.moments__nav { display: none; gap: 10px; }
+@media (min-width: 1000px) { .moments__nav { display: flex; } }
+/* ---------- 08 Zestaw ---------- */
+.kit__grid { display: grid; gap: 40px; align-items: center; }
+.kit__img img { width: 100%; border-radius: var(--r-l); }
+.kit__list { list-style: none; margin: 0; padding: 0; counter-reset: kit; }
+.kit__list li { counter-increment: kit; display: grid; grid-template-columns: 76px 28px 1fr; align-items: center; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--linia); color: var(--tekst-mocny); font-size: 1.02rem; }
+.kit__list li::before { content: counter(kit); grid-column: 2; grid-row: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--akcent); font-size: .8rem; font-weight: 800; }
+.kit__list .th { grid-column: 1; grid-row: 1; display: grid; place-items: center; width: 76px; height: 60px; border-radius: 14px; background: var(--tlo-produkt); }
+.kit__list .th img { max-width: 60px; max-height: 46px; object-fit: contain; }
+.kit__list .tx { grid-column: 3; grid-row: 1; }
+@media (min-width: 900px) { .kit__grid { grid-template-columns: 1.3fr 1fr; gap: 56px; } }
+
+/* ---------- 09 Ebook ---------- */
+.ebook { position: relative; overflow: hidden; background: var(--akcent) url(../assets/img/gen/09-ebook-tlo-kulinarne.webp) center / cover no-repeat; }
+.ebook__grid { position: relative; display: grid; gap: 28px; align-items: center; }
+.ebook__text { background: color-mix(in srgb, var(--tlo-akcent) 92%, transparent); border-radius: var(--r-l); padding: 28px; }
+.ebook__text p { font-size: 1.15rem; color: var(--tekst-mocny); max-width: 34ch; }
+.ebook__img { width: 100%; }
+.ebook__steps { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+.ebook__steps li { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--tekst-mocny); }
+.ebook__steps b { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--cta); color: var(--biel); font-size: .9rem; }
+.ebook__steps--row { justify-content: center; }
+@media (min-width: 900px) { .ebook__steps--row { display: flex; flex-wrap: wrap; gap: 28px; } }
+@media (min-width: 900px) {
+  .ebook { min-height: 680px; display: flex; align-items: center; }
+  .ebook__grid { grid-template-columns: .8fr 1.2fr; gap: 40px; }
+  .ebook__text { padding: 40px; }
+}
+
+/* ---------- 10 Akcesoria (jedyna sekcja kart) ---------- */
+.acc__grid { display: grid; grid-template-columns: 1fr; gap: var(--odstep-s); }
+.card { display: flex; flex-direction: column; border-radius: var(--r-m); background: var(--biel); overflow: hidden; text-decoration: none; }
+.card__img { position: relative; aspect-ratio: 4 / 3; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; padding: var(--odstep-m); background: var(--tlo-produkt); overflow: hidden; /* bez overflow aspect-ratio rośnie do wysokości zdjęcia */ }
+.card__img img { width: 100%; height: 100%; object-fit: contain; }
+.card__img .tbd { position: absolute; left: 12px; bottom: 12px; background: var(--biel); font-size: .7rem; }
+.card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card__code { font-size: var(--fs-etykieta); color: var(--tekst-slaby); }
+.card h3 { font-size: var(--fs-h3); }
+.card p { font-size: var(--fs-maly); color: var(--tekst-slaby); margin: 4px 0 8px; }
+.card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+@media (min-width: 640px) { .acc__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .acc__grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+@media (hover: hover) { .card { transition: transform var(--przejscie), box-shadow var(--przejscie); } .card:hover { transform: translateY(-4px); box-shadow: var(--cien); } }
+
+/* ---------- 11 FAQ ---------- */
+.faq__grid { display: grid; gap: 32px; }
+.faq .h2 { font-size: clamp(2.3rem, 5vw, 3.6rem); }
+.faq__link { display: inline-block; margin-top: 24px; font-weight: 700; color: var(--cta); }
+@media (min-width: 900px) { .faq__grid { grid-template-columns: .75fr 1.25fr; gap: 72px; } .faq__side { position: sticky; top: 110px; align-self: start; } }
+
+/* ---------- 12 Dla firm ---------- */
+.b2b { background: var(--cta); color: var(--biel); overflow: hidden; padding: 0; }
+.b2b__grid { display: grid; }
+.b2b__text { padding: var(--odstep-xl) 0; }
+.b2b .eyebrow { color: var(--tlo-akcent); }
+.b2b__title { color: var(--biel); font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: .98; max-width: 12ch; }
+.b2b .lead { color: var(--tekst-na-ciemnym); margin: 22px 0 32px; font-size: var(--fs-lead); max-width: 46ch; }
+.b2b__feats { list-style: none; margin: 0 0 36px; padding: 0; display: grid; }
+.b2b__feat { display: grid; grid-template-columns: 56px 1fr; gap: var(--odstep-s); align-items: start; padding: 20px 0; border-top: 1px solid rgb(255 255 255 / .2); }
+.b2b__feat:last-child { border-bottom: 1px solid rgb(255 255 255 / .2); }
+.b2b__feat .ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--akcent); }
+.b2b__feat .ic img { width: 28px; height: 28px; object-fit: contain; filter: brightness(0) saturate(100%) invert(12%) sepia(40%) saturate(3500%) hue-rotate(208deg) brightness(92%); }
+.b2b__feat h3 { color: var(--biel); font-size: 1.3rem; line-height: 1.15; margin: 4px 0 6px; } /* 17.10 (audyt W-01): Coolvetica, było Inter */
+.b2b__feat p { color: var(--tekst-na-ciemnym); font-size: var(--fs-tekst); margin: 0; max-width: 48ch; }
+.b2b__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.b2b__img { margin: 0 calc(var(--margines) * -1); background: var(--tekst-mocny); }
+.b2b__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 1000px) {
+  .b2b__grid { grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: stretch; }
+  .b2b__img { margin: 0 calc((100vw - min(100vw, var(--tresc))) / -2 - var(--margines)) 0 0; }
+  .b2b__img img { height: 100%; aspect-ratio: auto; object-position: 40% 50%; }
+}
+.b2b--hero .b2b__text { padding-top: clamp(40px, 6vw, 88px); }
+
+/* Dla firm: kroki */
+.b2b-steps__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--odstep-s); counter-reset: s; }
+.b2b-steps__list li { position: relative; padding: var(--odstep-m); border-radius: var(--r-l); background: var(--biel); }
+.b2b-steps__n { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); font-weight: 800; margin-bottom: var(--odstep-s); }
+.b2b-steps__list h3 { font-size: var(--fs-h3); margin-bottom: 8px; }
+.b2b-steps__list p { color: var(--tekst-slaby); margin: 0; }
+@media (min-width: 900px) {
+  .b2b-steps__list { grid-template-columns: repeat(3, 1fr); gap: var(--odstep-m); }
+  .b2b-steps__list li:not(:last-child)::after { content: ""; position: absolute; top: 50px; right: -24px; width: 24px; border-top: 2px dotted var(--akcent); }
+}
+
+/* Dla firm: podgląd logo na produkcie */
+.logo-demo { background: var(--tlo-alt); }
+.logo-demo__grid { display: grid; gap: var(--odstep-l); align-items: center; }
+.logo-demo__stage { border-radius: var(--r-l); background: var(--tlo-produkt); padding: clamp(24px, 4vw, 48px); }
+.logo-demo__product { position: relative; max-width: 640px; margin: 0 auto; }
+.logo-demo__product > img { width: 100%; filter: drop-shadow(0 30px 30px rgba(10,42,94,.2)); transition: opacity var(--przejscie); }
+.logo-demo__zone { position: absolute; left: 15%; top: 56%; width: 27%; height: 20%; display: grid; place-items: center; border: 2px dashed rgb(255 255 255 / .85); border-radius: 12px; color: rgb(255 255 255 / .92); font-weight: 700; font-size: clamp(.7rem, 1.4vw, .95rem); text-align: center; transform: skewY(-3deg); }
+.logo-demo__zone img { max-width: 88%; max-height: 80%; object-fit: contain; }
+.logo-demo__zone.has-logo { border-color: transparent; }
+.logo-demo__note { margin: var(--odstep-s) 0 0; text-align: center; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.logo-demo__punch { font-family: var(--font-naglowki); font-size: 1.5rem; line-height: 1.15; color: var(--cta); margin-top: 20px; }
+.logo-demo__upload { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.logo-demo__upload label { cursor: pointer; }
+.logo-demo__upload input:focus-visible + * , .logo-demo__upload label:focus-within { outline: 3px solid var(--akcent); outline-offset: 3px; }
+@media (min-width: 900px) { .logo-demo__grid { grid-template-columns: 1.15fr 1fr; gap: 72px; } }
+.b2b-form { background: var(--tlo); }
+
+
+/* ---------- 13 O nas ---------- */
+.about__grid { display: grid; gap: 40px; align-items: center; }
+.about__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-l); }
+.about .h2 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); margin-bottom: 26px; }
+.about p { color: var(--tekst-mocny); }
+/* .quote: komponent w components.css (17.10) */
+@media (min-width: 900px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+/* ---------- 14 Stopka ---------- */
+.footer { background: var(--tlo-ciemne); color: var(--tekst-na-ciemnym); padding: 72px 0 32px; }
+.footer__grid { display: grid; gap: 40px; }
+/* Lewa kolumna zrownana wysokoscia z kolumnami linkow po prawej. */
+.footer__brand img { width: 180px; margin-bottom: 26px; }
+.footer__brand h2 { color: var(--biel); font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.05; margin-bottom: 12px; }
+.footer__brand p { font-size: 1.05rem; margin-bottom: 22px; }
+.footer__brand .btn { min-height: 48px; font-size: .95rem; }
+.footer h4 { font-family: var(--font-naglowki); font-size: var(--fs-h3); color: var(--biel); padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.footer ul a { display: inline-block; padding: 7px 0; text-decoration: none; }
+@media (hover: hover) { .footer ul a:hover { color: var(--biel); } }
+.footer__bottom { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.2); display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; font-size: .85rem; }
+@media (min-width: 900px) { .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; align-items: start; } }
+
+/* ---------- Karta produktu ---------- */
+.crumbs { font-size: var(--fs-maly); color: var(--tekst-slaby); padding-top: 18px; padding-bottom: 18px; }
+.crumbs a { text-decoration: none; }
+.pdp { padding-bottom: var(--odstep-xl); }
+.pdp__grid { display: grid; gap: 28px; }
+@media (min-width: 900px) {
+  .pdp__grid { grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: start; }
+  .gallery { position: sticky; top: 96px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; } /* 17.10: miniatury pod zdjęciem w karuzeli zamiast kolumny z lewej */
+  .gallery__main { margin: 0; border-radius: var(--r-l); overflow: hidden; }
+  .gallery__dots { display: none; }
+}
+/* 17.10: miniatury pod zdjęciem na każdej szerokości. Na telefonie zastępują kropki (4 pełne i połowa piątej),
+   na desktopie pasek ma strzałki (main.js przewija go o 80% szerokości i wyłącza strzałkę na końcu). */
+.gallery__pasek { position: relative; margin-top: 12px; }
+.gallery__thumbs { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3.5 * 8px) / 4.5); gap: 8px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; overscroll-behavior-x: contain; scrollbar-width: none; padding-block: 2px; }
+.gallery__thumbs::-webkit-scrollbar { display: none; }
+.gallery__thumbs button { scroll-snap-align: start; aspect-ratio: 1; padding: 0; border: 2px solid transparent; border-radius: 12px; overflow: hidden; background: var(--tlo-produkt); cursor: pointer; }
+.gallery__thumbs button img { display: block; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.gallery__thumbs button[aria-current="true"] { border-color: var(--cta); }
+.gallery:has(.gallery__thumbs) .gallery__dots { display: none; }
+.gallery__pasek-strzalka { display: none; }
+@media (min-width: 900px) {
+  /* 6 pełnych miniatur i połowa siódmej: widać, że rząd się przesuwa */
+  .gallery__pasek { margin-top: 0; }
+  .gallery__thumbs { grid-auto-columns: calc((100% - 5.5 * 10px) / 6.5); gap: 10px; }
+  .gallery__thumbs button { border-radius: 14px; }
+}
+@media (hover: hover) and (min-width: 900px) {
+  .gallery__pasek-strzalka { position: absolute; top: 50%; z-index: 1; translate: 0 -50%; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: rgb(255 255 255 / .96); color: var(--tekst-mocny); box-shadow: 0 4px 14px rgb(10 42 94 / .18); cursor: pointer; transition: opacity .2s, background-color .2s, color .2s; }
+  .gallery__pasek-strzalka svg { width: 18px; height: 18px; }
+  .gallery__pasek-strzalka--prev { left: -14px; }
+  .gallery__pasek-strzalka--next { right: -14px; }
+  .gallery__pasek-strzalka:disabled { opacity: 0; pointer-events: none; }
+  .gallery__pasek-strzalka:hover { background: var(--cta); color: var(--biel); }
+}
+.buy .eyebrow { margin-bottom: 10px; }
+.buy h1 { font-size: clamp(1.7rem, 2.6vw, 2.2rem); line-height: 1.12; }
+.buy__claim { font-family: var(--font-naglowki); font-size: 1.5rem; color: var(--cta); margin: 12px 0 22px; }
+.omnibus { font-size: .82rem; color: var(--tekst-slaby); margin: -8px 0 24px; }
+.buy__label { font-weight: 700; font-size: .88rem; margin-bottom: 12px; color: var(--tekst-mocny); font-family: var(--font-tekst); }
+/* 17.10 (audyt W-01): nagłówek „Najważniejsze informacje” w Coolvetice jak pozostałe h2 (był Inter 14 px). Etykiety pól
+   (Kolor, W zestawie, Dobierz do zestawu) zostają w Inter jak reszta formularza. */
+h2.buy__label { font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); font-size: 1.15rem; }
+.buy__row { display: flex; gap: 10px; margin: 8px 0 14px; }
+.buy__row .btn { flex: 1; padding: 0 1.1em; }
+.buy__short { display: none; }
+@media (max-width: 479px) { .buy__row .btn svg, .buy__verb { display: none; } .buy__short { display: inline; } .buy__row .btn { padding: 0 .9em; } }
+@media (max-width: 359px) { .buy__row .btn { white-space: normal; line-height: 1.15; font-size: .92rem; padding: 6px .8em; } .buy__row .qty button { width: 38px; } }
+
+@media (min-width: 900px) { .sticky-buy { padding: 12px calc((100vw - min(100vw, var(--tresc))) / 2 + var(--margines)); } .sticky-buy .name { font-size: 1rem; } }
+
+.story { padding-top: var(--odstep-xl); padding-bottom: var(--odstep-xl); }
+.story__row { display: grid; gap: 28px; align-items: center; padding: clamp(28px, 5vw, 56px) 0; }
+.story__row img { width: 100%; border-radius: var(--r-l); aspect-ratio: 4 / 3; object-fit: cover; }
+/* R-03 (17.10): packshot na białym tle w sekcji story dostaje tło --tlo-produkt (klasę nadaje build.py po narożnikach zdjęcia) */
+.story__media--packshot { border-radius: var(--r-l); background: var(--tlo-produkt); overflow: hidden; }
+.story__media--packshot img { mix-blend-mode: multiply; }
+/* re-audyt T-29: wycięty packshot z daniem (LB795 bez aranżacji) mieści się w kadrze w całości, z cieniem pod pudełkiem */
+.story__media--wyciety img { object-fit: contain; padding: 5% 7%; mix-blend-mode: normal; filter: drop-shadow(0 18px 16px rgb(60 30 0 / .22)); }
+.story__row h2 { font-size: clamp(2rem, 4.2vw, 3rem); margin-bottom: 18px; }
+.story__row p { color: var(--tekst-slaby); font-size: 1.05rem; }
+.story__lead { font-size: 1.15rem !important; color: var(--tekst-mocny) !important; margin-bottom: 28px !important; }
+.story__punch { font-family: var(--font-naglowki); font-size: 1.5rem !important; color: var(--cta) !important; }
+@media (min-width: 900px) {
+  .story__row { grid-template-columns: 1fr 1fr; gap: 72px; }
+  .story__row:nth-child(even) .story__media { order: 2; }
+}
+@media (min-width: 900px) { .spec-wrap { grid-template-columns: .7fr 1.3fr; gap: 72px; } }
+/* ---------- v0.3: interakcje, koszyk, formularze, kategorie ---------- */
+
+
+.gallery:focus-visible { outline-offset: 6px; }
+
+
+
+
+
+
+
+/* cele dotykowe (audyt.py, próg 32 px) */
+
+/* ---------- Opinie (główna i karta produktu) ---------- */
+.reviews__grid { display: grid; gap: var(--odstep-m); }
+.reviews__sum { padding: var(--odstep-m); border-radius: var(--r-m); background: var(--tlo-akcent); color: var(--tekst-mocny); align-self: start; }
+/* 17.10: na kartach produktu sekcja opinii stoi na --tlo-alt, a --tlo-akcent to od 17.10 ten sam krem, więc podsumowanie dostaje biel jak karty opinii */
+.pdp ~ .reviews .reviews__sum { background: var(--biel); }
+.reviews__sum > b { display: block; font-family: var(--font-naglowki); font-size: 4rem; line-height: 1; margin-bottom: 6px; }
+.reviews__sum p { margin: 8px 0 16px; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.reviews__bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .8rem; font-weight: 600; }
+.reviews__bars li { display: grid; grid-template-columns: 12px 1fr 36px; align-items: center; gap: 10px; }
+.reviews__bars li span:last-child { text-align: right; color: var(--tekst-slaby); }
+.reviews__bars .bar { height: 8px; border-radius: var(--r-pill); background: var(--biel); overflow: hidden; }
+.reviews__bars .bar i { display: block; height: 100%; background: var(--akcent); }
+.reviews__track { scroll-padding-inline: var(--margines); display: grid; grid-auto-flow: column; grid-auto-columns: 84%; gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; scrollbar-width: none; }
+.reviews__track::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .reviews__track { grid-auto-columns: 48%; } }
+@media (min-width: 1000px) {
+  .reviews__grid { grid-template-columns: 280px 1fr; gap: 20px; }
+  .reviews__track { grid-auto-columns: calc((100% - 32px) / 3); margin: 0; padding: 0 0 8px; }
+  .reviews .dots { display: none; }
+}
+
+/* ---------- Dopracowanie 19.09 ---------- */
+@media (max-width: 639px) { .acc__grid .card__img { aspect-ratio: 16 / 10; } }
+/* R-04 (17.10): ocena przy cenie ze znacznikiem „opinie przykładowe” */
+.rating-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: -8px 0 18px; }
+.rating-row .tbd { font-size: .72rem; }
+.reviews__tbd { margin-top: 10px; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.rating-link { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 6px 0; font-size: var(--fs-maly); font-weight: 600; color: var(--tekst-mocny); text-decoration: none; }
+.rating-link .stars i { width: 16px; height: 16px; }
+.rating-link span:last-child { color: var(--tekst-slaby); text-decoration: underline; text-underline-offset: 3px; }
+@media (hover: hover) { .rating-link:hover span:last-child { color: var(--cta); } }
+
+/* =============================================================================
+   RUNDA 01 (uwagi klienta 1.10.2026): hero z KV, pasek promocji, karty modeli,
+   persony ze zdjęciami z planszy Kamila, niższy ebook, pasek dla firm.
+   ============================================================================= */
+
+/* --- Nagłówek: logo z funkcją obok (desktop) --- */
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand__tag { display: none; padding-left: 14px; border-left: 1px solid var(--linia); font-size: .78rem; font-weight: 600; line-height: 1.2; color: var(--tekst-slaby); max-width: 7.5em; }
+/* 17.10 (audyt R1-02): podpis od 1000 px, razem z menu desktopowym (wcześniej od 1080 px). Miejsce na podpis (ok. 110 px)
+   odzyskane tylko w zakresie 1000–1079 px: logo 136 px zamiast 158, odstępy w nagłówku 16 px, linki 8 px po bokach i .9rem.
+   Pomiar przy 1000 px: 40 + 136 + 14 + 94 + 16 + menu 518 + 16 + 100 + 40, wolne ok. 30 px po obu stronach menu,
+   logo się nie ściska. Od 1080 px nagłówek bez zmian. */
+@media (min-width: 1000px) { .brand__tag { display: block; } .header .brand, .header .logo-mark { flex: none; } }
+.nav a { white-space: nowrap; }
+@media (min-width: 1000px) and (max-width: 1199px) { .nav a { padding: 10px 11px; font-size: .92rem; } }
+@media (min-width: 1000px) and (max-width: 1079px) {
+  .header .wrap { gap: 16px; }
+  .header .logo-mark { width: 136px; }
+  .nav a { padding: 10px 8px; font-size: .9rem; }
+}
+
+/* --- 02 Promocje: stałe miejsce na banery, pasek i kafle --- */
+.promo { padding-top: clamp(32px, 4vw, 56px); padding-bottom: clamp(32px, 4vw, 56px); }
+.promo__grid { display: grid; gap: var(--odstep-s); }
+/* Makieta 25:923: kolumny 512, 320, 320 przy kontenerze 1184 px treści. */
+@media (min-width: 900px) { .promo__grid { grid-template-columns: 512fr 320fr 320fr; } }
+.promo__main, .promo__tile { position: relative; display: grid; border: 1px solid var(--linia);
+  border-radius: var(--r-l); overflow: hidden; text-decoration: none; }
+.promo__main { background: var(--tlo); color: var(--tekst-mocny); }
+.promo__tile { background: var(--biel); grid-template-rows: 230px 1fr; }
+.promo__media { display: block; overflow: hidden; background: var(--tlo-alt); }
+.promo__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.promo__body { display: grid; align-content: center; gap: 8px; padding: 0 24px; }
+.promo__main .promo__body { position: relative; z-index: 1; align-self: end; gap: 6px; padding: 28px; }
+.promo__main b { font-family: var(--font-naglowki); font-size: 2.2rem; line-height: 1; }
+.promo__tile b { font-family: var(--font-naglowki); font-size: 1.35rem; line-height: 1.1; color: var(--tekst-mocny); }
+.promo__txt { font-size: var(--fs-maly); line-height: 1.6; color: var(--tekst-slaby); max-width: 30ch; }
+.promo__go { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-weight: 700; color: var(--tekst-mocny); }
+.promo__go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.promo__pill { display: inline-block; justify-self: start; padding: 7px 16px; border-radius: var(--r-pill);
+  background: var(--tlo-akcent); color: var(--akcent-cieply-tekst); font-size: 1.04rem; font-weight: 800; letter-spacing: .03em; }
+@media (min-width: 900px) {
+  .promo__main { min-height: 449px; }
+}
+@media (max-width: 899px) {
+  .promo__main { grid-template-rows: 230px 1fr; }
+  .promo__main .promo__body { padding: 24px; }
+  .promo__main b { font-size: 1.8rem; }
+}
+
+/* --- 03 Każdy ma swój sposób: tło kremowe (runda 02: „zielone tło raczej odpuścimy”) --- */
+.way { background: var(--tlo-alt); }
+.way__text p { color: var(--tekst-mocny); }
+.way__text .btn { margin-top: 8px; }
+.way__compare figcaption { background: var(--biel); }
+.way__compare figure:last-child figcaption { background: var(--biel); }
+.way__arrow { border-color: var(--tlo-alt); background: var(--akcent); color: var(--tekst-mocny); }
+
+
+/* --- 05 Modele: cała oferta z przyciskiem zakupu --- */
+.modele__grid { display: grid; grid-template-columns: 1fr; gap: var(--odstep-s); }
+.modele .lead { max-width: 56ch; margin-inline: auto; }
+.modele .card__foot { gap: 8px; }
+@media (min-width: 640px) { .modele__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .modele__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .modele__grid { grid-template-columns: repeat(5, 1fr); gap: 18px; } .modele .card__body { padding: 18px 16px 20px; } .modele .card h3 { font-size: 1.3rem; } }
+
+/* --- 06 Kroki bez numeracji --- */
+.steps__list--plain .step__card { height: 100%; }
+
+/* --- 07 Persony --- */
+.persony__cta { margin-top: var(--odstep-m); display: flex; justify-content: center; }
+
+/* --- 08 Ebook: niższa sekcja, większe zdjęcie --- */
+.ebook__img { max-width: 100%; }
+@media (min-width: 900px) {
+  /* Makieta 25:688: sekcja 72 px odstępu, karta 482,8 px, zdjęcie poza siatką:
+     od 40,29% szerokości okna, 59,47% szerokości, wychodzi poza prawą krawędź. */
+  .ebook { min-height: 0; padding: 72px 0; }
+  .ebook__grid { grid-template-columns: .85fr 1.15fr; gap: var(--odstep-l); }
+  .ebook .sec, .ebook__text { padding: 32px; }
+  .ebook__img { position: absolute; left: 40.29%; top: 50%; transform: translateY(-50%);
+    width: 59.47%; height: auto; z-index: 0; }
+  .ebook__grid { position: relative; z-index: 1; }
+  .ebook__text { grid-column: 1; }
+}
+.ebook .btn { margin-top: 24px; }
+
+/* --- 10 Dla firm jako pasek --- */
+.b2b--pasek { background: var(--tlo); padding: clamp(36px, 5vw, 64px) 0; }
+.b2b__pasek { display: grid; gap: var(--odstep-m); align-items: center; padding: clamp(28px, 4vw, 44px); border-radius: var(--r-l); background: var(--cta); }
+.b2b--pasek .b2b__title { font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 16ch; margin-bottom: 12px; }
+.b2b--pasek .lead { margin: 0; max-width: 60ch; }
+
+/* --- Karta produktu, runda 01 --- */
+.gallery__stage { position: relative; }
+.gallery__badges { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: clamp(96px, 16vw, 140px); height: auto; }
+.ebook-box { display: grid; grid-template-columns: 96px 1fr; gap: var(--odstep-s); align-items: center; margin: 18px 0; padding: 14px; border-radius: var(--r-m); background: var(--tlo-akcent); text-decoration: none; color: var(--tekst-mocny); }
+.ebook-box img { width: 96px; height: auto; border-radius: 10px; }
+.ebook-box b { display: block; font-family: var(--font-naglowki); font-size: 1.25rem; line-height: 1.1; }
+.ebook-box small { display: block; margin-top: 6px; font-size: var(--fs-maly); line-height: 1.4; color: var(--tekst-slaby); }
+@media (hover: hover) { .ebook-box:hover { box-shadow: var(--cien); } .ebook-box:hover b { color: var(--cta); } }
+
+/* --- Kreacje z kampanii (docelowo publikacje z SoMe) --- */
+.some__grid { list-style: none; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; scroll-padding-inline: var(--margines); display: grid; grid-auto-flow: column; grid-auto-columns: 62%; gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.some__grid::-webkit-scrollbar { display: none; }
+.some__grid li { scroll-snap-align: start; }
+.some__grid img { width: 100%; height: auto; border-radius: var(--r-m); }
+@media (min-width: 900px) { .some__grid { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 0; } }
+
+/* --- Ebook na stronie głównej: niższa sekcja --- */
+.sec.ebook { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+.h2--kategoria { font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
+
+/* --- Ebook na hasło (uwaga klienta 1.10: podstrona zabezpieczona hasłem) --- */
+.gate { margin-top: 26px; padding: 20px; border-radius: var(--r-m); background: var(--biel); max-width: 30rem; }
+.gate__label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 8px; color: var(--tekst-mocny); }
+.gate__row { display: flex; flex-wrap: wrap; gap: 10px; }
+.gate__input { min-width: 0; max-width: 100%; flex: 1 1 11rem; min-height: 48px; padding: 0 14px; border: 1px solid var(--linia); border-radius: 14px; font: inherit; background: var(--tlo); }
+.gate__input:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+.gate__err { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--blad); }
+.gate__hint { margin: 10px 0 0; font-size: var(--fs-maly); color: var(--tekst-slaby); }
+.reader__frame { display: grid; gap: var(--odstep-m); justify-items: center; padding: clamp(16px, 3vw, 32px); border-radius: var(--r-l); background: var(--tlo-alt); }
+.reader__frame img { width: 100%; max-width: 760px; height: auto; border-radius: var(--r-m); -webkit-user-select: none; user-select: none; -webkit-user-drag: none; pointer-events: none; z-index: 1; }
+.reader .note-small { text-align: center; }
+@media (min-width: 900px) { .reader__frame { grid-template-columns: .5fr 1fr; align-items: center; } }
+
+/* Nagłówki muszą mieścić się także przy dłuższym kroju zastępczym. */
+.hero h1 { line-height: 1.05; }
+@media (max-width: 639px) {
+  .header .wrap { gap: 8px; }
+  .header .brand { flex: 1; min-width: 0; }
+  .header .logo-mark { max-width: 100%; }
+  .header__actions { flex: none; }
+}
+
+/* =============================================================================
+   RUNDA 02 (uwagi klienta 9.10.2026): smak, para, produkt z prawdziwych packshotów,
+   język graficzny opakowania (żółty i krem, ikony 3D, jedzenie z bliska).
+   ============================================================================= */
+
+/* --- 01 Hero: żółty KV z pomarańczowym żarem jak na froncie opakowania, persona z KV,
+       para nad posiłkiem i składniki w ruchu --- */
+.hero--smak { position: relative; overflow: hidden; isolation: isolate; background: var(--akcent); }
+.hero__tlo { position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(42% 62% at 74% 52%, rgb(255 255 255 / .5) 0%, transparent 62%),
+    radial-gradient(50% 80% at 76% 78%, var(--akcent-cieply) 0%, transparent 72%); }
+/* Rozmyty znak „lunchee” w tle jak w kreacjach KV: blady, nie konkuruje z postacią */
+.hero__tlo::after { content: ""; position: absolute; right: -6%; top: 10%; width: 66%; aspect-ratio: 2000 / 445;
+  background: url("../assets/img/logo-blur.webp") center / contain no-repeat; filter: blur(14px); opacity: .32; }
+.hero--smak .skladniki { z-index: 1; }
+.hero__grid { position: relative; z-index: 2; display: grid; }
+.hero__text { position: relative; z-index: 3; padding: 40px 0 8px; }
+.hero .eyebrow { color: var(--tekst-mocny); }
+.hero h1 { font-size: var(--fs-h1); line-height: 1.02; }
+.hero h1 span { display: block; }
+.hero h1 .alt { color: var(--cta); }
+.hero__sub { margin: 18px 0 26px; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.35; color: var(--tekst-mocny); max-width: 342px; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero__how-ic { display: none; }
+.hero__scena { position: relative; min-height: 430px; }
+.para--hero { left: 8%; width: 30%; bottom: 69.5%; }
+.hero__odznaki { position: absolute; left: 0; bottom: 22px; z-index: 3; }
+.hero__odznaki .odznaka { --w: 84px; }
+@media (min-width: 900px) {
+  .hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 600px; align-items: center; }
+  .hero__text { padding: 56px 0; }
+  .hero__scena { align-self: stretch; min-height: 600px; }
+  .hero__odznaki { left: -4%; bottom: 40px; }
+  .hero__odznaki .odznaka { --w: 108px; }
+}
+@media (max-width: 899px) {
+  .hero__cta { flex-direction: column; align-items: stretch; gap: 14px; }
+  .hero__cta .btn--blue { min-height: 60px; font-size: 1.05rem; }
+  .hero__how { order: 3; align-self: center; border-color: transparent; gap: 14px; }
+  .hero__how-ic { display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--tekst-mocny); border-radius: 50%; }
+  .hero__how-ic svg { transform: rotate(90deg); }
+  .hero__tlo { background:
+    radial-gradient(60% 40% at 55% 78%, rgb(255 255 255 / .45) 0%, transparent 65%),
+    radial-gradient(80% 45% at 60% 95%, var(--akcent-cieply) 0%, transparent 75%); }
+}
+
+/* --- 02 Promocje: dwa prawdziwe Lunchee z jedzeniem, gwarancja z pieczęcią, pudełko Lunchee przy dostawie --- */
+/* Poświata za produktami na całym kaflu, nie w scenie: w scenie urywała się na jej dolnej krawędzi (Figma 38:10, „dopracuj to odcięcie”) */
+.promo__main { grid-template-rows: auto 1fr; background: radial-gradient(62% 40% at 50% 28%, color-mix(in srgb, var(--akcent) 45%, transparent), transparent 78%), linear-gradient(165deg, var(--tlo-akcent) 0%, var(--tlo-alt) 70%); }
+.promo__scena { position: relative; display: block; height: 250px; overflow: hidden; }
+.promo__p { position: absolute; height: auto; filter: drop-shadow(0 18px 16px rgb(10 42 94 / .25)); }
+.promo__p--tyl { width: 46%; left: 10%; top: 10%; }
+.promo__p--przod { width: 52%; right: 6%; top: 34%; z-index: 1; }
+.para--promo { left: 20%; width: 18%; top: -6%; }
+.promo__scena .skladnik { width: var(--s); z-index: 2; }
+.promo__main .promo__body { align-self: start; gap: 8px; padding: 6px 28px 28px; }
+.promo__main b { font-size: clamp(1.9rem, 2.6vw, 2.4rem); }
+.promo__main .rabat { margin: 0 .08em; }
+.promo__media--gwarancja, .promo__media--dostawa { position: relative; display: grid; place-items: center; background: var(--tlo-alt); }
+.promo__media--gwarancja img { position: absolute; right: 6%; bottom: 10%; width: 62% !important; height: auto !important; object-fit: contain !important; filter: drop-shadow(0 14px 12px rgb(10 42 94 / .2)); }
+/* rozeta 3D z Codeksa zamiast płaskiej pieczęci, ta sama co w kaflach cech (Figma 38:10, „dopracuj tą ikonę”) */
+.promo__media--gwarancja img.promo__rozeta { left: 9%; top: 10%; right: auto; bottom: auto; z-index: 1; height: 50% !important; width: auto !important; max-width: none; rotate: -8deg; filter: drop-shadow(0 10px 12px rgb(10 42 94 / .3)); }
+.promo__media--dostawa img { width: auto !important; height: 86% !important; object-fit: contain !important; filter: drop-shadow(0 16px 14px rgb(120 60 0 / .25)); }
+/* auto dostawcze 3D z Codeksa w stylu ikon z opakowania zamiast płaskiej ciężarówki w kole (Figma 38:10, „dopracuj tą ikonę”) */
+.promo__media--dostawa img.promo__auto { inset: auto 5% 6% auto; margin: 0; height: auto !important; width: 36% !important; max-width: 150px; filter: drop-shadow(0 10px 12px rgb(10 42 94 / .25)); }
+@media (min-width: 900px) { .promo__main { min-height: 0; } .promo__scena { height: 290px; } }
+/* Uwaga 13.10 „zbyt mocne odcięcie”: obrazy w kaflach promocji rosły z szerokością i wychodziły poza pole
+   (pudełko dostawy ucięte na każdej szerokości, Lunchee w gwarancji od 520 px, dwa Lunchee w scenie od 520 px).
+   Rozmiar liczony od wysokości pola, scena na telefonie i tablecie w stałych proporcjach. */
+.promo__media--dostawa img { position: absolute; inset: 7% 0; margin: auto; height: 86% !important; width: auto !important; max-width: 90%; }
+.promo__media--gwarancja img { height: 72% !important; width: auto !important; max-width: 64%; }
+@media (max-width: 899px) {
+  .promo__main { grid-template-rows: auto 1fr; }
+  .promo__scena { height: auto; aspect-ratio: 16 / 10.4; width: min(100%, 520px); margin-inline: auto; }
+}
+
+
+/* --- 05 Modele: scena z dodatkami do nazwy modelu, produkt z packshotu klienta, na najechaniu danie --- */
+.card--model .card__img { aspect-ratio: 4 / 3.2; padding: 0; background: var(--biel); } /* bez osobnego tła pod produktem (uwaga 9.10: „usuwamy jednolite lub gradientowe tła”) */
+.card--model .card__img img { height: auto; }
+.card__produkt { position: relative; z-index: 1; width: 72% !important; margin-top: 6%; filter: drop-shadow(0 18px 14px rgb(0 0 0 / .3)); transition: opacity var(--przejscie), transform var(--przejscie); }
+.card--model .card__img-hover--alfa { z-index: 2; inset: 0; width: 100%; height: 100% !important; padding: 9% 10% 4%; object-fit: contain; transform: none; filter: drop-shadow(0 18px 14px rgb(0 0 0 / .3)); }
+.card--model .skladnik { width: var(--s); z-index: 1; }
+.card--model .skladnik img { animation: none; }
+.card__nazwa { display: flex; align-items: center; gap: 10px; font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); letter-spacing: var(--tracking-naglowki); font-size: 2rem; line-height: 1; color: var(--tekst-mocny); }
+.card__nazwa::before { content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--kolor); box-shadow: 0 0 0 3px var(--biel), 0 0 0 4px var(--linia); }
+.modele .card--model h3, .card--model h3 { font-size: 1.02rem; line-height: 1.15; color: var(--tekst-slaby); margin-top: 4px; } /* 17.10 (audyt W-01): Coolvetica z trackingiem nagłówków, było Inter .95rem */
+.card--model p { display: none; }
+.card--model .card__status { z-index: 3; }
+@media (hover: hover) {
+  .card--model:hover .card__img > img:first-of-type { opacity: 1; }
+  .card--model:hover .card__produkt { opacity: 0; transform: scale(.96); }
+  .card--model:hover .card__img-hover--alfa { opacity: 1; transform: scale(1.04); }
+}
+@media (min-width: 1280px) { .modele .card__nazwa { font-size: 1.75rem; } }
+
+/* --- 06 Jak korzystać: kropki i strzałki pod kadrami na dotyku --- */
+.steps .dots { margin-top: 12px; }
+@media (min-width: 1100px) { .steps .dots { display: none; } }
+.step__card img { aspect-ratio: 1; object-fit: cover; }
+
+/* Ebook (13.10: „dopracuj to odcięcie”, potem „za małe ebooki”): żółty blat z Codeksa na całą sekcję jako tło, bez
+   krawędzi; okładka z rozkładówką to oryginalne wycięcie z makiety KV jako osobny obraz, duży, po prawej, rozkładówka
+   wychodzi za prawą krawędź ekranu. Na telefonie duża okładka nad kartą tekstu. */
+.ebook--r2 { padding: 0 !important; background: var(--akcent) url(../assets/img/r2/ebook-blat.webp) 40% 50% / cover no-repeat; }
+.ebook--r2 .ebook__foto { position: relative; width: 150%; margin: 28px 0 -6px var(--margines); }
+.ebook--r2 .ebook__foto img { display: block; width: 100%; height: auto; filter: drop-shadow(16px 24px 20px rgb(110 60 0 / .32)); }
+.ebook--r2 .ebook__grid { padding: 8px 0 40px; }
+.ebook--r2 .ebook__text { background: var(--biel); }
+.ebook--r2 .h2 { margin-bottom: 18px; }
+@media (min-width: 900px) {
+  .ebook--r2 { display: block; min-height: 0; }
+  .ebook--r2 .ebook__foto { position: absolute; top: 50%; margin: 0; translate: 0 -50%;
+    left: calc(max(0px, (100vw - var(--tresc)) / 2) + var(--margines) + (min(100vw, var(--tresc)) - 2 * var(--margines)) * .43);
+    width: clamp(700px, 76vw, 1080px); }
+  .ebook--r2 .ebook__grid { min-height: 720px; grid-template-columns: 40% 1fr; padding: 64px 0; }
+  .ebook--r2 .ebook__text { padding: 40px; }
+}
+
+/* --- 10 Dla firm: znak oferty B2B i pudełka Lunchee na prezent --- */
+.b2b--pasek .b2b__pasek { display: grid; gap: var(--odstep-m); align-items: center;
+  background: radial-gradient(60% 120% at 88% 50%, color-mix(in srgb, var(--akcent) 28%, transparent), transparent 70%), linear-gradient(115deg, var(--tlo-ciemne) 0%, var(--cta) 100%); }
+.b2b__znak { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 22px; background: var(--akcent); color: var(--tekst-mocny); }
+.b2b__znak svg { width: 42px; height: 42px; }
+.b2b--pasek .eyebrow { color: var(--akcent); }
+.b2b--pasek .lead { margin: 0 0 24px; }
+.b2b__pudelka { position: relative; width: 340px; max-width: 100%; height: 230px; justify-self: center; }
+.b2b__pudelka img { position: absolute; bottom: 26px; height: auto; filter: drop-shadow(0 18px 16px rgb(0 0 0 / .35)); }
+.b2b__pudelka img:nth-child(1) { left: 0; width: 44%; bottom: 46px; }
+.b2b__pudelka img:nth-child(2) { right: 0; width: 44%; bottom: 46px; }
+.b2b__pudelka img:nth-child(3) { left: 50%; width: 54%; transform: translateX(-50%); z-index: 1; }
+.b2b__wstazka { position: absolute; left: 50%; bottom: 0; z-index: 2; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+  border-radius: var(--r-pill); background: var(--akcent); color: var(--tekst-mocny); font-size: .85rem; font-weight: 800; white-space: nowrap; }
+.b2b__wstazka svg { width: 18px; height: 18px; }
+@media (min-width: 900px) { .b2b--pasek .b2b__pasek { grid-template-columns: auto 1fr auto; gap: var(--odstep-l); } .b2b__znak { align-self: start; } }
+
+/* --- Stopka: media społecznościowe (@luncheepl z okładki instrukcji) --- */
+.footer .footer__social { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
+.footer__social a { display: grid !important; place-items: center; width: 44px; height: 44px; padding: 0 !important; border-radius: 50%; background: rgb(255 255 255 / .12); color: var(--biel); }
+.footer__social svg { width: 22px; height: 22px; }
+.footer__handle { margin-left: 4px; font-weight: 700; color: var(--biel); }
+@media (hover: hover) { .footer__social a:hover { background: var(--akcent); color: var(--tekst-mocny); } }
+
+/* --- Karta produktu: odznaki klienta w galerii, miniatura w pasku zakupu --- */
+.gallery__badges { width: auto; }
+.gallery__badges .odznaka { --w: clamp(62px, 7vw, 86px); }
+.cart__lewa { min-width: 0; }
+
+/* --- 07 Twój Lunchee moment (runda 02): sytuacje z opakowania, sceny zamiast metryczek person --- */
+.momenty { background: var(--tlo-alt); }
+.momenty__grid { list-style: none; margin: 0 calc(var(--margines) * -1); padding: 0 var(--margines) 8px; display: grid; grid-auto-flow: column; grid-auto-columns: 80%;
+  gap: var(--odstep-s); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margines); scrollbar-width: none; }
+.momenty__grid::-webkit-scrollbar { display: none; }
+.moment-card { scroll-snap-align: start; display: flex; flex-direction: column; border-radius: var(--r-m); background: var(--biel); overflow: hidden; }
+.moment-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.moment-card__body { padding: 18px 22px 24px; }
+.moment-card h3 { font-size: var(--fs-h3); line-height: 1.05; color: var(--cta); margin-bottom: 8px; }
+.moment-card p { margin: 0; color: var(--tekst-slaby); font-size: var(--fs-tekst); line-height: 1.45; }
+.momenty .dots { margin-top: 12px; }
+@media (min-width: 900px) {
+  .momenty__grid { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; overflow: visible; margin: 0; padding: 0; }
+  .momenty .przewin--momenty, .momenty .dots { display: none; }
+}
+/* Karta produktu: odznaki w rogu zdjęcia (uwaga z rundy 01), a nie pod nim, gdy kolumna miniatur jest wyższa */
+@media (min-width: 900px) { .gallery__stage { align-self: start; } }
+
+/* --- 05 Modele, poprawka 13.10: bez scen. Gra kolor i nazwa: duża nazwa modelu w jego kolorze
+   za packshotem, jasne tło, produkt w całości (uwaga klienta: „sam produkt najważniejszy”) --- */
+.card--nazwa { --kolor-nazwy: color-mix(in srgb, var(--kolor) 80%, var(--biel)); }
+.card--nazwa[data-model="lb715"] { --kolor-nazwy: var(--produkt-pearl-nazwa); }
+.card--nazwa[data-model="lb755"] { --kolor-nazwy: var(--produkt-glamour-nazwa); }
+.card--nazwa .card__img { container-type: inline-size; aspect-ratio: 1; align-items: end;
+  background: var(--biel); }
+.card__tlo-nazwa { position: absolute; left: 0; right: 0; top: 10%; z-index: 0; text-align: center; white-space: nowrap;
+  font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); line-height: 1; letter-spacing: var(--tracking-naglowki); /* 17.10 (audyt R2-02), było -.01em */
+  font-size: min(32cqi, calc(148cqi / var(--litery))); color: var(--kolor-nazwy); transition: transform .4s ease; }
+.card--nazwa .card__produkt { width: 70% !important; margin: 0 0 9%; }
+.card--nazwa .card__img-hover--alfa { padding: 34% 14% 8%; object-position: 50% 100%; }
+@media (hover: hover) { .card--nazwa:hover .card__tlo-nazwa { transform: translateY(-4%); } }
+.card--nazwa h3 { margin-top: 0; font-size: 1.05rem; color: var(--tekst-mocny); }
+.card__status.card__status--tekst { position: static; align-self: flex-start; margin: 4px 0 0; padding: 3px 10px; font-size: .7rem; }
+/* Modele na telefonie: dwie kolumny zamiast pięciu kart na całą szerokość */
+@media (max-width: 639px) {
+  .modele__grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .modele .card__body { padding: 14px 12px 16px; gap: 4px; }
+  .modele .card__nazwa { font-size: 1.35rem; gap: 7px; }
+  .modele .card__nazwa::before { width: 13px; height: 13px; }
+  .modele .card--model h3 { font-size: .8rem; }
+  .modele .card__foot { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .modele .card__foot .btn { width: 100%; justify-content: center; }
+}
+
+/* --- 01 Hero, dopracowanie 13.10: odznaki pod przyciskami (jak masterbaner i plansza KV),
+   składniki jako wybuch wokół pudełka z jedzeniem, liczone od sceny, więc trzymają się postaci
+   na każdej szerokości. Ostre z przodu, rozmyte za postacią. --- */
+.hero--smak .hero__odznaki { position: static; margin-top: 30px; gap: 14px; }
+.hero--smak .hero__odznaki .odznaka { --w: 88px; }
+@media (min-width: 900px) {
+  .hero--smak .hero__grid { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
+  .hero--smak .hero__odznaki .odznaka { --w: 96px; }
+}
+@media (max-width: 899px) {
+  .hero--smak .hero__text { padding-bottom: 0; }
+  .hero--smak .hero__odznaki { justify-content: center; margin-top: 26px; }
+  .hero--smak .hero__scena { min-height: 400px; }
+}
+
+/* --- Nakładka ze składnikami na całą stronę (runda 02, 13.10): przed sekcjami, kilka sztuk
+   na granicach sekcji, kliknięcia przechodzą przez nią. Pozycję pionową liczy main.js z kotwicy. --- */
+main { position: relative; }
+.nakladka { position: absolute; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; }
+.lewitujacy { position: absolute; left: var(--x); top: 0; width: var(--s); rotate: var(--r, 0deg);
+  translate: 0 var(--przesun, 0px); filter: drop-shadow(0 18px 18px rgb(60 30 0 / .28)); will-change: translate; }
+.lewitujacy img { display: block; width: 100%; height: auto; animation: unos var(--t, 8s) ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
+.lewitujacy--dalej { filter: blur(2.5px) drop-shadow(0 10px 10px rgb(60 30 0 / .18)); opacity: .9; }
+/* Węższe ekrany mają marginesy 16–48 px, więc duże składniki przy krawędzi wchodziłyby na treść:
+   mniejsze o 30%, dwa największe przy krawędzi tylko od 1360 px (test kolizji 13.10) */
+@media (max-width: 1359px) {
+  .lewitujacy { width: calc(var(--s) * .7); }
+  .lewitujacy--szeroki { display: none; }
+}
+@media (max-width: 899px) {
+  .lewitujacy { width: calc(var(--s) * .55); }
+  .lewitujacy:not(.lewitujacy--mobile) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .lewitujacy img { animation: none; } }
+
+/* --- 01 Hero, wersja ze zdjęciem miejsca (13.10, uwaga Grzegorza: „panią powinno otaczać tło miejsca,
+   w którym się znajduje, tylko z żółtym kolorem”). Zdjęcie z ImageGen po prawej, lewa krawędź gaśnie
+   w płaską żółć KV, tekst na spokojnej ścianie. Para i trzy małe składniki liczone od zdjęcia. --- */
+.hero--smak .hero__tlo { background: var(--akcent); }
+.hero--smak .hero__tlo::after { display: none; }
+.hero--smak .hero__scena { min-height: 0; }
+.hero__zdjecie { position: relative; aspect-ratio: 1672 / 941; }
+.hero__zdjecie > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero__zdjecie .para--hero { left: 47%; width: 10%; bottom: 50%; }
+@media (min-width: 900px) {
+  .hero--smak .hero__grid { position: static; grid-template-columns: minmax(0, 560px); min-height: 600px; }
+  .hero--smak .hero__text { z-index: 3; }
+  .hero--smak .hero__scena { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; z-index: 1; }
+  .hero__zdjecie { position: absolute; top: 0; right: 0; height: 100%; width: auto;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%); mask-image: linear-gradient(to right, transparent 0, #000 30%); }
+}
+@media (max-width: 899px) {
+  .hero--smak .hero__scena { margin: 26px calc(var(--margines) * -1) 0; }
+  .hero__zdjecie { aspect-ratio: 4 / 3.3; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%); mask-image: linear-gradient(to bottom, transparent 0, #000 16%); }
+  .hero__zdjecie > img { object-position: 66% 30%; }
+  .hero__zdjecie .para--hero { left: 30%; width: 15%; bottom: 46%; }
+}
+/* Hero od 1280 px (uwagi 13.10: „kobieta bliżej napisów”, „nadal zbyt szeroko”): zdjęcie przypięte do lewej
+   krawędzi kolumny tekstu, nie do okna. Kolumna tekstu ma 560 px, pudełko w ręce zaczyna się na 41% szerokości
+   zdjęcia (1066 px przy wysokości 600), więc +183 px daje ok. 60 px od kolumny tekstu do pudełka na każdej
+   szerokości. Prawa krawędź zdjęcia gaśnie w żółć, bo zdjęcie nie sięga już brzegu okna. */
+@media (min-width: 1280px) {
+  .hero__zdjecie { right: auto; left: calc(max(0px, (100vw - var(--tresc)) / 2) + var(--margines) + 183px);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 30%, #000 86%, transparent 100%); }
+}
+
+/* Karty na kremowych sekcjach: cienki obrys, żeby pole zdjęcia nie zlewało się z tłem sekcji (QA 13.10) */
+.card { box-shadow: 0 0 0 1px var(--linia); }
+@media (hover: hover) { .card:hover { box-shadow: 0 0 0 1px var(--linia), var(--cien); } }
+
+/* QA 13.10 (przegląd z Codeksem, potwierdzony): */
+/* karty modeli: cena nad przyciskiem w każdej karcie, niezależnie od długości ceny */
+.card--model .card__foot { flex-direction: column; align-items: flex-start; gap: 10px; }
+/* telefon: zdjęcie hero z jedzeniem na pierwszym ekranie, nad tekstem */
+@media (max-width: 899px) {
+  .hero--smak .hero__grid { display: flex; flex-direction: column; }
+  .hero--smak .hero__scena { order: -1; margin: 0 calc(var(--margines) * -1); }
+  .hero--smak .hero__zdjecie { aspect-ratio: 16 / 10.5; -webkit-mask-image: linear-gradient(to top, transparent 0, #000 18%); mask-image: linear-gradient(to top, transparent 0, #000 18%); }
+  .hero--smak .hero__zdjecie > img { object-position: 62% 32%; }
+  .hero--smak .hero__zdjecie .para--hero { left: 32%; width: 13%; bottom: 44%; }
+  .hero--smak .hero__text { padding-top: 6px; padding-bottom: 32px; }
+  .hero--smak .hero__odznaki { margin-top: 22px; }
+  /* porównanie „kiedyś / dziś”: etykiety na dole zdjęcia, nie na twarzach */
+  .way__compare figcaption { top: auto; bottom: 12px; }
+}
+
+/* Krok „Podgrzej”: zbliżenie okienka parowego z prawdziwego packshotu klienta (uwaga 9.10 o źle
+   wygenerowanym zaworze; tekst kroku mówi „Uchyl okienko parowe”) */
+.step__foto { position: relative; }
+.step__zblizenie { position: absolute; left: 10px; top: 10px; width: 34%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  border: 4px solid var(--biel); box-shadow: 0 10px 20px -10px rgb(10 42 94 / .6); }
+.step__card .step__zblizenie img { width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; }
+/* Wstawka z okienkiem parowym: znaczek „uchyl” (strzałka w górę), żeby pokazywała czynność z tekstu kroku */
+.step__zblizenie { overflow: visible; }
+.step__zblizenie img { border-radius: 50%; }
+.step__zblizenie::after { content: ""; position: absolute; right: -6px; top: -6px; width: 34%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--akcent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a2a5e' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5M6 11l6-6 6 6'/%3E%3C/svg%3E") center / 62% no-repeat;
+  box-shadow: 0 0 0 3px var(--biel); }
+
+/* „Jedz po swojemu”: rytm zamiast równej siatki profili; środkowa kolumna przesunięta (QA 13.10, uwaga y5054).
+   Podpisy zostają pod zdjęciem, bo na zdjęciu przyciemnienie zasłaniało lunch boxy. */
+@media (min-width: 900px) {
+  .momenty__grid { padding-bottom: 48px; }
+  .momenty__grid > .moment-card:nth-child(3n + 2) { translate: 0 48px; }
+}
+/* Pasek dla firm po opiniach: bez podwójnego marginesu (pomiar przerw 13.10: 224 px wobec ok. 155 px między resztą sekcji) */
+.reviews + .b2b--pasek { padding-top: 0; }
+
+/* Galeria z jednym zdjęciem (LBL7 czeka na zdjęcie od klienta): bez kolumny miniatur i kropek */
+.gallery--jedno .gallery__dots { display: none; }
+@media (min-width: 900px) { .gallery.gallery--jedno { grid-template-columns: minmax(0, 1fr); } }
+
+/* Hero, wybór klienta 16.10: tło „Kuchnia”, postać od nowa z Nano Banana 2.1 (hero-kuchnia-fit.webp, 4088×1290). Na desktopie zdjęcie ma
+   szerokość proporcjonalną do wysokości hero i stoi tak, że lewa krawędź pudełka (42% szerokości pliku) wypada
+   24 px za kolumną tekstu; liczy to main.js (--hero-l, --hero-w, --hero-t). Pod tekstem żółta mgiełka. */
+.hero--tlo .hero__zdjecie > img { object-position: var(--hero-poz-m, 58%) 50%; }
+@media (min-width: 900px) {
+  .hero--smak.hero--tlo .hero__zdjecie { top: 0; right: auto; left: var(--hero-l, 0px); height: 100%; width: var(--hero-w, 100%); aspect-ratio: auto;
+    -webkit-mask-image: none; mask-image: none; }
+  .hero--tlo .hero__zdjecie > img { object-position: 50% 50%; }
+  .hero--tlo .hero__zdjecie::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgb(242 185 12 / .55) 0, rgb(242 185 12 / .55) calc(var(--hero-t, 600px) - 280px), transparent calc(var(--hero-t, 600px) + 10px)); }
+}
+
+/* Hero 16.10: lewitujące warzywa tylko w wolnych pasach: po lewej od kolumny tekstu (--hero-tl), po prawej za
+   postacią (--hero-pr = 70% szerokości zdjęcia). Pozycje i pasy liczy main.js, ruch to delikatne unoszenie. */
+.hero__warzywa { position: absolute; inset: 0; z-index: 2; pointer-events: none; z-index: 1; }
+.hero__warzywo { position: absolute; top: var(--y); width: var(--s); rotate: var(--r, 0deg); filter: drop-shadow(0 12px 12px rgb(90 50 0 / .25)); }
+.hero__warzywo--lewa { right: calc(100% - var(--hero-tl, 0px) + 34px); }
+.hero__warzywo--prawa { left: calc(var(--hero-pr, 100%) + 10px); }
+.hero__warzywo--dalej { filter: blur(2px) drop-shadow(0 10px 10px rgb(90 50 0 / .18)); opacity: .9; }
+.hero__warzywo img { display: block; width: 100%; height: auto; animation: hero-unos var(--t, 8s) ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
+@keyframes hero-unos { 0% { translate: 0 -7px; rotate: -4deg; } 100% { translate: 0 9px; rotate: 5deg; } }
+@media (max-width: 899px) { .hero__warzywa { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero__warzywo img { animation: none; } }
+
+/* Hero 16.10: podtytuł w jednej linii od tabletu w górę (prośba Grzegorza) */
+@media (min-width: 900px) { .hero--smak .hero__sub { max-width: none; white-space: nowrap; } }
+
+/* Stopka 16.10: lewitujący składnik w prawym dolnym rogu, od 1100 px, gdzie jest wolne miejsce pod kolumną Zakupy.
+   Runda 3 (SG-8941, 22.10): pieczony batat zamiast awokado (klient: awokado je się na zimno), pomarańcz z KV na granacie */
+.footer { position: relative; overflow: hidden; }
+.footer__jedzenie { display: none; }
+@media (min-width: 1100px) {
+  .footer__jedzenie { display: block; position: absolute; right: max(24px, calc((100vw - var(--tresc)) / 2 + var(--margines) - 40px)); bottom: 22px; width: 330px; height: 170px; pointer-events: none; z-index: 1; }
+  .footer__sk { position: absolute; height: auto; filter: drop-shadow(0 16px 18px rgb(0 0 0 / .35)); animation: footer-unos var(--t, 8s) ease-in-out infinite alternate; }
+  .footer__sk--a { width: 150px; left: 50%; top: 4px; margin-left: -75px; rotate: -8deg; --t: 8s; }
+  .footer__sk--b { width: 156px; right: 0; top: 0; rotate: 10deg; --t: 9.5s; animation-delay: -3s; }
+}
+@keyframes footer-unos { 0% { translate: 0 -8px; } 100% { translate: 0 10px; } }
+@media (prefers-reduced-motion: reduce) { .footer__sk { animation: none; } }
+
+/* Mobile 17.10: dopracowanie telefonu poza płótnami wariantów (audyt 390 px). Wszystko pod max-width 899 px,
+   desktop bez zmian. */
+@media (max-width: 899px) {
+  /* nagłówki bez sierot i bez jednego słowa w ostatniej linii; płótna wariantów (.vk) mają własny skład */
+  :where(h1, h2, h3):not(.vk *) { text-wrap: balance; }
+  .hero__sub, .lead, .moment-card p, .story__row p { text-wrap: pretty; }
+
+  /* Ebook: karta tekstu miała boczny padding zdjęty przez skrót `padding: 8px 0 40px` i dotykała krawędzi ekranu.
+     Rozkładówka dalej urywa się na prawej krawędzi ekranu, ale obraz kończy się na niej sam (object-fit, kadr od lewej):
+     ten sam widok co obraz 150% szerokości przycięty przez sekcję, bez elementu poza ekranem (audyt: „wystaje”). */
+  .ebook--r2 .ebook__grid { padding-left: max(var(--margines), env(safe-area-inset-left)); padding-right: max(var(--margines), env(safe-area-inset-right)); }
+  .ebook--r2 .ebook__foto { width: calc(100% - var(--margines)); }
+  .ebook--r2 .ebook__foto img { width: 100%; height: calc(100vw * 1.5 * 1136 / 1800); object-fit: cover; object-position: 0 50%; }
+  .ebook--r2 .ebook__text { padding: 26px 22px; }
+
+  /* Opinie: podsumowanie w dwóch kolumnach (ocena po lewej, rozkład po prawej), o połowę niższe */
+  .reviews__sum { display: grid; grid-template-columns: 7.2rem minmax(0, 1fr); column-gap: 18px; align-items: center; padding: 20px; }
+  .reviews__sum > b { font-size: 3.2rem; grid-column: 1; }
+  .reviews__sum > .stars, .reviews__sum > p { grid-column: 1; }
+  .reviews__sum > p { margin: 6px 0 0; line-height: 1.35; }
+  .reviews__bars { grid-column: 2; grid-row: 1 / span 3; }
+
+  /* Karta produktu: odstęp między tytułem a oceną (gwiazdki siedziały na tytule) */
+  .buy h1 + .rating-row { margin-top: 6px; }
+  /* Przyciski wysyłki formularzy i wejścia do ebooka na całą szerokość, pod kciuk */
+  .form .btn { justify-self: stretch; }
+  .gate__row .btn { flex: 1 1 100%; }
+  .b2b__cta .btn { flex: 1 1 100%; }
+  /* zgody i faktura w formularzach: wiersz z polem wyboru ma 44 px wysokości (było 32) */
+  .check { padding: 10px 0; }
+
+  /* Formularz odstąpienia: word-break: normal siedzi od 17.10 w regule bazowej .legal__form (components.css), także na desktopie */
+  .legal__form-title { line-height: 1.25; }
+
+  /* Pasek zakupu: węższy przycisk i miniatura, żeby nazwa nie łamała się na cztery linie */
+  .sticky-buy { gap: 10px; }
+  .sticky-buy__th { width: 48px; height: 48px; }
+  .sticky-buy .btn { padding: 0 1.15em; }
+  /* Pasek zakupu zasłaniał dół stopki: stopka dostaje miejsce pod nim */
+  body:has(.sticky-buy) .footer { padding-bottom: calc(32px + 84px + env(safe-area-inset-bottom)); }
+
+  /* Stopka: kolumny linków obok siebie zamiast jednej kolumny na 1550 px */
+  .footer { padding-top: 56px; }
+  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 20px; }
+  .footer__brand { grid-column: 1 / -1; }
+  .footer__brand img { width: 150px; margin-bottom: 22px; }
+  .footer__grid > :last-child { grid-column: 1 / -1; }
+  .footer__grid > :last-child ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
+  .footer__grid > div:not(.footer__brand) ul { row-gap: 0; }
+  .footer__grid > div:not(.footer__brand) ul a { padding: 9px 0; line-height: 1.6; }
+  .footer h4 { padding-bottom: 12px; margin-bottom: 6px; }
+  .footer__bottom { margin-top: 40px; }
+
+  /* Panel wyboru wariantu (podgląd dla klienta) nie wchodzi na otwarte menu */
+  body:has(.mobile-nav.is-open) .ws-szyna { display: none; }
+}
+/* Tylko telefon (do 639 px): od 640 px siatka kart ma już dwie kolumny w pełnym rozmiarze, a kwadratowe zdjęcia opisów
+   byłyby na tablecie za wysokie */
+@media (max-width: 639px) {
+  /* Opisy produktu: kwadratowe packshoty w całości (kadr 4:3 obcinał torbę i pokrywę) */
+  .story__row img { aspect-ratio: auto; }
+
+  /* Pozostałe modele i lunch boxy na stronie akcesoriów: dwie kolumny jak w sekcji modeli na głównej */
+  .acc__grid:has(> .card--model) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .acc__grid > .card--model .card__img { aspect-ratio: 1; } /* kwadrat: nad pudełkiem jest miejsce na „Niedostępny w sklepie” */
+  .acc__grid > .card--model .card__produkt { margin-top: 18%; }
+  .acc__grid > .card--model .card__body { padding: 14px 12px 16px; gap: 4px; }
+  .acc__grid > .card--model .card__nazwa { font-size: 1.35rem; gap: 7px; }
+  .acc__grid > .card--model .card__nazwa::before { width: 13px; height: 13px; }
+  .acc__grid > .card--model h3 { font-size: .85rem; line-height: 1.3; }
+  .acc__grid > .card--model .card__foot .btn { width: 100%; }
+
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer__grid > :last-child { grid-column: auto; }
+  .footer__grid > :last-child ul { grid-template-columns: minmax(0, 1fr); }
+}
+/* Mobile 17.10, przegląd QA (360 i 390 px) */
+@media (max-width: 899px) {
+  /* podpowiedź karuzeli: strzałka idzie za ostatnim słowem, nie wisi przy prawej krawędzi zawiniętego tekstu */
+  .przewin__podpowiedz { display: block; flex: 1 1 auto; min-width: 0; }
+  .przewin__podpowiedz svg { display: inline-block; vertical-align: -4px; margin-left: 2px; }
+  /* bez samotnego „l”, „V,” i „V?” w ostatniej linii: najważniejsze informacje, zestaw, pytania FAQ; krótkie podpisy
+     kafli „W zestawie” wyważone („Przewód / 230 V” zamiast „Przewód 230 / V”) */
+  .feat li, .kit__list li, .faq summary { text-wrap: pretty; }
+  .buy__kit li span { text-wrap: balance; }
+  /* kafel „W domu i w trasie.”: chipy 230/12/24 V i tytuł (nowrap) były szersze niż kolumna tekstu i wchodziły
+     pod wtyczkę (360 i 768 px). Chipy i tytuł idą przez całą szerokość kafla, wtyczka stoi obok opisu. */
+  .feats__tile:has(.feats__chips) .feats__tekst { display: contents; }
+  .feats__tile:has(.feats__chips) :is(.feats__chips, .feats__val) { grid-column: 1 / -1; }
+  .feats__tile:has(.feats__chips) .feats__opis { grid-column: 1; }
+  .feats__tile:has(.feats__chips) .feats__ilustracja { grid-column: 2; grid-row: 3; width: 64px; }
+  /* specyfikacja: nagłówek nad tabelą bez podwójnego odstępu (margines nagłówka + odstęp siatki) */
+  .spec-wrap { gap: 18px; }
+  .spec-wrap > .sec__head { margin-bottom: 0; }
+  /* galeria akcesoriów: packshoty są przycięte na styk, na pełnej szerokości ekranu dotykały krawędzi */
+  .gallery__main img[src*="/akcesoria/"]:not([src*="lbl7"]) { padding: 10%; }
+}
+@media (max-width: 639px) {
+  /* karty modeli w dwóch kolumnach: cena się nie łamie („249,00 / zł”), stara cena schodzi do nowej linii */
+  .acc__grid > .card--model .price--sm { flex-wrap: wrap; row-gap: 0; white-space: nowrap; }
+  /* „Niedostępny w sklepie” w jednej linii, nie wchodzi na pudełko przy 360 px */
+  .acc__grid > .card--model .card__status { top: 8px; left: 8px; padding: 5px 9px; white-space: nowrap; }
+}
+@media (max-width: 419px) {
+  /* kolory na karcie produktu: pięć w jednym rzędzie także przy 360 px (Night spadał do drugiego rzędu) */
+  .buy .swatches { column-gap: 4px; justify-content: space-between; }
+  /* pasek zakupu: przycisk bez ikony koszyka (jak główny przycisk poniżej 480 px), nazwa w dwóch liniach zamiast trzech */
+  .sticky-buy .btn svg { display: none; }
+}
+@media (min-width: 360px) and (max-width: 419px) {
+  /* „Do koszyka · 249,00 zł” w jednej linii przy 360 px (samotne „zł” w drugiej) */
+  .buy__row .qty button { width: 40px; }
+  .buy__row .btn { padding: 0 .7em; font-size: .95rem; }
+}
+
+/* Hero na telefonie 17.10: odznaki 60°C i 3 źródła mniejsze, na zdjęciu obok kobiety (prawy górny róg, przy oknie),
+   zamiast dużego rzędu pod przyciskami */
+@media (max-width: 899px) {
+  .hero--smak .hero__text { position: static; }
+  .hero--smak .hero__odznaki { position: absolute; top: 14px; right: 12px; left: auto; bottom: auto; z-index: 4; margin: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .hero--smak .hero__odznaki .odznaka { --w: clamp(54px, 15vw, 76px); }
+  .hero--smak .hero__odznaki .odznaka--cieplo { rotate: 4deg; }
+  .hero--smak .hero__odznaki .odznaka--zasilanie { rotate: -4deg; }
+}
+
+/* Hero na telefonie 17.10: tekst wyśrodkowany */
+@media (max-width: 899px) {
+  .hero--smak .hero__text { text-align: center; }
+  .hero--smak .hero__text .hero__sub { margin-left: auto; margin-right: auto; }
+  .hero--smak .hero__cta { align-items: stretch; justify-content: center; }
+}
+
+/* Hero na telefonie 17.10: większy nagłówek, mniejszy przycisk (wyśrodkowany, nie na całą szerokość) */
+@media (max-width: 899px) {
+  .hero--smak h1 { font-size: min(11.8vw, 3.4rem); }
+  .hero--smak .hero__cta .btn--blue { align-self: center; min-height: 52px; font-size: 1rem; padding-inline: 30px; }
+}
+
+/* Ebook na telefonie 17.10: kadr makiety ścięty od góry o 15% */
+@media (max-width: 899px) {
+  .ebook--r2 .ebook__foto img { height: calc(100vw * 1.5 * 1136 / 1800 * .85); object-position: 0 100%; }
+}
+
+/* =============================================================================
+   AUDYT ZGODNOŚCI 17.10 (pakiet css-tokeny): odznaki w hero, para nad pudełkiem, Dla firm na żółtym KV,
+   odznaki w galerii, stopka pod paskiem zakupu
+   ============================================================================= */
+
+/* R1-08: podpisy odznak w hero co najmniej 12 px na desktopie i 11–12 px na telefonie (były 8,4 i 5,2 px).
+   Desktop: odznaka 120 px, „Podgrzanie do” w jednej linii jak na opakowaniu. Telefon: odznaki zostają w prawym
+   górnym rogu zdjęcia, większe, podpis w dwóch liniach, a płomień i wtyczka niżej, żeby obie zmieściły się na zdjęciu. */
+.hero--smak .hero__odznaki .odznaka__plytka small { font-size: max(12px, calc(var(--w) * .1)); }
+.hero--smak .hero__odznaki .odznaka--zasilanie .odznaka__plytka small { font-size: max(12px, calc(var(--w) * .12)); }
+@media (min-width: 900px) {
+  .hero--smak .hero__odznaki { margin-top: 22px; }
+  .hero--smak .hero__odznaki .odznaka { --w: 92px; } /* 22.10: obraz klienta (płomień i wtyczka nad płytką) przy 120 px był za duży */
+}
+@media (max-width: 899px) {
+  .hero--smak .hero__odznaki { top: 8px; right: 10px; gap: 4px; }
+  .hero--smak .hero__odznaki .odznaka { --w: clamp(58px, 16vw, 66px); } /* 22.10: obraz klienta jest o płomień i wtyczkę wyższy od płytki, mniejsza płytka trzyma tę samą wysokość kolumny */
+  /* 22.10: płomień, wtyczka i podpisy są teraz w obrazie z pliku klienta (components.css), poprawki położenia 3D i cyfry zdjęte */
+}
+
+/* R2-05: para nad otwartym pudełkiem w hero. Warstwa .para--hero (kłęby z ImageGen) liczona w ułamkach zdjęcia:
+   jedzenie ma środek na 53% szerokości pliku i górę na 70% wysokości, broda na ok. 42%, więc para kończy się pod twarzą.
+   Biała para ginęła na białej koszulce, dlatego krawędź kłębów dostaje delikatną ciepłą poświatę, a krycie jest wyższe niż w promocji. */
+.hero__zdjecie .para--hero, .hero--smak .hero__zdjecie .para--hero { left: 50.3%; width: 6%; bottom: 30%; aspect-ratio: 1 / 1.25; }
+.para--hero img { width: 30%; left: 32%; animation-name: para-hero; filter: brightness(1.12) drop-shadow(0 0 5px rgb(150 105 50 / .2)); } /* 17.10: bez przyciemnienia (para wyglądała na szarą), tylko delikatna ciepła poświata na krawędzi */
+.para--hero img:nth-child(2) { width: 26%; left: 52%; }
+.para--hero img:nth-child(3) { width: 28%; left: 70%; }
+.para--hero img:nth-child(n+2) { filter: brightness(1.05) drop-shadow(0 0 6px rgb(150 105 50 / .35)); } /* 17.10: kłęby nad białą koszulką z mocniejszą ciepłą krawędzią, żeby nie znikały */
+@keyframes para-hero {
+  0%   { opacity: 0;   transform: translateY(6%) scale(.97, .94); }
+  25%  { opacity: .85; }
+  65%  { opacity: .6; }
+  100% { opacity: 0;   transform: translateY(-10%) scale(1.03, 1.05); }
+}
+@media (max-width: 899px) {
+  .hero__zdjecie .para--hero, .hero--smak .hero__zdjecie .para--hero { left: 37.6%; width: 13.6%; bottom: 30%; aspect-ratio: 1 / 1.2; }
+  .para--hero img { filter: brightness(1.12) drop-shadow(0 0 3px rgb(150 105 50 / .2)); }
+  .para--hero img:nth-child(n+2) { filter: brightness(1.05) drop-shadow(0 0 4px rgb(150 105 50 / .35)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .para--hero img { animation: none; }
+  .para--hero img:nth-child(1) { opacity: .75; }
+  .para--hero img:nth-child(2) { opacity: .5; }
+}
+
+/* R1-19 (17.10) dawało pierwszej sekcji Dla firm żółte tło KV. Runda 3 (SG-8210, 22.10) to cofa: klient woli granat
+   („bardziej elegancko i poważnie”, „wracamy do tego co było”), więc sekcja bierze bazowe .b2b wyżej: tło --cta,
+   biały nagłówek, akapity --tekst-na-ciemnym, żółty przycisk główny i biały obrys. */
+
+/* R1-44: odznaki w galerii karty produktu w prawym górnym rogu zdjęcia (na packshotach pusty), mniejsze, i tylko
+   na zdjęciach samego pudełka. Chowają się na zdjęciach zestawu, torby, przewodów, zbliżenia okienka i scen z życia,
+   gdzie zasłaniały 28–100% swojego pola, i na daniu LB795, które wypełnia kadr aż po prawy górny róg. Bieżące zdjęcie wskazuje miniatura z aria-current (main.js ustawia je też
+   na telefonie, gdzie miniatury są ukryte). Lista plików według galerii z build.py. */
+.gallery__stage .gallery__badges { top: 12px; right: 12px; bottom: auto; gap: 8px; transition: opacity var(--przejscie), visibility var(--przejscie); }
+.gallery__badges .odznaka { --w: clamp(72px, 5.4vw, 84px); }
+/* 17.10: podpis na płytce nie schodzi poniżej 9 px; zamiast zmniejszać czcionkę łamie się na dwa wiersze („PODGRZANIE / DO”) */
+.gallery__badges .odznaka__plytka { padding-inline: 3px; }
+.gallery__badges .odznaka__plytka small { font-size: max(9px, calc(var(--w) * .1)); line-height: 1.05; white-space: normal; }
+.gallery__badges .odznaka--zasilanie .odznaka__plytka small { font-size: max(9px, calc(var(--w) * .12)); }
+.gallery:has(.gallery__thumbs [aria-current="true"] img:is([src$="-09.webp"], [src$="-15.webp"], [src$="-18.webp"], [src$="-19.webp"], [src$="-24.webp"], [src$="lb795-danie.webp"], [src$="lb795-07.webp"], [src$="lb795-08.webp"], [src$="lb795-13.webp"], [src$="lb795-16.webp"])) .gallery__badges { opacity: 0; visibility: hidden; }
+/* telefon: zdjęcie (.gallery__main) wychodzi o boczny margines poza .gallery__stage, więc róg liczony od zdjęcia */
+@media (max-width: 899px) { .gallery__stage .gallery__badges { top: 6px; right: calc(8px - var(--margines)); gap: 6px; } .gallery__badges .odznaka { --w: clamp(50px, 13.5vw, 56px); } .gallery__badges .odznaka__plytka { padding-inline: 2px; border-width: 2px; } }
+
+/* R1-48: pasek zakupu na desktopie (ok. 80 px) zasłaniał ostatni wiersz stopki; reguła dla telefonu jest wyżej */
+@media (min-width: 900px) { body:has(.sticky-buy) .footer { padding-bottom: calc(32px + 80px + env(safe-area-inset-bottom)); } }
+@media (min-width: 1100px) { body:has(.sticky-buy) .footer__jedzenie { bottom: calc(22px + 80px); } } /* składnik w prawym dolnym rogu nad paskiem, nie pod nim */
+
+/* Runda 03 (22.10): tło hero z makiety PSD Grzegorza (1920×600, Group 1/folder). Na telefonie (23.10) ten sam
+   obraz w osobnym kadrze 16:10,5 (*-m.webp, wybiera go hero-przelacznik.js). .hero--jasny: biały tekst na ciemnym tle
+   tylko na desktopie, bo na telefonie tekst stoi pod zdjęciem. */
+.hero--psd .hero__zdjecie > img:not(.hero__psd), .hero--psd .para--hero { display: none; }
+.hero--psd .hero__zdjecie > .hero__psd { display: block; object-position: 50% 50%; }
+/* telefon: tło pod tekstem w kolorze dołu zdjęcia (--hero-m-tlo ustawia hero-przelacznik.js), zdjęcie przechodzi w nie maską */
+@media (max-width: 899px) {
+  .hero--psd, .hero--psd .hero__tlo { background: var(--hero-m-tlo, var(--akcent)); transition: background-color .3s; }
+  .hero--jasny-m .hero__text .eyebrow, .hero--jasny-m .hero__text h1, .hero--jasny-m .hero__text h1 .alt,
+  .hero--jasny-m .hero__sub, .hero--jasny-m .hero__how { color: var(--biel); }
+  .hero--jasny-m .hero__how-ic { border-color: var(--biel); }
+}
+@media (min-width: 900px) {
+  .hero--psd.hero--smak.hero--tlo .hero__zdjecie { left: 0; width: 100%; }
+  .hero--psd .hero__zdjecie::after { display: none; }
+  .hero--jasny .hero__text .eyebrow, .hero--jasny .hero__text h1, .hero--jasny .hero__text h1 .alt,
+  .hero--jasny .hero__sub, .hero--jasny .hero__how { color: var(--biel); }
+  .hero--jasny .hero__how { border-color: var(--biel); }
+}
