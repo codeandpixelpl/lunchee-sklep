@@ -141,10 +141,7 @@
   .vk .pill-r { display: inline-flex; align-items: center; justify-content: center; border-radius: 99px; background: var(--tlo-alt); color: var(--promocja); font-weight: 800; white-space: nowrap; }
   /* 16.10: rabat jako czerwona plakietka z białą cyfrą (wcześniej czerwony obrys na bieli wyglądał płasko).
      17.10 (audyt R2-02): tracking z tokenu nagłówków jak h1 w hero, było -.01em */
-  .vk .rabat { display: inline-block; position: relative; padding: .04em .18em .08em; margin: 0 .04em; border-radius: .16em; color: #fff; line-height: .92; letter-spacing: var(--tracking-naglowki);
-    background: linear-gradient(180deg, #ef4a37 0%, #d42a1c 55%, #b81c10 100%); rotate: -4deg;
-    box-shadow: inset 0 .04em 0 rgb(255 255 255 / .28), inset 0 -.07em 0 rgb(0 0 0 / .2), 0 .1em .22em -.04em rgb(140 20 5 / .55);
-    text-shadow: 0 .03em 0 rgb(0 0 0 / .18); }
+  /* 22.10 (runda 03): .rabat bierze wygląd z komponentu w components.css (płaska płytka z białym obrysem), bez kopii tutaj */
   .vk .link-v { display: inline-flex; align-items: center; gap: .4em; font-weight: 800; color: var(--tekst-mocny); text-decoration: none; }
   .vk .link-v svg { width: 1em; height: 1em; }
   .vk .kolo { border-radius: 50%; overflow: hidden; }
@@ -336,4 +333,25 @@
     if (Number.isNaN(start)) { try { start = parseInt(localStorage.getItem('lunchee-ws-' + klucz), 10); } catch (e) {} }
     ustaw(Number.isNaN(start) ? (WYBRANE[klucz] || 0) : start, false);
   }
+  // Podgląd rundy 03 (22.10): link z #kotwicą trafia w sekcję także wtedy, gdy wariant wstawia się po załadowaniu strony.
+  // Kotwica to id elementu albo klasa sekcji (#feats → section.feats). Odstęp na przypięty nagłówek. Działa przez 3 s od załadowania,
+  // żeby późniejsza zmiana wariantu w widżecie nie przerzucała strony.
+  (() => {
+    if (!location.hash) return;
+    const t0 = Date.now();
+    const cel = () => {
+      const h = decodeURIComponent(location.hash.slice(1));
+      try { return document.getElementById(h) || document.querySelector('section.' + CSS.escape(h)); } catch (e) { return null; }
+    };
+    const skocz = () => {
+      if (Date.now() - t0 > 3000) return;
+      const el = cel(); if (!el) return;
+      const nag = document.querySelector('.header');
+      const off = nag && /sticky|fixed/.test(getComputedStyle(nag).position) ? nag.offsetHeight + 12 : 12;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - off, behavior: 'instant' });
+    };
+    let czas;
+    document.addEventListener('ws:wariant', () => { clearTimeout(czas); czas = setTimeout(skocz, 150); });
+    window.addEventListener('load', () => { skocz(); setTimeout(skocz, 700); setTimeout(skocz, 1600); });
+  })();
 })();

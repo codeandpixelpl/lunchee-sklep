@@ -19,9 +19,9 @@
 
 :root {
   /* --- Kolory: akcja ------------------------------------------------------ */
-  --cta:            #0054af;  /* przyciski główne, nagłówki drugiego członu (.alt), obrys aktywnego swatcha */
+  --cta:            #0054af;  /* przyciski główne, nagłówki drugiego członu (.alt), obrys aktywnego swatcha, tło pierwszej sekcji Dla firm (runda 3) */
   --cta-hover:      #0a2a5e;  /* hover przycisku .btn--blue */
-  --akcent:         #f2b90c;  /* żółty marki: przycisk .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, blok za zdjęciem w Dlaczego, tło pierwszej sekcji Dla firm, przycisk po dodaniu do koszyka (--ok) */
+  --akcent:         #f2b90c;  /* żółty marki: przycisk .btn--yellow, numery kroków, kropki karuzeli, licznik koszyka, blok za zdjęciem w Dlaczego, przycisk po dodaniu do koszyka (--ok) */
   --akcent-hover:   #ffcb2e;  /* hover przycisku .btn--yellow */
 
   /* --- Kolory: tła -------------------------------------------------------- */
@@ -31,7 +31,9 @@
   --tlo-akcent:     var(--tlo-alt);  /* 17.10 (audyt R1-73): jasne tła tylko trzy (--tlo, --tlo-alt, --tlo-produkt), więc jasnożółte #fdf1c9
                                        spoza palety KV wypada i ta rola dostaje krem z opakowania. Ikony parametrów, otwarte pytanie FAQ, cytat,
                                        pole gwarancji i dostawy, hover w menu. Nazwa zostaje, bo używają jej komponenty */
-  --tlo-ciemne:     #0a2a5e;  /* stopka, toast, link „Przejdź do treści”, etykieta „Niedostępny” */
+  --tlo-promocja:   var(--tlo-alt);  /* 22.10 (runda 03, SG-766): karta promocji na głównej, przy zakupie na karcie produktu i w koszyku.
+                                       Krem z opakowania zamiast żółtego, żółty zostaje w hero; promocję wyróżnia czerwień (--promocja) */
+  --tlo-ciemne:     #0a2a5e;  /* stopka, toast, link „Przejdź do treści”, etykieta „Niedostępny”, kształt paska Dla firm na głównej (runda 3) */
   --akcent-cieply:  #f26a3d;  /* KV: etykieta promocji, kółko ikony w hero (tło, nie tekst) */
   --promocja:       #d42a1c;  /* czerwona ramka rabatu i etykieta promocji (uwaga klienta 9.10: „30% w czerwonej ramce”), 5,4:1 na bieli */
   --akcent-cieply-tekst: #d95220;  /* ten sam pomarańcz przyciemniony do tekstu: 3,82:1 na kremie, bo #f26a3d daje 2,87:1 */

@@ -11,9 +11,9 @@
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/bpt1qjw.css">
 <link rel="stylesheet" href="styleguide/fonts.css">
-<link rel="stylesheet" href="styleguide/tokens.css?v=3.1">
-<link rel="stylesheet" href="styleguide/components.css?v=3.8">
-<link rel="stylesheet" href="css/style.css?v=3.9">
+<link rel="stylesheet" href="styleguide/tokens.css?v=3.2">
+<link rel="stylesheet" href="styleguide/components.css?v=4.1">
+<link rel="stylesheet" href="css/style.css?v=4.0">
 <!-- @/head -->
 <title>Zamówienie · Lunchee</title>
 <meta name="description" content="Zamówienie w sklepie Lunchee: dane do wysyłki, faktura, dostawa i płatność.">
@@ -104,8 +104,8 @@
           <fieldset class="fs">
             <legend><span class="fs__num">3</span>Dostawa i&nbsp;płatność</legend>
             <div class="radios">
-              <label class="radio"><input type="radio" name="dostawa" value="kurier" checked><span>Kurier</span><em>14,99 zł</em></label>
-              <label class="radio"><input type="radio" name="dostawa" value="paczkomat"><span>Paczkomat</span><em>12,99 zł</em></label>
+              <label class="radio"><input type="radio" name="dostawa" value="kurier" checked><span>Kurier</span><em data-dostawa-cena="14.99">14,99 zł</em></label>
+              <label class="radio"><input type="radio" name="dostawa" value="paczkomat"><span>Paczkomat</span><em data-dostawa-cena="12.99">12,99 zł</em></label>
             </div>
             <div class="radios">
               <label class="radio"><input type="radio" name="platnosc" value="blik" checked><span>BLIK</span></label>
@@ -116,9 +116,12 @@
 
           <fieldset class="fs">
             <legend><span class="fs__num">4</span>Zgody</legend>
-            <label class="check"><input type="checkbox" name="regulamin" required><span>Akceptuję <a href="regulamin.html" target="_blank" rel="noopener">Regulamin sklepu</a>. *</span></label>
-            <label class="check"><input type="checkbox" name="polityka" required><span>Zapoznałem/am się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Polityką prywatności</a> i&nbsp;przyjmuję do wiadomości zasady przetwarzania moich danych w&nbsp;celu realizacji zamówienia. *</span></label>
-            <label class="check"><input type="checkbox" name="newsletter"><span>Chcę otrzymywać newsletter z&nbsp;informacjami o&nbsp;promocjach i&nbsp;nowych produktach (zgoda dobrowolna, można wycofać w&nbsp;każdej chwili).</span></label>
+            <!-- runda 03 (KOS-2848): „Zaznacz wszystkie” tylko ustawia pola poniżej, samo nie jest zgodą i nie idzie z formularzem (bez name).
+                 Każda zgoda zostaje osobnym polem, nic nie jest zaznaczone na starcie. Logika: main.js, [data-zgody-wszystkie]. -->
+            <label class="check check--wszystkie"><input type="checkbox" data-zgody-wszystkie aria-controls="zgoda-regulamin zgoda-polityka zgoda-newsletter"><span>Zaznacz wszystkie zgody</span></label>
+            <label class="check"><input type="checkbox" name="regulamin" id="zgoda-regulamin" data-zgoda required><span>Akceptuję <a href="regulamin.html" target="_blank" rel="noopener">Regulamin sklepu</a>. *</span></label>
+            <label class="check"><input type="checkbox" name="polityka" id="zgoda-polityka" data-zgoda required><span>Zapoznałem/am się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Polityką prywatności</a> i&nbsp;przyjmuję do wiadomości zasady przetwarzania moich danych w&nbsp;celu realizacji zamówienia. *</span></label>
+            <label class="check"><input type="checkbox" name="newsletter" id="zgoda-newsletter" data-zgoda><span>Chcę otrzymywać newsletter z&nbsp;informacjami o&nbsp;promocjach i&nbsp;nowych produktach (zgoda dobrowolna, można wycofać w&nbsp;każdej chwili).</span></label>
             <p class="cart__note">Administrator danych: <span class="tbd">dane sprzedawcy do uzupełnienia</span>. Dane z&nbsp;formularza przetwarzamy, żeby zrealizować zamówienie (art.&nbsp;6 ust.&nbsp;1 lit.&nbsp;b&nbsp;RODO). Newsletter wysyłamy na podstawie Twojej zgody (art.&nbsp;6 ust.&nbsp;1 lit.&nbsp;a&nbsp;RODO). Więcej w&nbsp;<a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
           </fieldset>
         </div>
@@ -127,7 +130,7 @@
           <h2>Twoje zamówienie</h2>
           <ul class="cart__mini" data-cart-mini></ul>
           <!-- 17.10 (audyt R2-43): gwarancja przy zamówieniu, gdy w koszyku jest lunch box; teksty jak na karcie produktu, bez kwoty -->
-          <div class="cart__gw" data-cart-gw hidden><img src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" width="383" height="480" loading="lazy"><span><b>Rozszerzona gwarancja producenta</b><small>30 miesięcy gwarancji producenta</small></span></div>
+          <div class="cart__gw" data-cart-gw hidden><img src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" width="480" height="480" loading="lazy"><span><b>Rozszerzona gwarancja producenta</b><small>30 miesięcy gwarancji producenta</small></span></div>
           <dl>
             <div><dt>Produkty</dt><dd data-cart-qty>0</dd></div>
             <div><dt>Wartość</dt><dd data-cart-sum>0,00 zł</dd></div>
@@ -144,7 +147,7 @@
 </main>
 <!-- @footer -->
 <footer class="footer" id="kontakt">
-  <div class="footer__jedzenie" aria-hidden="true"><img class="footer__sk footer__sk--a" src="assets/img/r2/skladniki/awokado.webp" alt="" width="387" height="381" loading="lazy" decoding="async"></div>
+  <div class="footer__jedzenie" aria-hidden="true"><img class="footer__sk footer__sk--a" src="assets/img/r2/skladniki/batat.webp" alt="" width="354" height="386" loading="lazy" decoding="async"></div>
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__brand">
@@ -216,7 +219,7 @@
     </div>
   </div>
 </div>
-<script src="js/main.js?v=2.9"></script>
+<script src="js/main.js?v=3.0"></script>
 <!-- @/footer -->
 </body>
 </html>

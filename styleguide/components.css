@@ -209,11 +209,16 @@ body.no-scroll { position: fixed; top: var(--menu-scroll-top, 0px); inset-inline
 .check input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--cta); }
 .check.is-invalid { color: var(--blad); }
 .check a { color: var(--cta); }
+/* runda 03 (KOS-2848): „Zaznacz wszystkie zgody” nad pojedynczymi zgodami, oddzielone linią */
+.check--wszystkie { font-weight: 700; padding-bottom: 14px; border-bottom: 1px solid var(--linia); }
 .radios { display: flex; flex-wrap: wrap; gap: 10px; }
 .radio { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 16px; border: 1.5px solid var(--linia); border-radius: var(--r-pill); background: var(--biel); cursor: pointer; font-weight: 600; color: var(--tekst-mocny); }
 .radio input { accent-color: var(--cta); width: 18px; height: 18px; }
 .radio:has(input:checked) { border-color: var(--cta); box-shadow: inset 0 0 0 1px var(--cta); }
 .radio em { font-style: normal; }
+/* runda 03: darmowa dostawa przy opcji, stara cena przekreślona, 0,00 zł w kolorze promocji (jak „teraz 0 zł” w koszyku) */
+.radio em s { margin-right: .35em; font-weight: 500; color: var(--tekst-slaby); }
+.radio em b { color: var(--promocja); }
 .form { display: grid; gap: 14px; padding: 28px; border-radius: var(--r-l); background: var(--biel); }
 .form .btn { justify-self: start; }
 .form__ok { padding: 14px 18px; border-radius: var(--r-m); background: var(--ok-tlo); color: var(--ok-tekst); font-weight: 600; }
@@ -427,6 +432,17 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
   font-size: calc(var(--w) * .62); line-height: 1; color: var(--biel); -webkit-text-stroke: calc(var(--w) * .045) var(--odznaka-zasilanie-ciemny); paint-order: stroke fill; }
 .odznaka--zasilanie .odznaka__3d { top: calc(var(--w) * .14); left: 38%; height: calc(var(--w) * .74); transform: translateX(-50%) rotate(-14deg); } /* 16.10: wtyczka i cyfra niżej, bliżej płytki */
 .odznaka--zasilanie .odznaka__cyfra { top: calc(var(--w) * .2); }
+/* 22.10, runda 03 („ikony 1:1 takie jak dostarczyliśmy z pliku”): 60°C i 3 źródła zasilania to jeden obraz z pliku klienta
+   (3 źródła zasilania.psb, osadzony w PSD rich contentu LB745). --w dalej oznacza szerokość płytki, obraz jest szerszy
+   o płomień i wtyczkę. Płytka zostaje w DOM tylko jako tekst dla czytników ekranu, cyfra znika. Płytka 1,7 l bez zmian. */
+.odznaka--cieplo, .odznaka--zasilanie, .odznaka--pojemnosc { padding-top: 0; }
+.odznaka--pojemnosc { width: var(--w); } /* 22.10: „Pojemność 1,7 L” w stylu ikon klienta (płytka jak 60°C, pojemnik z Codeksa) */
+.odznaka--cieplo { width: calc(var(--w) * 1.016); }
+.odznaka--zasilanie { width: calc(var(--w) * 1.169); }
+.odznaka--cieplo .odznaka__3d, .odznaka--zasilanie .odznaka__3d, .odznaka--pojemnosc .odznaka__3d { position: static; transform: none; width: 100%; height: auto; filter: none; }
+.odznaka--cieplo .odznaka__plytka, .odznaka--zasilanie .odznaka__plytka, .odznaka--pojemnosc .odznaka__plytka { position: absolute; width: 1px; height: 1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.odznaka--zasilanie .odznaka__cyfra { display: none; }
 
 /* --- Para nad jedzeniem: kłęby z ImageGen nałożone w jednym miejscu, wolno wznoszą się i gasną.
    Cykl 9 s, liniowo, fazy przesunięte ujemnym opóźnieniem, więc nic nie wyskakuje przy starcie
@@ -464,10 +480,16 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
 /* --- Rabat w czerwonej ramce (9.10: „znika ta informacja o 30%, może w czerwonej ramce?”) --- */
 /* 17.10: rabat jak na stronie głównej (wariant promocji): czerwona plakietka z białą cyfrą, ten sam wygląd w karcie produktu,
    koszyku i na głównej. Wcześniej tu był czerwony obrys na bieli. */
-.rabat { display: inline-block; position: relative; padding: .04em .18em .08em; margin: 0 .04em; border-radius: .16em; color: #fff; line-height: .92; letter-spacing: var(--tracking-naglowki);
-  background: linear-gradient(180deg, #ef4a37 0%, #d42a1c 55%, #b81c10 100%); rotate: -4deg;
-  box-shadow: inset 0 .04em 0 rgb(255 255 255 / .28), inset 0 -.07em 0 rgb(0 0 0 / .2), 0 .1em .22em -.04em rgb(140 20 5 / .55);
-  text-shadow: 0 .03em 0 rgb(0 0 0 / .18); }
+/* --- Karta promocji (22.10, runda 03, SG-766: „dwa elementy z żółtym tłem… nie widać, co tutaj jest ważniejsze”) ---
+   Jeden wygląd promocji w trzech miejscach: karta „Dwa Lunchee 30% taniej” na głównej (warianty/promocje.html, wariant 2),
+   baner przy zakupie na karcie produktu (build.py, pair_box) i blok rabatu w koszyku (warianty/koszyk.html, wariant 4).
+   Tło kremowe jak w koszyku, wyróżnienie robią czerwona plakietka .promo-tag / .tag-r i czerwone .rabat. Zaokrąglenie daje miejsce użycia. */
+.promo-karta { background: var(--tlo-promocja); color: var(--tekst-mocny); }
+
+/* 22.10, runda 03 („za bardzo kreskówkowe i 3D”): płaska płytka z białym obrysem jak płytki 60°C i 3 źródła z opakowania,
+   bez połysku, wewnętrznego światła i obrotu */
+.rabat { display: inline-block; position: relative; padding: .04em .2em .08em; margin: 0 .06em; border-radius: .18em; color: var(--biel); line-height: .92; letter-spacing: var(--tracking-naglowki);
+  background: var(--promocja); border: max(2px, .055em) solid var(--biel); box-shadow: 0 .05em .14em -.03em rgb(120 20 5 / .3); }
 /* 17.10 (audyt sekcji): zdaniem, jak „Promocja dla Ciebie” w wybranym wariancie 2 promocji na głównej; było wersalikami */
 .promo-tag { display: inline-block; justify-self: start; padding: 7px 16px; border-radius: var(--r-pill); background: var(--promocja); color: var(--biel); font-size: .95rem; font-weight: 800; letter-spacing: .02em; }
 
@@ -495,7 +517,7 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
 /* 17.10 (audyt R2-43): gwarancja w podsumowaniu zamówienia, bez kwoty */
 .cart__gw { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; margin: 0 0 16px; padding: 10px 14px; border-radius: var(--r-m); background: var(--tlo-akcent); color: var(--tekst-mocny); }
 .cart__gw[hidden] { display: none; }
-.cart__gw img { width: 48px; height: auto; }
+.cart__gw img { width: 56px; height: auto; } /* 22.10: okrągły znak gwarancji z opakowania zamiast rozety ze wstążkami */
 .cart__gw b { display: block; font-size: .95rem; line-height: 1.25; }
 .cart__gw small { display: block; margin-top: 2px; font-size: var(--fs-maly); color: var(--tekst-slaby); }
 .dorzuc { margin-top: var(--odstep-m); }
@@ -517,59 +539,72 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
 @media (min-width: 1100px) { .przewin--kroki { display: none; } }
 @media (prefers-reduced-motion: reduce) { .przewin__podpowiedz svg { animation: none; } }
 
+/* Pasek kart przewijany w bok (runda 3, 22.10): ten sam układ co karuzele kroków, momentów i opinii, zebrany w jeden komponent.
+   Tor na całą szerokość ekranu z marginesem w środku, karty co 78% szerokości, więc kolejna karta jest ucięta przy krawędzi.
+   Przewijanie palcem i klawiaturą (tabindex="0" na torze), strzałki .przewin i kropki .dots podpina [data-carousel] w main.js.
+   Kontener z marginesem wyzeruje wcięcie przez --pasek-wciecie: 0px, gdy tor już stoi na całej szerokości. */
+.pasek { list-style: none; margin: 0 calc(var(--pasek-wciecie, var(--margines)) * -1); padding: 4px var(--margines) 10px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: var(--pasek-karta, 78%); gap: 14px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margines); scrollbar-width: none; }
+.pasek::-webkit-scrollbar { display: none; }
+.pasek > * { scroll-snap-align: start; min-width: 0; }
+.pasek:focus-visible { outline-offset: -3px; border-radius: var(--r-m); }
+
 
 /* =============================================================================
    17.10 — AUDYT SEKCJI: komponenty z wariantów wybranych na stronę główną, przeniesione z płótna .vk
    (warianty/*.html, style ograniczone do .vk) do zwykłych klas, żeby podstrony miały ten sam wygląd.
    ============================================================================= */
 
-/* --- Karta modelu z motywem (wariant 2 sekcji Modele, „Tła z motywem”) ---
-   Zwykła siatka: 2 w rzędzie na telefonie, na desktopie tyle w rzędzie, ile kart (--n, 4 albo 5).
-   Wymiary sceny w jednostkach cqi kontenera .model-karta__scena, odczytane z płótna wariantu (karta 312 px, scena 350 px).
-   Pozycje packshotu i dania (--zx --zy --zw --dx --dy --dw), rozmiar i kolor nazwy podaje build.py (MOTYW) dla każdego modelu.
-   Po najechaniu zamknięty packshot przechodzi w ten sam kadr z daniem, na dotyku danie widać od razu (jak w wariancie). */
+/* --- Karta modelu (runda 03, 22.10, pinezki SG-3952, PR-13302, KAT-347) ---
+   Wygląd jak na stronie kategorii (wariant 3 „Dwie duże karty”): białe jednolite tło, otwarte pudełko z daniem,
+   wokół warzywa i owoce z tych samych plików co na kategorii, duża nazwa modelu z kropką koloru, pod nią pełna nazwa,
+   cena i przycisk. Jeden komponent dla sekcji Modele na głównej (5 kolumn), „Pozostałe Lunchee” na kartach produktu
+   (4 kolumny, bez oglądanego modelu) i lunch boxów na stronie akcesoriów. Markup składa build.py (model_karty()).
+   Siatka: 2 w rzędzie na telefonie, na desktopie tyle w rzędzie, ile kart (--n). Karta jest kontenerem (cqi),
+   więc nazwa i składniki skalują się z jej szerokością. Składniki: --x --y --s (procent sceny) i --r z build.py. */
 .modele-siatka { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 @media (min-width: 1000px) { .modele-siatka { grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: var(--odstep-s); } }
-.model-karta { position: relative; display: flex; flex-direction: column; min-width: 0; border-radius: var(--r-m); background: var(--tlo-produkt); color: var(--tekst-mocny); text-decoration: none; overflow: hidden;
-  box-shadow: 0 16px 30px -22px rgb(60 40 10 / .45); transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s; }
+.model-karta { position: relative; container-type: inline-size; display: flex; flex-direction: column; min-width: 0; border-radius: var(--r-m); background: var(--biel); color: var(--tekst-mocny); text-decoration: none; overflow: hidden;
+  box-shadow: 0 14px 30px -22px rgb(60 40 10 / .45); transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s; }
 .model-karta:focus-visible { outline: 3px solid var(--cta); outline-offset: 3px; }
-.model-karta__scena { position: relative; container-type: inline-size; aspect-ratio: 312 / 350; overflow: hidden; }
-.model-karta__tlo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--tlo-o, 1);
-  -webkit-mask-image: linear-gradient(#000 76%, transparent); mask-image: linear-gradient(#000 76%, transparent); }
-.model-karta__halo { position: absolute; left: -22%; top: 24.5cqi; width: 137%; height: 86cqi; background: radial-gradient(closest-side, var(--k) 0%, var(--k) 55%, transparent 100%); opacity: var(--o, .8); pointer-events: none; }
-.model-karta__podloze { position: absolute; left: 3%; top: 99cqi; width: 88%; height: 12cqi; border-radius: 50%; background: radial-gradient(closest-side, rgb(50 25 10 / .36), rgb(50 25 10 / 0)); pointer-events: none; }
-.model-karta__nazwa { position: absolute; left: 0; right: 0; top: 12.8cqi; font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); font-size: calc(var(--nazwa-fs) * 1cqi); line-height: 1; letter-spacing: var(--tracking-naglowki);
-  color: var(--nazwa-kolor); white-space: nowrap; text-align: center; text-shadow: 0 0 5.8cqi rgb(255 255 255 / .75), 0 .6cqi 1.3cqi rgb(255 255 255 / .5); }
-.model-karta__zamk, .model-karta__danie { position: absolute; max-width: none; height: auto; filter: drop-shadow(0 5.8cqi 5cqi rgb(60 30 0 / .25)); transition: opacity .45s ease, transform .5s cubic-bezier(.2, .7, .3, 1); transform-origin: 50% 85%; }
-.model-karta__zamk { left: calc(var(--zx) * 1%); top: calc(var(--zy) * 1cqi); width: calc(var(--zw) * 1%); }
-.model-karta__danie { left: calc(var(--dx) * 1%); top: calc(var(--dy) * 1cqi); width: calc(var(--dw) * 1%); opacity: 0; }
-.model-karta__body { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: -4px; padding: 0 12px 16px; text-align: center; }
-.model-karta__kod { font-family: var(--font-tekst); font-size: .95rem; font-weight: 600; line-height: 1.3; letter-spacing: 0; color: var(--tekst-mocny); }
-.model-karta .price--sm { flex-wrap: wrap; justify-content: center; column-gap: 8px; row-gap: 0; font-size: 1.4rem; }
-.model-karta__omnibus { max-width: 24ch; margin: 0; font-size: .72rem; line-height: 1.35; }
-.model-karta__brak { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-pill); background: var(--tekst-mocny); color: var(--biel); font-size: .72rem; font-weight: 700; line-height: 1.3; white-space: nowrap; }
-.model-karta__body > :nth-last-child(2) { margin-bottom: 10px; }
-.model-karta__btn { width: min(100%, 13.5rem); margin-top: auto; }
+/* scena: pudełko zajmuje 76% szerokości pośrodku, składniki leżą na rogach i wchodzą lekko na pudełko jak na kategorii */
+.model-karta__scena { position: relative; aspect-ratio: 100 / 74; }
+.model-karta__produkt { position: absolute; left: 12%; top: 9%; width: 76%; max-width: none; height: auto; filter: drop-shadow(0 4cqi 4cqi rgb(60 30 0 / .25)); transition: transform .5s cubic-bezier(.2, .7, .3, 1); transform-origin: 50% 85%; }
+.model-karta__skladnik { position: absolute; z-index: 1; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--s) * 1%); rotate: var(--r, 0deg); pointer-events: none;
+  filter: drop-shadow(0 2cqi 2cqi rgb(60 30 0 / .2)); }
+.model-karta__skladnik img { display: block; width: 100%; height: auto; }
+/* „Niedostępny w sklepie” stoi w opisie (kolejność czytania), a pokazuje się w prawym górnym rogu karty jak na kategorii */
+.model-karta__brak { position: absolute; z-index: 2; top: 10px; right: 10px; display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-pill); background: var(--tlo-ciemne); color: var(--biel); font-size: .72rem; font-weight: 700; line-height: 1.3; white-space: nowrap; }
+.model-karta__body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 2px clamp(12px, 7cqi, 20px) clamp(14px, 7cqi, 20px); }
+.model-karta__nazwa { display: flex; align-items: center; gap: .32em; font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); font-size: clamp(1.3rem, 12.5cqi, 2rem); line-height: 1; letter-spacing: var(--tracking-naglowki); color: var(--tekst-mocny); }
+.model-karta__nazwa::before { content: ""; flex: none; width: .66em; height: .66em; border-radius: 50%; background: var(--kolor); box-shadow: 0 0 0 2px var(--biel), 0 1px 4px rgb(0 0 0 / .2); }
+.model-karta__kod { margin: 2px 0 0; font-size: clamp(.78rem, 5.6cqi, .95rem); line-height: 1.3; color: var(--tekst-mocny); }
+.model-karta .price--sm { flex-wrap: wrap; column-gap: 8px; row-gap: 0; margin-top: 4px; font-size: clamp(1.15rem, 8.6cqi, 1.45rem); letter-spacing: var(--tracking-naglowki); }
+.model-karta .price__old { font-family: var(--font-tekst); font-weight: 500; letter-spacing: normal; }
+.model-karta__omnibus { margin: 0; font-size: .72rem; line-height: 1.35; color: var(--tekst-slaby); }
+.model-karta__btn { align-self: stretch; margin-top: auto; }
+.model-karta__body > :nth-last-child(2) { margin-bottom: 12px; }
 @media (hover: hover) {
   .model-karta:hover { transform: translateY(-6px); box-shadow: 0 24px 38px -22px rgb(60 40 10 / .55); }
-  .model-karta:hover .model-karta__danie, .model-karta:focus-visible .model-karta__danie { opacity: 1; }
-  .model-karta:hover .model-karta__zamk, .model-karta:focus-visible .model-karta__zamk { opacity: 0; }
+  .model-karta:hover .model-karta__produkt { transform: scale(1.03); }
   .model-karta:hover .btn--yellow { background: var(--akcent-hover); }
   .model-karta:hover .btn--outline { background: var(--tekst-mocny); color: var(--biel); }
 }
-@media (hover: none) { .model-karta__danie { opacity: 1; } .model-karta__zamk { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .model-karta, .model-karta img { transition: none; } }
-/* nieparzysta ostatnia karta w dwóch kolumnach: na całą szerokość, scena po lewej, opis po prawej (jak Night w wariancie na telefonie) */
+/* nieparzysta ostatnia karta w dwóch kolumnach (Night na głównej i w akcesoriach): na całą szerokość, scena po lewej, opis po prawej */
 @media (max-width: 999px) {
-  .modele-siatka > .model-karta:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; }
-  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__tlo { -webkit-mask-image: none; mask-image: none; }
-  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__body { justify-content: center; margin-top: 0; padding: 16px 12px 16px 0; }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; column-gap: 4px; }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__nazwa { font-size: clamp(1.3rem, 6.2cqi, 2rem); }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__kod { font-size: clamp(.78rem, 2.8cqi, .95rem); }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) .price--sm { font-size: clamp(1.15rem, 4.3cqi, 1.45rem); }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__body { padding: 14px 12px 14px 0; }
   .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__btn { margin-top: 0; }
+  .modele-siatka > .model-karta:last-child:nth-child(odd) .model-karta__brak { position: static; margin-bottom: 6px; }
 }
 
-/* --- Promocja dla par na karcie produktu: wygląd wariantu 2 promocji (żółty baner, dania, nagłówek jak .t-h) --- */
+/* --- Promocja dla par na karcie produktu: wygląd wariantu 2 promocji (dania, nagłówek jak .t-h). Tło z .promo-karta (22.10, było żółte) --- */
 .pair__h { font-weight: var(--waga-naglowki); line-height: 1.08; letter-spacing: var(--tracking-naglowki); color: var(--tekst-mocny); }
-.pair--promo { background: radial-gradient(90% 140% at 70% 40%, var(--akcent-hover), var(--akcent) 70%); }
 .pair--promo .pair__sub { color: var(--tekst-mocny); }
 .pair--promo .pair__img::before { display: none; }
 /* 17.10: pudełka z daniem wyżej, żeby dolna krawędź nie była ucinana przez kartę */
@@ -584,7 +619,7 @@ body.has-visible-sticky-buy .toast { bottom: calc(var(--sticky-buy-height, 100px
 .kupon { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: var(--odstep-s); align-items: center; margin: 18px 0; padding: 16px 24px; border-radius: 12px; background: var(--biel); color: var(--tekst-mocny); text-decoration: none;
   -webkit-mask: radial-gradient(circle 7px at 0 50%, #0000 98%, #000) left / 51% 18px repeat-y, radial-gradient(circle 7px at 100% 50%, #0000 98%, #000) right / 51% 18px repeat-y;
   mask: radial-gradient(circle 7px at 0 50%, #0000 98%, #000) left / 51% 18px repeat-y, radial-gradient(circle 7px at 100% 50%, #0000 98%, #000) right / 51% 18px repeat-y; }
-.kupon img { justify-self: center; width: 76px; height: auto; filter: drop-shadow(0 6px 6px rgb(60 30 0 / .22)); }
+.kupon img { justify-self: center; width: 88px; height: auto; filter: drop-shadow(0 6px 6px rgb(60 30 0 / .22)); }
 .kupon b { display: block; font-family: var(--font-naglowki); font-weight: var(--waga-naglowki); font-size: 1.25rem; line-height: 1.1; letter-spacing: var(--tracking-naglowki); }
 .kupon small { display: block; margin-top: 6px; font-size: var(--fs-maly); line-height: 1.4; color: var(--tekst-slaby); }
 .pill-promo { display: inline-flex; align-items: center; margin-bottom: 8px; padding: 4px 14px; border-radius: var(--r-pill); background: var(--tlo-alt); color: var(--promocja); font-size: .95rem; font-weight: 800; line-height: 1.3; white-space: nowrap; }

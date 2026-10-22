@@ -811,13 +811,14 @@ main { position: relative; }
 /* Hero 16.10: podtytuł w jednej linii od tabletu w górę (prośba Grzegorza) */
 @media (min-width: 900px) { .hero--smak .hero__sub { max-width: none; white-space: nowrap; } }
 
-/* Stopka 16.10: lewitujące awokado w prawym dolnym rogu (Codex), od 1100 px, gdzie jest wolne miejsce pod kolumną Zakupy */
+/* Stopka 16.10: lewitujący składnik w prawym dolnym rogu, od 1100 px, gdzie jest wolne miejsce pod kolumną Zakupy.
+   Runda 3 (SG-8941, 22.10): pieczony batat zamiast awokado (klient: awokado je się na zimno), pomarańcz z KV na granacie */
 .footer { position: relative; overflow: hidden; }
 .footer__jedzenie { display: none; }
 @media (min-width: 1100px) {
   .footer__jedzenie { display: block; position: absolute; right: max(24px, calc((100vw - var(--tresc)) / 2 + var(--margines) - 40px)); bottom: 22px; width: 330px; height: 170px; pointer-events: none; z-index: 1; }
   .footer__sk { position: absolute; height: auto; filter: drop-shadow(0 16px 18px rgb(0 0 0 / .35)); animation: footer-unos var(--t, 8s) ease-in-out infinite alternate; }
-  .footer__sk--a { width: 160px; left: 50%; top: 14px; margin-left: -80px; rotate: -14deg; --t: 8s; }
+  .footer__sk--a { width: 150px; left: 50%; top: 4px; margin-left: -75px; rotate: -8deg; --t: 8s; }
   .footer__sk--b { width: 156px; right: 0; top: 0; rotate: 10deg; --t: 9.5s; animation-delay: -3s; }
 }
 @keyframes footer-unos { 0% { translate: 0 -8px; } 100% { translate: 0 10px; } }
@@ -981,17 +982,12 @@ main { position: relative; }
 .hero--smak .hero__odznaki .odznaka--zasilanie .odznaka__plytka small { font-size: max(12px, calc(var(--w) * .12)); }
 @media (min-width: 900px) {
   .hero--smak .hero__odznaki { margin-top: 22px; }
-  .hero--smak .hero__odznaki .odznaka { --w: 120px; }
+  .hero--smak .hero__odznaki .odznaka { --w: 92px; } /* 22.10: obraz klienta (płomień i wtyczka nad płytką) przy 120 px był za duży */
 }
 @media (max-width: 899px) {
   .hero--smak .hero__odznaki { top: 8px; right: 10px; gap: 4px; }
-  .hero--smak .hero__odznaki .odznaka { --w: clamp(86px, 24vw, 100px); padding-top: calc(var(--w) * .4); }
-  .hero--smak .hero__odznaki .odznaka__plytka { padding-inline: 3px; }
-  .hero--smak .hero__odznaki .odznaka__plytka small,
-  .hero--smak .hero__odznaki .odznaka--zasilanie .odznaka__plytka small { font-size: 12px; line-height: 1.05; white-space: normal; } /* re-audyt R1-08: 12 px na każdej szerokości telefonu (było 11 px na 360) */
-  .hero--smak .hero__odznaki .odznaka--cieplo .odznaka__3d { height: calc(var(--w) * .56); } /* dół płomienia nad dwuliniowym podpisem, nie na nim */
-  .hero--smak .hero__odznaki .odznaka--zasilanie .odznaka__3d { top: calc(var(--w) * .06); height: calc(var(--w) * .62); }
-  .hero--smak .hero__odznaki .odznaka--zasilanie .odznaka__cyfra { top: calc(var(--w) * .1); font-size: calc(var(--w) * .54); }
+  .hero--smak .hero__odznaki .odznaka { --w: clamp(58px, 16vw, 66px); } /* 22.10: obraz klienta jest o płomień i wtyczkę wyższy od płytki, mniejsza płytka trzyma tę samą wysokość kolumny */
+  /* 22.10: płomień, wtyczka i podpisy są teraz w obrazie z pliku klienta (components.css), poprawki położenia 3D i cyfry zdjęte */
 }
 
 /* R2-05: para nad otwartym pudełkiem w hero. Warstwa .para--hero (kłęby z ImageGen) liczona w ułamkach zdjęcia:
@@ -1019,23 +1015,9 @@ main { position: relative; }
   .para--hero img:nth-child(2) { opacity: .5; }
 }
 
-/* R1-19: Dla firm, pierwsza sekcja na żółtym KV zamiast tła #0054af (decyzja z 5.10: granat tylko w tekstach i CTA).
-   Tekst granatowy, przyciski jak w hero strony głównej (niebieski główny, obrys granatowy), ikony na białym kole. */
-.b2b--hero { background: var(--akcent); color: var(--tekst-mocny); }
-.b2b--hero .eyebrow { color: var(--tekst-mocny); }
-.b2b--hero .b2b__title { color: var(--tekst-mocny); }
-.b2b--hero .lead, .b2b--hero .b2b__feat p { color: var(--tekst-mocny); }
-.b2b--hero .b2b__feat h3 { color: var(--tekst-mocny); }
-.b2b--hero .b2b__feat { border-top-color: rgb(10 42 94 / .2); }
-.b2b--hero .b2b__feat:last-child { border-bottom-color: rgb(10 42 94 / .2); }
-.b2b--hero .b2b__feat .ic { background: var(--biel); }
-.b2b--hero .btn--yellow { background: var(--cta); border-color: var(--cta); color: var(--biel); }
-.b2b--hero .btn--outline-white { border-color: var(--tekst-mocny); color: var(--tekst-mocny); }
-.b2b--hero .b2b__img { background: var(--tlo-alt); }
-@media (hover: hover) {
-  .b2b--hero .btn--yellow:hover { background: var(--cta-hover); border-color: var(--cta-hover); }
-  .b2b--hero .btn--outline-white:hover { background: var(--tekst-mocny); color: var(--biel); }
-}
+/* R1-19 (17.10) dawało pierwszej sekcji Dla firm żółte tło KV. Runda 3 (SG-8210, 22.10) to cofa: klient woli granat
+   („bardziej elegancko i poważnie”, „wracamy do tego co było”), więc sekcja bierze bazowe .b2b wyżej: tło --cta,
+   biały nagłówek, akapity --tekst-na-ciemnym, żółty przycisk główny i biały obrys. */
 
 /* R1-44: odznaki w galerii karty produktu w prawym górnym rogu zdjęcia (na packshotach pusty), mniejsze, i tylko
    na zdjęciach samego pudełka. Chowają się na zdjęciach zestawu, torby, przewodów, zbliżenia okienka i scen z życia,
@@ -1047,11 +1029,30 @@ main { position: relative; }
 .gallery__badges .odznaka__plytka { padding-inline: 3px; }
 .gallery__badges .odznaka__plytka small { font-size: max(9px, calc(var(--w) * .1)); line-height: 1.05; white-space: normal; }
 .gallery__badges .odznaka--zasilanie .odznaka__plytka small { font-size: max(9px, calc(var(--w) * .12)); }
-.gallery__badges .odznaka--cieplo .odznaka__3d { height: calc(var(--w) * .6); } /* dół płomienia nad dwuwierszowym podpisem, nie na nim */
 .gallery:has(.gallery__thumbs [aria-current="true"] img:is([src$="-09.webp"], [src$="-15.webp"], [src$="-18.webp"], [src$="-19.webp"], [src$="-24.webp"], [src$="lb795-danie.webp"], [src$="lb795-07.webp"], [src$="lb795-08.webp"], [src$="lb795-13.webp"], [src$="lb795-16.webp"])) .gallery__badges { opacity: 0; visibility: hidden; }
 /* telefon: zdjęcie (.gallery__main) wychodzi o boczny margines poza .gallery__stage, więc róg liczony od zdjęcia */
-@media (max-width: 899px) { .gallery__stage .gallery__badges { top: 6px; right: calc(8px - var(--margines)); gap: 6px; } .gallery__badges .odznaka { --w: clamp(66px, 17.5vw, 72px); } .gallery__badges .odznaka__plytka { padding-inline: 2px; border-width: 2px; } }
+@media (max-width: 899px) { .gallery__stage .gallery__badges { top: 6px; right: calc(8px - var(--margines)); gap: 6px; } .gallery__badges .odznaka { --w: clamp(50px, 13.5vw, 56px); } .gallery__badges .odznaka__plytka { padding-inline: 2px; border-width: 2px; } }
 
 /* R1-48: pasek zakupu na desktopie (ok. 80 px) zasłaniał ostatni wiersz stopki; reguła dla telefonu jest wyżej */
 @media (min-width: 900px) { body:has(.sticky-buy) .footer { padding-bottom: calc(32px + 80px + env(safe-area-inset-bottom)); } }
-@media (min-width: 1100px) { body:has(.sticky-buy) .footer__jedzenie { bottom: calc(22px + 80px); } } /* awokado w prawym dolnym rogu nad paskiem, nie pod nim */
+@media (min-width: 1100px) { body:has(.sticky-buy) .footer__jedzenie { bottom: calc(22px + 80px); } } /* składnik w prawym dolnym rogu nad paskiem, nie pod nim */
+
+/* Runda 03 (22.10): tło hero z makiety PSD Grzegorza (1920×600, Group 1/folder). Na telefonie (23.10) ten sam
+   obraz w osobnym kadrze 16:10,5 (*-m.webp, wybiera go hero-przelacznik.js). .hero--jasny: biały tekst na ciemnym tle
+   tylko na desktopie, bo na telefonie tekst stoi pod zdjęciem. */
+.hero--psd .hero__zdjecie > img:not(.hero__psd), .hero--psd .para--hero { display: none; }
+.hero--psd .hero__zdjecie > .hero__psd { display: block; object-position: 50% 50%; }
+/* telefon: tło pod tekstem w kolorze dołu zdjęcia (--hero-m-tlo ustawia hero-przelacznik.js), zdjęcie przechodzi w nie maską */
+@media (max-width: 899px) {
+  .hero--psd, .hero--psd .hero__tlo { background: var(--hero-m-tlo, var(--akcent)); transition: background-color .3s; }
+  .hero--jasny-m .hero__text .eyebrow, .hero--jasny-m .hero__text h1, .hero--jasny-m .hero__text h1 .alt,
+  .hero--jasny-m .hero__sub, .hero--jasny-m .hero__how { color: var(--biel); }
+  .hero--jasny-m .hero__how-ic { border-color: var(--biel); }
+}
+@media (min-width: 900px) {
+  .hero--psd.hero--smak.hero--tlo .hero__zdjecie { left: 0; width: 100%; }
+  .hero--psd .hero__zdjecie::after { display: none; }
+  .hero--jasny .hero__text .eyebrow, .hero--jasny .hero__text h1, .hero--jasny .hero__text h1 .alt,
+  .hero--jasny .hero__sub, .hero--jasny .hero__how { color: var(--biel); }
+  .hero--jasny .hero__how { border-color: var(--biel); }
+}

@@ -10,8 +10,6 @@
   .vk--m [data-m="lewo"] { text-align: left !important; }
   .vk--m [data-m="prawo"] { text-align: right; }
   .vk--m [data-m="kosz"] { display: grid; place-items: center; }
-  .vk--m .foto { border-radius: calc(24 * var(--u)); }
-  .vk--m .foto > img:not(.a) { object-position: 50% 50% !important; transform: scale(2.2); transform-origin: 26% 74%; }
 }
 /* 17.10, wariant 4 z prawdziwego koszyka (main.js, koszykV4). Liczba pozycji zmienia wysokość lewej kolumny:
    grupy pod listą przesuwa się zmiennymi z .vk (jednostki płótna), na telefonie razem z nimi jedzie granatowe podsumowanie. */
@@ -26,6 +24,8 @@
   .vk--m > .a[data-kv-podsum] { height: calc((var(--mh) + var(--kv-rm, 0)) * var(--u)); }
   .vk--m .kv-kod input { font-size: max(16px, calc(var(--mfs) * var(--u))) !important; } /* iOS nie powiększa strony przy polu od 16 px */
 }
+/* runda 03 (KOS-586): talerz wychodzi poza płótno w prawo; sekcja przycina go na krawędzi okna bez poziomego przewijania strony */
+.vk-sek--koszyk { overflow-x: clip; }
 .vk [data-kv-ukryj] { display: none !important; }
 .vk[data-kv-promo="naliczony"] [data-kv-pokaz="dodaj"], .vk[data-kv-promo="dodaj"] [data-kv-pokaz="naliczony"] { display: none !important; }
 .kv-foto, .kv-akc { display: flex; align-items: center; justify-content: center; background: var(--tlo-produkt); }
@@ -59,8 +59,8 @@
   <span class="a" style="--x:950;--y:-180;--w:400;--h:220;border-radius:50%;background:#f4c11c"></span><span class="a" style="--x:-100;--y:650;--w:300;--h:400;border-radius:50%;background:#f4c11c"></span>
   <span class="a reka" style="--x:120;--y:10;--fs:62;--rot:0deg">lunchee</span><span class="a t-p" style="--x:350;--y:24;--fs:16;color:var(--tekst-mocny);border-left:calc(2 * var(--u)) solid #ccc;padding-left:.8em">Ciepły posiłek.<br>Lepszy dzień.</span>
   <h1 class="a t-h" style="--x:120;--y:90;--fs:72">Koszyk</h1><span class="a t-p" style="--x:124;--y:168;--fs:22;color:var(--tekst-mocny)">2 produkty w Twoim koszyku</span>
-  <span class="odz" style="--x:530;--y:64"><span class="odznaka odznaka--cieplo" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
-  <span class="odz" style="--x:670;--y:64"><span class="odznaka odznaka--zasilanie" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <span class="odz" style="--x:530;--y:64"><span class="odznaka odznaka--cieplo" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:670;--y:64"><span class="odznaka odznaka--zasilanie" style="--s:82"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 79px, (min-width: 900px) 6.10vw, 1px" alt="" style="--x:802;--y:98;--w:102">
   <span class="a t-p c" style="--x:500;--y:164;--w:142;--fs:15;font-weight:700;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span>
   <span class="a t-p c" style="--x:640;--y:164;--w:142;--fs:15;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
@@ -80,7 +80,7 @@
   <span class="a" style="--x:660;--y:410;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
   <span class="a" style="--x:850;--y:420;--fs:26;color:var(--tekst-mocny)">🗑</span>
   <span class="a karta" style="--x:120;--y:522;--w:820;--h:128;background:var(--tlo-alt)"></span>
-  <img class="a cien" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:144;--y:530;--w:102">
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:144;--y:522;--w:102">
   <b class="a" style="--x:270;--y:560;--fs:19;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
   <span class="a t-p" style="--x:270;--y:591;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
   <b class="a t-h" style="--x:122;--y:676;--fs:32">Dołóż do zamówienia</b>
@@ -116,7 +116,7 @@
   <span class="a t-p" style="--x:1250;--y:692;--fs:15;color:var(--tekst-mocny)">🔒 <b>Bezpieczne płatności</b></span>
   <a class="a btn-v btn-z" href="zamowienie.html" style="--x:990;--y:756;--w:446;--h:70;--fs:23">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
   <a class="a link-v" href="lunch-boxy.html" style="--x:1144;--y:842;--fs:17">Kontynuuj zakupy</a>
-  <img class="a cien" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 820w" sizes="(min-width: 1376px) 230px, (min-width: 900px) 17.94vw, 1px" alt="" style="--x:1440;--y:420;--w:300" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 1600w" sizes="(min-width: 1376px) 230px, (min-width: 900px) 17.94vw, 1px" alt="" style="--x:1440;--y:420;--w:300" loading="lazy" decoding="async">
   <span class="a reka" style="--x:1470;--y:40;--fs:30;--rot:-14deg">Twój<br>ciepły posiłek<br>zawsze pod ręką!</span><span class="a reka" style="--x:1500;--y:830;--fs:30;--rot:-14deg">Smaczniej<br>każdego dnia!</span>
   <span class="a reka" style="--x:20;--y:820;--fs:26;--rot:-14deg">Więcej<br>możliwości<br>z Lunchee!</span>
   <span class="a" style="--x:1460;--y:912;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
@@ -130,7 +130,7 @@
   <span class="a karta" style="--x:424;--y:86;--w:1214;--h:198;background:linear-gradient(90deg,#f8c71e,#fbd34a)"></span>
   <span class="a tag-r" style="--x:446;--y:102;--w:216;--h:40;--fs:17;text-transform:none">Promocja dla Ciebie</span>
   <b class="a t-h" style="--x:456;--y:146;--fs:52;white-space:nowrap">Rabat <span style="background:var(--promocja);color:#fff;border-radius:.15em;padding:0 .12em">30%</span> naliczony!</b>
-  <img class="a" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:450;--y:212;--w:56"><span class="a t-p" style="--x:518;--y:220;--fs:16;color:var(--tekst-mocny);font-weight:700">Rozszerzona gwarancja producenta<br>jest już w koszyku, teraz 0 zł</span>
+  <img class="a" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:450;--y:208;--w:56"><span class="a t-p" style="--x:518;--y:220;--fs:16;color:var(--tekst-mocny);font-weight:700">Rozszerzona gwarancja producenta<br>jest już w koszyku, teraz 0 zł</span>
   <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 192px, (min-width: 900px) 14.95vw, 1px" alt="" style="--x:996;--y:100;--w:250" loading="lazy" decoding="async"><img class="a cien" src="assets/img/r2/produkty/lb755-zamkniety.webp" srcset="assets/img/r2/produkty/lb755-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb755-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb755-zamkniety.webp 756w" sizes="(min-width: 1376px) 192px, (min-width: 900px) 14.95vw, 1px" alt="" style="--x:1196;--y:126;--w:250">
   <span class="a reka" style="--x:1470;--y:110;--fs:40;--rot:-12deg">Ciepło<br>zawsze<br>z Tobą!</span>
   <span class="a karta" style="--x:48;--y:304;--w:966;--h:108;background:#fff"></span>
@@ -148,7 +148,7 @@
   <span class="a" style="--x:734;--y:454;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
   <span class="a" style="--x:924;--y:464;--fs:26;color:var(--tekst-mocny)">🗑</span>
   <span class="a karta" style="--x:48;--y:554;--w:966;--h:90;background:var(--tlo-alt)"></span>
-  <img class="a cien" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:72;--y:562;--w:72">
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:72;--y:557;--w:72">
   <b class="a" style="--x:168;--y:581;--fs:18;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
   <span class="a t-p" style="--x:168;--y:610;--fs:15">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
   <b class="a t-h" style="--x:54;--y:656;--fs:31">Dołóż do zamówienia</b>
@@ -177,8 +177,8 @@
   <a class="a btn-v btn-b" href="zamowienie.html" style="--x:1076;--y:716;--w:524;--h:58;--fs:21">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
   <a class="a btn-v btn-o" href="lunch-boxy.html" style="--x:1076;--y:784;--w:524;--h:52;--fs:20">Kontynuuj zakupy</a>
   <span class="a t-p" style="--x:1076;--y:862;--fs:15;color:var(--tekst-mocny)">🚚 Darmowa dostawa od 269,00 zł</span><span class="a t-p" style="--x:1330;--y:862;--fs:15;color:var(--tekst-mocny)">🔒 Bezpieczne płatności</span>
-  <span class="odz" style="--x:70;--y:858"><span class="odznaka odznaka--cieplo" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
-  <span class="odz" style="--x:310;--y:858"><span class="odznaka odznaka--zasilanie" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <span class="odz" style="--x:70;--y:858"><span class="odznaka odznaka--cieplo" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:310;--y:858"><span class="odznaka odznaka--zasilanie" style="--s:50"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 58px, (min-width: 900px) 4.49vw, 1px" alt="" style="--x:544;--y:855;--w:75">
   <span class="a t-p c" style="--x:40;--y:903;--w:120;--fs:1;opacity:0"></span>
   <span class="a t-p c" style="--x:280;--y:903;--w:120;--fs:1;opacity:0"></span>
@@ -192,8 +192,8 @@
 <div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
   <span class="a" style="--x:1300;--y:-100;--w:500;--h:300;border-radius:50%;background:#f4c11c"></span>
   <span class="a reka" style="--x:60;--y:6;--fs:60;--rot:0deg">lunchee</span><span class="a t-p" style="--x:64;--y:76;--fs:16;color:var(--tekst-mocny)">Ciepły posiłek. Gdziekolwiek jesteś.</span>
-  <span class="odz" style="--x:390;--y:14"><span class="odznaka odznaka--cieplo" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span><span class="a t-p" style="--x:470;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">Do 60°C</b><br>zawsze ciepły posiłek</span>
-  <span class="odz" style="--x:660;--y:14"><span class="odznaka odznaka--zasilanie" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span><span class="a t-p" style="--x:740;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">3 źródła</b><br>230 V, 12 V, 24 V</span>
+  <span class="odz" style="--x:390;--y:14"><span class="odznaka odznaka--cieplo" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span><span class="a t-p" style="--x:470;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">Do 60°C</b><br>zawsze ciepły posiłek</span>
+  <span class="odz" style="--x:660;--y:14"><span class="odznaka odznaka--zasilanie" style="--s:62"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span><span class="a t-p" style="--x:740;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">3 źródła</b><br>230 V, 12 V, 24 V</span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 65px, (min-width: 900px) 5.02vw, 1px" alt="" style="--x:950;--y:28;--w:84"><span class="a t-p" style="--x:1048;--y:30;--fs:15;color:var(--tekst-mocny)"><b style="font-size:1.3em">Stal nierdzewna</b><br>pojemnik do zmywarki</span>
   <span class="a reka" style="--x:1400;--y:24;--fs:40;--rot:-10deg">Więcej<br>niż lunch box</span>
   <span class="a karta" style="--x:38;--y:118;--w:1046;--h:800;background:#fff"></span>
@@ -215,7 +215,7 @@
   <span class="a" style="--x:784;--y:450;--w:160;--h:56;border-radius:99px;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;display:flex;align-items:center;justify-content:space-around;--fs:22;font-weight:600;color:var(--tekst-mocny)"><span>−</span>1<span>+</span></span>
   <span class="a" style="--x:974;--y:460;--fs:26;color:var(--tekst-mocny)">🗑</span>
   <span class="a karta" style="--x:60;--y:562;--w:1004;--h:100;background:var(--tlo-alt)"></span>
-  <img class="a cien" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:84;--y:570;--w:80">
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:84;--y:564;--w:80">
   <b class="a" style="--x:188;--y:592;--fs:18;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
   <span class="a t-p" style="--x:188;--y:621;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
   <b class="a" style="--x:930;--y:590;--fs:28;color:var(--ok)">0 zł</b><span class="a" style="--x:996;--y:586;--w:44;--h:44;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:calc(24 * var(--u))">✓</span>
@@ -253,10 +253,10 @@
   <span class="a" style="--x:1138;--y:424;--w:302;--h:52;border-radius:calc(14 * var(--u));background:#fff;box-shadow:inset 0 0 0 calc(1.5 * var(--u)) #e3d8c4;--fs:16;color:#8a93a6;display:flex;align-items:center;padding-left:1em">🏷&nbsp; Kod rabatowy</span>
   <span class="a" style="--x:1460;--y:424;--w:150;--h:52;border-radius:99px;box-shadow:inset 0 0 0 calc(2 * var(--u)) var(--tekst-mocny);--fs:17;font-weight:800;color:var(--tekst-mocny);display:grid;place-items:center">Zastosuj</span>
   <span class="a karta" style="--x:1128;--y:494;--w:244;--h:96;background:#fdeceb"></span><span class="a" style="--x:1140;--y:516;--w:52;--h:52;border-radius:50%;background:var(--promocja);color:#fff;display:grid;place-items:center;font:800 calc(26 * var(--u))/1 var(--font-tekst)">%</span><span class="a t-p" style="--x:1206;--y:512;--fs:16;color:var(--promocja);font-weight:700">Promocja dla Ciebie</span><span class="a t-p" style="--x:1206;--y:540;--fs:16;color:var(--tekst-mocny)">Rabat 30% naliczony</span>
-  <span class="a karta" style="--x:1388;--y:494;--w:232;--h:96;background:#eef3fb"></span><img class="a" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:1396;--y:502;--w:68"><span class="a t-p" style="--x:1476;--y:510;--fs:15;color:var(--tekst-mocny);font-weight:700">Rozszerzona<br>gwarancja</span><b class="a" style="--x:1476;--y:556;--fs:16;color:var(--ok)">teraz 0 zł</b>
+  <span class="a karta" style="--x:1388;--y:494;--w:232;--h:96;background:#eef3fb"></span><img class="a" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:1396;--y:497;--w:68"><span class="a t-p" style="--x:1476;--y:510;--fs:15;color:var(--tekst-mocny);font-weight:700">Rozszerzona<br>gwarancja</span><b class="a" style="--x:1476;--y:556;--fs:16;color:var(--ok)">teraz 0 zł</b>
   <a class="a btn-v btn-z" href="zamowienie.html" style="--x:1128;--y:608;--w:490;--h:60;--fs:21">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
   <span class="a t-p c" style="--x:1128;--y:676;--w:490;--fs:15;color:var(--tekst-mocny)">🔒 Bezpieczne i szybkie zakupy</span>
-  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 820w" sizes="(min-width: 1376px) 353px, (min-width: 900px) 27.51vw, 1px" alt="" style="--x:1300;--y:690;--w:460" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1376px) 353px, (min-width: 900px) 27.51vw, 1px" alt="" style="--x:1300;--y:690;--w:460" loading="lazy" decoding="async">
   <span class="a reka" style="--x:1140;--y:740;--fs:40;--rot:-14deg">Ciepłe<br>chwile<br>każdego<br>dnia ♡</span>
   <span class="a" style="--x:60;--y:906;--fs:13;padding:.2em .7em;border-radius:99px;background:rgb(10 42 94 / .08);color:var(--tekst-slaby)">Podgląd z przykładowym koszykiem</span>
 </div></div></div>
@@ -267,8 +267,11 @@
      data-kv: gw (gwarancja), pod (akcesoria), prawy (granatowe podsumowanie, przesuwa się tylko na telefonie),
      rabat (wiersz rabatu, znika bez rabatu), podrabat (wszystko w podsumowaniu pod rabatem, podjeżdża w jego miejsce,
      a granatowa karta skraca się o ten wiersz), foto (carbonara, na telefonie pod podsumowaniem). -->
-<div class="vk-sek vk-sek--pelne" style="--tlo-v:var(--tlo-produkt);padding-top:8px"><div class="vk-ramka"><div class="vk vk--m" data-kv-koszyk data-kv-promo="naliczony" style="overflow:hidden;border-radius:calc(24 * var(--u));--mhk:2054">
-  <div class="a foto" data-kv="foto" data-kv-foto-tlo style="--x:1480;--y:0;--w:192;--h:941;--mx:16;--my:1838;--mw:358;--mh:216"><img src="assets/img/r2/warianty/carbonara.webp" alt="" style="object-position:20% 50%"></div>
+<div class="vk-sek vk-sek--pelne vk-sek--koszyk" style="--tlo-v:var(--tlo-produkt);padding-top:8px"><div class="vk-ramka"><div class="vk vk--m" data-kv-koszyk data-kv-promo="naliczony" style="--mhk:2054">
+  <!-- runda 03 (KOS-586, „Problem z grafiką - odcięta”): zamiast paska wyciętego z kadru carbonary cały talerz (wycinek z carbonara.webp
+       bez pudełka z AI). Na desktopie wychodzi zza granatowej karty i biegnie za prawą krawędź okna (sekcja przycina go overflow-x: clip),
+       od ok. 2100 px stoi cały. Na telefonie cały, pod kartą podsumowania. -->
+  <img class="a" data-kv="foto" src="assets/img/r2/warianty/carbonara-talerz-caly.webp" srcset="assets/img/r2/warianty/carbonara-talerz-caly-w640.webp 640w, assets/img/r2/warianty/carbonara-talerz-caly.webp 1024w" sizes="(min-width: 900px) min(36vw, 560px), 82vw" width="1024" height="646" alt="" loading="lazy" decoding="async" style="--x:1468;--y:250;--w:730;--mx:35;--my:1846;--mw:320">
   <h1 tabindex="-1" data-kv-h1 class="a t-h" style="--x:40;--y:20;--fs:76;--mx:16;--my:8;--mfs:38">Koszyk</h1><span class="a t-p" style="--x:44;--y:112;--fs:26;color:var(--tekst-mocny);--mx:16;--my:56;--mw:358;--mfs:16">Dobre jedzenie zawsze z Tobą</span>
   <div data-kv-lista>
   <div class="a karta" data-id="lb755" style="--x:40;--y:186;--w:894;--h:156;background:#fff;--mx:16;--my:96;--mw:358;--mh:136">
@@ -287,7 +290,7 @@
   </div>
   </div>
   <span class="a karta" data-kv="gw" style="--x:40;--y:538;--w:894;--h:118;background:var(--tlo-alt);--mx:16;--my:392;--mw:358;--mh:118"></span>
-  <img class="a cien" data-kv="gw" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:64;--y:546;--w:94;--mx:26;--my:408;--mw:56">
+  <img class="a cien" data-kv="gw" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:64;--y:539;--w:94;--mx:26;--my:404;--mw:56">
   <b data-m="gw" data-kv="gw" class="a" style="--x:182;--y:573;--fs:19;color:var(--tekst-mocny);white-space:nowrap;--mx:94;--my:408;--mw:272;--mfs:15">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
   <span class="a t-p" data-kv="gw" style="--x:182;--y:604;--fs:16;--mx:94;--my:454;--mw:270;--mfs:14">30 miesięcy gwarancji producenta, do każdego lunch boxa w zamówieniu.</span>
   <b class="a t-h" data-kv="pod" style="--x:40;--y:686;--fs:34;--mx:16;--my:546;--mfs:28">Dołóż do zamówienia</b>
@@ -305,7 +308,7 @@
     <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbc7']" aria-label="Dodaj do koszyka: Pojemnik INOX LBC7" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
   </div>
   <div class="a karta" data-kv="pod" style="--x:494;--y:742;--w:212;--h:186;background:#fff;--mx:16;--my:868;--mw:171;--mh:240">
-    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/maly-pojemnik.webp" srcset="assets/img/r2/akcesoria/maly-pojemnik-w240.webp 240w, assets/img/r2/akcesoria/maly-pojemnik-w400.webp 400w, assets/img/r2/akcesoria/maly-pojemnik-w640.webp 640w, assets/img/r2/akcesoria/maly-pojemnik.webp 1000w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
+    <span class="a kv-akc" style="--x:10;--y:10;--w:192;--h:80;--mx:10;--my:10;--mw:151;--mh:100"><img src="assets/img/r2/akcesoria/inox-z-pokrywa.webp" srcset="assets/img/r2/akcesoria/inox-z-pokrywa-w240.webp 240w, assets/img/r2/akcesoria/inox-z-pokrywa-w400.webp 400w, assets/img/r2/akcesoria/inox-z-pokrywa-w640.webp 640w, assets/img/r2/akcesoria/inox-z-pokrywa.webp 1000w" sizes="(min-width: 900px) 82px, (min-width: 560px) 192px, 35vw" alt=""></span>
     <b class="a" style="--x:14;--y:98;--w:184;--fs:18;color:var(--tekst-mocny);line-height:1.15;--mx:14;--my:118;--mw:143;--mfs:15">Pojemnik z&nbsp;pokrywą LBCL7</b>
     <span class="a t-p" style="--x:14;--y:148;--fs:18;color:var(--tekst-mocny);--mx:14;--my:160;--mfs:15">39,00 zł</span>
     <button type="button" class="a btn-v btn-o" data-ws-klik="[data-add='lbcl7']" aria-label="Dodaj do koszyka: Pojemnik z pokrywą LBCL7" style="--x:110;--y:140;--w:92;--h:42;--fs:17;border:0;cursor:pointer;background:#fff;--mx:10;--my:186;--mw:151;--mh:44;--mfs:16">Dodaj</button>
@@ -330,7 +333,7 @@
     <button class="a" type="submit" style="--x:326;--y:0;--w:150;--h:58;--fs:19;--mx:208;--my:0;--mw:110;--mh:50;--mfs:15">Zastosuj</button>
   </form>
   <p class="a kv-kod-msg" data-kv="podrabat" data-kod-msg role="status" hidden style="--x:996;--y:422;--w:476;--fs:15;--mx:34;--my:1475;--mw:322;--mfs:13"></p>
-  <span class="a karta" data-kv="podrabat" style="--x:980;--y:444;--w:508;--h:198;background:var(--tlo-alt);--mx:26;--my:1496;--mw:338;--mh:176"></span>
+  <span class="a karta promo-karta" data-kv="podrabat" style="--x:980;--y:444;--w:508;--h:198;--mx:26;--my:1496;--mw:338;--mh:176"></span>
   <span class="a tag-r" data-kv="podrabat" style="--x:1000;--y:462;--w:220;--h:40;--fs:16;text-transform:none;--mx:42;--my:1514;--mw:192;--mh:32;--mfs:14">Promocja dla Ciebie</span>
   <b class="a t-h" data-kv="podrabat" data-kv-pokaz="naliczony" data-kv-pole="naglowek" style="--x:1000;--y:520;--fs:30;white-space:nowrap;--mx:42;--my:1560;--mfs:24">Rabat <span class="rabat">30%</span> naliczony</b>
   <span class="a t-p" data-kv="podrabat" data-kv-pokaz="naliczony" data-kv-pole="oszczedzasz" style="--x:1000;--y:574;--w:318;--fs:16;color:var(--tekst-mocny);--mx:42;--my:1608;--mw:304;--mfs:15">Oszczędzasz 149,40 zł. Każde kolejne dwa lunch boxy też kosztują 30% mniej.</span>
@@ -370,7 +373,7 @@
   <span class="a" style="--x:312;--y:354;--w:30;--h:30;border-radius:50%;background:#ceaab2;box-shadow:0 0 0 calc(3 * var(--u)) #fff,0 0 0 calc(5 * var(--u)) var(--tekst-mocny)"></span><span class="a" style="--x:362;--y:358;--w:22;--h:22;border-radius:50%;background:#d7d7d9"></span><span class="a" style="--x:404;--y:358;--w:22;--h:22;border-radius:50%;background:#39546f"></span>
   <span class="a" style="--x:316;--y:524;--w:22;--h:22;border-radius:50%;background:#ceaab2"></span><span class="a" style="--x:356;--y:520;--w:30;--h:30;border-radius:50%;background:#d7d7d9;box-shadow:0 0 0 calc(3 * var(--u)) #fff,0 0 0 calc(5 * var(--u)) var(--tekst-mocny)"></span><span class="a" style="--x:404;--y:524;--w:22;--h:22;border-radius:50%;background:#39546f"></span>
   <span class="a karta" style="--x:44;--y:584;--w:970;--h:104;background:var(--tlo-alt)"></span>
-  <img class="a cien" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" style="--x:68;--y:592;--w:83">
+  <img class="a cien" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" style="--x:68;--y:586;--w:83">
   <b class="a" style="--x:175;--y:615;--fs:19;color:var(--tekst-mocny);white-space:nowrap">Rozszerzona gwarancja producenta jest już w koszyku, <span style="color:var(--promocja)">teraz 0 zł</span></b>
   <span class="a t-p" style="--x:175;--y:646;--fs:16">30 miesięcy zamiast 24, do każdego lunch boxa w zamówieniu.</span>
   <span class="a" style="--x:908;--y:614;--w:50;--h:50;border-radius:50%;background:#dcefd9;color:var(--ok);display:grid;place-items:center;font-size:calc(26 * var(--u))">✓</span>
@@ -410,8 +413,8 @@
   <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 118px, (min-width: 900px) 9.21vw, 1px" alt="" style="--x:1455;--y:548;--w:154" loading="lazy" decoding="async">
   <a class="a btn-v btn-z" href="zamowienie.html" style="--x:1062;--y:718;--w:564;--h:72;--fs:25">Przejdź do zamówienia <svg><use href="#i-arrow"/></svg></a>
   <span class="a t-p c" style="--x:1062;--y:800;--w:564;--fs:15">Koszyk zapamiętuje wybór w tej przeglądarce.</span>
-  <span class="odz" style="--x:1078;--y:834"><span class="odznaka odznaka--cieplo" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
-  <span class="odz" style="--x:1238;--y:834"><span class="odznaka odznaka--zasilanie" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <span class="odz" style="--x:1078;--y:834"><span class="odznaka odznaka--cieplo" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:1238;--y:834"><span class="odznaka odznaka--zasilanie" style="--s:52"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 50px, (min-width: 900px) 3.89vw, 1px" alt="" style="--x:1393;--y:856;--w:65">
   <span class="a t-p c" style="--x:1048;--y:897;--w:112;--fs:1;opacity:0"></span>
   <span class="a t-p c" style="--x:1208;--y:897;--w:112;--fs:1;opacity:0"></span>

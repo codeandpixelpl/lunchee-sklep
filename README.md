@@ -3,9 +3,9 @@
 Prototyp sklepu lunchee.pl (Lunchee, sub-marka NOVEEN) przygotowany przez Code&Pixel.
 Statyczny HTML, CSS i JS, bez frameworka i bez kroku budowania.
 
-> Ta paczka to stan z 8.10.2026 (runda 01). Przed przekazaniem trzeba ją odświeżyć z `03 - Design`
-> po zdjęciu podglądu wariantów (opis niżej). Uwagi „Przekazanie dla programisty” opisują stan
-> z 17.10.2026.
+> Ta paczka to stan z 24.10.2026 (runda 03). Na stronie głównej stoi przełącznik dziesięciu teł hero
+> do wyboru przez klienta. Przed przekazaniem programiście trzeba zostawić jedno tło i zdjąć podgląd
+> wariantów (opis niżej).
 
 ## Podgląd lokalny
 
@@ -84,6 +84,17 @@ a sekcje „momenty”, „ebook” i karta produktu zostają w wersji z `build.
 5. Sprawdzić, że na żadnej stronie nie zostały statyczne kafle cech z `build.py` w miejscu parametrów t3
    i że nie ładuje się już Google Fonts. Krój Caveat (podpisy polaroidów w sekcji „Każdy ma swój sposób”)
    trzeba wtedy hostować lokalnie, jak Inter (licencja OFL).
+
+### Przed oddaniem: zostawić jedno tło hero
+
+Na stronie głównej `js/hero-przelacznik.js` przełącza dziesięć teł hero (numery 01–10, `?hero=NN` w adresie).
+Na desktopie tło ma 3,2:1 (`hero-NN.webp`, `-w1280`, `-w3840`), na telefonie osobny kadr 16:10,5
+(`hero-NN-m.webp`, `-m800`) i własny kolor tła pod tekstem. Tła 05, 08 i 10 mają biały tekst na desktopie,
+08 i 10 także na telefonie.
+
+1. W `index.html` wpisać w `<img class="hero__psd">` pliki wybranego tła (desktop i telefon, np. przez `<picture>`).
+2. Przenieść do CSS kolor tła telefonu (`TLO_M`) i ewentualny biały tekst (`.hero--jasny`, `.hero--jasny-m`).
+3. Usunąć `js/hero-przelacznik.js`, jego `<script>` w `index.html` i pozostałe pliki z `assets/img/r2/hero-psd/`.
 
 ### Części statyczne do podpięcia
 

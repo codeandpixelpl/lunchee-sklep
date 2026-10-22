@@ -114,10 +114,14 @@ $$('[data-picker]').forEach(picker => {
 });
 
 /* ---------- Karuzele: przewijanie palcem, strzałki i kropki jako nadpisanie ---------- */
-$$('[data-carousel]').forEach(track => {
+/* Runda 3 (22.10): karuzela jako funkcja, bo pasek cech „Dlaczego Lunchee?” przychodzi z wariantu (js/warianty-sekcji.js)
+   po załadowaniu strony. Strzałki szukamy najpierw w najbliższym [data-karuzela]: w sekcji z wariantem stoi też ukryty oryginał. */
+const karuzela = track => {
+  if (track.dataset.karuzelaGotowa) return;
+  track.dataset.karuzelaGotowa = '1';
   const items = [...track.children];
   const dots = track.dataset.dots ? document.getElementById(track.dataset.dots) : null;
-  const wrap = track.closest('section') || document;
+  const wrap = track.closest('[data-karuzela]') || track.closest('section') || document;
   const prev = $('[data-carousel-prev]', wrap), next = $('[data-carousel-next]', wrap);
   const bar = track.dataset.progress ? $('i', document.getElementById(track.dataset.progress)) : null;
   if (dots) items.forEach(() => dots.appendChild(document.createElement('span')));
@@ -136,7 +140,9 @@ $$('[data-carousel]').forEach(track => {
   prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
   next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
   update();
-});
+};
+$$('[data-carousel]').forEach(karuzela);
+document.addEventListener('ws:wariant', () => $$('[data-carousel]').forEach(karuzela));
 
 /* ---------- Galeria karty produktu ---------- */
 $$('[data-gallery]').forEach(g => {
@@ -226,6 +232,10 @@ const cart = {
     const ship = n && sum < free ? +(shipEl?.dataset.ship || 0) : 0;
     $$('[data-cart-sum]').forEach(c => c.textContent = zl(gross));
     $$('[data-cart-ship]').forEach(c => c.textContent = zl(ship));
+    // runda 03: przy darmowej dostawie opcje w zamówieniu pokazują to samo co podsumowanie (przekreślona cena i 0,00 zł)
+    const gratis = n > 0 && sum >= free;
+    $$('[data-dostawa-cena]').forEach(e => e.innerHTML = gratis
+      ? `<s><span class="sr-only">zamiast </span>${zl(+e.dataset.dostawaCena)}</s> <b>${zl(0)}</b>` : zl(+e.dataset.dostawaCena));
     $$('[data-cart-total]').forEach(c => c.textContent = zl(sum + ship));
     // zamówienie: wiersz o rozszerzonej gwarancji, gdy w koszyku jest lunch box (audyt R2-43, bez kwoty)
     $$('[data-cart-gw]').forEach(g => g.hidden = !cart.read().some(x => MODELS[x.id]));
@@ -287,7 +297,6 @@ function koszykV4({ items, n, gross, disc, sum, ship }) {
   const z = { '--kv-a': a, '--kv-am': am, '--kv-b': b, '--kv-bm': bm, '--kv-r': r, '--kv-rm': rm,
     '--h-k': 941 + Math.max(b, r), '--mhk': 2054 + bm + rm }; // desktop: wyższa z kolumn plus margines płótna
   Object.entries(z).forEach(([p, v]) => vk.style.setProperty(p, v));
-  $('[data-kv-foto-tlo]', vk)?.style.setProperty('--h', z['--h-k']);
 
   // wiersze; fokus wraca na ten sam przycisk po przerysowaniu (obsługa z klawiatury)
   const lista = $('[data-kv-lista]', vk), akt = document.activeElement;
@@ -470,6 +479,24 @@ $$('[data-toggle]').forEach(cb => {
   // 17.10 (audyt „Faktura VAT · pola”): adres firmy też wymagany, faktura musi mieć adres nabywcy (art. 106e ust. 1 pkt 3 ustawy o VAT)
   const sync = () => { box.hidden = !cb.checked; $$('input', box).forEach(i => i.required = cb.checked); };
   cb.addEventListener('change', sync); sync();
+});
+/* ---------- Zamówienie: „Zaznacz wszystkie zgody” (runda 03, KOS-2848) ----------
+   Pole zbiorcze tylko ustawia zgody pod nim. Każda zgoda zostaje osobnym polem i można ją odznaczyć; gdy część jest
+   zaznaczona, pole zbiorcze ma stan pośredni (indeterminate), gdy wszystkie, jest zaznaczone. Na starcie nic nie jest zaznaczone. */
+$$('[data-zgody-wszystkie]').forEach(wszystkie => {
+  const zgody = $$('[data-zgoda]', wszystkie.closest('fieldset') || document);
+  const stan = () => {
+    const ile = zgody.filter(z => z.checked).length;
+    wszystkie.checked = ile === zgody.length;
+    wszystkie.indeterminate = ile > 0 && ile < zgody.length;
+  };
+  wszystkie.addEventListener('change', () => {
+    zgody.forEach(z => { if (z.checked !== wszystkie.checked) { z.checked = wszystkie.checked; z.dispatchEvent(new Event('input', { bubbles: true })); } });
+    stan();
+  });
+  zgody.forEach(z => z.addEventListener('change', stan));
+  addEventListener('pageshow', stan); // przeglądarka może odtworzyć zaznaczenia po powrocie na stronę
+  stan();
 });
 $$('[data-form]').forEach(f => {
   f.addEventListener('submit', e => {

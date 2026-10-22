@@ -37,20 +37,12 @@
 .vm-cecha span { display: block; color: var(--tekst-mocny); line-height: 1.3; }
 .vm-kropka { border-radius: 50%; box-shadow: 0 0 0 calc(4 * var(--u)) #fff, 0 calc(4 * var(--u)) calc(10 * var(--u)) rgb(0 0 0 / .18); }
 .vm-strz { display: grid; place-items: center; border-radius: 50%; background: #fff; color: var(--tekst-mocny); box-shadow: 0 calc(6 * var(--u)) calc(14 * var(--u)) rgb(0 0 0 / .18); font: 700 calc(32 * var(--u))/1 var(--font-tekst); }
-/* TELEFON (17.10), tylko wariant 2: siatka 2 kolumny, Night na całą szerokość ze zdjęciem po lewej */
-@media (max-width: 899px) {
-  #modele .vk--m .t-h .alt { display: block; }
-  #modele .vk--m .vm-karta { border-radius: calc(18 * var(--u)); box-shadow: 0 calc(10 * var(--u)) calc(22 * var(--u)) calc(-14 * var(--u)) rgb(60 40 10 / .45); }
-  #modele .vk--m .vm-karta > img[src*="/tlo-"] { height: calc(var(--mh) * var(--u)) !important; }
-  /* QA 17.10: dolna krawędź tła wypadała w połowie wiersza „Lunchee LB7x5”, więc w siatce 2×2 tło gaśnie miękko */
-  #modele .vk--m .vm-karta:not(:last-child) > img[src*="/tlo-"] { -webkit-mask-image: linear-gradient(#000 calc(100% - 32 * var(--u)), transparent); mask-image: linear-gradient(#000 calc(100% - 32 * var(--u)), transparent); }
-  #modele .vk--m .vm-brak { letter-spacing: -.01em; }
-}
+/* runda 03 (22.10): wariant 2 nie stoi już na płótnie .vk, układ telefonu daje komponent .model-karta (components.css) */
 </style>
 
 <template data-nr="1" data-nazwa="Karty z rekwizytami">
 <div class="vk-sek" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk" style="overflow:hidden">
-  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 820w" sizes="(min-width: 1376px) 322px, (min-width: 900px) 25.12vw, 1px" alt="" style="--x:1400;--y:20;--w:420" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1376px) 322px, (min-width: 900px) 25.12vw, 1px" alt="" style="--x:1400;--y:20;--w:420" loading="lazy" decoding="async">
   <img class="a dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:-30;--y:756;--w:230;filter:blur(3px)" loading="lazy" decoding="async">
   <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:1534;--y:800;--w:110" loading="lazy" decoding="async">
   <span class="a reka" style="--x:70;--y:38;--fs:44;--rot:-10deg">Ciepły<br>posiłek<br>zawsze<br>z Tobą ♡</span>
@@ -113,63 +105,37 @@
 </template>
 
 <template data-nr="2" data-nazwa="Tła z motywem">
-<!-- wybór 16.10: tło na całą szerokość, bez ozdobników w rogach i paska z korzyściami -->
-<div class="vk-sek vk-sek--pelne" style="--tlo-v:var(--tlo-produkt)"><div class="vk-ramka"><div class="vk vk--m" style="--h-k:748;--mhk:1004">
-  <p class="a t-e c" style="--x:436;--y:28;--w:800;--fs:19;color:var(--akcent);--mx:16;--my:2;--mw:358;--mfs:14.2">Elektryczne lunch boxy</p>
-  <h2 class="a t-h c" style="--x:336;--y:74;--w:1000;--fs:76;--mx:16;--my:28;--mw:358;--mfs:36">Pięć kolorów. <span class="alt">Wybierz swój.</span></h2>
-  <div class="a vm-karta" style="--x:40;--y:212;--w:312;--h:516;background:var(--tlo-produkt);--mx:16;--my:130;--mw:173;--mh:316">
-    <img class="a" src="assets/img/r2/warianty/tlo-city.webp" alt="" style="--x:0;--y:0;--w:312;height:calc(380 * var(--u));object-fit:cover;opacity:.85;--mx:0;--my:0;--mw:173;--mh:211" loading="lazy" decoding="async">
-    <span class="a vm-nazwa" style="--x:0;--y:40;--w:312;--fs:71;color:#1f3550;--mx:0;--my:22;--mw:173;--mfs:39">City</span>
-    <img class="a cien vm-zamk" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 215px, (min-width: 900px) 16.75vw, (min-width: 560px) 223px, 39.7vw" alt="Lunchee LB745 City" style="--x:20;--y:136;--w:280;--mx:9;--my:75;--mw:155" loading="lazy" decoding="async">
-    <img class="a cien vm-danie" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 820w" sizes="(min-width: 1376px) 219px, (min-width: 900px) 17.05vw, (min-width: 560px) 227px, 40.5vw" alt="" style="--x:22;--y:129;--w:285;--mx:10;--my:71;--mw:158" loading="lazy" decoding="async">
-    <span class="a vm-kod" style="--x:0;--y:364;--w:312;--fs:19;--mx:0;--my:198;--mw:173;--mfs:14.5">Lunchee LB745</span>
-    <span class="a vm-cena" style="--x:0;--y:392;--w:312;--fs:28;--mx:0;--my:218;--mw:173;--mfs:20">249,00 zł</span>
-    <a class="a btn-v btn-z" href="produkt-lb745.html" style="--x:48;--y:442;--w:216;--h:58;--fs:22;--mx:12;--my:254;--mw:149;--mh:48;--mfs:16">Kup teraz <svg><use href="#i-arrow"/></svg></a>
-  </div>
-  <div class="a vm-karta" style="--x:368;--y:212;--w:306;--h:516;background:var(--tlo-produkt);--mx:201;--my:130;--mw:173;--mh:316">
-    <img class="a" src="assets/img/r2/warianty/tlo-glamour.webp" alt="" style="--x:0;--y:0;--w:306;height:calc(380 * var(--u));object-fit:cover;--mx:0;--my:0;--mw:173;--mh:211" loading="lazy" decoding="async">
-    <span class="a vm-halo" style="--k:var(--tlo-produkt);--o:.9;--x:-67;--y:75;--w:420;--h:330;--mx:-37;--my:41;--mw:232;--mh:183"></span>
-    <span class="a vm-podloze" style="--x:8;--y:328;--w:270;--h:40;--mx:4;--my:181;--mw:150;--mh:22"></span>
-    <span class="a vm-nazwa" style="--x:0;--y:40;--w:306;--fs:58;color:#7a2440;--mx:0;--my:22;--mw:173;--mfs:32">Glamour</span>
-    <img class="a cien vm-zamk" src="assets/img/r2/produkty/lb755-zamkniety.webp" srcset="assets/img/r2/produkty/lb755-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb755-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb755-zamkniety.webp 756w" sizes="(min-width: 1376px) 215px, (min-width: 900px) 16.75vw, (min-width: 560px) 223px, 39.7vw" alt="Lunchee LB755 Glamour" style="--x:16;--y:136;--w:280;--mx:9;--my:75;--mw:155" loading="lazy" decoding="async">
-    <img class="a cien vm-danie" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 820w" sizes="(min-width: 1376px) 222px, (min-width: 900px) 17.28vw, (min-width: 560px) 230px, 41.0vw" alt="" style="--x:18;--y:133;--w:289;--mx:10;--my:73.5;--mw:160" loading="lazy" decoding="async">
-    <span class="a vm-kod" style="--x:0;--y:364;--w:306;--fs:19;--mx:0;--my:198;--mw:173;--mfs:14.5">Lunchee LB755</span>
-    <span class="a vm-cena" style="--x:0;--y:392;--w:306;--fs:28;--mx:0;--my:218;--mw:173;--mfs:20">249,00 zł</span>
-    <a class="a btn-v btn-z" href="produkt-lb755.html" style="--x:46;--y:442;--w:212;--h:58;--fs:22;--mx:12;--my:254;--mw:149;--mh:48;--mfs:16">Kup teraz <svg><use href="#i-arrow"/></svg></a>
-  </div>
-  <div class="a vm-karta" style="--x:688;--y:212;--w:298;--h:516;background:var(--tlo-produkt);--mx:16;--my:458;--mw:173;--mh:316">
-    <img class="a" src="assets/img/r2/warianty/tlo-nature.webp" alt="" style="--x:0;--y:0;--w:298;height:calc(380 * var(--u));object-fit:cover;--mx:0;--my:0;--mw:173;--mh:211" loading="lazy" decoding="async">
-    <span class="a vm-nazwa" style="--x:0;--y:40;--w:298;--fs:63;color:#164634;--mx:0;--my:22;--mw:173;--mfs:35">Nature</span>
-    <img class="a cien vm-zamk" src="assets/img/r2/produkty/lb725-zamkniety.webp" srcset="assets/img/r2/produkty/lb725-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb725-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb725-zamkniety.webp 756w" sizes="(min-width: 1376px) 212px, (min-width: 900px) 16.51vw, (min-width: 560px) 223px, 39.7vw" alt="Lunchee LB725 Nature" style="--x:14;--y:136;--w:276;--mx:9;--my:75;--mw:155" loading="lazy" decoding="async">
-    <img class="a cien vm-danie" src="assets/img/r2/produkty/lb725-danie.webp" srcset="assets/img/r2/produkty/lb725-danie-w240.webp 240w, assets/img/r2/produkty/lb725-danie-w400.webp 400w, assets/img/r2/produkty/lb725-danie-w640.webp 640w, assets/img/r2/produkty/lb725-danie.webp 820w" sizes="(min-width: 1376px) 215px, (min-width: 900px) 16.75vw, (min-width: 560px) 226px, 40.3vw" alt="" style="--x:16;--y:126;--w:280;--mx:10;--my:69;--mw:157" loading="lazy" decoding="async">
-    <span class="a vm-kod" style="--x:0;--y:364;--w:298;--fs:19;--mx:0;--my:198;--mw:173;--mfs:14.5">Lunchee LB725</span>
-    <span class="a vm-cena" style="--x:0;--y:392;--w:298;--fs:28;--mx:0;--my:218;--mw:173;--mfs:20">249,00 zł</span>
-    <a class="a btn-v btn-z" href="produkt-lb725.html" style="--x:44;--y:442;--w:210;--h:58;--fs:22;--mx:12;--my:254;--mw:149;--mh:48;--mfs:16">Kup teraz <svg><use href="#i-arrow"/></svg></a>
-  </div>
-  <div class="a vm-karta" style="--x:1002;--y:212;--w:302;--h:516;background:var(--tlo-produkt);--mx:201;--my:458;--mw:173;--mh:316">
-    <img class="a" src="assets/img/r2/warianty/tlo-pearl.webp" alt="" style="--x:0;--y:0;--w:302;height:calc(380 * var(--u));object-fit:cover;--mx:0;--my:0;--mw:173;--mh:211" loading="lazy" decoding="async">
-    <span class="a vm-halo" style="--k:#efe6d5;--o:.85;--x:-69;--y:75;--w:420;--h:330;--mx:-37;--my:41;--mw:232;--mh:183"></span>
-    <span class="a vm-podloze" style="--x:6;--y:328;--w:270;--h:40;--mx:4;--my:181;--mw:150;--mh:22"></span>
-    <span class="a vm-nazwa" style="--x:0;--y:40;--w:302;--fs:71;color:#45475a;--mx:0;--my:22;--mw:173;--mfs:39">Pearl</span>
-    <img class="a cien vm-zamk" src="assets/img/r2/produkty/lb715-zamkniety.webp" srcset="assets/img/r2/produkty/lb715-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb715-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb715-zamkniety.webp 756w" sizes="(min-width: 1376px) 215px, (min-width: 900px) 16.75vw, (min-width: 560px) 223px, 39.7vw" alt="Lunchee LB715 Pearl" style="--x:14;--y:136;--w:280;--mx:9;--my:75;--mw:155" loading="lazy" decoding="async">
-    <img class="a cien vm-danie" src="assets/img/r2/produkty/lb715-danie.webp" srcset="assets/img/r2/produkty/lb715-danie-w240.webp 240w, assets/img/r2/produkty/lb715-danie-w400.webp 400w, assets/img/r2/produkty/lb715-danie-w640.webp 640w, assets/img/r2/produkty/lb715-danie.webp 820w" sizes="(min-width: 1376px) 222px, (min-width: 900px) 17.28vw, (min-width: 560px) 230px, 41.0vw" alt="" style="--x:15;--y:137;--w:289;--mx:9.5;--my:75.5;--mw:160" loading="lazy" decoding="async">
-    <span class="a vm-kod" style="--x:0;--y:364;--w:302;--fs:19;--mx:0;--my:198;--mw:173;--mfs:14.5">Lunchee LB715</span>
-    <span class="a vm-cena" style="--x:0;--y:392;--w:302;--fs:28;--mx:0;--my:218;--mw:173;--mfs:20">249,00 zł</span>
-    <a class="a btn-v btn-z" href="produkt-lb715.html" style="--x:46;--y:442;--w:210;--h:58;--fs:22;--mx:12;--my:254;--mw:149;--mh:48;--mfs:16">Kup teraz <svg><use href="#i-arrow"/></svg></a>
-  </div>
-  <div class="a vm-karta" style="--x:1320;--y:212;--w:316;--h:516;background:var(--tlo-produkt);--mx:16;--my:786;--mw:358;--mh:211">
-    <img class="a" src="assets/img/r2/warianty/tlo-night.webp" alt="" style="--x:0;--y:0;--w:316;height:calc(380 * var(--u));object-fit:cover;--mx:0;--my:0;--mw:173;--mh:211" loading="lazy" decoding="async">
-    <span class="a vm-halo" style="--k:#c9d6ee;--o:.5;--x:-63;--y:75;--w:420;--h:330;--mx:-15;--my:41;--mw:188;--mh:183"></span>
-    <span class="a vm-podloze" style="--x:12;--y:328;--w:270;--h:40;--mx:4;--my:181;--mw:150;--mh:22"></span>
-    <span class="a vm-nazwa" style="--x:0;--y:40;--w:316;--fs:71;color:#fff;--mx:0;--my:22;--mw:173;--mfs:39">Night</span>
-    <img class="a cien vm-zamk" src="assets/img/r2/produkty/lb795-zamkniety.webp" srcset="assets/img/r2/produkty/lb795-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb795-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb795-zamkniety.webp 756w" sizes="(min-width: 1376px) 215px, (min-width: 900px) 16.75vw, (min-width: 560px) 223px, 39.7vw" alt="Lunchee LB795 Night" style="--x:20;--y:136;--w:280;--mx:9;--my:75;--mw:155" loading="lazy" decoding="async">
-    <img class="a cien vm-danie" src="assets/img/r2/produkty/lb795-danie.webp" srcset="assets/img/r2/produkty/lb795-danie-w240.webp 240w, assets/img/r2/produkty/lb795-danie-w400.webp 400w, assets/img/r2/produkty/lb795-danie-w640.webp 640w, assets/img/r2/produkty/lb795-danie.webp 820w" sizes="(min-width: 1376px) 219px, (min-width: 900px) 17.08vw, (min-width: 560px) 227px, 40.5vw" alt="" style="--x:22;--y:139;--w:285.5;--mx:10;--my:76.5;--mw:158" loading="lazy" decoding="async">
-    <span class="a vm-kod" style="--x:0;--y:350;--w:316;--fs:19;--mx:181;--my:26;--mw:169;--mfs:14.5">Lunchee LB795</span>
-    <span class="a vm-brak" style="--x:62;--y:382;--w:192;--h:32;--fs:15;--mx:180;--my:52;--mw:171;--mh:28;--mfs:14.2">Niedostępny w sklepie</span>
-    <span class="a vm-cena" style="--x:0;--y:414;--w:316;--fs:28;--mx:181;--my:90;--mw:169;--mfs:20">249,00 zł</span>
-    <a class="a btn-v btn-o" href="produkt-lb795.html" style="--x:52;--y:456;--w:212;--h:54;--fs:22;--mx:190;--my:130;--mw:151;--mh:48;--mfs:16">Zobacz <svg><use href="#i-arrow"/></svg></a>
-  </div>
-</div></div></div>
+<!-- wybór 16.10: tło na całą szerokość, bez ozdobników w rogach i paska z korzyściami.
+     Runda 03 (22.10, pinezka SG-3952): zamiast płótna z tłami z motywem zwykła siatka 5 kolumn z kartą .model-karta
+     (components.css), taką samą jak „Pozostałe Lunchee” na kartach produktu i wygląd jak na stronie kategorii.
+     Karty między znacznikami wstawia python3 _build/build.py (model_karty()), ręczna edycja przepada. -->
+<div class="sec" style="background:var(--tlo-produkt)"><div class="wrap">
+  <div class="sec__head sec__head--center"><span class="eyebrow">Elektryczne lunch boxy</span><h2 class="h2">Pięć kolorów. <span class="alt" style="display:inline">Wybierz swój.</span></h2></div>
+<!-- @modele-siatka -->
+<div class="modele-siatka" style="--n:5">
+        <a class="model-karta" href="produkt-lb745.html" data-model="lb745" style="--kolor:#39546f">
+          <div class="model-karta__scena"><img class="model-karta__produkt" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1280px) 236px, (min-width: 1000px) 18vw, (min-width: 560px) 34vw, 33vw" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City z posiłkiem" loading="lazy" decoding="async" width="1600" height="1208"><span class="model-karta__skladnik" style="--x:1;--y:47;--s:23;--r:-8deg"><img src="assets/img/r2/skladniki/pomidorki.webp" alt="" loading="lazy" decoding="async" width="349" height="371"></span><span class="model-karta__skladnik" style="--x:74;--y:3;--s:22;--r:12deg"><img src="assets/img/r2/skladniki/bazylia.webp" alt="" loading="lazy" decoding="async" width="237" height="221"></span></div>
+          <div class="model-karta__body"><h3 class="model-karta__nazwa">City</h3><p class="model-karta__kod">Lunchee LB745 City</p><span class="price price--sm">249,00 zł<s class="price__old">279,00 zł</s></span><small class="model-karta__omnibus">Najniższa cena z&nbsp;30 dni przed obniżką: 249,00&nbsp;zł</small><span class="btn btn--yellow btn--sm model-karta__btn">Kup teraz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a class="model-karta" href="produkt-lb755.html" data-model="lb755" style="--kolor:#ceaab2">
+          <div class="model-karta__scena"><img class="model-karta__produkt" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 1600w" sizes="(min-width: 1280px) 236px, (min-width: 1000px) 18vw, (min-width: 560px) 34vw, 33vw" alt="Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour z posiłkiem" loading="lazy" decoding="async" width="1600" height="1167"><span class="model-karta__skladnik" style="--x:1;--y:44;--s:22;--r:-10deg"><img src="assets/img/r2/skladniki/brokul.webp" alt="" loading="lazy" decoding="async" width="328" height="355"></span><span class="model-karta__skladnik" style="--x:76;--y:50;--s:20;--r:8deg"><img src="assets/img/r2/skladniki/cytryna.webp" alt="" loading="lazy" decoding="async" width="220" height="214"></span></div>
+          <div class="model-karta__body"><h3 class="model-karta__nazwa">Glamour</h3><p class="model-karta__kod">Lunchee LB755 Glamour</p><span class="price price--sm">249,00 zł</span><span class="btn btn--yellow btn--sm model-karta__btn">Kup teraz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a class="model-karta" href="produkt-lb725.html" data-model="lb725" style="--kolor:#7e9d93">
+          <div class="model-karta__scena"><img class="model-karta__produkt" src="assets/img/r2/produkty/lb725-danie.webp" srcset="assets/img/r2/produkty/lb725-danie-w240.webp 240w, assets/img/r2/produkty/lb725-danie-w400.webp 400w, assets/img/r2/produkty/lb725-danie-w640.webp 640w, assets/img/r2/produkty/lb725-danie.webp 1600w" sizes="(min-width: 1280px) 236px, (min-width: 1000px) 18vw, (min-width: 560px) 34vw, 33vw" alt="Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature z posiłkiem" loading="lazy" decoding="async" width="1600" height="1232"><span class="model-karta__skladnik" style="--x:1;--y:42;--s:22;--r:10deg"><img src="assets/img/r2/skladniki/papryka-czerwona.webp" alt="" loading="lazy" decoding="async" width="273" height="282"></span><span class="model-karta__skladnik" style="--x:77;--y:46;--s:20;--r:0deg"><img src="assets/img/r2/skladniki/marchew.webp" alt="" loading="lazy" decoding="async" width="207" height="169"></span></div>
+          <div class="model-karta__body"><h3 class="model-karta__nazwa">Nature</h3><p class="model-karta__kod">Lunchee LB725 Nature</p><span class="price price--sm">249,00 zł</span><span class="btn btn--yellow btn--sm model-karta__btn">Kup teraz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a class="model-karta" href="produkt-lb715.html" data-model="lb715" style="--kolor:#d7d7d9">
+          <div class="model-karta__scena"><img class="model-karta__produkt" src="assets/img/r2/produkty/lb715-danie.webp" srcset="assets/img/r2/produkty/lb715-danie-w240.webp 240w, assets/img/r2/produkty/lb715-danie-w400.webp 400w, assets/img/r2/produkty/lb715-danie-w640.webp 640w, assets/img/r2/produkty/lb715-danie.webp 1600w" sizes="(min-width: 1280px) 236px, (min-width: 1000px) 18vw, (min-width: 560px) 34vw, 33vw" alt="Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl z posiłkiem" loading="lazy" decoding="async" width="1600" height="1145"><span class="model-karta__skladnik" style="--x:2;--y:46;--s:20;--r:-18deg"><img src="assets/img/r2/skladniki/penne.webp" alt="" loading="lazy" decoding="async" width="222" height="225"></span><span class="model-karta__skladnik" style="--x:76;--y:44;--s:22;--r:6deg"><img src="assets/img/r2/skladniki/pomidorki.webp" alt="" loading="lazy" decoding="async" width="349" height="371"></span></div>
+          <div class="model-karta__body"><h3 class="model-karta__nazwa">Pearl</h3><p class="model-karta__kod">Lunchee LB715 Pearl</p><span class="price price--sm">249,00 zł</span><span class="btn btn--yellow btn--sm model-karta__btn">Kup teraz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+        <a class="model-karta" href="produkt-lb795.html" data-model="lb795" style="--kolor:#141414">
+          <div class="model-karta__scena"><img class="model-karta__produkt" src="assets/img/r2/produkty/lb795-danie.webp" srcset="assets/img/r2/produkty/lb795-danie-w240.webp 240w, assets/img/r2/produkty/lb795-danie-w400.webp 400w, assets/img/r2/produkty/lb795-danie-w640.webp 640w, assets/img/r2/produkty/lb795-danie.webp 1600w" sizes="(min-width: 1280px) 236px, (min-width: 1000px) 18vw, (min-width: 560px) 34vw, 33vw" alt="Elektryczny Lunch Box NOVEEN Lunchee LB795 Night z posiłkiem" loading="lazy" decoding="async" width="1600" height="1149"><span class="model-karta__skladnik" style="--x:3;--y:38;--s:16;--r:22deg"><img src="assets/img/r2/skladniki/chili.webp" alt="" loading="lazy" decoding="async" width="294" height="432"></span><span class="model-karta__skladnik" style="--x:77;--y:46;--s:20;--r:0deg"><img src="assets/img/r2/skladniki/batat.webp" alt="" loading="lazy" decoding="async" width="354" height="386"></span></div>
+          <div class="model-karta__body"><span class="model-karta__brak">Niedostępny w&nbsp;sklepie</span><h3 class="model-karta__nazwa">Night</h3><p class="model-karta__kod">Lunchee LB795 Night</p><span class="price price--sm">249,00 zł</span><span class="btn btn--outline btn--sm model-karta__btn">Zobacz <svg><use href="#i-arrow"/></svg></span></div>
+        </a>
+      </div>
+<!-- @/modele-siatka -->
+</div></div>
 </template>
 
 <template data-nr="3" data-nazwa="City na podium">
@@ -323,11 +289,11 @@
   <img class="a dek" src="assets/img/r2/skladniki/para-2.webp" alt="" style="--x:800;--y:300;--w:50;opacity:.6" loading="lazy" decoding="async">
   <img class="a dek" src="assets/img/r2/skladniki/para-4.webp" alt="" style="--x:1110;--y:300;--w:50;opacity:.6" loading="lazy" decoding="async">
   <img class="a dek" src="assets/img/r2/skladniki/para-5.webp" alt="" style="--x:1430;--y:300;--w:50;opacity:.6" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 820w" sizes="(min-width: 1376px) 242px, (min-width: 900px) 18.90vw, 1px" alt="Lunchee LB745 City z posiłkiem" style="--x:30;--y:340;--w:316" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 820w" sizes="(min-width: 1376px) 242px, (min-width: 900px) 18.90vw, 1px" alt="Lunchee LB755 Glamour z posiłkiem" style="--x:368;--y:340;--w:316" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb725-danie.webp" srcset="assets/img/r2/produkty/lb725-danie-w240.webp 240w, assets/img/r2/produkty/lb725-danie-w400.webp 400w, assets/img/r2/produkty/lb725-danie-w640.webp 640w, assets/img/r2/produkty/lb725-danie.webp 820w" sizes="(min-width: 1376px) 238px, (min-width: 900px) 18.54vw, 1px" alt="Lunchee LB725 Nature z posiłkiem" style="--x:678;--y:336;--w:310" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb715-danie.webp" srcset="assets/img/r2/produkty/lb715-danie-w240.webp 240w, assets/img/r2/produkty/lb715-danie-w400.webp 400w, assets/img/r2/produkty/lb715-danie-w640.webp 640w, assets/img/r2/produkty/lb715-danie.webp 820w" sizes="(min-width: 1376px) 239px, (min-width: 900px) 18.66vw, 1px" alt="Lunchee LB715 Pearl z posiłkiem" style="--x:990;--y:346;--w:312" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb795-danie.webp" srcset="assets/img/r2/produkty/lb795-danie-w240.webp 240w, assets/img/r2/produkty/lb795-danie-w400.webp 400w, assets/img/r2/produkty/lb795-danie-w640.webp 640w, assets/img/r2/produkty/lb795-danie.webp 820w" sizes="(min-width: 1376px) 239px, (min-width: 900px) 18.66vw, 1px" alt="Lunchee LB795 Night z posiłkiem" style="--x:1318;--y:344;--w:312" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1376px) 242px, (min-width: 900px) 18.90vw, 1px" alt="Lunchee LB745 City z posiłkiem" style="--x:30;--y:340;--w:316" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb755-danie.webp" srcset="assets/img/r2/produkty/lb755-danie-w240.webp 240w, assets/img/r2/produkty/lb755-danie-w400.webp 400w, assets/img/r2/produkty/lb755-danie-w640.webp 640w, assets/img/r2/produkty/lb755-danie.webp 1600w" sizes="(min-width: 1376px) 242px, (min-width: 900px) 18.90vw, 1px" alt="Lunchee LB755 Glamour z posiłkiem" style="--x:368;--y:340;--w:316" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb725-danie.webp" srcset="assets/img/r2/produkty/lb725-danie-w240.webp 240w, assets/img/r2/produkty/lb725-danie-w400.webp 400w, assets/img/r2/produkty/lb725-danie-w640.webp 640w, assets/img/r2/produkty/lb725-danie.webp 1600w" sizes="(min-width: 1376px) 238px, (min-width: 900px) 18.54vw, 1px" alt="Lunchee LB725 Nature z posiłkiem" style="--x:678;--y:336;--w:310" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb715-danie.webp" srcset="assets/img/r2/produkty/lb715-danie-w240.webp 240w, assets/img/r2/produkty/lb715-danie-w400.webp 400w, assets/img/r2/produkty/lb715-danie-w640.webp 640w, assets/img/r2/produkty/lb715-danie.webp 1600w" sizes="(min-width: 1376px) 239px, (min-width: 900px) 18.66vw, 1px" alt="Lunchee LB715 Pearl z posiłkiem" style="--x:990;--y:346;--w:312" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb795-danie.webp" srcset="assets/img/r2/produkty/lb795-danie-w240.webp 240w, assets/img/r2/produkty/lb795-danie-w400.webp 400w, assets/img/r2/produkty/lb795-danie-w640.webp 640w, assets/img/r2/produkty/lb795-danie.webp 1600w" sizes="(min-width: 1376px) 239px, (min-width: 900px) 18.66vw, 1px" alt="Lunchee LB795 Night z posiłkiem" style="--x:1318;--y:344;--w:312" loading="lazy" decoding="async">
   <img class="a cien-s dek" src="assets/img/r2/skladniki/bazylia.webp" alt="" style="--x:250;--y:560;--w:80" loading="lazy" decoding="async">
   <img class="a cien-s dek" src="assets/img/r2/skladniki/chili.webp" alt="" style="--x:1580;--y:520;--w:80" loading="lazy" decoding="async">
   <span class="a vm-nazwa" style="--x:40;--y:612;--w:316;--fs:78;color:#3e5a78">City</span>

@@ -11,9 +11,9 @@
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/bpt1qjw.css">
 <link rel="stylesheet" href="styleguide/fonts.css">
-<link rel="stylesheet" href="styleguide/tokens.css?v=3.1">
-<link rel="stylesheet" href="styleguide/components.css?v=3.8">
-<link rel="stylesheet" href="css/style.css?v=3.9">
+<link rel="stylesheet" href="styleguide/tokens.css?v=3.2">
+<link rel="stylesheet" href="styleguide/components.css?v=4.1">
+<link rel="stylesheet" href="css/style.css?v=4.0">
 <!-- @/head -->
 <title>Lunchee · Elektryczne lunch boxy NOVEEN</title>
 <meta name="description" content="Elektryczny lunch box NOVEEN Lunchee podgrzewa posiłek do 60°C w około 20 minut. Zasilanie 230 V / 12 V / 24 V, pojemnik INOX, torba termiczna w zestawie.">
@@ -74,7 +74,7 @@
 <main id="tresc">
 
   <!-- 01 · Hero (runda 02: Agnieszka z KV w prawdziwym miejscu w żółtej tonacji, para nad posiłkiem, odznaki klienta pod przyciskami) -->
-  <section class="hero hero--smak hero--tlo" data-paralaksa>
+  <section class="hero hero--smak hero--tlo hero--psd" data-paralaksa>
     <div class="hero__tlo" aria-hidden="true"></div>
     <div class="wrap hero__grid">
       <div class="hero__text">
@@ -86,12 +86,13 @@
           <a class="btn btn--outline hero__how" href="#jak-korzystac"><span class="hero__how-ic" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>Jak to działa</a>
         </div>
         <ul class="odznaki hero__odznaki" aria-label="Najważniejsze cechy">
-          <li class="odznaka odznaka--cieplo"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" width="124" height="160"><span class="odznaka__plytka"><small>Podgrzanie do</small><b>60°C</b></span></li>
-          <li class="odznaka odznaka--zasilanie"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" width="239" height="400"><span class="odznaka__cyfra" aria-hidden="true">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></li>
+          <li class="odznaka odznaka--cieplo"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" width="360" height="639"><span class="odznaka__plytka"><small>Podgrzanie do</small><b>60°C</b></span></li>
+          <li class="odznaka odznaka--zasilanie"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" width="360" height="543"><span class="odznaka__cyfra" aria-hidden="true">3</span><span class="odznaka__plytka"><small>3 źródła zasilania</small></span></li>
         </ul>
       </div>
       <div class="hero__scena">
         <div class="hero__zdjecie">
+          <img class="hero__psd" src="assets/img/r2/hero-psd/hero-01.webp" srcset="assets/img/r2/hero-psd/hero-01-w1280.webp 1280w, assets/img/r2/hero-psd/hero-01.webp 1920w, assets/img/r2/hero-psd/hero-01-w3840.webp 3840w" sizes="100vw" alt="Kobieta je ciepły posiłek z lunch boxa Lunchee" width="1920" height="600" fetchpriority="high">
           <img src="assets/img/r2/hero-kuchnia-fit.webp" srcset="assets/img/r2/hero-kuchnia-fit-w1280.webp 1280w, assets/img/r2/hero-kuchnia-fit-w1920.webp 1920w, assets/img/r2/hero-kuchnia-fit-w2560.webp 2560w, assets/img/r2/hero-kuchnia-fit.webp 4088w" sizes="(min-width: 900px) 1901px, 208vw" alt="Roześmiana kobieta w słonecznej kuchni je ciepły posiłek z lunch boxa Lunchee LB755 Glamour" width="4088" height="1290" fetchpriority="high">
           <span class="para para--hero" aria-hidden="true"><img src="assets/img/r2/skladniki/para-3.webp" alt="" width="123" height="560"><img src="assets/img/r2/skladniki/para-5.webp" alt="" width="141" height="560"><img src="assets/img/r2/skladniki/para-1.webp" alt="" width="146" height="560"></span>
         </div>
@@ -121,7 +122,7 @@
         <div class="promo__tile">
           <span class="promo__media promo__media--gwarancja" aria-hidden="true">
             <img src="assets/img/r2/produkty/lb725-zamkniety.webp" alt="" width="1100" height="817" loading="lazy" decoding="async">
-            <img class="promo__rozeta" src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" width="383" height="480" loading="lazy" decoding="async">
+            <img class="promo__rozeta" src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
           </span>
           <span class="promo__body">
             <span class="promo__pill">teraz 0 zł</span>
@@ -132,7 +133,7 @@
         <div class="promo__tile">
           <span class="promo__media promo__media--dostawa" aria-hidden="true">
             <img src="assets/img/r2/opakowanie-front.webp" alt="" width="1000" height="907" loading="lazy" decoding="async">
-            <img class="promo__auto" src="assets/img/r2/ikony/dostawa-3d.webp" alt="" width="480" height="309" loading="lazy" decoding="async">
+            <img class="promo__auto" src="assets/img/r2/ikony/dostawa-auto.webp" alt="" width="480" height="309" loading="lazy" decoding="async">
           </span>
           <span class="promo__body">
             <span class="promo__pill">od 269 zł</span>
@@ -192,7 +193,7 @@
         <li class="feats__tile feats__tile--gwarancja">
           <span class="feats__stempel"><i>teraz</i><b>0 zł</b></span>
           <div class="feats__tekst"><b class="feats__val">30 mies.</b><p class="feats__opis">Rozszerzona gwarancja producenta, dokładana do każdego lunch boxa w&nbsp;zamówieniu.</p></div>
-          <span class="feats__ilustracja feats__ilustracja--gwarancja" aria-hidden="true"><img src="assets/img/r2/parametry/gwarancja-rozeta-30.webp" alt="" width="383" height="480" loading="lazy" decoding="async"></span>
+          <span class="feats__ilustracja feats__ilustracja--gwarancja" aria-hidden="true"><img src="assets/img/r2/parametry/znak-gwarancji-30.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
         </li>
       </ul>
       <p class="note-small">Czas podgrzewania zależy od rodzaju, ilości i&nbsp;temperatury posiłku.</p>
@@ -211,23 +212,23 @@
       <div class="modele__grid">
 <!-- @modele-karty -->
         <a class="card card--product card--model card--nazwa" href="produkt-lb745.html" data-model="lb745" style="--kolor:#39546f">
-          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:4">City</span><img class="card__produkt" src="assets/img/r2/produkty/lb745-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb745-danie.webp" alt="" loading="lazy" width="820" height="619" decoding="async"></div>
+          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:4">City</span><img class="card__produkt" src="assets/img/r2/produkty/lb745-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB745 City" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb745-danie.webp" alt="" loading="lazy" width="1600" height="1208" decoding="async"></div>
           <div class="card__body"><h3>Lunchee LB745<span class="sr-only"> City</span></h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB745 City</p><div class="card__foot"><span style="display:grid;gap:4px;justify-items:start"><span class="price price--sm">249,00 zł<s class="price__old">279,00 zł</s></span><small class="omnibus" style="margin:0;line-height:1.35">Najniższa cena z&nbsp;30 dni przed obniżką: 249,00&nbsp;zł</small></span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
         </a>
         <a class="card card--product card--model card--nazwa" href="produkt-lb755.html" data-model="lb755" style="--kolor:#ceaab2">
-          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:7">Glamour</span><img class="card__produkt" src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour" loading="lazy" width="756" height="559" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb755-danie.webp" alt="" loading="lazy" width="820" height="598" decoding="async"></div>
+          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:7">Glamour</span><img class="card__produkt" src="assets/img/r2/produkty/lb755-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour" loading="lazy" width="756" height="559" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb755-danie.webp" alt="" loading="lazy" width="1600" height="1167" decoding="async"></div>
           <div class="card__body"><h3>Lunchee LB755<span class="sr-only"> Glamour</span></h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB755 Glamour</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
         </a>
         <a class="card card--product card--model card--nazwa" href="produkt-lb725.html" data-model="lb725" style="--kolor:#7e9d93">
-          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:6">Nature</span><img class="card__produkt" src="assets/img/r2/produkty/lb725-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb725-danie.webp" alt="" loading="lazy" width="820" height="631" decoding="async"></div>
+          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:6">Nature</span><img class="card__produkt" src="assets/img/r2/produkty/lb725-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb725-danie.webp" alt="" loading="lazy" width="1600" height="1232" decoding="async"></div>
           <div class="card__body"><h3>Lunchee LB725<span class="sr-only"> Nature</span></h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB725 Nature</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
         </a>
         <a class="card card--product card--model card--nazwa" href="produkt-lb715.html" data-model="lb715" style="--kolor:#d7d7d9">
-          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:5">Pearl</span><img class="card__produkt" src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb715-danie.webp" alt="" loading="lazy" width="820" height="587" decoding="async"></div>
+          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:5">Pearl</span><img class="card__produkt" src="assets/img/r2/produkty/lb715-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb715-danie.webp" alt="" loading="lazy" width="1600" height="1145" decoding="async"></div>
           <div class="card__body"><h3>Lunchee LB715<span class="sr-only"> Pearl</span></h3><p>Elektryczny Lunch Box NOVEEN Lunchee LB715 Pearl</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--blue btn--sm">Kup teraz <svg><use href="#i-arrow"/></svg></span></div></div>
         </a>
         <a class="card card--product card--model card--nazwa" href="produkt-lb795.html" data-model="lb795" style="--kolor:#141414">
-          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:5">Night</span><img class="card__produkt" src="assets/img/r2/produkty/lb795-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB795 Night" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb795-danie.webp" alt="" loading="lazy" width="820" height="589" decoding="async"></div>
+          <div class="card__img card__img--produkt"><span class="card__tlo-nazwa" aria-hidden="true" style="--litery:5">Night</span><img class="card__produkt" src="assets/img/r2/produkty/lb795-zamkniety.webp" alt="Elektryczny Lunch Box NOVEEN Lunchee LB795 Night" loading="lazy" width="756" height="562" decoding="async"><img class="card__img-hover card__img-hover--alfa" src="assets/img/r2/produkty/lb795-danie.webp" alt="" loading="lazy" width="1600" height="1149" decoding="async"></div>
           <div class="card__body"><h3>Lunchee LB795<span class="sr-only"> Night</span></h3><span class="card__status card__status--tekst">Niedostępny w&nbsp;sklepie</span><p>Elektryczny Lunch Box NOVEEN Lunchee LB795 Night</p><div class="card__foot"><span class="price price--sm">249,00 zł</span><span class="btn btn--outline btn--sm">Zobacz <svg><use href="#i-arrow"/></svg></span></div></div>
         </a>
 <!-- @/modele-karty -->
@@ -420,7 +421,7 @@
 
 <!-- @footer -->
 <footer class="footer" id="kontakt">
-  <div class="footer__jedzenie" aria-hidden="true"><img class="footer__sk footer__sk--a" src="assets/img/r2/skladniki/awokado.webp" alt="" width="387" height="381" loading="lazy" decoding="async"></div>
+  <div class="footer__jedzenie" aria-hidden="true"><img class="footer__sk footer__sk--a" src="assets/img/r2/skladniki/batat.webp" alt="" width="354" height="386" loading="lazy" decoding="async"></div>
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__brand">
@@ -492,9 +493,11 @@
     </div>
   </div>
 </div>
-<script src="js/main.js?v=2.9"></script>
+<script src="js/main.js?v=3.0"></script>
+<!-- WYBÓR TŁA HERO DLA KLIENTA (runda 03): po wyborze zostawić jedno tło i zdjąć przełącznik -->
+<script src="js/hero-przelacznik.js"></script>
 <!-- @/footer -->
 <!-- PODGLĄD DLA KLIENTA: warianty sekcji z Figmy, zdjąć przed oddaniem (PODGLAD_WARIANTOW w build.py) -->
-<script src="js/warianty-sekcji.js?v=1792264027"></script>
+<script src="js/warianty-sekcji.js?v=1792687783"></script>
 </body>
 </html>

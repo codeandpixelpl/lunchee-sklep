@@ -12,23 +12,25 @@
 .vb-cecha { line-height: 1.3; }
 .vb-pas { display: inline-flex; align-items: center; justify-content: center; gap: .5em; border-radius: 99px; font-weight: 800; white-space: nowrap; }
 .vb-zolte-k { display: grid; place-items: center; border-radius: 50%; background: var(--akcent); color: var(--tekst-mocny); }
-/* b2b-1: kolor kształtu i światła za prezentami (re-audyt R1-19). Kształt na telefonie rysuje też garb w svg w data URL niżej,
-   tam kolor stoi literalnie (#f2b90c = --akcent), bo zmienna nie wchodzi do data URL. */
-.vb1 { --b2b-ksztalt: var(--akcent); --b2b-swiatlo: rgb(255 246 214 / .7); }
-.vk .vb1-btn:hover { background: var(--cta-hover); }
-.vk .vb1-btn:focus-visible { outline: 3px solid var(--tekst-mocny); outline-offset: 3px; }
+/* b2b-1: kolor kształtu i światła za prezentami. Runda 3 (SG-8210, 22.10): wraca granat sprzed re-audytu R1-19
+   (klient: „lepiej pracował granatowy kolor tła”), kształt --tlo-ciemne, za prezentami poświata w --cta.
+   Kształt na telefonie rysuje też garb w svg w data URL niżej, tam kolor stoi literalnie (#0a2a5e = --tlo-ciemne),
+   bo zmienna nie wchodzi do data URL. */
+.vb1 { --b2b-ksztalt: var(--tlo-ciemne); --b2b-swiatlo: rgb(0 84 175 / .6); --b2b-swiatlo-pol: rgb(0 84 175 / .22); }
+.vk .vb1-btn:hover { background: var(--akcent-hover); }
+.vk .vb1-btn:focus-visible { outline: 3px solid var(--biel); outline-offset: 3px; }
 /* TELEFON b2b-1 START */
 @media (max-width: 899px) {
-  /* telefon: ścieżka svg rozciągnięta do pionu wykrzywia narożniki, więc żółty kształt składają dwa prostokąty:
-     korpus to svg (ścieżka ukryta, jasne światło za LB745 w tle), wybrzuszenie po prawej z łagodnym S to span poświaty */
+  /* telefon: ścieżka svg rozciągnięta do pionu wykrzywia narożniki, więc granatowy kształt składają dwa prostokąty:
+     korpus to svg (ścieżka ukryta, światło --cta za LB745 w tle), wybrzuszenie po prawej z łagodnym S to span poświaty */
   #dla-firm .vk.vk--m { margin-top: calc(-8 * var(--u)) !important; }
   #dla-firm .vk--m > svg.a:first-child > path { display: none; }
   #dla-firm .vk--m > svg.a:first-child { border-radius: calc(24 * var(--u)) 0 calc(24 * var(--u)) calc(24 * var(--u));
-    background: radial-gradient(closest-side, var(--b2b-swiatlo), transparent) calc(100% + 70 * var(--u)) calc(100% + 80 * var(--u)) / calc(300 * var(--u)) calc(280 * var(--u)) no-repeat, var(--b2b-ksztalt); }
+    background: radial-gradient(closest-side, var(--b2b-swiatlo), var(--b2b-swiatlo-pol) 55%, transparent) calc(100% + 70 * var(--u)) calc(100% + 80 * var(--u)) / calc(300 * var(--u)) calc(280 * var(--u)) no-repeat, var(--b2b-ksztalt); }
   /* wybrzuszenie: ta sama krzywa S co na desktopie (styczne poziome na obu końcach), rysowana w svg, bo twarde przejścia gradientów
      dawały poszarpaną krawędź; span ma stałe proporcje 218×30 jednostek, więc rozciągnięcie svg niczego nie wykrzywia */
   #dla-firm .vk--m > svg.a:first-child + span.a {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 218 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30V28C37 28 48 0 80 0H194A24 24 0 0 1 218 24V30Z' fill='%23f2b90c'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat !important; }
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 218 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30V28C37 28 48 0 80 0H194A24 24 0 0 1 218 24V30Z' fill='%230a2a5e'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat !important; }
 }
 /* TELEFON b2b-1 END */
 /* b2b-1 na 1000–1199 px (iPad w poziomie): płótno w skali 0,69 zmniejsza akapit do ok. 12 px i przycisk poniżej 44 px,
@@ -46,20 +48,21 @@
      obok nagłówka, LB745 obok przycisku).
      Re-audyt R1-19 (17.10, decyzja z 5.10: granat tylko w tekstach i CTA): kształt na żółtym KV zamiast granatu, bez niebieskiej
      poświaty (za prezentami jasne światło), nagłówek i akapit granatowe, przycisk niebieski CTA jak w hero i na dla-firm.html.
-     Kompozycja bez zmian: kokarda, pudełka, LB745, kukurydza pod 45°, awokado, nieregularny kształt. -->
+     Kompozycja bez zmian: kokarda, pudełka, LB745, kukurydza pod 45°, awokado, nieregularny kształt.
+     Runda 3 (22.10, SG-8037, SG-8083, SG-8210): z powrotem granat jak przed R1-19 (biały nagłówek, żółty przycisk),
+     kukurydza zastąpiona pomidorkami, bez kokardy, pudełka to sam packshot opakowania klienta. -->
 <div class="vk-sek vk-sek--pelne" style="--tlo-v:var(--tlo)"><div class="vk-ramka"><div class="vk vk--m vb1" style="--h-k:522;margin-top:calc(-50 * var(--u));--mhk:450">
   <svg class="a" viewBox="0 0 1672 522" style="--x:0;--y:0;--w:1672;--h:522;--mx:16;--my:64;--mw:358;--mh:358" preserveAspectRatio="none"><path d="M24 112C24 84 48 74 76 74H900C960 74 978 36 1030 36H1630C1653 36 1672 55 1672 78V442C1672 465 1653 484 1630 484H64C40 484 24 468 24 444Z" style="fill:var(--b2b-ksztalt)"/></svg>
-  <span class="a" style="--x:950;--y:74;--w:662;--h:442;background:radial-gradient(closest-side, var(--b2b-swiatlo), transparent);--mx:156;--my:36;--mw:218;--mh:30"></span>
+  <span class="a" style="--x:950;--y:74;--w:662;--h:442;background:radial-gradient(closest-side, var(--b2b-swiatlo), var(--b2b-swiatlo-pol) 55%, transparent);--mx:156;--my:36;--mw:218;--mh:30"></span>
   <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:1014;--y:155;--w:262;--mx:202;--my:26;--mw:90" loading="lazy" decoding="async">
   <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="" style="--x:1318;--y:155;--w:262;--mx:290;--my:26;--mw:90" loading="lazy" decoding="async">
   <img class="a cien" src="assets/img/r2/opakowanie-front.webp" alt="Pudełka Lunchee jako prezent firmowy" style="--x:1152;--y:121;--w:290;--mx:244;--my:11;--mw:104" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/warianty/kokarda-czerwona.webp" alt="" style="--x:1208;--y:71;--w:172;--mx:264;--my:-7;--mw:62" loading="lazy" decoding="async">
-  <img class="a cien-s unos" src="assets/img/r2/skladniki/kukurydza.webp" alt="" style="--x:770;--y:4;--w:170;--r:-45deg;--t:8s;--d:-3s;--mx:56;--my:30;--mw:88" loading="lazy" decoding="async">
+  <img class="a cien-s unos" src="assets/img/r2/skladniki/pomidorki.webp" alt="" style="--x:782;--y:-2;--w:150;--r:-12deg;--t:8s;--d:-3s;--mx:60;--my:22;--mw:76" loading="lazy" decoding="async"><!-- runda 3 (22.10): pomidorki na gałązce w miejscu przypalonej kukurydzy, ta sama pozycja i skala -->
   <img class="a cien-s unos" src="assets/img/r2/skladniki/losos.webp" alt="" style="--x:760;--y:380;--w:172;--r:-12deg;--t:9s;--d:-5s;--mx:4;--my:398;--mw:72" loading="lazy" decoding="async"><!-- R-02 (17.10): awokado z decyzji o b2b t1, na dolnej krawędzi kształtu -->
   <img class="a cien" src="assets/img/r2/produkty/lb745-zamkniety.webp" srcset="assets/img/r2/produkty/lb745-zamkniety-w240.webp 240w, assets/img/r2/produkty/lb745-zamkniety-w400.webp 400w, assets/img/r2/produkty/lb745-zamkniety.webp 756w" sizes="(min-width: 1376px) 249px, (min-width: 900px) 19.38vw, (min-width: 560px) 135px, 24.1vw" alt="" style="--x:980;--y:279;--w:324;--mx:280;--my:372;--mw:94" loading="lazy" decoding="async">
-  <h2 class="a t-h" style="--x:122;--y:106;--fs:66;color:var(--tekst-mocny);line-height:1.02;--mx:40;--my:112;--mfs:36">Lunchee dla<br>Twojej firmy</h2>
-  <p class="a t-p" style="--x:124;--y:262;--w:600;--fs:21;color:var(--tekst-mocny);--mx:40;--my:210;--mw:306;--mfs:16">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
-  <a class="a btn-v btn-b vb1-btn" href="dla-firm.html" style="--x:124;--y:374;--w:360;--h:68;--fs:24;--mx:40;--my:344;--mw:230;--mh:54;--mfs:16">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
+  <h2 class="a t-h" style="--x:122;--y:106;--fs:66;color:var(--biel);line-height:1.02;--mx:40;--my:112;--mfs:36">Lunchee dla<br>Twojej firmy</h2>
+  <p class="a t-p" style="--x:124;--y:262;--w:600;--fs:21;color:var(--tekst-na-ciemnym);--mx:40;--my:210;--mw:306;--mfs:16">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
+  <a class="a btn-v btn-z vb1-btn" href="dla-firm.html" style="--x:124;--y:374;--w:360;--h:68;--fs:24;--mx:40;--my:344;--mw:230;--mh:54;--mfs:16">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
 </div></div></div>
 </template>
 <template data-nr="2" data-nazwa="Zespół w biurze">
@@ -72,8 +75,8 @@
   <h2 class="a t-h" style="--x:80;--y:226;--fs:80;line-height:1.04">Lunchee dla<br>Twojej firmy</h2>
   <p class="a t-p" style="--x:82;--y:410;--w:540;--fs:21;color:var(--tekst-mocny)">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
   <a class="a btn-v btn-z" href="dla-firm.html" style="--x:82;--y:548;--w:384;--h:78;--fs:24">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
-  <span class="odz" style="--x:94;--y:660"><span class="odznaka odznaka--cieplo" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
-  <span class="odz" style="--x:212;--y:660"><span class="odznaka odznaka--zasilanie" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <span class="odz" style="--x:94;--y:660"><span class="odznaka odznaka--cieplo" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:212;--y:660"><span class="odznaka odznaka--zasilanie" style="--s:84"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 84px, (min-width: 900px) 6.52vw, 1px" alt="" style="--x:321;--y:695;--w:109" loading="lazy" decoding="async">
   <span class="a t-p c" style="--x:70;--y:764;--w:132;--fs:16;font-weight:700;color:var(--tekst-mocny)">Ciepły posiłek<br>w pracy</span>
   <span class="a t-p c" style="--x:188;--y:764;--w:132;--fs:16;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
@@ -87,7 +90,7 @@
   <svg class="a" viewBox="0 0 860 720" style="--x:36;--y:104;--w:860;--h:720" preserveAspectRatio="none"><path d="M30 0H820C860 160 870 520 790 720H30C13 720 0 707 0 690V30C0 13 13 0 30 0Z" fill="#f4bf1c"/></svg>
   <img class="a cien" src="assets/img/r2/warianty/b2b-prezenty.webp" alt="" style="--x:600;--y:160;--w:300;transform:rotate(-4deg)" loading="lazy" decoding="async">
   <img class="a dek" src="assets/img/r2/skladniki/para-2.webp" alt="" style="--x:600;--y:340;--w:70;opacity:.7" loading="lazy" decoding="async">
-  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 820w" sizes="(min-width: 1376px) 314px, (min-width: 900px) 24.52vw, 1px" alt="" style="--x:476;--y:390;--w:410" loading="lazy" decoding="async">
+  <img class="a cien" src="assets/img/r2/produkty/lb745-danie.webp" srcset="assets/img/r2/produkty/lb745-danie-w240.webp 240w, assets/img/r2/produkty/lb745-danie-w400.webp 400w, assets/img/r2/produkty/lb745-danie-w640.webp 640w, assets/img/r2/produkty/lb745-danie.webp 1600w" sizes="(min-width: 1376px) 314px, (min-width: 900px) 24.52vw, 1px" alt="" style="--x:476;--y:390;--w:410" loading="lazy" decoding="async">
   <span class="a vb-teczka" style="--x:86;--y:152;--w:92;--h:92;border-radius:calc(18 * var(--u));background:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56%;height:56%"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18M11 12h2v2h-2z"/></svg></span>
   <p class="a t-e" style="--x:206;--y:176;--fs:17;color:var(--tekst-mocny)">Współpraca dla biznesu · oferta B2B</p>
   <h2 class="a t-h" style="--x:86;--y:262;--fs:76;line-height:1.04">Lunchee dla<br>Twojej firmy</h2>
@@ -140,8 +143,8 @@
   <h2 class="a t-h" style="--x:86;--y:196;--fs:96;line-height:1.02">Lunchee dla<br>Twojej firmy</h2>
   <p class="a t-p" style="--x:88;--y:408;--w:600;--fs:24;color:var(--tekst-mocny)">Szukasz praktycznego prezentu dla pracowników, klientów lub partnerów biznesowych? Lunchee może być dobrym wyborem – na co dzień i na specjalne okazje.</p>
   <a class="a btn-v btn-z" href="dla-firm.html" style="--x:86;--y:566;--w:434;--h:80;--fs:27">Zobacz ofertę dla firm <svg><use href="#i-arrow"/></svg></a>
-  <span class="odz" style="--x:180;--y:676"><span class="odznaka odznaka--cieplo" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/plomien.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
-  <span class="odz" style="--x:314;--y:676"><span class="odznaka odznaka--zasilanie" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/wtyczka.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
+  <span class="odz" style="--x:180;--y:676"><span class="odznaka odznaka--cieplo" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-60c.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__plytka"><b>60°C</b></span></span></span>
+  <span class="odz" style="--x:314;--y:676"><span class="odznaka odznaka--zasilanie" style="--s:96"><img class="odznaka__3d" src="assets/img/r2/ikony/odznaka-3-zrodla.webp" alt="" loading="lazy" decoding="async"><span class="odznaka__cyfra">3</span><span class="odznaka__plytka"></span></span></span>
   <img class="a" src="assets/img/r2/akcesoria/inox.webp" srcset="assets/img/r2/akcesoria/inox-w240.webp 240w, assets/img/r2/akcesoria/inox-w400.webp 400w, assets/img/r2/akcesoria/inox-w640.webp 640w, assets/img/r2/akcesoria/inox.webp 1000w" sizes="(min-width: 1376px) 96px, (min-width: 900px) 7.48vw, 1px" alt="" style="--x:439;--y:716;--w:125" loading="lazy" decoding="async">
   <span class="a t-p c" style="--x:156;--y:795;--w:144;--fs:16;font-weight:700;color:var(--tekst-mocny)">Podgrzewa<br>do 60°C</span>
   <span class="a t-p c" style="--x:290;--y:795;--w:144;--fs:16;font-weight:700;color:var(--tekst-mocny)">3 źródła<br>zasilania</span>
